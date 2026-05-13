@@ -381,10 +381,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       {/* Footer */}
       <footer className="border-t border-white/5 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Logo size="sm" showLearn={false} />
+          <Logo size="sm" />
           <p className="font-sans text-text-muted text-xs text-center">
-            © 2026 FTTG Solutions LLC · McDonough, GA ·{' '}
-            <a href="mailto:adefemi@kolawoles.com" className="hover:text-gold transition-colors">adefemi@kolawoles.com</a>
+            © 2026 FTTG Solutions LLC · McDonough, GA
           </p>
           <a
             href="https://www.fttgsolutions.com"
