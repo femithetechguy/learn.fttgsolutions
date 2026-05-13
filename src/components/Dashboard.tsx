@@ -428,17 +428,17 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-            <p className="font-sans text-text-muted text-xs">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
-            <div className="flex items-center gap-5">
+          <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between gap-6">
+            <p className="font-sans text-text-muted text-xs min-w-0 truncate">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
+            <div className="flex items-center gap-4 shrink-0">
               <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-muted hover:text-gold transition-colors">
-                <Youtube size={16} />
+                <Youtube size={18} />
               </a>
               <a href="https://www.instagram.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-muted hover:text-gold transition-colors">
-                <Instagram size={16} />
+                <Instagram size={18} />
               </a>
               <a href="https://twitter.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-muted hover:text-gold transition-colors">
-                <Twitter size={16} />
+                <Twitter size={18} />
               </a>
             </div>
           </div>
