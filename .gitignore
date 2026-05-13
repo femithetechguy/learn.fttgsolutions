@@ -15,6 +15,9 @@ build/
 # misc
 .DS_Store
 *.pem
+.claude/
+files.zip
+progress.md
 
 # debug
 npm-debug.log*
