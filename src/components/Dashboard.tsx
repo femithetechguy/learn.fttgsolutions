@@ -385,22 +385,19 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       <footer className="border-t border-white/5 mt-8 bg-bg-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-          {/* Top: all sections in a row on desktop */}
-          <div className="flex flex-col md:flex-row md:items-start gap-10">
+          {/* Top grid — 1 col mobile, 2 col tablet, 4 col desktop */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2.5rem' }}>
 
             {/* Brand */}
-            <div className="flex flex-col gap-3 md:w-56 shrink-0">
+            <div className="flex flex-col gap-3">
               <Logo size="sm" />
               <p className="font-sans text-text-muted text-sm leading-relaxed">
                 Technical training and timeless philosophy for builders.
               </p>
             </div>
 
-            {/* Spacer */}
-            <div className="hidden md:block flex-1" />
-
             {/* Quick Links */}
-            <div className="flex flex-col gap-2.5 shrink-0">
+            <div className="flex flex-col gap-2.5">
               <p className="font-sans text-sm font-semibold text-text-primary mb-1">Quick Links</p>
               <a href="#courses" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Courses</a>
               <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Articles</a>
@@ -408,7 +405,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             </div>
 
             {/* Company */}
-            <div className="flex flex-col gap-2.5 shrink-0">
+            <div className="flex flex-col gap-2.5">
               <p className="font-sans text-sm font-semibold text-text-primary mb-1">Company</p>
               <a href="https://www.fttgsolutions.com/about" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">About</a>
               <a href="https://www.fttgsolutions.com/contact" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Contact</a>
@@ -416,7 +413,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             </div>
 
             {/* Newsletter */}
-            <div className="flex flex-col gap-2.5 shrink-0 md:w-56">
+            <div className="flex flex-col gap-2.5">
               <p className="font-sans text-sm font-semibold text-text-primary mb-1">Newsletter</p>
               <p className="font-sans text-sm text-text-muted">Subscribe to receive updates and insights</p>
               <form onSubmit={e => e.preventDefault()} className="flex flex-col gap-2 mt-1">
@@ -431,7 +428,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
             <p className="font-sans text-text-muted text-xs">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
             <div className="flex items-center gap-5">
               <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-muted hover:text-gold transition-colors">
