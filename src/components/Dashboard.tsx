@@ -383,7 +383,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       {/* Footer */}
       <footer className="border-t border-white/5 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
 
             {/* Logo + copyright */}
             <div className="flex flex-col gap-3">
@@ -393,18 +393,18 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               </p>
             </div>
 
-            {/* Nav links */}
-            <div className="flex gap-10 flex-wrap">
-              <div className="flex flex-col gap-2">
-                <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-text-muted mb-1">Learn</p>
-                <a href="#courses" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Courses</a>
-                <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Articles</a>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-text-muted mb-1">Company</p>
-                <a href="https://www.fttgsolutions.com" target="_blank" rel="noopener noreferrer" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">fttgsolutions.com</a>
-                <a href="https://www.fttgsolutions.com/contact" target="_blank" rel="noopener noreferrer" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Contact</a>
-              </div>
+            {/* Learn links */}
+            <div className="flex flex-col gap-3">
+              <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-text-muted">Learn</p>
+              <a href="#courses" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Courses</a>
+              <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Articles</a>
+            </div>
+
+            {/* Company links */}
+            <div className="flex flex-col gap-3">
+              <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-text-muted">Company</p>
+              <a href="https://www.fttgsolutions.com" target="_blank" rel="noopener noreferrer" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">fttgsolutions.com</a>
+              <a href="https://www.fttgsolutions.com/contact" target="_blank" rel="noopener noreferrer" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Contact</a>
             </div>
 
           </div>
