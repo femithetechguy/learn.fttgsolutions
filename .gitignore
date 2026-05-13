@@ -17,8 +17,6 @@ build/
 *.pem
 .claude/
 files.zip
-progress.md
-
 # debug
 npm-debug.log*
 
