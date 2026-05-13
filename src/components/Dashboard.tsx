@@ -383,7 +383,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
       {/* Footer */}
       <footer className="border-t border-white/5 mt-8 bg-bg-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-16">
 
           {/* Top grid — 1 col mobile, 2 col tablet, 4 col desktop */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2.5rem' }}>
