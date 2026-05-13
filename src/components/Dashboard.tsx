@@ -383,7 +383,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
       {/* Footer */}
       <footer className="border-t border-white/5 mt-8 bg-bg-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
           {/* Top grid — 1 col mobile, 2 col tablet, 4 col desktop */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2.5rem' }}>
@@ -428,16 +428,16 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between gap-6">
-            <p className="font-sans text-text-muted text-xs min-w-0 truncate">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
-            <div className="flex items-center gap-4 shrink-0">
-              <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-muted hover:text-gold transition-colors">
+          <div className="mt-8 pt-6 pb-8 border-t border-white/10 flex items-center justify-between gap-6">
+            <p className="font-sans text-text-secondary text-xs min-w-0 truncate">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
+            <div className="flex items-center gap-5 shrink-0">
+              <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-secondary hover:text-gold transition-colors">
                 <Youtube size={18} />
               </a>
-              <a href="https://www.instagram.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-muted hover:text-gold transition-colors">
+              <a href="https://www.instagram.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-secondary hover:text-gold transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="https://twitter.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-muted hover:text-gold transition-colors">
+              <a href="https://twitter.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-secondary hover:text-gold transition-colors">
                 <Twitter size={18} />
               </a>
             </div>
