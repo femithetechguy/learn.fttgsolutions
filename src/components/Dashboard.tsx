@@ -383,7 +383,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Logo size="sm" />
           <p className="font-sans text-text-muted text-xs text-center">
-            © 2026 FTTG Solutions LLC · McDonough, GA
+            © 2026 FTTG Solutions LLC
           </p>
           <a
             href="https://www.fttgsolutions.com"
