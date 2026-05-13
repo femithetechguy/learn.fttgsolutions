@@ -186,7 +186,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
             <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">Courses</a>
-            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1">fttgsolutions.com</a>
+            <a href="https://learn.fttgsolutions.com/articles" className="block font-sans text-sm text-text-secondary py-1">Articles</a>
+            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">fttgsolutions.com</a>
             <div className="pt-2 border-t border-white/5">
               <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
                 <LogOut size={14} />
@@ -204,9 +205,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           <div className="animate-fade-in">
             {isGuest ? (
               <>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4">
-                  <Sparkles size={12} className="text-gold" />
-                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Browsing as guest — create an account for full access</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4 max-w-full">
+                  <Sparkles size={12} className="text-gold flex-shrink-0" />
+                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Guest mode — sign up for full access</span>
                 </div>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
                   Explore FTTG Learn
@@ -249,7 +250,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       <div id="courses" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Filter pills */}
-        <div className="flex items-center gap-2 flex-wrap mb-8">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 mb-8 scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}>
           {FILTER_PILLS.map(f => (
             <button
               key={f}
@@ -392,7 +394,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             </div>
 
             {/* Nav links */}
-            <div className="flex gap-10">
+            <div className="flex gap-10 flex-wrap">
               <div className="flex flex-col gap-2">
                 <p className="font-sans text-[10px] font-semibold tracking-widest uppercase text-text-muted mb-1">Learn</p>
                 <a href="#courses" className="font-sans text-xs text-text-secondary hover:text-text-primary transition-colors">Courses</a>
