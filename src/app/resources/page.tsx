@@ -6,6 +6,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { FilterPill, PillColor } from '@/components/FilterBar'
+import FavoriteButton from '@/components/FavoriteButton'
 import content from '@/lib/content'
 import resources from '@/lib/resources'
 
@@ -115,7 +116,10 @@ export default function ResourcesPage() {
                               {item.label}
                             </h3>
                           </div>
-                          <ExternalLink size={14} className="text-text-muted flex-shrink-0 mt-1 group-hover:text-gold transition-colors" />
+                          <div className="flex items-center gap-1.5 flex-shrink-0">
+                            <FavoriteButton id={`resource:${item.label}`} />
+                            <ExternalLink size={14} className="text-text-muted mt-1 group-hover:text-gold transition-colors" />
+                          </div>
                         </div>
                         <p className="font-sans text-text-secondary text-sm leading-relaxed">
                           {item.description}

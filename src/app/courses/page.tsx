@@ -6,6 +6,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { ICON_MAP } from '@/components/FilterBar'
+import FavoriteButton from '@/components/FavoriteButton'
 import content from '@/lib/content'
 import coursesData from '@/lib/courses'
 
@@ -100,6 +101,7 @@ export default function CoursesPage() {
                     >
                       <Icon size={18} style={{ color: course.pillarColor }} />
                     </div>
+                    <FavoriteButton id={`course:${course.id}`} className="ml-auto" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>

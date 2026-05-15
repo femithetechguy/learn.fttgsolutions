@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { LogOut, Menu, X } from 'lucide-react'
+import { LogOut, Menu, X, Heart } from 'lucide-react'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
 
@@ -30,6 +30,9 @@ export default function Nav({ user, onLogout }: NavProps) {
             <a href={nav.coursesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
             <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
             <a href={nav.resourcesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.resources}</a>
+            <a href="/favorites" aria-label="Favourites" className="text-text-secondary hover:text-gold transition-colors">
+              <Heart size={17} />
+            </a>
           </div>
 
           {/* User area */}
@@ -75,6 +78,7 @@ export default function Nav({ user, onLogout }: NavProps) {
           <a href={nav.coursesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
           <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
           <a href={nav.resourcesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.resources}</a>
+          <a href="/favorites" className="block font-sans text-sm text-text-secondary py-1">Favourites</a>
           <div className="pt-2 border-t border-white/5">
             {user && onLogout ? (
               <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
