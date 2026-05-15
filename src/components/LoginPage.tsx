@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Logo from '@/components/Logo'
 import { ICON_MAP } from '@/components/FilterBar'
@@ -209,6 +209,11 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
 
 export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPassword }: LoginPageProps) {
   const [view, setView]             = useState<View>('login')
+
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get('view')
+    if (p === 'register' || p === 'forgot') setView(p)
+  }, [])
 
   // shared
   const [email, setEmail]           = useState('')

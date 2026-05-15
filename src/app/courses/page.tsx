@@ -152,8 +152,8 @@ export default function CoursesPage() {
               <h3 className="font-display font-bold text-text-primary text-lg">{upsell.title}</h3>
               <p className="font-sans text-text-secondary text-sm mt-1">{upsell.description}</p>
             </div>
-            <a href="/" className="btn-gold flex-shrink-0 text-sm">
-              {upsell.cta}
+            <a href="/?view=register" className="btn-gold flex-shrink-0 text-sm inline-flex items-center gap-2">
+              {upsell.cta} <ChevronRight size={14} />
             </a>
           </div>
         </div>

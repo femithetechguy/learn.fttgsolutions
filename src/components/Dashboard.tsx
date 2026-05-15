@@ -231,9 +231,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               <h3 className="font-display font-bold text-text-primary text-lg">{upsell.title}</h3>
               <p className="font-sans text-text-secondary text-sm mt-1">{upsell.description}</p>
             </div>
-            <button className="btn-gold flex-shrink-0 text-sm">
+            <a href="/?view=register" className="btn-gold flex-shrink-0 text-sm inline-flex items-center gap-2">
               {upsell.cta} <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
         )}
       </div>
