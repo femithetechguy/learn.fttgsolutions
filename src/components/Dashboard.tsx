@@ -141,7 +141,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   })
 
   return (
-    <div className="min-h-screen bg-bg-primary bg-grid">
+    <div className="min-h-screen bg-bg-primary bg-grid overflow-x-hidden">
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
@@ -201,7 +201,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
       {/* Hero section */}
       <div className="relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-gold/3 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 sm:w-[600px] h-64 sm:h-[400px] bg-gold/5 blur-3xl rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
           <div className="animate-fade-in">
             {isGuest ? (
