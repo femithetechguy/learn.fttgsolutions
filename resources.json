@@ -1,0 +1,96 @@
+{
+  "categories": [
+    {
+      "heading": "Documentation",
+      "items": [
+        {
+          "label": "MDN Web Docs",
+          "url": "https://developer.mozilla.org",
+          "description": "The definitive reference for HTML, CSS, and JavaScript on the web.",
+          "tag": "Docs"
+        },
+        {
+          "label": "Next.js Documentation",
+          "url": "https://nextjs.org/docs",
+          "description": "Official docs for building full-stack React applications with Next.js.",
+          "tag": "Docs"
+        },
+        {
+          "label": "TypeScript Handbook",
+          "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+          "description": "The definitive guide to TypeScript from the Microsoft team.",
+          "tag": "Docs"
+        }
+      ]
+    },
+    {
+      "heading": "Tools & Platforms",
+      "items": [
+        {
+          "label": "Vercel",
+          "url": "https://vercel.com",
+          "description": "Deploy and scale Next.js apps with zero configuration.",
+          "tag": "Hosting"
+        },
+        {
+          "label": "Supabase",
+          "url": "https://supabase.com",
+          "description": "Open-source Postgres database with built-in auth, APIs, and storage.",
+          "tag": "Backend"
+        },
+        {
+          "label": "Tailwind CSS",
+          "url": "https://tailwindcss.com",
+          "description": "Utility-first CSS framework for building UIs rapidly.",
+          "tag": "Styling"
+        }
+      ]
+    },
+    {
+      "heading": "Data & BI",
+      "items": [
+        {
+          "label": "dbt Documentation",
+          "url": "https://docs.getdbt.com",
+          "description": "Transform data in your warehouse with SQL and version-controlled models.",
+          "tag": "Data"
+        },
+        {
+          "label": "Power BI Learning",
+          "url": "https://learn.microsoft.com/en-us/power-bi/",
+          "description": "Official Microsoft learning hub for Power BI dashboards and reports.",
+          "tag": "BI"
+        },
+        {
+          "label": "Kaggle",
+          "url": "https://www.kaggle.com",
+          "description": "Datasets, notebooks, and competitions to sharpen your data skills.",
+          "tag": "Data"
+        }
+      ]
+    },
+    {
+      "heading": "Community & Reading",
+      "items": [
+        {
+          "label": "FTTG Solutions",
+          "url": "https://www.fttgsolutions.com",
+          "description": "The main FTTG website — projects, blog posts, and updates.",
+          "tag": "FTTG"
+        },
+        {
+          "label": "Dev.to",
+          "url": "https://dev.to",
+          "description": "Developer community with articles on software, careers, and tech culture.",
+          "tag": "Community"
+        },
+        {
+          "label": "roadmap.sh",
+          "url": "https://roadmap.sh",
+          "description": "Community-driven roadmaps for developers to guide their learning path.",
+          "tag": "Learning"
+        }
+      ]
+    }
+  ]
+}

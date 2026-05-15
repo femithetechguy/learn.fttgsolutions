@@ -67,7 +67,9 @@
     "nav": {
       "courses": "COURSES",
       "articles": "ARTICLES",
-      "articlesUrl": "https://learn.fttgsolutions.com/articles",
+      "articlesUrl": "/articles",
+      "resources": "RESOURCES",
+      "resourcesUrl": "/resources",
       "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {
@@ -105,6 +107,16 @@
     }
   },
 
+  "articles": {
+    "title": "Articles",
+    "subtitle": "Insights, walkthroughs, and builder wisdom from the FTTG crew."
+  },
+
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Curated tools, docs, and links to accelerate your growth"
+  },
+
   "footer": {
     "brand": {
       "tagline": "Technical training and timeless philosophy for builders."
@@ -113,7 +125,7 @@
       "heading": "Quick Links",
       "links": [
         { "label": "Courses",   "href": "#courses",                                "external": false },
-        { "label": "Articles",  "href": "https://learn.fttgsolutions.com/articles", "external": true  },
+        { "label": "Articles",  "href": "/articles", "external": false },
         { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
       ]
     },

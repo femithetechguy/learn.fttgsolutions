@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import {
   BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
-  LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star,
-  Youtube, Instagram, Twitter, Send, ExternalLink
+  ChevronRight, Sparkles, TrendingUp, Users, Star,
+  Youtube, Instagram, Twitter, Send
 } from 'lucide-react'
+import Nav from '@/components/Nav'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
 
@@ -32,11 +33,10 @@ const COURSES = content.courses.map(c => {
 const STATS = content.dashboard.stats.map((s, i) => ({ ...s, icon: STAT_ICONS[i] }))
 
 const FILTER_PILLS = content.dashboard.filters
-const { ui, hero, nav, upsell } = content.dashboard
+const { ui, hero, upsell } = content.dashboard
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [filter, setFilter] = useState('All')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isGuest = user.role === 'guest'
   const displayName = user.name
@@ -52,63 +52,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">
 
-      {/* Navigation — sticky works only when no overflow:hidden ancestor */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Logo size="sm" />
-
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-6">
-              <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
-              <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
-              <a href={content.site.mainSiteUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                {nav.mainSiteLabel}<ExternalLink size={11} className="opacity-50" />
-              </a>
-            </div>
-
-            {/* User area */}
-            <div className="hidden md:flex items-center gap-3">
-              {isGuest ? (
-                <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-xs">{ui.guestBadge}</span>
-              ) : (
-                <span className="font-sans text-sm text-text-secondary">{displayName}</span>
-              )}
-              <button
-                onClick={onLogout}
-                className="flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
-              >
-                <LogOut size={14} />
-                {isGuest ? ui.signIn : ui.signOut}
-              </button>
-            </div>
-
-            {/* Mobile menu button — 44×44px touch target */}
-            <button
-              className="md:hidden w-11 h-11 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(v => !v)}
-              aria-label={ui.toggleMenu}
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
-            <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
-            <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
-            <a href={content.site.mainSiteUrl} className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
-            <div className="pt-2 border-t border-white/5">
-              <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
-                <LogOut size={14} />
-                {isGuest ? ui.signIn : ui.signOut}
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+      <Nav user={user} onLogout={onLogout} />
 
       {/* overflow-x-hidden here (not on outer div) so sticky nav isn't broken */}
       <div className="overflow-x-hidden">
