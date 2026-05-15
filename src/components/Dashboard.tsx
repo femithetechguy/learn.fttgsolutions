@@ -7,123 +7,32 @@ import {
   Youtube, Instagram, Twitter, Send
 } from 'lucide-react'
 import Logo from '@/components/Logo'
+import content from '@/lib/content'
 
 interface DashboardProps {
   user: { name?: string; email?: string; role: 'member' | 'guest' | null }
   onLogout: () => void
 }
 
-const COURSES = [
-  {
-    id: 1,
-    title: 'DAX Zero to Advanced',
-    description: 'From SUM to TREATAS — real enterprise patterns from production dashboards.',
-    pillar: 'Data & BI',
-    pillarColor: '#1D9E75',
-    pillarBg: 'rgba(29,158,117,0.1)',
-    icon: BookOpen,
-    lessons: 12,
-    duration: '4h 20m',
-    level: 'Intermediate',
-    free: true,
-    progress: 0,
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Python ETL for Power BI',
-    description: 'Replace Power Query with pandas. SharePoint via Microsoft Graph API.',
-    pillar: 'Data & BI',
-    pillarColor: '#1D9E75',
-    pillarBg: 'rgba(29,158,117,0.1)',
-    icon: BookOpen,
-    lessons: 8,
-    duration: '3h 10m',
-    level: 'Advanced',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 3,
-    title: 'Next.js Personal Brand Site',
-    description: 'Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.',
-    pillar: 'App Dev',
-    pillarColor: '#378ADD',
-    pillarBg: 'rgba(55,138,221,0.1)',
-    icon: Code2,
-    lessons: 10,
-    duration: '5h 00m',
-    level: 'Intermediate',
-    free: true,
-    progress: 0,
-  },
-  {
-    id: 4,
-    title: 'NestJS API Architecture',
-    description: 'Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.',
-    pillar: 'App Dev',
-    pillarColor: '#378ADD',
-    pillarBg: 'rgba(55,138,221,0.1)',
-    icon: Code2,
-    lessons: 9,
-    duration: '3h 45m',
-    level: 'Advanced',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 5,
-    title: 'The Builder\'s Philosophy',
-    description: 'Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.',
-    pillar: 'Philosophy',
-    pillarColor: '#EF9F27',
-    pillarBg: 'rgba(239,159,39,0.1)',
-    icon: Flame,
-    lessons: 6,
-    duration: '2h 00m',
-    level: 'All levels',
-    free: true,
-    progress: 0,
-  },
-  {
-    id: 6,
-    title: 'Think & Build Rich — Napoleon Hill',
-    description: 'Chapter-by-chapter walk through Think and Grow Rich for modern builders.',
-    pillar: 'Philosophy',
-    pillarColor: '#EF9F27',
-    pillarBg: 'rgba(239,159,39,0.1)',
-    icon: Flame,
-    lessons: 14,
-    duration: '6h 30m',
-    level: 'All levels',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 7,
-    title: 'The Crossover Series',
-    description: 'Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.',
-    pillar: 'Crossover',
-    pillarColor: '#7F77DD',
-    pillarBg: 'rgba(127,119,221,0.1)',
-    icon: Brain,
-    lessons: 5,
-    duration: '2h 30m',
-    level: 'All levels',
-    free: true,
-    progress: 0,
-    featured: true,
-  },
-]
+const PILLAR_ICONS = { 'App Dev': Code2, 'Data & BI': BookOpen, 'Philosophy': Flame, 'Crossover': Brain } as const
+const STAT_ICONS = [PlayCircle, Clock, Users, Star]
 
-const STATS = [
-  { icon: PlayCircle, value: '50+', label: 'Lessons', color: '#D4AF37' },
-  { icon: Clock, value: '27h', label: 'Content', color: '#1D9E75' },
-  { icon: Users, value: '3', label: 'Pillars', color: '#378ADD' },
-  { icon: Star, value: 'Free', label: 'Guest access', color: '#EF9F27' },
-]
+const COURSES = content.courses.map(c => {
+  const pillar = content.pillars.find(p => p.label === c.pillar)
+  return {
+    ...c,
+    progress: 0,
+    featured: 'featured' in c ? c.featured : false,
+    icon: PILLAR_ICONS[c.pillar as keyof typeof PILLAR_ICONS],
+    pillarColor: pillar?.color ?? '#D4AF37',
+    pillarBg: pillar?.bg ?? 'rgba(212,175,55,0.1)',
+  }
+})
 
-const FILTER_PILLS = ['All', 'Data & BI', 'App Dev', 'Philosophy', 'Crossover', 'Free']
+const STATS = content.dashboard.stats.map((s, i) => ({ ...s, icon: STAT_ICONS[i] }))
+
+const FILTER_PILLS = content.dashboard.filters
+const { ui, hero, nav, upsell } = content.dashboard
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [filter, setFilter] = useState('All')
@@ -151,15 +60,15 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-6">
-              <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">Courses</a>
-              <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">Articles</a>
-              <a href="https://www.fttgsolutions.com" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors" target="_blank" rel="noopener noreferrer">fttgsolutions.com</a>
+              <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
+              <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
+              <a href={content.site.mainSiteUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
             </div>
 
             {/* User area */}
             <div className="hidden md:flex items-center gap-3">
               {isGuest ? (
-                <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-xs">Guest</span>
+                <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-xs">{ui.guestBadge}</span>
               ) : (
                 <span className="font-sans text-sm text-text-secondary">{displayName}</span>
               )}
@@ -168,7 +77,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 className="flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
               >
                 <LogOut size={14} />
-                {isGuest ? 'Sign in' : 'Sign out'}
+                {isGuest ? ui.signIn : ui.signOut}
               </button>
             </div>
 
@@ -186,13 +95,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
-            <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">Courses</a>
-            <a href="https://learn.fttgsolutions.com/articles" className="block font-sans text-sm text-text-secondary py-1">Articles</a>
-            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">fttgsolutions.com</a>
+            <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
+            <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
+            <a href={content.site.mainSiteUrl} className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
             <div className="pt-2 border-t border-white/5">
               <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
                 <LogOut size={14} />
-                {isGuest ? 'Sign in' : 'Sign out'}
+                {isGuest ? ui.signIn : ui.signOut}
               </button>
             </div>
           </div>
@@ -208,22 +117,22 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               <>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4 max-w-full">
                   <Sparkles size={12} className="text-gold flex-shrink-0" />
-                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Guest mode — sign up for full access</span>
+                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">{hero.guestBadge}</span>
                 </div>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
-                  Explore FTTG Learn
+                  {hero.guestTitle}
                 </h1>
               </>
             ) : (
               <>
-                <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-2">Welcome back</p>
+                <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-2">{hero.memberGreetingLabel}</p>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
                   Hey, {displayName} 👋
                 </h1>
               </>
             )}
             <p className="font-sans text-text-secondary text-lg mt-3 max-w-xl">
-              Technical training and timeless philosophy for builders. Pick a pillar and start learning.
+              {hero.subtitle}
             </p>
           </div>
 
@@ -267,7 +176,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             </button>
           ))}
           <span className="font-sans text-text-muted text-xs ml-auto hidden sm:block">
-            {filtered.length} course{filtered.length !== 1 ? 's' : ''}
+            {filtered.length} {filtered.length !== 1 ? ui.coursePlural : ui.courseSingular}
           </span>
         </div>
 
@@ -288,7 +197,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 {course.featured && (
                   <div className="absolute -top-2.5 left-5">
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gold text-bg-primary text-[10px] font-bold tracking-wider uppercase rounded-sm">
-                      <Sparkles size={8} /> Featured
+                      <Sparkles size={8} /> {ui.featuredBadge}
                     </span>
                   </div>
                 )}
@@ -307,9 +216,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                         {course.pillar}
                       </span>
                       {course.free ? (
-                        <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20 text-[10px]">Free</span>
+                        <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20 text-[10px]">{ui.freeBadge}</span>
                       ) : (
-                        <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-[10px]">Member</span>
+                        <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-[10px]">{ui.memberBadge}</span>
                       )}
                     </div>
                     <h3 className="font-display font-bold text-text-primary text-base leading-snug">
@@ -351,11 +260,11 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                   {locked ? (
                     <>
                       <Lock size={14} />
-                      Members only
+                      {ui.lockedButton}
                     </>
                   ) : (
                     <>
-                      Start learning
+                      {ui.startButton}
                       <ChevronRight size={14} />
                     </>
                   )}
@@ -369,13 +278,11 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {isGuest && (
           <div className="mt-10 p-6 card-dark border border-gold/20 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
             <div>
-              <h3 className="font-display font-bold text-text-primary text-lg">Unlock everything</h3>
-              <p className="font-sans text-text-secondary text-sm mt-1">
-                Create a free account to access all member courses, track your progress, and join the community.
-              </p>
+              <h3 className="font-display font-bold text-text-primary text-lg">{upsell.title}</h3>
+              <p className="font-sans text-text-secondary text-sm mt-1">{upsell.description}</p>
             </div>
             <button className="btn-gold flex-shrink-0 text-sm">
-              Create account <ArrowRight size={14} />
+              {upsell.cta} <ArrowRight size={14} />
             </button>
           </div>
         )}
@@ -392,35 +299,39 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             <div className="flex flex-col gap-3">
               <Logo size="sm" />
               <p className="font-sans text-text-muted text-sm leading-relaxed">
-                Technical training and timeless philosophy for builders.
+                {content.footer.brand.tagline}
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Quick Links</p>
-              <a href="#courses" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Courses</a>
-              <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Articles</a>
-              <a href="https://www.fttgsolutions.com" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Main Site</a>
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.quickLinks.heading}</p>
+              {content.footer.quickLinks.links.map(l => (
+                <a key={l.label} href={l.href} className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors" {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  {l.label}
+                </a>
+              ))}
             </div>
 
             {/* Company */}
             <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Company</p>
-              <a href="https://www.fttgsolutions.com/about" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">About</a>
-              <a href="https://www.fttgsolutions.com/contact" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Contact</a>
-              <a href="https://www.fttgsolutions.com/blog" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Blog</a>
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.company.heading}</p>
+              {content.footer.company.links.map(l => (
+                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">
+                  {l.label}
+                </a>
+              ))}
             </div>
 
             {/* Newsletter */}
             <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Newsletter</p>
-              <p className="font-sans text-sm text-text-muted">Subscribe to receive updates and insights</p>
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.newsletter.heading}</p>
+              <p className="font-sans text-sm text-text-muted">{content.footer.newsletter.description}</p>
               <form onSubmit={e => e.preventDefault()} className="flex flex-col gap-2 mt-1">
-                <input type="email" placeholder="Your Email" className="input-dark text-sm py-2" />
+                <input type="email" placeholder={content.footer.newsletter.placeholder} className="input-dark text-sm py-2" />
                 <button type="submit" className="btn-gold text-sm py-2 gap-2">
                   <Send size={13} />
-                  Subscribe
+                  {content.footer.newsletter.button}
                 </button>
               </form>
             </div>
@@ -429,15 +340,15 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
           {/* Bottom bar */}
           <div className="mt-8 pt-6 pb-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-sans text-text-secondary text-xs">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
+            <p className="font-sans text-text-secondary text-xs">{content.footer.copyright}</p>
             <div className="flex items-center gap-8 shrink-0">
-              <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-secondary hover:text-gold transition-colors">
                 <Youtube size={20} />
               </a>
-              <a href="https://www.instagram.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-secondary hover:text-gold transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://twitter.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-secondary hover:text-gold transition-colors">
                 <Twitter size={20} />
               </a>
             </div>
