@@ -2,6 +2,7 @@
 
 import { Construction } from 'lucide-react'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import content from '@/lib/content'
 import articles from '@/lib/articles'
 
@@ -51,6 +52,7 @@ export default function ArticlesPage() {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

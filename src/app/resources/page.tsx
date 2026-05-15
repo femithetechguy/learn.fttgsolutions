@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { ExternalLink } from 'lucide-react'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { FilterPill, PillColor } from '@/components/FilterBar'
 import content from '@/lib/content'
@@ -128,6 +129,7 @@ export default function ResourcesPage() {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

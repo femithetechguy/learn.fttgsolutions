@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { PlayCircle, Clock, Lock, ChevronRight, Sparkles, TrendingUp } from 'lucide-react'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { ICON_MAP } from '@/components/FilterBar'
 import content from '@/lib/content'
@@ -158,6 +159,7 @@ export default function CoursesPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
