@@ -22,117 +22,179 @@ const { login } = content
 function PillarCards({ mobile = false }: { mobile?: boolean }) {
   const cx = PILLARS[3]
 
-  const cardPad   = mobile ? 'p-2'        : 'p-3'
-  const iconBox   = mobile ? 'w-5 h-5'    : 'w-7 h-7'
-  const iconBoxMb = mobile ? 'mb-1'       : 'mb-2.5'
-  const iconSz    = mobile ? 10           : 13
-  const decorH    = mobile ? 'h-4'        : 'h-7'
-  const decorMb   = mobile ? 'mb-1'       : 'mb-2.5'
-  const labelSz   = mobile ? 'text-[10px]': 'text-xs'
-  const tagSz     = mobile ? 'text-[8px]' : 'text-[9px]'
-  const gridGap   = mobile ? 'gap-1.5'   : 'gap-2'
-  const cxPad     = mobile ? 'px-2.5 py-1.5' : 'px-4 py-3'
+  // ── Mobile: left column = 3 stacked pillars, right column = crossover ──
+  if (mobile) {
+    return (
+      <div className="flex gap-1.5">
 
+        {/* Left: 3 pillars stacked */}
+        <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+          {PILLARS.slice(0, 3).map(({ icon: Icon, label, tag, color, bg, type }, i) => (
+            <div
+              key={label}
+              className="relative p-2 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm animate-slide-in-left overflow-hidden"
+              style={{ animationDelay: `${600 + i * 120}ms` }}
+            >
+              <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${color}08` }} />
+
+              {/* Icon + decoration side-by-side */}
+              <div className="flex items-start gap-1.5 mb-1.5">
+                <div
+                  className={`w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+                  style={{ background: bg }}
+                >
+                  <Icon size={10} style={{ color }} />
+                </div>
+
+                {type === 'code' && (
+                  <div className="font-mono text-[6px] leading-tight flex-1 overflow-hidden" style={{ color, opacity: 0.55 }}>
+                    <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
+                    <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
+                  </div>
+                )}
+                {type === 'data' && (
+                  <div className="flex items-end gap-0.5 flex-1 h-5">
+                    {[55, 85, 40, 95, 65].map((h, j) => (
+                      <div key={j} className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
+                        style={{ height: `${h}%`, background: color, opacity: 0.35 + h / 220, animationDelay: `${800 + j * 90}ms` }} />
+                    ))}
+                  </div>
+                )}
+                {type === 'flame' && (
+                  <div className="flex items-center gap-0.5 flex-1 h-5">
+                    {[3, 4, 3, 5, 4].map((size, j) => (
+                      <div key={j} className="rounded-full animate-float"
+                        style={{ width: size, height: size, background: color, opacity: 0.2 + j * 0.12,
+                          animationDelay: `${j * 400}ms`, animationDuration: `${3 + j * 0.4}s`, flexShrink: 0 }} />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight">{label}</p>
+              <p className="font-sans text-text-muted text-[8px] mt-0.5 leading-tight">{tag}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Right: Crossover as tall vertical column */}
+        <div
+          className="relative w-[38%] flex-shrink-0 p-2 rounded-sm border border-accent-cross/25 bg-bg-card/30 backdrop-blur-sm animate-slide-in-left flex flex-col items-center overflow-hidden"
+          style={{ animationDelay: '960ms' }}
+        >
+          <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 28px rgba(127,119,221,0.08)' }} />
+
+          {/* Icon */}
+          <div className="w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
+            <Brain size={10} style={{ color: cx.color }} />
+          </div>
+          <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight mt-1.5 text-center">{cx.label}</p>
+          <p className="font-sans text-text-muted text-[7px] leading-tight mt-0.5 text-center">{cx.tag}</p>
+
+          <div className="flex-1" />
+
+          {/* Pillar names → convergence → circle */}
+          <div className="flex flex-col items-center gap-0.5 mb-1">
+            {PILLARS.slice(0, 3).map((p, j) => (
+              <span key={p.label} className="font-sans text-[7px] font-semibold animate-pulse"
+                style={{ color: p.color, opacity: 0.8, animationDelay: `${j * 400}ms` }}>
+                {p.label}
+              </span>
+            ))}
+          </div>
+          <svg width="14" height="13" viewBox="0 0 14 13" fill="none" className="flex-shrink-0">
+            <line x1="7" y1="0" x2="7" y2="7" stroke="#7F77DD" strokeWidth="1" strokeOpacity="0.5" />
+            <polygon points="4,7 7,12 10,7" fill="#7F77DD" opacity="0.6" />
+          </svg>
+          <div className="w-3 h-3 rounded-full flex-shrink-0 animate-pulse mt-1"
+            style={{ background: cx.color, boxShadow: `0 0 8px ${cx.color}B0`, animationDelay: '1.2s' }} />
+        </div>
+      </div>
+    )
+  }
+
+  // ── Desktop: 3-col grid + full-width crossover strip ──
   return (
     <div>
-      <div className={`grid ${gridGap} ${mobile ? 'grid-cols-2' : 'grid-cols-3'}`}>
+      <div className="grid gap-2 grid-cols-3">
         {PILLARS.slice(0, 3).map(({ icon: Icon, label, tag, color, bg, type }, i) => (
           <div
             key={label}
-            className={`relative ${cardPad} rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden ${mobile && i === 2 ? 'col-span-2' : ''}`}
+            className="relative p-3 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
             style={{ animationDelay: `${600 + i * 120}ms` }}
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${color}15` }} />
 
             <div
-              className={`${iconBox} rounded-sm flex items-center justify-center ${iconBoxMb} flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+              className={`w-7 h-7 rounded-sm flex items-center justify-center mb-2.5 flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
               style={{ background: bg }}
             >
-              <Icon size={iconSz} style={{ color }} />
+              <Icon size={13} style={{ color }} />
             </div>
 
             {type === 'code' && (
-              <div className={`font-mono text-[7px] leading-relaxed ${decorMb} ${decorH} overflow-hidden`} style={{ color, opacity: 0.55 }}>
+              <div className="font-mono text-[8px] leading-relaxed mb-2.5 h-7 overflow-hidden" style={{ color, opacity: 0.55 }}>
                 <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
                 <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
-                {!mobile && <div className="pl-1">{'<View'}<span className="animate-blink">▋</span></div>}
+                <div className="pl-1">{'<View'}<span className="animate-blink">▋</span></div>
               </div>
             )}
-
             {type === 'data' && (
-              <div className={`flex items-end gap-0.5 ${decorMb} ${decorH}`}>
+              <div className="flex items-end gap-0.5 mb-2.5 h-7">
                 {[55, 85, 40, 95, 65].map((h, j) => (
-                  <div
-                    key={j}
-                    className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
-                    style={{ height: `${h}%`, background: color, opacity: 0.35 + h / 220, animationDelay: `${800 + j * 90}ms` }}
-                  />
+                  <div key={j} className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
+                    style={{ height: `${h}%`, background: color, opacity: 0.35 + h / 220, animationDelay: `${800 + j * 90}ms` }} />
                 ))}
               </div>
             )}
-
             {type === 'flame' && (
-              <div className={`flex items-end gap-1 ${decorMb} ${decorH}`}>
-                {(mobile ? [3, 5, 4, 6, 5] : [4, 6, 5, 8, 6, 9]).map((size, j) => (
-                  <div
-                    key={j}
-                    className="rounded-full animate-float"
-                    style={{
-                      width: size, height: size,
-                      background: color,
-                      opacity: 0.2 + j * 0.1,
-                      animationDelay: `${j * 400}ms`,
-                      animationDuration: `${3 + j * 0.4}s`,
-                      alignSelf: j % 2 === 0 ? 'flex-end' : 'center',
-                      flexShrink: 0,
-                    }}
-                  />
+              <div className="flex items-end gap-1.5 mb-2.5 h-7">
+                {[4, 6, 5, 8, 6, 9].map((size, j) => (
+                  <div key={j} className="rounded-full animate-float"
+                    style={{ width: size, height: size, background: color, opacity: 0.2 + j * 0.1,
+                      animationDelay: `${j * 400}ms`, animationDuration: `${3 + j * 0.4}s`,
+                      alignSelf: j % 2 === 0 ? 'flex-end' : 'center', flexShrink: 0 }} />
                 ))}
               </div>
             )}
 
-            <p className={`font-sans font-semibold text-text-primary ${labelSz} leading-tight`}>{label}</p>
-            <p className={`font-sans text-text-muted ${tagSz} mt-0.5 leading-tight`}>{tag}</p>
+            <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
+            <p className="font-sans text-text-muted text-[9px] mt-0.5 leading-tight">{tag}</p>
           </div>
         ))}
       </div>
 
       {/* Crossover — full-width connector strip */}
       <div
-        className={`relative mt-1.5 ${cxPad} rounded-sm border border-accent-cross/25 bg-bg-card/30 backdrop-blur-sm group hover:border-accent-cross/40 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden`}
+        className="relative mt-2 px-4 py-3 rounded-sm border border-accent-cross/25 bg-bg-card/30 backdrop-blur-sm group hover:border-accent-cross/40 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
         style={{ animationDelay: '960ms' }}
       >
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: 'inset 0 0 28px rgba(127,119,221,0.1)' }} />
-        <div className="flex items-center gap-3">
-          <div className={`${iconBox} rounded-sm flex items-center justify-center flex-shrink-0`} style={{ background: cx.bg }}>
-            <Brain size={iconSz} style={{ color: cx.color }} />
+        <div className="flex items-center gap-4">
+          <div className="w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
+            <Brain size={13} style={{ color: cx.color }} />
           </div>
           <div className="flex-shrink-0">
-            <p className={`font-sans font-semibold text-text-primary ${labelSz}`}>{cx.label}</p>
-            <p className={`font-sans text-text-muted ${tagSz}`}>{cx.tag}</p>
+            <p className="font-sans font-semibold text-text-primary text-xs">{cx.label}</p>
+            <p className="font-sans text-text-muted text-[9px]">{cx.tag}</p>
           </div>
           <div className="flex-1 flex items-center justify-end gap-2">
             <div className="flex flex-col gap-0.5 text-right">
               {PILLARS.slice(0, 3).map((p, j) => (
-                <span
-                  key={p.label}
-                  className={`font-sans ${mobile ? 'text-[7px]' : 'text-[8px]'} font-semibold animate-pulse`}
-                  style={{ color: p.color, opacity: 0.75, animationDelay: `${j * 400}ms` }}
-                >
+                <span key={p.label} className="font-sans text-[8px] font-semibold animate-pulse"
+                  style={{ color: p.color, opacity: 0.75, animationDelay: `${j * 400}ms` }}>
                   {p.label}
                 </span>
               ))}
             </div>
-            <svg width={mobile ? 22 : 28} height={mobile ? 28 : 36} viewBox="0 0 28 36" fill="none" className="flex-shrink-0">
+            <svg width="28" height="36" viewBox="0 0 28 36" fill="none" className="flex-shrink-0">
               <line x1="0" y1="5"  x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
               <line x1="0" y1="18" x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
               <line x1="0" y1="31" x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
               <polygon points="22,15 28,18 22,21" fill="#7F77DD" opacity="0.55" />
             </svg>
-            <div
-              className={`${mobile ? 'w-3 h-3' : 'w-3.5 h-3.5'} rounded-full flex-shrink-0 animate-pulse`}
-              style={{ background: cx.color, boxShadow: `0 0 10px ${cx.color}B0`, animationDelay: '1.2s' }}
-            />
+            <div className="w-3.5 h-3.5 rounded-full flex-shrink-0 animate-pulse"
+              style={{ background: cx.color, boxShadow: `0 0 10px ${cx.color}B0`, animationDelay: '1.2s' }} />
           </div>
         </div>
       </div>
