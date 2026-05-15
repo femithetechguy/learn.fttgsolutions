@@ -1,0 +1,219 @@
+{
+  "site": {
+    "name": "FTTG Learn",
+    "company": "FTTG Solutions LLC",
+    "domain": "learn.fttgsolutions.com",
+    "mainSiteUrl": "https://www.fttgsolutions.com"
+  },
+
+  "logo": {
+    "altFull": "FTTG Learn",
+    "altIcon": "FTTG"
+  },
+
+  "meta": {
+    "title": "FTTG Learn — Build. Think. Grow.",
+    "description": "Technical training and philosophy for builders. Power BI, Python, full-stack development, and the principles that drive real growth.",
+    "keywords": ["Power BI", "DAX", "Python", "Next.js", "FTTG Solutions", "data engineering", "full-stack"],
+    "og": {
+      "title": "FTTG Learn",
+      "description": "Build. Think. Grow.",
+      "siteName": "FTTG Solutions"
+    }
+  },
+
+  "login": {
+    "brand": {
+      "siteLabel": "learn.fttgsolutions.com",
+      "headline": ["Build.", "Think.", "Grow."],
+      "subheading": "Technical training and timeless philosophy for people who build things that matter.",
+      "pillarsLabel": "Three pillars. One platform."
+    },
+    "form": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account or continue as a guest.",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "forgotPassword": "Forgot password?",
+      "signInButton": "Sign in",
+      "signingIn": "Signing in…",
+      "divider": "or",
+      "guestButton": "Continue as Guest",
+      "guestLoading": "Loading…",
+      "guestNote": "Guests have access to free lessons and previews.",
+      "createAccount": "Create an account",
+      "createAccountSuffix": "for full access.",
+      "backToSite": "← Back to fttgsolutions.com",
+      "errorFallback": "Login failed.",
+      "validationError": "Please fill in all fields."
+    },
+    "stats": [
+      { "value": "3",    "label": "Pillars" },
+      { "value": "50+",  "label": "Lessons" },
+      { "value": "Free", "label": "Guest Access" }
+    ]
+  },
+
+  "pillars": [
+    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "type": "code",  "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
+    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "type": "data",  "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
+    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "type": "flame", "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
+    { "label": "Crossover",  "tag": "Code meets mindset.",      "type": "brain", "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
+  ],
+
+  "dashboard": {
+    "nav": {
+      "courses": "COURSES",
+      "articles": "ARTICLES",
+      "articlesUrl": "https://learn.fttgsolutions.com/articles",
+      "mainSiteLabel": "FTTG SOLUTIONS"
+    },
+    "hero": {
+      "guestBadge": "Guest mode — sign up for full access",
+      "guestTitle": "Explore FTTG Learn",
+      "memberGreetingLabel": "Welcome back",
+      "subtitle": "Technical training and timeless philosophy for builders. Pick a pillar and start learning."
+    },
+    "stats": [
+      { "value": "50+",  "label": "Lessons",     "color": "#D4AF37" },
+      { "value": "27h",  "label": "Content",      "color": "#1D9E75" },
+      { "value": "3",    "label": "Pillars",      "color": "#378ADD" },
+      { "value": "Free", "label": "Guest access", "color": "#EF9F27" }
+    ],
+    "filters": ["All", "Data & BI", "App Dev", "Philosophy", "Crossover", "Free"],
+    "ui": {
+      "guestBadge": "Guest",
+      "signIn": "Sign in",
+      "signOut": "Sign out",
+      "toggleMenu": "Toggle menu",
+      "defaultLearnerName": "Learner",
+      "startButton": "Start learning",
+      "lockedButton": "Members only",
+      "featuredBadge": "Featured",
+      "freeBadge": "Free",
+      "memberBadge": "Member",
+      "courseSingular": "course",
+      "coursePlural": "courses",
+      "lessonsSuffix": "lessons"
+    },
+    "upsell": {
+      "title": "Unlock everything",
+      "description": "Create a free account to access all member courses, track your progress, and join the community.",
+      "cta": "Create account"
+    }
+  },
+
+  "footer": {
+    "brand": {
+      "tagline": "Technical training and timeless philosophy for builders."
+    },
+    "quickLinks": {
+      "heading": "Quick Links",
+      "links": [
+        { "label": "Courses",   "href": "#courses",                                "external": false },
+        { "label": "Articles",  "href": "https://learn.fttgsolutions.com/articles", "external": true  },
+        { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
+      ]
+    },
+    "company": {
+      "heading": "Company",
+      "links": [
+        { "label": "About",   "href": "https://www.fttgsolutions.com/about",   "external": true },
+        { "label": "Contact", "href": "https://www.fttgsolutions.com/contact", "external": true },
+        { "label": "Blog",    "href": "https://www.fttgsolutions.com/blog",    "external": true }
+      ]
+    },
+    "newsletter": {
+      "heading": "Newsletter",
+      "description": "Subscribe to receive updates and insights",
+      "placeholder": "Your Email",
+      "button": "Subscribe"
+    },
+    "social": {
+      "youtube":        "https://www.youtube.com/@fttgsolutions",
+      "youtubeLabel":   "YouTube",
+      "instagram":      "https://www.instagram.com/fttgsolutions",
+      "instagramLabel": "Instagram",
+      "twitter":        "https://twitter.com/fttgsolutions",
+      "twitterLabel":   "Twitter"
+    },
+    "copyright": "© 2026 FTTG Solutions LLC. All Rights Reserved."
+  },
+
+  "courses": [
+    {
+      "id": 1,
+      "title": "DAX Zero to Advanced",
+      "description": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
+      "pillar": "Data & BI",
+      "lessons": 12,
+      "duration": "4h 20m",
+      "level": "Intermediate",
+      "free": true,
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "Python ETL for Power BI",
+      "description": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
+      "pillar": "Data & BI",
+      "lessons": 8,
+      "duration": "3h 10m",
+      "level": "Advanced",
+      "free": false
+    },
+    {
+      "id": 3,
+      "title": "Next.js Personal Brand Site",
+      "description": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
+      "pillar": "App Dev",
+      "lessons": 10,
+      "duration": "5h 00m",
+      "level": "Intermediate",
+      "free": true
+    },
+    {
+      "id": 4,
+      "title": "NestJS API Architecture",
+      "description": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
+      "pillar": "App Dev",
+      "lessons": 9,
+      "duration": "3h 45m",
+      "level": "Advanced",
+      "free": false
+    },
+    {
+      "id": 5,
+      "title": "The Builder's Philosophy",
+      "description": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
+      "pillar": "Philosophy",
+      "lessons": 6,
+      "duration": "2h 00m",
+      "level": "All levels",
+      "free": true
+    },
+    {
+      "id": 6,
+      "title": "Think & Build Rich — Napoleon Hill",
+      "description": "Chapter-by-chapter walk through Think and Grow Rich for modern builders.",
+      "pillar": "Philosophy",
+      "lessons": 14,
+      "duration": "6h 30m",
+      "level": "All levels",
+      "free": false
+    },
+    {
+      "id": 7,
+      "title": "The Crossover Series",
+      "description": "Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.",
+      "pillar": "Crossover",
+      "lessons": 5,
+      "duration": "2h 30m",
+      "level": "All levels",
+      "free": true,
+      "featured": true
+    }
+  ]
+}

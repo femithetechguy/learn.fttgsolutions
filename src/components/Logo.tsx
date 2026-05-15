@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import content from '@/lib/content'
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
@@ -21,7 +22,7 @@ export default function Logo({ size = 'md', showLearn = true, href = '/' }: Logo
       {showLearn ? (
         <Image
           src="/logo.svg"
-          alt="FTTG Learn"
+          alt={content.logo.altFull}
           width={logoW}
           height={logoH}
           priority
@@ -30,7 +31,7 @@ export default function Logo({ size = 'md', showLearn = true, href = '/' }: Logo
       ) : (
         <Image
           src="/icon.svg"
-          alt="FTTG"
+          alt={content.logo.altIcon}
           width={iconSize}
           height={iconSize}
           priority
