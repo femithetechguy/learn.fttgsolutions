@@ -49,6 +49,33 @@
       "errorFallback": "Login failed.",
       "validationError": "Please fill in all fields."
     },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join FTTG Learn and start building.",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email address",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "submitButton": "Create account",
+      "submitting": "Creating account…",
+      "backToLogin": "Already have an account?",
+      "backToLoginLink": "Sign in",
+      "passwordMismatch": "Passwords do not match.",
+      "validationError": "Please fill in all fields.",
+      "errorFallback": "Could not create account."
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "emailLabel": "Email address",
+      "submitButton": "Send reset link",
+      "submitting": "Sending…",
+      "backToLogin": "Back to sign in",
+      "successTitle": "Check your inbox",
+      "successMessage": "If an account exists for that email, a reset link is on its way.",
+      "errorFallback": "Could not send reset link."
+    },
     "stats": [
       { "value": "3",    "label": "Pillars" },
       { "value": "50+",  "label": "Lessons" },

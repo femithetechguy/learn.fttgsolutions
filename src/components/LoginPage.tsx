@@ -6,9 +6,13 @@ import Logo from '@/components/Logo'
 import { ICON_MAP } from '@/components/FilterBar'
 import content from '@/lib/content'
 
+type View = 'login' | 'register' | 'forgot'
+
 interface LoginPageProps {
   onLogin: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
   onGuest: () => void
+  onRegister?: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  onForgotPassword?: (email: string) => Promise<{ success: boolean; error?: string }>
 }
 
 const PILLARS = content.pillars.map(p => ({
@@ -17,6 +21,8 @@ const PILLARS = content.pillars.map(p => ({
 }))
 
 const { login } = content
+const reg = login.register
+const forgot = login.forgot
 
 function PillarCards({ mobile = false }: { mobile?: boolean }) {
   const cx = PILLARS[3]
@@ -201,22 +207,60 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
   )
 }
 
-export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
+export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPassword }: LoginPageProps) {
+  const [view, setView]             = useState<View>('login')
+
+  // shared
   const [email, setEmail]           = useState('')
-  const [password, setPassword]     = useState('')
-  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading]       = useState(false)
   const [error, setError]           = useState('')
+
+  // login
+  const [password, setPassword]     = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [guestLoading, setGuestLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // register
+  const [name, setName]             = useState('')
+  const [regPassword, setRegPassword]   = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showRegPassword, setShowRegPassword] = useState(false)
+
+  // forgot
+  const [forgotSent, setForgotSent] = useState(false)
+
+  const switchView = (v: View) => {
+    setView(v)
+    setError('')
+    setForgotSent(false)
+  }
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email || !password) { setError(login.form.validationError); return }
-    setError('')
-    setLoading(true)
+    setError(''); setLoading(true)
     const result = await onLogin(email, password)
     setLoading(false)
     if (!result.success) setError(result.error || login.form.errorFallback)
+  }
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!name || !email || !regPassword || !confirmPassword) { setError(reg.validationError); return }
+    if (regPassword !== confirmPassword) { setError(reg.passwordMismatch); return }
+    setError(''); setLoading(true)
+    const result = await (onRegister?.(name, email, regPassword) ?? Promise.resolve({ success: true as const }))
+    setLoading(false)
+    if (!result.success) setError((result as { success: false; error?: string }).error || reg.errorFallback)
+  }
+
+  const handleForgot = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) { setError(login.form.validationError); return }
+    setError(''); setLoading(true)
+    await (onForgotPassword?.(email) ?? Promise.resolve({ success: true }))
+    setLoading(false)
+    setForgotSent(true)
   }
 
   const handleGuest = async () => {
@@ -288,176 +332,300 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
         {/* ── FORM ── */}
         <div className="w-full max-w-[400px] animate-slide-up animate-delay-100 relative z-10">
 
-          {/* Logo — mobile only, above the form title */}
+          {/* Logo — mobile only */}
           <div className="lg:hidden flex justify-center mb-5 animate-fade-in">
             <Logo size="sm" />
           </div>
 
-          <div className="mb-3 lg:mb-8">
-            <h2 className="font-display text-xl lg:text-3xl font-bold text-text-primary leading-tight">
-              {login.form.title}
-            </h2>
-            <p className="hidden lg:block font-sans text-text-secondary mt-2 text-base">
-              {login.form.subtitle}
-            </p>
-          </div>
+          {/* ── LOGIN VIEW ── */}
+          {view === 'login' && (
+            <>
+              <div className="mb-3 lg:mb-8">
+                <h2 className="font-display text-xl lg:text-3xl font-bold text-text-primary leading-tight">
+                  {login.form.title}
+                </h2>
+                <p className="hidden lg:block font-sans text-text-secondary mt-2 text-base">
+                  {login.form.subtitle}
+                </p>
+              </div>
 
-          <form onSubmit={handleSubmit} className="space-y-2.5 lg:space-y-4" noValidate>
+              <form onSubmit={handleLogin} className="space-y-2.5 lg:space-y-4" noValidate>
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {login.form.emailLabel}
+                  </label>
+                  <input
+                    type="email" value={email} onChange={e => setEmail(e.target.value)}
+                    placeholder={login.form.emailPlaceholder}
+                    className="input-dark !py-2 lg:!py-3"
+                    autoComplete="email" disabled={loading}
+                  />
+                </div>
 
-            <div className="space-y-1">
-              <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
-                {login.form.emailLabel}
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder={login.form.emailPlaceholder}
-                className="input-dark !py-2 lg:!py-3"
-                autoComplete="email"
-                disabled={loading}
-              />
-            </div>
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {login.form.passwordLabel}
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'} value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      placeholder={login.form.passwordPlaceholder}
+                      className="input-dark !py-2 lg:!py-3 pr-11"
+                      autoComplete="current-password" disabled={loading}
+                    />
+                    <button type="button" onClick={() => setShowPassword(v => !v)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-secondary transition-colors"
+                      tabIndex={-1} aria-label={showPassword ? 'Hide password' : 'Show password'}>
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+                </div>
 
-            <div className="space-y-1">
-              <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
-                {login.form.passwordLabel}
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder={login.form.passwordPlaceholder}
-                  className="input-dark !py-2 lg:!py-3 pr-11"
-                  autoComplete="current-password"
-                  disabled={loading}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(v => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-secondary transition-colors"
-                  tabIndex={-1}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                <div className="flex justify-end">
+                  <button type="button" onClick={() => switchView('forgot')}
+                    className="font-sans text-sm text-text-muted hover:text-gold transition-colors">
+                    {login.form.forgotPassword}
+                  </button>
+                </div>
+
+                {error && <ErrorBanner message={error} />}
+
+                <button type="submit" disabled={loading} className="btn-gold w-full mt-1 h-10 lg:h-12 text-sm">
+                  {loading
+                    ? <Spinner label={login.form.signingIn} />
+                    : <span className="flex items-center gap-2">{login.form.signInButton}<ArrowRight size={16} /></span>}
+                </button>
+              </form>
+
+              <div className="flex items-center gap-3 my-3 lg:my-5">
+                <div className="flex-1 h-px bg-text-muted/20" />
+                <span className="font-sans text-text-muted text-xs tracking-widest uppercase">{login.form.divider}</span>
+                <div className="flex-1 h-px bg-text-muted/20" />
+              </div>
+
+              <button type="button" onClick={handleGuest} disabled={guestLoading} className="btn-ghost w-full h-10 lg:h-12 text-sm group">
+                {guestLoading
+                  ? <Spinner label={login.form.guestLoading} muted />
+                  : <span className="flex items-center gap-2">{login.form.guestButton}<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></span>}
+              </button>
+
+              <div className="mt-4 space-y-1 text-center">
+                <p className="font-sans text-text-muted text-sm leading-relaxed">
+                  {login.form.guestNote}
+                </p>
+                <button onClick={() => switchView('register')}
+                  className="font-sans text-sm text-gold hover:text-gold-light transition-colors underline underline-offset-2">
+                  {login.form.createAccount}
                 </button>
               </div>
-            </div>
 
-            <div className="flex justify-end">
-              <button type="button" className="font-sans text-xs text-text-muted hover:text-gold transition-colors" tabIndex={-1}>
-                {login.form.forgotPassword}
-              </button>
-            </div>
-
-            {error && (
-              <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-sm">
-                <span className="font-sans text-red-400 text-sm">{error}</span>
+              <div className="hidden lg:block mt-10 pt-6 border-t border-white/5 text-center">
+                <a href={content.site.mainSiteUrl}
+                  className="font-sans text-text-muted text-xs hover:text-text-secondary transition-colors inline-flex items-center gap-1.5"
+                  target="_blank" rel="noopener noreferrer">
+                  {login.form.backToSite}
+                </a>
               </div>
-            )}
+            </>
+          )}
 
-            <button type="submit" disabled={loading} className="btn-gold w-full mt-1 h-10 lg:h-12 text-sm">
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-bg-primary/30 border-t-bg-primary rounded-full animate-spin" />
-                  {login.form.signingIn}
-                </span>
+          {/* ── REGISTER VIEW ── */}
+          {view === 'register' && (
+            <>
+              <div className="mb-3 lg:mb-8">
+                <h2 className="font-display text-xl lg:text-3xl font-bold text-text-primary leading-tight">
+                  {reg.title}
+                </h2>
+                <p className="hidden lg:block font-sans text-text-secondary mt-2 text-base">
+                  {reg.subtitle}
+                </p>
+              </div>
+
+              <form onSubmit={handleRegister} className="space-y-2.5 lg:space-y-4" noValidate>
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {reg.nameLabel}
+                  </label>
+                  <input
+                    type="text" value={name} onChange={e => setName(e.target.value)}
+                    placeholder={reg.namePlaceholder}
+                    className="input-dark !py-2 lg:!py-3"
+                    autoComplete="name" disabled={loading}
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {reg.emailLabel}
+                  </label>
+                  <input
+                    type="email" value={email} onChange={e => setEmail(e.target.value)}
+                    placeholder={login.form.emailPlaceholder}
+                    className="input-dark !py-2 lg:!py-3"
+                    autoComplete="email" disabled={loading}
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {reg.passwordLabel}
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showRegPassword ? 'text' : 'password'} value={regPassword}
+                      onChange={e => setRegPassword(e.target.value)}
+                      placeholder={login.form.passwordPlaceholder}
+                      className="input-dark !py-2 lg:!py-3 pr-11"
+                      autoComplete="new-password" disabled={loading}
+                    />
+                    <button type="button" onClick={() => setShowRegPassword(v => !v)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-secondary transition-colors"
+                      tabIndex={-1} aria-label={showRegPassword ? 'Hide password' : 'Show password'}>
+                      {showRegPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                    {reg.confirmPasswordLabel}
+                  </label>
+                  <input
+                    type={showRegPassword ? 'text' : 'password'} value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    placeholder={login.form.passwordPlaceholder}
+                    className="input-dark !py-2 lg:!py-3"
+                    autoComplete="new-password" disabled={loading}
+                  />
+                </div>
+
+                {error && <ErrorBanner message={error} />}
+
+                <button type="submit" disabled={loading} className="btn-gold w-full mt-1 h-10 lg:h-12 text-sm">
+                  {loading
+                    ? <Spinner label={reg.submitting} />
+                    : <span className="flex items-center gap-2">{reg.submitButton}<ArrowRight size={16} /></span>}
+                </button>
+              </form>
+
+              <p className="font-sans text-text-muted text-sm text-center mt-4">
+                {reg.backToLogin}{' '}
+                <button onClick={() => switchView('login')} className="text-gold hover:text-gold-light transition-colors underline underline-offset-2">
+                  {reg.backToLoginLink}
+                </button>
+              </p>
+            </>
+          )}
+
+          {/* ── FORGOT PASSWORD VIEW ── */}
+          {view === 'forgot' && (
+            <>
+              {forgotSent ? (
+                <div className="text-center py-6">
+                  <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center mx-auto mb-4">
+                    <ArrowRight size={20} className="text-gold rotate-[-90deg]" />
+                  </div>
+                  <h2 className="font-display text-xl lg:text-2xl font-bold text-text-primary">{forgot.successTitle}</h2>
+                  <p className="font-sans text-text-secondary text-sm mt-2 max-w-xs mx-auto">{forgot.successMessage}</p>
+                  <button onClick={() => switchView('login')}
+                    className="mt-6 font-sans text-sm text-gold hover:text-gold-light transition-colors underline underline-offset-2">
+                    {forgot.backToLogin}
+                  </button>
+                </div>
               ) : (
-                <span className="flex items-center gap-2">
-                  {login.form.signInButton}
-                  <ArrowRight size={16} />
-                </span>
+                <>
+                  <div className="mb-3 lg:mb-8">
+                    <h2 className="font-display text-xl lg:text-3xl font-bold text-text-primary leading-tight">
+                      {forgot.title}
+                    </h2>
+                    <p className="hidden lg:block font-sans text-text-secondary mt-2 text-base">
+                      {forgot.subtitle}
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleForgot} className="space-y-2.5 lg:space-y-4" noValidate>
+                    <div className="space-y-1">
+                      <label className="font-sans text-xs font-semibold text-text-secondary tracking-widest uppercase block">
+                        {forgot.emailLabel}
+                      </label>
+                      <input
+                        type="email" value={email} onChange={e => setEmail(e.target.value)}
+                        placeholder={login.form.emailPlaceholder}
+                        className="input-dark !py-2 lg:!py-3"
+                        autoComplete="email" disabled={loading}
+                      />
+                    </div>
+
+                    {error && <ErrorBanner message={error} />}
+
+                    <button type="submit" disabled={loading} className="btn-gold w-full mt-1 h-10 lg:h-12 text-sm">
+                      {loading
+                        ? <Spinner label={forgot.submitting} />
+                        : <span className="flex items-center gap-2">{forgot.submitButton}<ArrowRight size={16} /></span>}
+                    </button>
+                  </form>
+
+                  <p className="font-sans text-text-muted text-sm text-center mt-4">
+                    <button onClick={() => switchView('login')} className="text-gold hover:text-gold-light transition-colors underline underline-offset-2">
+                      {forgot.backToLogin}
+                    </button>
+                  </p>
+                </>
               )}
-            </button>
-          </form>
-
-          <div className="flex items-center gap-3 my-3 lg:my-5">
-            <div className="flex-1 h-px bg-text-muted/20" />
-            <span className="font-sans text-text-muted text-xs tracking-widest uppercase">{login.form.divider}</span>
-            <div className="flex-1 h-px bg-text-muted/20" />
-          </div>
-
-          <button
-            type="button"
-            onClick={handleGuest}
-            disabled={guestLoading}
-            className="btn-ghost w-full h-10 lg:h-12 text-sm group"
-          >
-            {guestLoading ? (
-              <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-text-muted/30 border-t-text-secondary rounded-full animate-spin" />
-                {login.form.guestLoading}
-              </span>
-            ) : (
-              <span className="flex items-center gap-2">
-                {login.form.guestButton}
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </span>
-            )}
-          </button>
-
-          <p className="hidden lg:block font-sans text-text-muted text-xs text-center mt-3 leading-relaxed">
-            {login.form.guestNote}{' '}
-            <button className="text-gold hover:text-gold-light transition-colors underline underline-offset-2">
-              {login.form.createAccount}
-            </button>{' '}
-            {login.form.createAccountSuffix}
-          </p>
-
-          <div className="hidden lg:block mt-10 pt-6 border-t border-white/5 text-center">
-            <a
-              href={content.site.mainSiteUrl}
-              className="font-sans text-text-muted text-xs hover:text-text-secondary transition-colors inline-flex items-center gap-1.5"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {login.form.backToSite}
-            </a>
-          </div>
+            </>
+          )}
 
         </div>
 
-        {/* ── MOBILE BRAND SECTION (below form) ── */}
-        <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
-
-          {/* Divider */}
-          <div className="gold-line mb-3" />
-
-          {/* Headline */}
-          <div className="mb-2">
-            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
-              {login.brand.siteLabel}
+        {/* ── MOBILE BRAND SECTION (below form, login view only) ── */}
+        {view === 'login' && (
+          <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
+            <div className="gold-line mb-3" />
+            <div className="mb-2">
+              <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
+                {login.brand.siteLabel}
+              </p>
+              <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
+                <span className="inline-block animate-slide-up animate-delay-200">{login.brand.headline[0]}</span>{' '}
+                <span className="inline-block text-shimmer-gold" style={{ animation: 'slideUp 0.5s ease both 300ms, shimmer 3s linear 900ms infinite' }}>
+                  {login.brand.headline[1]}
+                </span>{' '}
+                <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
+              </h2>
+            </div>
+            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
+              {login.brand.pillarsLabel}
             </p>
-            <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
-              <span className="inline-block animate-slide-up animate-delay-200">{login.brand.headline[0]}</span>{' '}
-              <span className="inline-block text-shimmer-gold" style={{ animation: 'slideUp 0.5s ease both 300ms, shimmer 3s linear 900ms infinite' }}>
-                {login.brand.headline[1]}
-              </span>{' '}
-              <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
-            </h2>
+            <PillarCards mobile />
+            <div className="flex gap-5 mt-2">
+              {login.stats.map(({ value, label }, i) => (
+                <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
+                  <p className="font-display text-base font-bold text-gradient-gold">{value}</p>
+                  <p className="font-sans text-text-muted text-[8px] tracking-wide uppercase mt-0.5">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
-
-          {/* Pillars label */}
-          <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
-            {login.brand.pillarsLabel}
-          </p>
-
-          {/* Compact pillar cards */}
-          <PillarCards mobile />
-
-          {/* Stats */}
-          <div className="flex gap-5 mt-2">
-            {login.stats.map(({ value, label }, i) => (
-              <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
-                <p className="font-display text-base font-bold text-gradient-gold">{value}</p>
-                <p className="font-sans text-text-muted text-[8px] tracking-wide uppercase mt-0.5">{label}</p>
-              </div>
-            ))}
-          </div>
-
-        </div>
+        )}
       </div>
     </div>
+  )
+}
+
+function ErrorBanner({ message }: { message: string }) {
+  return (
+    <div className="flex items-start gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-sm">
+      <span className="font-sans text-red-400 text-sm">{message}</span>
+    </div>
+  )
+}
+
+function Spinner({ label, muted = false }: { label: string; muted?: boolean }) {
+  return (
+    <span className="flex items-center gap-2">
+      <span className={`w-4 h-4 border-2 rounded-full animate-spin ${muted ? 'border-text-muted/30 border-t-text-secondary' : 'border-bg-primary/30 border-t-bg-primary'}`} />
+      {label}
+    </span>
   )
 }
