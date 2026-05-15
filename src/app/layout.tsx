@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Technical training and philosophy for builders. Power BI, Python, full-stack development, and the principles that drive real growth.',
   keywords: ['Power BI', 'DAX', 'Python', 'Next.js', 'FTTG Solutions', 'data engineering', 'full-stack'],
   icons: {
-    icon: '/icon.svg',
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
   openGraph: {
     title: 'FTTG Learn',
