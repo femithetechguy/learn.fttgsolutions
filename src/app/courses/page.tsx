@@ -94,14 +94,14 @@ export default function CoursesPage() {
                     </div>
                   )}
 
-                  <div className="flex items-start justify-between gap-3">
+                  <FavoriteButton id={`course:${course.id}`} className="absolute top-3 right-3" />
+                  <div className="flex items-start gap-3">
                     <div
                       className="w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0"
                       style={{ background: course.pillarBg }}
                     >
                       <Icon size={18} style={{ color: course.pillarColor }} />
                     </div>
-                    <FavoriteButton id={`course:${course.id}`} className="ml-auto" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>

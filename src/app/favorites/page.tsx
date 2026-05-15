@@ -146,12 +146,10 @@ export default function FavoritesPage() {
                 {favCourses.map(course => {
                   const Icon = course.Icon
                   return (
-                    <div key={course.id} className="card-dark p-5 flex flex-col gap-4 border border-transparent hover:border-white/10 transition-all duration-200">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: course.pillarBg }}>
-                          {Icon && <Icon size={18} style={{ color: course.pillarColor }} />}
-                        </div>
-                        <FavoriteButton id={`course:${course.id}`} className="ml-auto" />
+                    <div key={course.id} className="card-dark p-5 flex flex-col gap-4 border border-transparent hover:border-white/10 transition-all duration-200 relative">
+                      <FavoriteButton id={`course:${course.id}`} className="absolute top-3 right-3" />
+                      <div className="w-10 h-10 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: course.pillarBg }}>
+                        {Icon && <Icon size={18} style={{ color: course.pillarColor }} />}
                       </div>
                       <div>
                         <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
