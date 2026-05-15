@@ -44,14 +44,20 @@ module.exports = {
         'dark-gradient': 'linear-gradient(180deg, #111111 0%, #080808 100%)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease forwards',
-        'slide-up': 'slideUp 0.5s ease forwards',
+        'fade-in': 'fadeIn 0.6s ease both',
+        'slide-up': 'slideUp 0.5s ease both',
+        'slide-in-left': 'slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'scale-in': 'scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both',
         'glow-pulse': 'glowPulse 3s ease-in-out infinite',
         'shimmer': 'shimmer 2s linear infinite',
+        'float': 'float 8s ease-in-out infinite',
+        'float-slow': 'float 12s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: { from: { opacity: '0' }, to: { opacity: '1' } },
-        slideUp: { from: { opacity: '0', transform: 'translateY(20px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        slideUp: { from: { opacity: '0', transform: 'translateY(24px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        slideInLeft: { from: { opacity: '0', transform: 'translateX(-28px)' }, to: { opacity: '1', transform: 'translateX(0)' } },
+        scaleIn: { from: { opacity: '0', transform: 'scale(0.75)' }, to: { opacity: '1', transform: 'scale(1)' } },
         glowPulse: {
           '0%, 100%': { boxShadow: '0 0 20px #D4AF3720' },
           '50%': { boxShadow: '0 0 40px #D4AF3740' },
@@ -59,6 +65,10 @@ module.exports = {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-22px)' },
         },
       },
       boxShadow: {

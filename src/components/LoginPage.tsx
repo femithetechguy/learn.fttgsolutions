@@ -57,55 +57,65 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
       {/* Left panel — brand & pillars */}
       <div className="hidden lg:flex lg:w-[52%] relative flex-col justify-between p-12 overflow-hidden">
 
-        {/* Ambient glow */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-accent-dev/5 blur-3xl pointer-events-none" />
+        {/* Floating ambient orbs */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/5 blur-3xl pointer-events-none animate-float" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-accent-dev/5 blur-3xl pointer-events-none animate-float-slow" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-1/2 -right-16 w-64 h-64 rounded-full bg-accent-cross/5 blur-3xl pointer-events-none animate-float" style={{ animationDelay: '5s' }} />
 
         {/* Top — logo + tagline */}
-        <div className="relative z-10 animate-fade-in">
-          <Logo size="lg" />
+        <div className="relative z-10">
+          <div className="animate-fade-in">
+            <Logo size="lg" />
+          </div>
           <div className="mt-10">
-            <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-3">
+            <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-3 animate-slide-up animate-delay-100">
               learn.fttgsolutions.com
             </p>
             <h1 className="font-display text-5xl font-bold leading-tight text-text-primary">
-              Build.{' '}
-              <span className="text-gradient-gold">Think.</span>
+              <span className="inline-block animate-slide-up animate-delay-200">Build.</span>{' '}
+              <span
+                className="inline-block text-shimmer-gold"
+                style={{ animation: 'slideUp 0.5s ease both 300ms, shimmer 3s linear 900ms infinite' }}
+              >
+                Think.
+              </span>
               <br />
-              Grow.
+              <span className="inline-block animate-slide-up animate-delay-400">Grow.</span>
             </h1>
-            <p className="mt-4 font-sans text-text-secondary text-lg leading-relaxed max-w-md">
+            <p className="mt-4 font-sans text-text-secondary text-lg leading-relaxed max-w-md animate-slide-up animate-delay-500">
               Technical training and timeless philosophy for people who build things that matter.
             </p>
           </div>
         </div>
 
         {/* Mid — pillars */}
-        <div className="relative z-10 space-y-3 animate-slide-up animate-delay-200">
-          <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-4">
+        <div className="relative z-10 space-y-3">
+          <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-4 animate-fade-in animate-delay-500">
             Three pillars. One platform.
           </p>
-          {PILLARS.map(({ icon: Icon, label, color, bg }) => (
+          {PILLARS.map(({ icon: Icon, label, color, bg }, i) => (
             <div
               key={label}
-              className="flex items-center gap-4 p-4 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/10 transition-all duration-200"
+              className="relative flex items-center gap-4 p-4 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 hover:shadow-glow-sm transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
+              style={{ animationDelay: `${600 + i * 130}ms` }}
             >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-sm" style={{ boxShadow: `inset 0 0 20px ${color}18` }} />
               <div
-                className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0"
+                className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
                 style={{ background: bg }}
               >
                 <Icon size={16} style={{ color }} />
               </div>
               <span className="font-sans font-semibold text-text-primary text-sm">{label}</span>
-              <ChevronRight size={14} className="ml-auto text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ChevronRight size={14} className="ml-auto text-text-muted opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
             </div>
           ))}
         </div>
 
         {/* Bottom — stats */}
-        <div className="relative z-10 flex gap-8 animate-fade-in animate-delay-400">
-          {STATS.map(({ value, label }) => (
-            <div key={label}>
+        <div className="relative z-10 flex gap-8">
+          {STATS.map(({ value, label }, i) => (
+            <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
               <p className="font-display text-2xl font-bold text-gradient-gold">{value}</p>
               <p className="font-sans text-text-muted text-xs tracking-wide uppercase mt-0.5">{label}</p>
             </div>
@@ -117,14 +127,17 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
       <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-gold/20 to-transparent" />
 
       {/* Right panel — login form */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 lg:px-16">
+      <div className="flex-1 relative flex flex-col items-center justify-center px-6 py-12 lg:px-16 overflow-hidden">
+
+        {/* Mobile ambient glow */}
+        <div className="lg:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-gold/4 blur-3xl pointer-events-none animate-float" />
 
         {/* Mobile logo */}
-        <div className="lg:hidden mb-10">
+        <div className="lg:hidden mb-10 animate-fade-in">
           <Logo size="md" />
         </div>
 
-        <div className="w-full max-w-[400px] animate-slide-up">
+        <div className="w-full max-w-[400px] animate-slide-up animate-delay-100">
 
           {/* Header */}
           <div className="mb-8">
