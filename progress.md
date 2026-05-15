@@ -172,6 +172,7 @@ A Next.js 14 training platform hosted at `learn.fttgsolutions.com`, built as par
 
 - [x] Deploy to Vercel under `learn.fttgsolutions.com`
 - [x] Created `.env.example` (tracked) and `.env.local` (gitignored) with `NEXT_PUBLIC_SITE_URL`
+- [x] Fixed Vercel project icon — added `public/favicon.svg` + explicit `type: 'image/svg+xml'` in layout metadata (same pattern as fttgsolutions repo)
 - [ ] Add DNS CNAME: `learn` → `cname.vercel-dns.com`
 - [ ] Configure `next.config.js` with production image domains
 - [ ] Add environment variables: `NEXTAUTH_SECRET`, `DATABASE_URL`, `NEXT_PUBLIC_API_URL`
