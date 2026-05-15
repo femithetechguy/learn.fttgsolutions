@@ -52,6 +52,9 @@ module.exports = {
         'shimmer': 'shimmer 2s linear infinite',
         'float': 'float 8s ease-in-out infinite',
         'float-slow': 'float 12s ease-in-out infinite',
+        'blink': 'blink 1s step-end infinite',
+        'flicker': 'flicker 2.5s ease-in-out infinite',
+        'grow-bar': 'growBar 0.8s ease both',
       },
       keyframes: {
         fadeIn: { from: { opacity: '0' }, to: { opacity: '1' } },
@@ -69,6 +72,21 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-22px)' },
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
+        },
+        flicker: {
+          '0%, 100%': { transform: 'scale(1) rotate(0deg)' },
+          '20%': { transform: 'scale(1.1) rotate(-3deg)' },
+          '40%': { transform: 'scale(0.94) rotate(2deg)' },
+          '60%': { transform: 'scale(1.06) rotate(-1deg)' },
+          '80%': { transform: 'scale(0.97) rotate(2.5deg)' },
+        },
+        growBar: {
+          from: { transform: 'scaleY(0)' },
+          to: { transform: 'scaleY(1)' },
         },
       },
       boxShadow: {

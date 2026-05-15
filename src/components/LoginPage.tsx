@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Eye, EyeOff, ArrowRight, BookOpen, Code2, Brain, Flame, ChevronRight } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight, BookOpen, Code2, Brain, Flame } from 'lucide-react'
 import Logo from '@/components/Logo'
 
 interface LoginPageProps {
@@ -10,10 +10,10 @@ interface LoginPageProps {
 }
 
 const PILLARS = [
-  { icon: Code2, label: 'App Dev', color: '#378ADD', bg: 'rgba(55,138,221,0.1)' },
-  { icon: BookOpen, label: 'Data & BI', color: '#1D9E75', bg: 'rgba(29,158,117,0.1)' },
-  { icon: Flame, label: 'Philosophy', color: '#EF9F27', bg: 'rgba(239,159,39,0.1)' },
-  { icon: Brain, label: 'Crossover', color: '#7F77DD', bg: 'rgba(127,119,221,0.1)' },
+  { icon: Code2,    label: 'App Dev',     tag: 'Build. Ship. Repeat.',    color: '#378ADD', bg: 'rgba(55,138,221,0.12)',  type: 'code'  as const },
+  { icon: BookOpen, label: 'Data & BI',   tag: 'Insight. Clarity. Power.',color: '#1D9E75', bg: 'rgba(29,158,117,0.12)', type: 'data'  as const },
+  { icon: Flame,    label: 'Philosophy',  tag: 'Think. Reflect. Grow.',   color: '#EF9F27', bg: 'rgba(239,159,39,0.12)', type: 'flame' as const },
+  { icon: Brain,    label: 'Crossover',   tag: 'Code meets mindset.',     color: '#7F77DD', bg: 'rgba(127,119,221,0.12)',type: 'brain' as const },
 ]
 
 const STATS = [
@@ -88,28 +88,98 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
           </div>
         </div>
 
-        {/* Mid — pillars */}
-        <div className="relative z-10 space-y-3">
+        {/* Mid — pillars 2×2 grid */}
+        <div className="relative z-10">
           <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-4 animate-fade-in animate-delay-500">
             Three pillars. One platform.
           </p>
-          {PILLARS.map(({ icon: Icon, label, color, bg }, i) => (
-            <div
-              key={label}
-              className="relative flex items-center gap-4 p-4 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 hover:shadow-glow-sm transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
-              style={{ animationDelay: `${600 + i * 130}ms` }}
-            >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-sm" style={{ boxShadow: `inset 0 0 20px ${color}18` }} />
+          <div className="grid grid-cols-2 gap-3">
+            {PILLARS.map(({ icon: Icon, label, tag, color, bg, type }, i) => (
               <div
-                className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-                style={{ background: bg }}
+                key={label}
+                className="relative p-4 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
+                style={{ animationDelay: `${600 + i * 130}ms` }}
               >
-                <Icon size={16} style={{ color }} />
+                {/* Hover inner glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 24px ${color}18` }} />
+
+                {/* Icon */}
+                <div
+                  className={`w-8 h-8 rounded-sm flex items-center justify-center mb-3 flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+                  style={{ background: bg }}
+                >
+                  <Icon size={15} style={{ color }} />
+                </div>
+
+                {/* Per-pillar decoration */}
+                {type === 'code' && (
+                  <div className="font-mono text-[9px] leading-relaxed mb-3 h-8 overflow-hidden" style={{ color, opacity: 0.55 }}>
+                    <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
+                    <div><span style={{ opacity: 0.5 }}>const</span> {' App = () => {'}</div>
+                    <div className="pl-2">{'return <View'}<span className="animate-blink">▋</span></div>
+                  </div>
+                )}
+
+                {type === 'data' && (
+                  <div className="flex items-end gap-1 mb-3 h-8">
+                    {[55, 85, 40, 95, 60].map((h, j) => (
+                      <div
+                        key={j}
+                        className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
+                        style={{
+                          height: `${h}%`,
+                          background: color,
+                          opacity: 0.35 + h / 220,
+                          animationDelay: `${800 + j * 90}ms`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {type === 'flame' && (
+                  <div className="flex items-end gap-2 mb-3 h-8">
+                    {/* Rising thought bubbles — small at bottom, grow as they rise */}
+                    {[4, 6, 5, 8, 6, 10].map((size, j) => (
+                      <div
+                        key={j}
+                        className="rounded-full animate-float"
+                        style={{
+                          width: size,
+                          height: size,
+                          background: color,
+                          opacity: 0.2 + j * 0.1,
+                          animationDelay: `${j * 400}ms`,
+                          animationDuration: `${3 + j * 0.5}s`,
+                          alignSelf: j % 2 === 0 ? 'flex-end' : 'center',
+                          flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {type === 'brain' && (
+                  <div className="flex items-center gap-1.5 mb-3 h-8">
+                    {[0, 1, 2, 3].map(j => (
+                      <div key={j} className="flex items-center gap-1.5 flex-1">
+                        <div
+                          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
+                          style={{ background: color, opacity: 0.5 + j * 0.12, animationDelay: `${j * 350}ms` }}
+                        />
+                        {j < 3 && (
+                          <div className="flex-1 h-px" style={{ background: `${color}35` }} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <p className="font-sans font-semibold text-text-primary text-sm leading-tight">{label}</p>
+                <p className="font-sans text-text-muted text-[10px] mt-0.5 leading-tight">{tag}</p>
               </div>
-              <span className="font-sans font-semibold text-text-primary text-sm">{label}</span>
-              <ChevronRight size={14} className="ml-auto text-text-muted opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Bottom — stats */}
