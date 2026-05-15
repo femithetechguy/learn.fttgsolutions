@@ -226,6 +226,12 @@
           "url": "https://tabulareditor.com/",
           "description": "Advanced model authoring tool for Analysis Services and Power BI datasets — TE2 is free.",
           "tag": "Tools"
+        },
+        {
+          "label": "Postman",
+          "url": "https://www.postman.com",
+          "description": "Industry-standard tool for building, testing, and documenting APIs with a visual interface.",
+          "tag": "Tools"
         }
       ]
     },
