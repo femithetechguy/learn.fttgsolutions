@@ -49,6 +49,33 @@
       "errorFallback": "Login failed.",
       "validationError": "Please fill in all fields."
     },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join FTTG Learn and start building.",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email address",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "submitButton": "Create account",
+      "submitting": "Creating account…",
+      "backToLogin": "Already have an account?",
+      "backToLoginLink": "Sign in",
+      "passwordMismatch": "Passwords do not match.",
+      "validationError": "Please fill in all fields.",
+      "errorFallback": "Could not create account."
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "emailLabel": "Email address",
+      "submitButton": "Send reset link",
+      "submitting": "Sending…",
+      "backToLogin": "Back to sign in",
+      "successTitle": "Check your inbox",
+      "successMessage": "If an account exists for that email, a reset link is on its way.",
+      "errorFallback": "Could not send reset link."
+    },
     "stats": [
       { "value": "3",    "label": "Pillars" },
       { "value": "50+",  "label": "Lessons" },
@@ -57,17 +84,20 @@
   },
 
   "pillars": [
-    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "type": "code",  "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
-    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "type": "data",  "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
-    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "type": "flame", "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
-    { "label": "Crossover",  "tag": "Code meets mindset.",      "type": "brain", "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
+    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "icon": "Code2",    "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
+    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "icon": "BookOpen", "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
+    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "icon": "Flame",    "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
+    { "label": "Crossover",  "tag": "Code meets mindset.",      "icon": "Brain",    "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
   ],
 
   "dashboard": {
     "nav": {
       "courses": "COURSES",
+      "coursesUrl": "/courses",
       "articles": "ARTICLES",
-      "articlesUrl": "https://learn.fttgsolutions.com/articles",
+      "articlesUrl": "/articles",
+      "resources": "RESOURCES",
+      "resourcesUrl": "/resources",
       "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {
@@ -82,7 +112,14 @@
       { "value": "3",    "label": "Pillars",      "color": "#378ADD" },
       { "value": "Free", "label": "Guest access", "color": "#EF9F27" }
     ],
-    "filters": ["All", "Data & BI", "App Dev", "Philosophy", "Crossover", "Free"],
+    "filters": [
+      { "label": "All" },
+      { "label": "Free", "icon": "Unlock" },
+      { "label": "Data & BI" },
+      { "label": "App Dev" },
+      { "label": "Philosophy" },
+      { "label": "Crossover" }
+    ],
     "ui": {
       "guestBadge": "Guest",
       "signIn": "Sign in",
@@ -105,6 +142,21 @@
     }
   },
 
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Pick a pillar and start building. Filter by topic or jump straight into a free lesson."
+  },
+
+  "articles": {
+    "title": "Articles",
+    "subtitle": "Insights, walkthroughs, and builder wisdom from the FTTG crew."
+  },
+
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Curated tools, docs, and links to accelerate your growth"
+  },
+
   "footer": {
     "brand": {
       "tagline": "Technical training and timeless philosophy for builders."
@@ -112,8 +164,8 @@
     "quickLinks": {
       "heading": "Quick Links",
       "links": [
-        { "label": "Courses",   "href": "#courses",                                "external": false },
-        { "label": "Articles",  "href": "https://learn.fttgsolutions.com/articles", "external": true  },
+        { "label": "Courses",   "href": "/courses", "external": false },
+        { "label": "Articles",  "href": "/articles", "external": false },
         { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
       ]
     },
@@ -140,80 +192,5 @@
       "twitterLabel":   "Twitter"
     },
     "copyright": "© 2026 FTTG Solutions LLC. All Rights Reserved."
-  },
-
-  "courses": [
-    {
-      "id": 1,
-      "title": "DAX Zero to Advanced",
-      "description": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
-      "pillar": "Data & BI",
-      "lessons": 12,
-      "duration": "4h 20m",
-      "level": "Intermediate",
-      "free": true,
-      "featured": true
-    },
-    {
-      "id": 2,
-      "title": "Python ETL for Power BI",
-      "description": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
-      "pillar": "Data & BI",
-      "lessons": 8,
-      "duration": "3h 10m",
-      "level": "Advanced",
-      "free": false
-    },
-    {
-      "id": 3,
-      "title": "Next.js Personal Brand Site",
-      "description": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
-      "pillar": "App Dev",
-      "lessons": 10,
-      "duration": "5h 00m",
-      "level": "Intermediate",
-      "free": true
-    },
-    {
-      "id": 4,
-      "title": "NestJS API Architecture",
-      "description": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
-      "pillar": "App Dev",
-      "lessons": 9,
-      "duration": "3h 45m",
-      "level": "Advanced",
-      "free": false
-    },
-    {
-      "id": 5,
-      "title": "The Builder's Philosophy",
-      "description": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
-      "pillar": "Philosophy",
-      "lessons": 6,
-      "duration": "2h 00m",
-      "level": "All levels",
-      "free": true
-    },
-    {
-      "id": 6,
-      "title": "Think & Build Rich — Napoleon Hill",
-      "description": "Chapter-by-chapter walk through Think and Grow Rich for modern builders.",
-      "pillar": "Philosophy",
-      "lessons": 14,
-      "duration": "6h 30m",
-      "level": "All levels",
-      "free": false
-    },
-    {
-      "id": 7,
-      "title": "The Crossover Series",
-      "description": "Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.",
-      "pillar": "Crossover",
-      "lessons": 5,
-      "duration": "2h 30m",
-      "level": "All levels",
-      "free": true,
-      "featured": true
-    }
-  ]
+  }
 }

@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import {
   BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
-  LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star,
-  Youtube, Instagram, Twitter, Send, ExternalLink
+  ChevronRight, Sparkles, TrendingUp, Users, Star
 } from 'lucide-react'
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
+import coursesData from '@/lib/courses'
 
 interface DashboardProps {
   user: { name?: string; email?: string; role: 'member' | 'guest' | null }
@@ -17,7 +19,7 @@ interface DashboardProps {
 const PILLAR_ICONS = { 'App Dev': Code2, 'Data & BI': BookOpen, 'Philosophy': Flame, 'Crossover': Brain } as const
 const STAT_ICONS = [PlayCircle, Clock, Users, Star]
 
-const COURSES = content.courses.map(c => {
+const COURSES = coursesData.map(c => {
   const pillar = content.pillars.find(p => p.label === c.pillar)
   return {
     ...c,
@@ -32,11 +34,10 @@ const COURSES = content.courses.map(c => {
 const STATS = content.dashboard.stats.map((s, i) => ({ ...s, icon: STAT_ICONS[i] }))
 
 const FILTER_PILLS = content.dashboard.filters
-const { ui, hero, nav, upsell } = content.dashboard
+const { ui, hero, upsell } = content.dashboard
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [filter, setFilter] = useState('All')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isGuest = user.role === 'guest'
   const displayName = user.name
@@ -52,63 +53,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">
 
-      {/* Navigation — sticky works only when no overflow:hidden ancestor */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Logo size="sm" />
-
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-6">
-              <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
-              <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
-              <a href={content.site.mainSiteUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                {nav.mainSiteLabel}<ExternalLink size={11} className="opacity-50" />
-              </a>
-            </div>
-
-            {/* User area */}
-            <div className="hidden md:flex items-center gap-3">
-              {isGuest ? (
-                <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-xs">{ui.guestBadge}</span>
-              ) : (
-                <span className="font-sans text-sm text-text-secondary">{displayName}</span>
-              )}
-              <button
-                onClick={onLogout}
-                className="flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
-              >
-                <LogOut size={14} />
-                {isGuest ? ui.signIn : ui.signOut}
-              </button>
-            </div>
-
-            {/* Mobile menu button — 44×44px touch target */}
-            <button
-              className="md:hidden w-11 h-11 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(v => !v)}
-              aria-label={ui.toggleMenu}
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
-            <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
-            <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
-            <a href={content.site.mainSiteUrl} className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
-            <div className="pt-2 border-t border-white/5">
-              <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
-                <LogOut size={14} />
-                {isGuest ? ui.signIn : ui.signOut}
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+      <Nav user={user} onLogout={onLogout} />
 
       {/* overflow-x-hidden here (not on outer div) so sticky nav isn't broken */}
       <div className="overflow-x-hidden">
@@ -169,15 +114,15 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           style={{ scrollbarWidth: 'none' }}>
           {FILTER_PILLS.map(f => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
+              key={f.label}
+              onClick={() => setFilter(f.label)}
               className={`font-sans text-xs font-semibold px-4 py-2 rounded-sm border transition-all duration-150 ${
-                filter === f
+                filter === f.label
                   ? 'bg-gold text-bg-primary border-gold'
                   : 'border-white/10 text-text-secondary hover:border-gold/40 hover:text-text-primary'
               }`}
             >
-              {f}
+              {f.label}
             </button>
           ))}
           <span className="font-sans text-text-muted text-xs ml-auto hidden sm:block">
@@ -286,81 +231,14 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               <h3 className="font-display font-bold text-text-primary text-lg">{upsell.title}</h3>
               <p className="font-sans text-text-secondary text-sm mt-1">{upsell.description}</p>
             </div>
-            <button className="btn-gold flex-shrink-0 text-sm">
+            <a href="/?view=register" className="btn-gold flex-shrink-0 text-sm inline-flex items-center gap-2">
               {upsell.cta} <ArrowRight size={14} />
-            </button>
+            </a>
           </div>
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 mt-8 bg-bg-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-          {/* Top grid — 1 col mobile, 2 col tablet, 4 col desktop */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2.5rem' }}>
-
-            {/* Brand */}
-            <div className="flex flex-col gap-3">
-              <Logo size="sm" />
-              <p className="font-sans text-text-muted text-sm leading-relaxed">
-                {content.footer.brand.tagline}
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.quickLinks.heading}</p>
-              {content.footer.quickLinks.links.map(l => (
-                <a key={l.label} href={l.href} className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors" {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                  {l.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Company */}
-            <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.company.heading}</p>
-              {content.footer.company.links.map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">
-                  {l.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Newsletter */}
-            <div className="flex flex-col gap-2.5">
-              <p className="font-sans text-sm font-semibold text-text-primary mb-1">{content.footer.newsletter.heading}</p>
-              <p className="font-sans text-sm text-text-muted">{content.footer.newsletter.description}</p>
-              <form onSubmit={e => e.preventDefault()} className="flex flex-col gap-2 mt-1">
-                <input type="email" placeholder={content.footer.newsletter.placeholder} className="input-dark text-sm py-2" />
-                <button type="submit" className="btn-gold text-sm py-2 gap-2">
-                  <Send size={13} />
-                  {content.footer.newsletter.button}
-                </button>
-              </form>
-            </div>
-
-          </div>
-
-          {/* Bottom bar */}
-          <div className="mt-8 pt-6 pb-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-sans text-text-secondary text-xs">{content.footer.copyright}</p>
-            <div className="flex items-center gap-8 shrink-0">
-              <a href={content.footer.social.youtube} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.youtubeLabel} className="text-text-secondary hover:text-gold transition-colors">
-                <Youtube size={20} />
-              </a>
-              <a href={content.footer.social.instagram} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.instagramLabel} className="text-text-secondary hover:text-gold transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href={content.footer.social.twitter} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.twitterLabel} className="text-text-secondary hover:text-gold transition-colors">
-                <Twitter size={20} />
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </footer>
+      <Footer />
       </div>{/* end overflow-x-hidden wrapper */}
     </div>
   )

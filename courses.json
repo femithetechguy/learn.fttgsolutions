@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "DAX Zero to Advanced",
+    "description": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
+    "pillar": "Data & BI",
+    "lessons": 12,
+    "duration": "4h 20m",
+    "level": "Intermediate",
+    "free": true,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Python ETL for Power BI",
+    "description": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
+    "pillar": "Data & BI",
+    "lessons": 8,
+    "duration": "3h 10m",
+    "level": "Advanced",
+    "free": false
+  },
+  {
+    "id": 3,
+    "title": "Next.js Personal Brand Site",
+    "description": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
+    "pillar": "App Dev",
+    "lessons": 10,
+    "duration": "5h 00m",
+    "level": "Intermediate",
+    "free": true
+  },
+  {
+    "id": 4,
+    "title": "NestJS API Architecture",
+    "description": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
+    "pillar": "App Dev",
+    "lessons": 9,
+    "duration": "3h 45m",
+    "level": "Advanced",
+    "free": false
+  },
+  {
+    "id": 5,
+    "title": "The Builder's Philosophy",
+    "description": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
+    "pillar": "Philosophy",
+    "lessons": 6,
+    "duration": "2h 00m",
+    "level": "All levels",
+    "free": true
+  },
+  {
+    "id": 6,
+    "title": "Think & Build Rich — Napoleon Hill",
+    "description": "Chapter-by-chapter walk through Think and Grow Rich for modern builders.",
+    "pillar": "Philosophy",
+    "lessons": 14,
+    "duration": "6h 30m",
+    "level": "All levels",
+    "free": false
+  },
+  {
+    "id": 7,
+    "title": "The Crossover Series",
+    "description": "Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.",
+    "pillar": "Crossover",
+    "lessons": 5,
+    "duration": "2h 30m",
+    "level": "All levels",
+    "free": true,
+    "featured": true
+  }
+]
