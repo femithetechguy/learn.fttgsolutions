@@ -290,7 +290,7 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
         <div className="w-full max-w-[400px] animate-slide-up animate-delay-100 relative z-10">
 
           {/* Logo — mobile only, above the form title */}
-          <div className="lg:hidden flex justify-center mb-3 animate-fade-in">
+          <div className="lg:hidden flex justify-center mb-5 animate-fade-in">
             <Logo size="sm" />
           </div>
 
