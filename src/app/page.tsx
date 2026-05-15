@@ -1,19 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import LoginPage from '@/components/LoginPage'
-import Dashboard from '@/components/Dashboard'
-
-type UserRole = 'member' | 'guest' | null
-
-interface User {
-  email?: string
-  name?: string
-  role: UserRole
-}
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>(null)
+  const router = useRouter()
 
   const handleLogin = async (email: string, password: string) => {
     // Stub — wire your real backend/NextAuth here
@@ -24,22 +15,13 @@ export default function Home() {
     if (password.length < 4) {
       return { success: false, error: 'Password is too short.' }
     }
-    const name = email.split('@')[0]
-    setUser({ email, name, role: 'member' })
+    router.push('/courses')
     return { success: true }
   }
 
   const handleGuest = () => {
-    setUser({ role: 'guest', name: 'Guest' })
+    router.push('/courses')
   }
 
-  const handleLogout = () => {
-    setUser(null)
-  }
-
-  if (!user) {
-    return <LoginPage onLogin={handleLogin} onGuest={handleGuest} />
-  }
-
-  return <Dashboard user={user} onLogout={handleLogout} />
+  return <LoginPage onLogin={handleLogin} onGuest={handleGuest} />
 }
