@@ -41,7 +41,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   const isGuest = user.role === 'guest'
   const displayName = user.name
     ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
-    : 'Learner'
+    : ui.defaultLearnerName
 
   const filtered = COURSES.filter(c => {
     if (filter === 'All') return true
@@ -85,7 +85,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             <button
               className="md:hidden text-text-secondary"
               onClick={() => setMobileMenuOpen(v => !v)}
-              aria-label="Toggle menu"
+              aria-label={ui.toggleMenu}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -236,7 +236,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 <div className="flex items-center gap-3 font-sans text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <PlayCircle size={11} />
-                    {course.lessons} lessons
+                    {course.lessons} {ui.lessonsSuffix}
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock size={11} />
@@ -342,13 +342,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           <div className="mt-8 pt-6 pb-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-sans text-text-secondary text-xs">{content.footer.copyright}</p>
             <div className="flex items-center gap-8 shrink-0">
-              <a href={content.footer.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.youtube} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.youtubeLabel} className="text-text-secondary hover:text-gold transition-colors">
                 <Youtube size={20} />
               </a>
-              <a href={content.footer.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.instagram} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.instagramLabel} className="text-text-secondary hover:text-gold transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href={content.footer.social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-secondary hover:text-gold transition-colors">
+              <a href={content.footer.social.twitter} target="_blank" rel="noopener noreferrer" aria-label={content.footer.social.twitterLabel} className="text-text-secondary hover:text-gold transition-colors">
                 <Twitter size={20} />
               </a>
             </div>

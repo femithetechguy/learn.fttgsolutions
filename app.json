@@ -6,6 +6,11 @@
     "mainSiteUrl": "https://www.fttgsolutions.com"
   },
 
+  "logo": {
+    "altFull": "FTTG Learn",
+    "altIcon": "FTTG"
+  },
+
   "meta": {
     "title": "FTTG Learn — Build. Think. Grow.",
     "description": "Technical training and philosophy for builders. Power BI, Python, full-stack development, and the principles that drive real growth.",
@@ -82,13 +87,16 @@
       "guestBadge": "Guest",
       "signIn": "Sign in",
       "signOut": "Sign out",
+      "toggleMenu": "Toggle menu",
+      "defaultLearnerName": "Learner",
       "startButton": "Start learning",
       "lockedButton": "Members only",
       "featuredBadge": "Featured",
       "freeBadge": "Free",
       "memberBadge": "Member",
       "courseSingular": "course",
-      "coursePlural": "courses"
+      "coursePlural": "courses",
+      "lessonsSuffix": "lessons"
     },
     "upsell": {
       "title": "Unlock everything",
@@ -124,9 +132,12 @@
       "button": "Subscribe"
     },
     "social": {
-      "youtube":   "https://www.youtube.com/@fttgsolutions",
-      "instagram": "https://www.instagram.com/fttgsolutions",
-      "twitter":   "https://twitter.com/fttgsolutions"
+      "youtube":        "https://www.youtube.com/@fttgsolutions",
+      "youtubeLabel":   "YouTube",
+      "instagram":      "https://www.instagram.com/fttgsolutions",
+      "instagramLabel": "Instagram",
+      "twitter":        "https://twitter.com/fttgsolutions",
+      "twitterLabel":   "Twitter"
     },
     "copyright": "© 2026 FTTG Solutions LLC. All Rights Reserved."
   },
