@@ -224,52 +224,13 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
         {/* Floating orb — mobile only */}
         <div className="lg:hidden absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-gold/4 blur-3xl pointer-events-none animate-float" />
 
-        {/* ── MOBILE BRAND SECTION ── */}
-        <div className="lg:hidden w-full max-w-[440px] mb-3 relative z-10">
-
-          {/* Logo */}
-          <div className="flex justify-center mb-2 animate-fade-in">
-            <Logo size="sm" />
-          </div>
-
-          {/* Headline — single line at text-2xl, no line break */}
-          <div className="mb-2">
-            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
-              {login.brand.siteLabel}
-            </p>
-            <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
-              <span className="inline-block animate-slide-up animate-delay-200">{login.brand.headline[0]}</span>{' '}
-              <span className="inline-block text-shimmer-gold" style={{ animation: 'slideUp 0.5s ease both 300ms, shimmer 3s linear 900ms infinite' }}>
-                {login.brand.headline[1]}
-              </span>{' '}
-              <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
-            </h2>
-          </div>
-
-          {/* Pillars label */}
-          <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
-            {login.brand.pillarsLabel}
-          </p>
-
-          {/* Compact pillar cards */}
-          <PillarCards mobile />
-
-          {/* Stats */}
-          <div className="flex gap-5 mt-2">
-            {login.stats.map(({ value, label }, i) => (
-              <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
-                <p className="font-display text-base font-bold text-gradient-gold">{value}</p>
-                <p className="font-sans text-text-muted text-[8px] tracking-wide uppercase mt-0.5">{label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="gold-line mt-3" />
-        </div>
-
         {/* ── FORM ── */}
         <div className="w-full max-w-[400px] animate-slide-up animate-delay-100 relative z-10">
+
+          {/* Logo — mobile only, above the form title */}
+          <div className="lg:hidden flex justify-center mb-3 animate-fade-in">
+            <Logo size="sm" />
+          </div>
 
           <div className="mb-3 lg:mb-8">
             <h2 className="font-display text-xl lg:text-3xl font-bold text-text-primary leading-tight">
@@ -392,6 +353,46 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
             >
               {login.form.backToSite}
             </a>
+          </div>
+
+        </div>
+
+        {/* ── MOBILE BRAND SECTION (below form) ── */}
+        <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
+
+          {/* Divider */}
+          <div className="gold-line mb-3" />
+
+          {/* Headline */}
+          <div className="mb-2">
+            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
+              {login.brand.siteLabel}
+            </p>
+            <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
+              <span className="inline-block animate-slide-up animate-delay-200">{login.brand.headline[0]}</span>{' '}
+              <span className="inline-block text-shimmer-gold" style={{ animation: 'slideUp 0.5s ease both 300ms, shimmer 3s linear 900ms infinite' }}>
+                {login.brand.headline[1]}
+              </span>{' '}
+              <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
+            </h2>
+          </div>
+
+          {/* Pillars label */}
+          <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
+            {login.brand.pillarsLabel}
+          </p>
+
+          {/* Compact pillar cards */}
+          <PillarCards mobile />
+
+          {/* Stats */}
+          <div className="flex gap-5 mt-2">
+            {login.stats.map(({ value, label }, i) => (
+              <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
+                <p className="font-display text-base font-bold text-gradient-gold">{value}</p>
+                <p className="font-sans text-text-muted text-[8px] tracking-wide uppercase mt-0.5">{label}</p>
+              </div>
+            ))}
           </div>
 
         </div>
