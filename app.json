@@ -66,6 +66,7 @@
   "dashboard": {
     "nav": {
       "courses": "COURSES",
+      "coursesUrl": "/courses",
       "articles": "ARTICLES",
       "articlesUrl": "/articles",
       "resources": "RESOURCES",
@@ -107,6 +108,11 @@
     }
   },
 
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Pick a pillar and start building. Filter by topic or jump straight into a free lesson."
+  },
+
   "articles": {
     "title": "Articles",
     "subtitle": "Insights, walkthroughs, and builder wisdom from the FTTG crew."
@@ -124,7 +130,7 @@
     "quickLinks": {
       "heading": "Quick Links",
       "links": [
-        { "label": "Courses",   "href": "#courses",                                "external": false },
+        { "label": "Courses",   "href": "/courses", "external": false },
         { "label": "Articles",  "href": "/articles", "external": false },
         { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
       ]

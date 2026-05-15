@@ -27,7 +27,7 @@ export default function Nav({ user, onLogout }: NavProps) {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="/#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
+            <a href={nav.coursesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
             <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
             <a href={nav.resourcesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.resources}</a>
             <a
@@ -80,7 +80,7 @@ export default function Nav({ user, onLogout }: NavProps) {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
-          <a href="/#courses" className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
+          <a href={nav.coursesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
           <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
           <a href={nav.resourcesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.resources}</a>
           <a href={content.site.mainSiteUrl} className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
