@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
@@ -6,38 +7,36 @@ interface LogoProps {
   href?: string
 }
 
-export default function Logo({ size = 'md', showLearn = true, href = '/' }: LogoProps) {
-  const sizes = {
-    sm: { mark: 'text-xs', brand: 'text-base', learn: 'text-xs' },
-    md: { mark: 'text-xs', brand: 'text-lg', learn: 'text-sm' },
-    lg: { mark: 'text-sm', brand: 'text-2xl', learn: 'text-base' },
-  }
+const SIZES = {
+  sm: { logoH: 28, logoW: 128, iconSize: 28 },
+  md: { logoH: 36, logoW: 165, iconSize: 36 },
+  lg: { logoH: 44, logoW: 201, iconSize: 44 },
+}
 
-  const s = sizes[size]
+export default function Logo({ size = 'md', showLearn = true, href = '/' }: LogoProps) {
+  const { logoH, logoW, iconSize } = SIZES[size]
 
   return (
-    <Link href={href} className="flex items-center gap-2.5 group select-none">
-      {/* Mark */}
-      <div className="flex items-center justify-center w-8 h-8 bg-gold rounded-sm flex-shrink-0 transition-all duration-200 group-hover:bg-gold-light">
-        <span className={`font-display font-bold text-bg-primary ${s.mark} leading-none`}>F</span>
-      </div>
-
-      {/* Wordmark */}
-      <div className="flex flex-col leading-none">
-        <div className="flex items-baseline gap-1.5">
-          <span className={`font-display font-bold text-text-primary ${s.brand} tracking-tight`}>
-            FTTG
-          </span>
-          {showLearn && (
-            <span className={`font-sans font-semibold text-gold ${s.learn} tracking-widest uppercase`}>
-              Learn
-            </span>
-          )}
-        </div>
-        <span className="font-sans text-text-muted text-[10px] tracking-widest uppercase mt-0.5">
-          Solutions
-        </span>
-      </div>
+    <Link href={href} className="inline-flex items-center group select-none">
+      {showLearn ? (
+        <Image
+          src="/logo.svg"
+          alt="FTTG Learn"
+          width={logoW}
+          height={logoH}
+          priority
+          className="transition-opacity duration-200 group-hover:opacity-80"
+        />
+      ) : (
+        <Image
+          src="/icon.svg"
+          alt="FTTG"
+          width={iconSize}
+          height={iconSize}
+          priority
+          className="rounded-sm transition-opacity duration-200 group-hover:opacity-80"
+        />
+      )}
     </Link>
   )
 }

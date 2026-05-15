@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import {
   BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
-  LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star
+  LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star,
+  Youtube, Instagram, Twitter, Send
 } from 'lucide-react'
 import Logo from '@/components/Logo'
 
@@ -140,7 +141,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   })
 
   return (
-    <div className="min-h-screen bg-bg-primary bg-grid">
+    <div className="min-h-screen bg-bg-primary bg-grid overflow-x-hidden">
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
@@ -186,7 +187,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
             <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">Courses</a>
-            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1">fttgsolutions.com</a>
+            <a href="https://learn.fttgsolutions.com/articles" className="block font-sans text-sm text-text-secondary py-1">Articles</a>
+            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">fttgsolutions.com</a>
             <div className="pt-2 border-t border-white/5">
               <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
                 <LogOut size={14} />
@@ -199,14 +201,14 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
       {/* Hero section */}
       <div className="relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-gold/3 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 sm:w-[600px] h-64 sm:h-[400px] bg-gold/5 blur-3xl rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
           <div className="animate-fade-in">
             {isGuest ? (
               <>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4">
-                  <Sparkles size={12} className="text-gold" />
-                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Browsing as guest — create an account for full access</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4 max-w-full">
+                  <Sparkles size={12} className="text-gold flex-shrink-0" />
+                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Guest mode — sign up for full access</span>
                 </div>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
                   Explore FTTG Learn
@@ -249,7 +251,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       <div id="courses" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Filter pills */}
-        <div className="flex items-center gap-2 flex-wrap mb-8">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 mb-8 scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}>
           {FILTER_PILLS.map(f => (
             <button
               key={f}
@@ -379,21 +382,67 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 mt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Logo size="sm" showLearn={false} />
-          <p className="font-sans text-text-muted text-xs text-center">
-            © 2026 FTTG Solutions LLC · McDonough, GA ·{' '}
-            <a href="mailto:adefemi@kolawoles.com" className="hover:text-gold transition-colors">adefemi@kolawoles.com</a>
-          </p>
-          <a
-            href="https://www.fttgsolutions.com"
-            className="font-sans text-text-muted text-xs hover:text-text-secondary transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            fttgsolutions.com ↗
-          </a>
+      <footer className="border-t border-white/5 mt-8 bg-bg-secondary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+          {/* Top grid — 1 col mobile, 2 col tablet, 4 col desktop */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2.5rem' }}>
+
+            {/* Brand */}
+            <div className="flex flex-col gap-3">
+              <Logo size="sm" />
+              <p className="font-sans text-text-muted text-sm leading-relaxed">
+                Technical training and timeless philosophy for builders.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div className="flex flex-col gap-2.5">
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Quick Links</p>
+              <a href="#courses" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Courses</a>
+              <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Articles</a>
+              <a href="https://www.fttgsolutions.com" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Main Site</a>
+            </div>
+
+            {/* Company */}
+            <div className="flex flex-col gap-2.5">
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Company</p>
+              <a href="https://www.fttgsolutions.com/about" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">About</a>
+              <a href="https://www.fttgsolutions.com/contact" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Contact</a>
+              <a href="https://www.fttgsolutions.com/blog" target="_blank" rel="noopener noreferrer" className="font-sans text-sm text-text-muted hover:text-text-primary transition-colors">Blog</a>
+            </div>
+
+            {/* Newsletter */}
+            <div className="flex flex-col gap-2.5">
+              <p className="font-sans text-sm font-semibold text-text-primary mb-1">Newsletter</p>
+              <p className="font-sans text-sm text-text-muted">Subscribe to receive updates and insights</p>
+              <form onSubmit={e => e.preventDefault()} className="flex flex-col gap-2 mt-1">
+                <input type="email" placeholder="Your Email" className="input-dark text-sm py-2" />
+                <button type="submit" className="btn-gold text-sm py-2 gap-2">
+                  <Send size={13} />
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+          {/* Bottom bar */}
+          <div className="mt-8 pt-6 pb-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="font-sans text-text-secondary text-xs">© 2026 FTTG Solutions LLC. All Rights Reserved.</p>
+            <div className="flex items-center gap-8 shrink-0">
+              <a href="https://www.youtube.com/@fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-text-secondary hover:text-gold transition-colors">
+                <Youtube size={20} />
+              </a>
+              <a href="https://www.instagram.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-text-secondary hover:text-gold transition-colors">
+                <Instagram size={20} />
+              </a>
+              <a href="https://twitter.com/fttgsolutions" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-text-secondary hover:text-gold transition-colors">
+                <Twitter size={20} />
+              </a>
+            </div>
+          </div>
+
         </div>
       </footer>
     </div>
