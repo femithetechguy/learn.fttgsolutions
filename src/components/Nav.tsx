@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { LogOut, Menu, X, ExternalLink } from 'lucide-react'
+import { LogOut, Menu, X } from 'lucide-react'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
 
@@ -30,14 +30,6 @@ export default function Nav({ user, onLogout }: NavProps) {
             <a href={nav.coursesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
             <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
             <a href={nav.resourcesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.resources}</a>
-            <a
-              href={content.site.mainSiteUrl}
-              className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors inline-flex items-center gap-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {nav.mainSiteLabel}<ExternalLink size={11} className="opacity-50" />
-            </a>
           </div>
 
           {/* User area */}
@@ -83,7 +75,6 @@ export default function Nav({ user, onLogout }: NavProps) {
           <a href={nav.coursesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.courses}</a>
           <a href={nav.articlesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.articles}</a>
           <a href={nav.resourcesUrl} className="block font-sans text-sm text-text-secondary py-1">{nav.resources}</a>
-          <a href={content.site.mainSiteUrl} className="block font-sans text-sm text-text-secondary py-1" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
           <div className="pt-2 border-t border-white/5">
             {user && onLogout ? (
               <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
