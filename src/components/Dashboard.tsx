@@ -9,6 +9,7 @@ import {
 import Nav from '@/components/Nav'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
+import coursesData from '@/lib/courses'
 
 interface DashboardProps {
   user: { name?: string; email?: string; role: 'member' | 'guest' | null }
@@ -18,7 +19,7 @@ interface DashboardProps {
 const PILLAR_ICONS = { 'App Dev': Code2, 'Data & BI': BookOpen, 'Philosophy': Flame, 'Crossover': Brain } as const
 const STAT_ICONS = [PlayCircle, Clock, Users, Star]
 
-const COURSES = content.courses.map(c => {
+const COURSES = coursesData.map(c => {
   const pillar = content.pillars.find(p => p.label === c.pillar)
   return {
     ...c,
