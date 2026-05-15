@@ -27,7 +27,7 @@ export default function FavoriteButton({ id, className = '' }: Props) {
   }
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`inline-flex ${className}`}>
       <button
         onClick={handleClick}
         aria-label={isFav ? 'Remove from favourites' : 'Save to favourites'}
