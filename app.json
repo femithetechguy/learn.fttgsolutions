@@ -57,10 +57,10 @@
   },
 
   "pillars": [
-    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "type": "code",  "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
-    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "type": "data",  "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
-    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "type": "flame", "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
-    { "label": "Crossover",  "tag": "Code meets mindset.",      "type": "brain", "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
+    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "icon": "Code2",    "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
+    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "icon": "BookOpen", "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
+    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "icon": "Flame",    "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
+    { "label": "Crossover",  "tag": "Code meets mindset.",      "icon": "Brain",    "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
   ],
 
   "dashboard": {
@@ -85,7 +85,14 @@
       { "value": "3",    "label": "Pillars",      "color": "#378ADD" },
       { "value": "Free", "label": "Guest access", "color": "#EF9F27" }
     ],
-    "filters": ["All", "Data & BI", "App Dev", "Philosophy", "Crossover", "Free"],
+    "filters": [
+      { "label": "All" },
+      { "label": "Free", "icon": "Unlock" },
+      { "label": "Data & BI" },
+      { "label": "App Dev" },
+      { "label": "Philosophy" },
+      { "label": "Crossover" }
+    ],
     "ui": {
       "guestBadge": "Guest",
       "signIn": "Sign in",

@@ -114,15 +114,15 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           style={{ scrollbarWidth: 'none' }}>
           {FILTER_PILLS.map(f => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
+              key={f.label}
+              onClick={() => setFilter(f.label)}
               className={`font-sans text-xs font-semibold px-4 py-2 rounded-sm border transition-all duration-150 ${
-                filter === f
+                filter === f.label
                   ? 'bg-gold text-bg-primary border-gold'
                   : 'border-white/10 text-text-secondary hover:border-gold/40 hover:text-text-primary'
               }`}
             >
-              {f}
+              {f.label}
             </button>
           ))}
           <span className="font-sans text-text-muted text-xs ml-auto hidden sm:block">

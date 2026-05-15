@@ -1,22 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import {
-  BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
-  ChevronRight, Sparkles, TrendingUp
-} from 'lucide-react'
+import { PlayCircle, Clock, Lock, ChevronRight, Sparkles, TrendingUp } from 'lucide-react'
 import Nav from '@/components/Nav'
+import EmptyState from '@/components/EmptyState'
+import FilterBar, { ICON_MAP } from '@/components/FilterBar'
 import content from '@/lib/content'
 import coursesData from '@/lib/courses'
-
-const PILLAR_ICONS = { 'App Dev': Code2, 'Data & BI': BookOpen, 'Philosophy': Flame, 'Crossover': Brain } as const
 
 const COURSES = coursesData.map(c => {
   const pillar = content.pillars.find(p => p.label === c.pillar)
   return {
     ...c,
     featured: 'featured' in c ? c.featured : false,
-    icon: PILLAR_ICONS[c.pillar as keyof typeof PILLAR_ICONS],
+    Icon: pillar?.icon ? ICON_MAP[pillar.icon] : null,
     pillarColor: pillar?.color ?? '#D4AF37',
     pillarBg: pillar?.bg ?? 'rgba(212,175,55,0.1)',
   }
@@ -27,11 +24,13 @@ const { ui, upsell } = content.dashboard
 
 export default function CoursesPage() {
   const [filter, setFilter] = useState('All')
+  const [search, setSearch] = useState('')
 
   const filtered = COURSES.filter(c => {
-    if (filter === 'All') return true
-    if (filter === 'Free') return c.free
-    return c.pillar === filter
+    const matchesPillar = filter === 'All' || (filter === 'Free' ? c.free : c.pillar === filter)
+    const q = search.toLowerCase()
+    const matchesSearch = !q || c.title.toLowerCase().includes(q) || c.description.toLowerCase().includes(q)
+    return matchesPillar && matchesSearch
   })
 
   return (
@@ -58,32 +57,26 @@ export default function CoursesPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Filter pills */}
-          <div
-            className="flex items-center gap-2 overflow-x-auto pb-1 mb-8 scrollbar-hide"
-            style={{ scrollbarWidth: 'none' }}
-          >
-            {FILTER_PILLS.map(f => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`font-sans text-xs font-semibold px-4 py-2 rounded-sm border transition-all duration-150 ${
-                  filter === f
-                    ? 'bg-gold text-bg-primary border-gold'
-                    : 'border-white/10 text-text-secondary hover:border-gold/40 hover:text-text-primary'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-            <span className="font-sans text-text-muted text-xs ml-auto hidden sm:block">
-              {filtered.length} {filtered.length !== 1 ? ui.coursePlural : ui.courseSingular}
-            </span>
+          <div className="mb-8">
+            <FilterBar
+              pills={FILTER_PILLS.filter(f => f.label !== 'All').map(f => {
+                const pillar = content.pillars.find(p => p.label === f.label)
+                return { label: f.label, icon: pillar?.icon ?? f.icon }
+              })}
+              activePill={filter === 'All' ? null : filter}
+              onPillChange={val => setFilter(val ?? 'All')}
+              search={search}
+              onSearchChange={setSearch}
+              searchPlaceholder="Search courses..."
+              resultCount={filtered.length}
+              resultLabel={filtered.length !== 1 ? ui.coursePlural : ui.courseSingular}
+            />
           </div>
 
-          {/* Course grid */}
+          {filtered.length === 0 && <EmptyState query={search || undefined} />}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {filtered.map(course => {
-              const Icon = course.icon
+              const Icon = course.Icon
               return (
                 <div
                   key={course.id}

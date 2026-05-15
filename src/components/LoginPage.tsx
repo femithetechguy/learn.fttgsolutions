@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Eye, EyeOff, ArrowRight, BookOpen, Code2, Brain, Flame } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Logo from '@/components/Logo'
+import { ICON_MAP } from '@/components/FilterBar'
 import content from '@/lib/content'
 
 interface LoginPageProps {
@@ -10,11 +11,9 @@ interface LoginPageProps {
   onGuest: () => void
 }
 
-const PILLAR_ICONS = { code: Code2, data: BookOpen, flame: Flame, brain: Brain } as const
-
 const PILLARS = content.pillars.map(p => ({
   ...p,
-  icon: PILLAR_ICONS[p.type as keyof typeof PILLAR_ICONS],
+  Icon: p.icon ? ICON_MAP[p.icon] : null,
 }))
 
 const { login } = content
@@ -29,7 +28,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
 
         {/* Left: 3 pillars stacked */}
         <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-          {PILLARS.slice(0, 3).map(({ icon: Icon, label, tag, color, bg, type }, i) => (
+          {PILLARS.slice(0, 3).map(({ Icon, label, tag, color, bg, icon }, i) => (
             <div
               key={label}
               className="relative p-2 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm animate-slide-in-left overflow-hidden"
@@ -40,19 +39,19 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
               {/* Icon + decoration side-by-side */}
               <div className="flex items-start gap-1.5 mb-1.5">
                 <div
-                  className={`w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+                  className={`w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0 ${icon === 'Flame' ? 'animate-flicker' : ''}`}
                   style={{ background: bg }}
                 >
                   <Icon size={10} style={{ color }} />
                 </div>
 
-                {type === 'code' && (
+                {icon === 'Code2' && (
                   <div className="font-mono text-[6px] leading-tight flex-1 overflow-hidden" style={{ color, opacity: 0.55 }}>
                     <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
                     <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
                   </div>
                 )}
-                {type === 'data' && (
+                {icon === 'BookOpen' && (
                   <div className="flex items-end gap-0.5 flex-1 h-5">
                     {[55, 85, 40, 95, 65].map((h, j) => (
                       <div key={j} className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
@@ -60,7 +59,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
                     ))}
                   </div>
                 )}
-                {type === 'flame' && (
+                {icon === 'Flame' && (
                   <div className="flex items-center gap-0.5 flex-1 h-5">
                     {[3, 4, 3, 5, 4].map((size, j) => (
                       <div key={j} className="rounded-full animate-float"
@@ -86,7 +85,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
 
           {/* Icon */}
           <div className="w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
-            <Brain size={10} style={{ color: cx.color }} />
+            {cx.Icon && <cx.Icon size={10} style={{ color: cx.color }} />}
           </div>
           <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight mt-1.5 text-center">{cx.label}</p>
           <p className="font-sans text-text-muted text-[7px] leading-tight mt-0.5 text-center">{cx.tag}</p>
@@ -117,7 +116,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
   return (
     <div>
       <div className="grid gap-2 grid-cols-3">
-        {PILLARS.slice(0, 3).map(({ icon: Icon, label, tag, color, bg, type }, i) => (
+        {PILLARS.slice(0, 3).map(({ Icon, label, tag, color, bg, icon }, i) => (
           <div
             key={label}
             className="relative p-3 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
@@ -126,20 +125,20 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${color}15` }} />
 
             <div
-              className={`w-7 h-7 rounded-sm flex items-center justify-center mb-2.5 flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+              className={`w-7 h-7 rounded-sm flex items-center justify-center mb-2.5 flex-shrink-0 ${icon === 'Flame' ? 'animate-flicker' : ''}`}
               style={{ background: bg }}
             >
               <Icon size={13} style={{ color }} />
             </div>
 
-            {type === 'code' && (
+            {icon === 'Code2' && (
               <div className="font-mono text-[8px] leading-relaxed mb-2.5 h-7 overflow-hidden" style={{ color, opacity: 0.55 }}>
                 <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
                 <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
                 <div className="pl-1">{'<View'}<span className="animate-blink">▋</span></div>
               </div>
             )}
-            {type === 'data' && (
+            {icon === 'BookOpen' && (
               <div className="flex items-end gap-0.5 mb-2.5 h-7">
                 {[55, 85, 40, 95, 65].map((h, j) => (
                   <div key={j} className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
@@ -147,7 +146,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
                 ))}
               </div>
             )}
-            {type === 'flame' && (
+            {icon === 'Flame' && (
               <div className="flex items-end gap-1.5 mb-2.5 h-7">
                 {[4, 6, 5, 8, 6, 9].map((size, j) => (
                   <div key={j} className="rounded-full animate-float"
@@ -172,7 +171,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: 'inset 0 0 28px rgba(127,119,221,0.1)' }} />
         <div className="flex items-center gap-4">
           <div className="w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
-            <Brain size={13} style={{ color: cx.color }} />
+            {cx.Icon && <cx.Icon size={13} style={{ color: cx.color }} />}
           </div>
           <div className="flex-shrink-0">
             <p className="font-sans font-semibold text-text-primary text-xs">{cx.label}</p>
