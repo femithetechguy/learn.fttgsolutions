@@ -50,9 +50,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   })
 
   return (
-    <div className="min-h-screen bg-bg-primary bg-grid overflow-x-hidden">
+    <div className="min-h-screen bg-bg-primary bg-grid">
 
-      {/* Navigation */}
+      {/* Navigation — sticky works only when no overflow:hidden ancestor */}
       <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -83,13 +83,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               </button>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button — 44×44px touch target */}
             <button
-              className="md:hidden text-text-secondary"
+              className="md:hidden w-11 h-11 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
               onClick={() => setMobileMenuOpen(v => !v)}
               aria-label={ui.toggleMenu}
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -109,6 +109,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
           </div>
         )}
       </nav>
+
+      {/* overflow-x-hidden here (not on outer div) so sticky nav isn't broken */}
+      <div className="overflow-x-hidden">
 
       {/* Hero section */}
       <div className="relative overflow-hidden">
@@ -358,6 +361,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
         </div>
       </footer>
+      </div>{/* end overflow-x-hidden wrapper */}
     </div>
   )
 }
