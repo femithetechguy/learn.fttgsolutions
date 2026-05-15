@@ -160,18 +160,30 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
                 )}
 
                 {type === 'brain' && (
-                  <div className="flex items-center gap-1.5 mb-3 h-8">
-                    {[0, 1, 2, 3].map(j => (
-                      <div key={j} className="flex items-center gap-1.5 flex-1">
+                  <div className="relative flex items-center gap-2 mb-3 h-8">
+                    {/* Three pillar source nodes — blue, green, amber */}
+                    <div className="flex flex-col justify-between h-full py-0.5 flex-shrink-0">
+                      {['#378ADD', '#1D9E75', '#EF9F27'].map((c, j) => (
                         <div
-                          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-                          style={{ background: color, opacity: 0.5 + j * 0.12, animationDelay: `${j * 350}ms` }}
+                          key={j}
+                          className="w-2 h-2 rounded-full animate-pulse"
+                          style={{ background: c, opacity: 0.8, animationDelay: `${j * 400}ms` }}
                         />
-                        {j < 3 && (
-                          <div className="flex-1 h-px" style={{ background: `${color}35` }} />
-                        )}
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    {/* Converging lines via SVG */}
+                    <svg className="flex-shrink-0" width="18" height="32" viewBox="0 0 18 32" fill="none">
+                      <line x1="0" y1="4"  x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
+                      <line x1="0" y1="16" x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
+                      <line x1="0" y1="28" x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
+                    </svg>
+                    {/* Central crossover node — glowing purple */}
+                    <div
+                      className="w-3.5 h-3.5 rounded-full flex-shrink-0 animate-pulse"
+                      style={{ background: color, boxShadow: `0 0 10px ${color}90`, animationDelay: '1.2s' }}
+                    />
+                    {/* Output — fades out to the right */}
+                    <div className="flex-1 h-px" style={{ background: `linear-gradient(to right, ${color}60, transparent)` }} />
                   </div>
                 )}
 
