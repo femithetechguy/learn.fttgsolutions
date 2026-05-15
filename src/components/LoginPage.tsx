@@ -88,69 +88,61 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
           </div>
         </div>
 
-        {/* Mid — pillars 2×2 grid */}
+        {/* Mid — 3 main pillars + Crossover connector */}
         <div className="relative z-10">
           <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-4 animate-fade-in animate-delay-500">
             Three pillars. One platform.
           </p>
-          <div className="grid grid-cols-2 gap-3">
-            {PILLARS.map(({ icon: Icon, label, tag, color, bg, type }, i) => (
+
+          {/* Main pillars — 3 equal columns */}
+          <div className="grid grid-cols-3 gap-2">
+            {PILLARS.slice(0, 3).map(({ icon: Icon, label, tag, color, bg, type }, i) => (
               <div
                 key={label}
-                className="relative p-4 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
-                style={{ animationDelay: `${600 + i * 130}ms` }}
+                className="relative p-3 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm group hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
+                style={{ animationDelay: `${600 + i * 120}ms` }}
               >
-                {/* Hover inner glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 24px ${color}18` }} />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${color}15` }} />
 
-                {/* Icon */}
                 <div
-                  className={`w-8 h-8 rounded-sm flex items-center justify-center mb-3 flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
+                  className={`w-7 h-7 rounded-sm flex items-center justify-center mb-2.5 flex-shrink-0 ${type === 'flame' ? 'animate-flicker' : ''}`}
                   style={{ background: bg }}
                 >
-                  <Icon size={15} style={{ color }} />
+                  <Icon size={13} style={{ color }} />
                 </div>
 
-                {/* Per-pillar decoration */}
                 {type === 'code' && (
-                  <div className="font-mono text-[9px] leading-relaxed mb-3 h-8 overflow-hidden" style={{ color, opacity: 0.55 }}>
+                  <div className="font-mono text-[8px] leading-relaxed mb-2.5 h-7 overflow-hidden" style={{ color, opacity: 0.55 }}>
                     <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
-                    <div><span style={{ opacity: 0.5 }}>const</span> {' App = () => {'}</div>
-                    <div className="pl-2">{'return <View'}<span className="animate-blink">▋</span></div>
+                    <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
+                    <div className="pl-1">{'<View'}<span className="animate-blink">▋</span></div>
                   </div>
                 )}
 
                 {type === 'data' && (
-                  <div className="flex items-end gap-1 mb-3 h-8">
-                    {[55, 85, 40, 95, 60].map((h, j) => (
+                  <div className="flex items-end gap-0.5 mb-2.5 h-7">
+                    {[55, 85, 40, 95, 65].map((h, j) => (
                       <div
                         key={j}
                         className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
-                        style={{
-                          height: `${h}%`,
-                          background: color,
-                          opacity: 0.35 + h / 220,
-                          animationDelay: `${800 + j * 90}ms`,
-                        }}
+                        style={{ height: `${h}%`, background: color, opacity: 0.35 + h / 220, animationDelay: `${800 + j * 90}ms` }}
                       />
                     ))}
                   </div>
                 )}
 
                 {type === 'flame' && (
-                  <div className="flex items-end gap-2 mb-3 h-8">
-                    {/* Rising thought bubbles — small at bottom, grow as they rise */}
-                    {[4, 6, 5, 8, 6, 10].map((size, j) => (
+                  <div className="flex items-end gap-1.5 mb-2.5 h-7">
+                    {[4, 6, 5, 8, 6, 9].map((size, j) => (
                       <div
                         key={j}
                         className="rounded-full animate-float"
                         style={{
-                          width: size,
-                          height: size,
+                          width: size, height: size,
                           background: color,
                           opacity: 0.2 + j * 0.1,
                           animationDelay: `${j * 400}ms`,
-                          animationDuration: `${3 + j * 0.5}s`,
+                          animationDuration: `${3 + j * 0.4}s`,
                           alignSelf: j % 2 === 0 ? 'flex-end' : 'center',
                           flexShrink: 0,
                         }}
@@ -159,38 +151,54 @@ export default function LoginPage({ onLogin, onGuest }: LoginPageProps) {
                   </div>
                 )}
 
-                {type === 'brain' && (
-                  <div className="relative flex items-center gap-2 mb-3 h-8">
-                    {/* Three pillar source nodes — blue, green, amber */}
-                    <div className="flex flex-col justify-between h-full py-0.5 flex-shrink-0">
-                      {['#378ADD', '#1D9E75', '#EF9F27'].map((c, j) => (
-                        <div
-                          key={j}
-                          className="w-2 h-2 rounded-full animate-pulse"
-                          style={{ background: c, opacity: 0.8, animationDelay: `${j * 400}ms` }}
-                        />
-                      ))}
-                    </div>
-                    {/* Converging lines via SVG */}
-                    <svg className="flex-shrink-0" width="18" height="32" viewBox="0 0 18 32" fill="none">
-                      <line x1="0" y1="4"  x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
-                      <line x1="0" y1="16" x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
-                      <line x1="0" y1="28" x2="18" y2="16" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.4" />
-                    </svg>
-                    {/* Central crossover node — glowing purple */}
-                    <div
-                      className="w-3.5 h-3.5 rounded-full flex-shrink-0 animate-pulse"
-                      style={{ background: color, boxShadow: `0 0 10px ${color}90`, animationDelay: '1.2s' }}
-                    />
-                    {/* Output — fades out to the right */}
-                    <div className="flex-1 h-px" style={{ background: `linear-gradient(to right, ${color}60, transparent)` }} />
-                  </div>
-                )}
-
-                <p className="font-sans font-semibold text-text-primary text-sm leading-tight">{label}</p>
-                <p className="font-sans text-text-muted text-[10px] mt-0.5 leading-tight">{tag}</p>
+                <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
+                <p className="font-sans text-text-muted text-[9px] mt-0.5 leading-tight">{tag}</p>
               </div>
             ))}
+          </div>
+
+          {/* Crossover — full-width connector strip */}
+          <div
+            className="relative mt-2 px-4 py-3 rounded-sm border border-accent-cross/25 bg-bg-card/30 backdrop-blur-sm group hover:border-accent-cross/40 transition-all duration-300 cursor-pointer animate-slide-in-left overflow-hidden"
+            style={{ animationDelay: '960ms' }}
+          >
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: 'inset 0 0 28px rgba(127,119,221,0.1)' }} />
+
+            <div className="flex items-center gap-4">
+              {/* Icon + label */}
+              <div className="w-7 h-7 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(127,119,221,0.12)' }}>
+                <Brain size={13} style={{ color: '#7F77DD' }} />
+              </div>
+              <div className="flex-shrink-0">
+                <p className="font-sans font-semibold text-text-primary text-xs">Crossover</p>
+                <p className="font-sans text-text-muted text-[9px]">Code meets mindset.</p>
+              </div>
+
+              {/* Convergence visual — pillar labels → purple node */}
+              <div className="flex-1 flex items-center justify-end gap-2">
+                <div className="flex flex-col gap-0.5 text-right">
+                  {[['App Dev', '#378ADD'], ['Data & BI', '#1D9E75'], ['Philosophy', '#EF9F27']].map(([name, c], j) => (
+                    <span
+                      key={name}
+                      className="font-sans text-[8px] font-semibold animate-pulse"
+                      style={{ color: c as string, opacity: 0.75, animationDelay: `${j * 400}ms` }}
+                    >
+                      {name}
+                    </span>
+                  ))}
+                </div>
+                <svg width="28" height="36" viewBox="0 0 28 36" fill="none" className="flex-shrink-0">
+                  <line x1="0" y1="5"  x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
+                  <line x1="0" y1="18" x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
+                  <line x1="0" y1="31" x2="22" y2="18" stroke="#7F77DD" strokeWidth="0.9" strokeOpacity="0.45" />
+                  <polygon points="22,15 28,18 22,21" fill="#7F77DD" opacity="0.55" />
+                </svg>
+                <div
+                  className="w-3.5 h-3.5 rounded-full flex-shrink-0 animate-pulse"
+                  style={{ background: '#7F77DD', boxShadow: '0 0 10px rgba(127,119,221,0.7)', animationDelay: '1.2s' }}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
