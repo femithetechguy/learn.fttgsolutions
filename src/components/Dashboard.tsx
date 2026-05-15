@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
   BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
   LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star,
-  Youtube, Instagram, Twitter, Send
+  Youtube, Instagram, Twitter, Send, ExternalLink
 } from 'lucide-react'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
@@ -62,7 +62,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             <div className="hidden md:flex items-center gap-6">
               <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.courses}</a>
               <a href={nav.articlesUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">{nav.articles}</a>
-              <a href={content.site.mainSiteUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors" target="_blank" rel="noopener noreferrer">{nav.mainSiteLabel}</a>
+              <a href={content.site.mainSiteUrl} className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors inline-flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                {nav.mainSiteLabel}<ExternalLink size={11} className="opacity-50" />
+              </a>
             </div>
 
             {/* User area */}

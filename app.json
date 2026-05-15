@@ -65,10 +65,10 @@
 
   "dashboard": {
     "nav": {
-      "courses": "Courses",
-      "articles": "Articles",
+      "courses": "COURSES",
+      "articles": "ARTICLES",
       "articlesUrl": "https://learn.fttgsolutions.com/articles",
-      "mainSiteLabel": "fttgsolutions.com"
+      "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {
       "guestBadge": "Guest mode — sign up for full access",
