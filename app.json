@@ -94,10 +94,16 @@
     "nav": {
       "courses": "COURSES",
       "coursesUrl": "/courses",
+      "coursesIcon": "BookOpen",
       "articles": "ARTICLES",
       "articlesUrl": "/articles",
+      "articlesIcon": "FileText",
       "resources": "RESOURCES",
       "resourcesUrl": "/resources",
+      "resourcesIcon": "Package",
+      "favorites": "FAVOURITES",
+      "favoritesUrl": "/favorites",
+      "favoritesIcon": "Heart",
       "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {

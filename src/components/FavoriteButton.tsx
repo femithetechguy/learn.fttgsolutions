@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { Heart } from 'lucide-react'
 import { useFavorites } from '@/lib/userStore'
+import GuestGatePopup from '@/components/GuestGatePopup'
 
 interface Props {
   id: string
@@ -15,15 +16,6 @@ export default function FavoriteButton({ id, className = '' }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const isFav = favorites.has(id)
 
-  useEffect(() => {
-    if (!showPrompt) return
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setShowPrompt(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [showPrompt])
-
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -35,7 +27,7 @@ export default function FavoriteButton({ id, className = '' }: Props) {
   }
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
+    <div ref={ref} className={className}>
       <button
         onClick={handleClick}
         aria-label={isFav ? 'Remove from favourites' : 'Save to favourites'}
@@ -50,23 +42,7 @@ export default function FavoriteButton({ id, className = '' }: Props) {
       </button>
 
       {showPrompt && (
-        <div className="absolute right-0 top-9 z-50 w-52 bg-bg-secondary border border-white/10 rounded-md shadow-xl p-3 animate-fade-in">
-          <p className="font-sans text-text-secondary text-xs leading-snug mb-2">
-            Sign in to save favourites and access them anywhere.
-          </p>
-          <a
-            href="/?view=register"
-            className="block w-full text-center font-sans text-xs font-semibold py-1.5 rounded-sm bg-gold text-bg-primary hover:bg-gold/90 transition-colors"
-          >
-            Create account
-          </a>
-          <a
-            href="/"
-            className="block w-full text-center font-sans text-xs text-text-muted hover:text-gold transition-colors mt-1.5"
-          >
-            Sign in
-          </a>
-        </div>
+        <GuestGatePopup anchorRef={ref} onClose={() => setShowPrompt(false)} />
       )}
     </div>
   )
