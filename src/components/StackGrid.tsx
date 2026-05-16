@@ -7,7 +7,7 @@ function ToolChip({ slug, name, color }: StackTool) {
   const path = (slug ? SI_MAP[slug]?.path : undefined) ?? (slug ? CUSTOM_MAP[slug] : undefined)
 
   return (
-    <span className="group inline-flex items-center gap-1.5 px-2.5 py-1 bg-bg-elevated border border-white/5 rounded-sm cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/5">
+    <span className="group inline-flex items-center gap-1.5 px-2.5 py-1 bg-bg-elevated border border-white/10 rounded-sm cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5">
       {path && (
         <svg
           role="img"
@@ -42,7 +42,7 @@ export default function StackGrid({ categories, columns = 2 }: StackGridProps) {
     <div className={`grid ${colClass} gap-x-10 gap-y-3`}>
       {categories.map(row => (
         <div key={row.category} className="flex items-start gap-2 sm:gap-3">
-          <span className="font-sans text-[10px] font-bold tracking-widest text-text-secondary uppercase w-24 sm:w-32 shrink-0 pt-1.5 leading-tight">
+          <span className="font-sans text-[10px] font-bold tracking-widest text-text-primary uppercase w-24 sm:w-32 shrink-0 pt-1.5 leading-tight">
             {row.category}
           </span>
           <div className="flex flex-wrap gap-1.5">
