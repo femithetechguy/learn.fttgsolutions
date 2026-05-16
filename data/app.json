@@ -107,6 +107,9 @@
       "stack": "STACK",
       "stackUrl": "/stack",
       "stackIcon": "Layers",
+      "cheatsheets": "CHEAT SHEETS",
+      "cheatsheetsUrl": "/cheatsheets",
+      "cheatsheetsIcon": "FileCode2",
       "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {
