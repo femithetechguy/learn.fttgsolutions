@@ -89,7 +89,7 @@ export default function Nav({ user, onLogout }: NavProps) {
                 )}
               </>
             ) : (
-              <a href="/" className="font-sans text-sm text-text-muted hover:text-text-secondary transition-colors duration-200">
+              <a href="/" className="font-sans text-sm font-medium text-text-primary border border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/50 px-4 py-1.5 rounded-sm transition-all duration-200">
                 {ui.signIn}
               </a>
             )}
@@ -146,7 +146,7 @@ export default function Nav({ user, onLogout }: NavProps) {
                 {isGuest ? ui.signIn : ui.signOut}
               </button>
             ) : (
-              <a href="/" className="font-sans text-sm text-text-muted hover:text-text-secondary transition-colors duration-150">
+              <a href="/" className="inline-flex font-sans text-sm font-medium text-text-primary border border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/50 px-4 py-1.5 rounded-sm transition-all duration-150">
                 {ui.signIn}
               </a>
             )}
