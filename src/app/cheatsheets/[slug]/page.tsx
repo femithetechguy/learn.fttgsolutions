@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { useParams, useRouter, notFound } from 'next/navigation'
+import { useParams, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { FileCode2, Search, X, Share2, Printer, Check } from 'lucide-react'
 import Nav from '@/components/Nav'
@@ -72,7 +72,7 @@ export default function CheatsheetPage() {
                   <div className="flex items-center gap-2 shrink-0 mt-2">
                     <button
                       onClick={handleShare}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/10 text-text-muted hover:text-text-primary hover:border-white/25 transition-all duration-150 font-sans text-xs"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
                       title="Share this cheat sheet"
                     >
                       {shared
@@ -80,14 +80,14 @@ export default function CheatsheetPage() {
                         : <><Share2 size={13} /><span className="hidden sm:inline">Share</span></>
                       }
                     </button>
-                    <button
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/10 text-text-muted hover:text-text-primary hover:border-white/25 transition-all duration-150 font-sans text-xs opacity-50 cursor-not-allowed"
-                      title="Print (coming soon)"
-                      disabled
+                    <Link
+                      href={`/cheatsheets/${slug}/print`}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
+                      title="Print this cheat sheet"
                     >
                       <Printer size={13} />
                       <span className="hidden sm:inline">Print</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
                 <p className="font-sans text-text-secondary text-lg mt-3 max-w-2xl">
