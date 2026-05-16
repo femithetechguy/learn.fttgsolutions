@@ -1,0 +1,15 @@
+{
+  "label": "Python",
+  "headline": "Python Cheat Sheet",
+  "tagline": "Read. Transform. Automate.",
+  "description": "Quick reference for Python syntax and data-focused libraries — pandas, built-ins, string methods, and control flow.",
+  "color": "FFD43B",
+  "categories": [
+    {
+      "category": "Core Built-ins",
+      "items": [
+        { "name": "print()", "syntax": "print(value)", "definition": "Outputs a value to the console." }
+      ]
+    }
+  ]
+}

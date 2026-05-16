@@ -1,9 +1,9 @@
 'use client'
 
-import { Search, X, LucideIcon, BarChart2, Code2, Flame, Brain, Unlock, BookOpen, Users, Star, Tag, FileText, Package, Heart, Layers } from 'lucide-react'
+import { Search, X, LucideIcon, BarChart2, Code2, Flame, Brain, Unlock, BookOpen, Users, Star, Tag, FileText, Package, Heart, Layers, FileCode2 } from 'lucide-react'
 
 export const ICON_MAP: Record<string, LucideIcon> = {
-  BarChart2, Code2, Flame, Brain, Unlock, BookOpen, Users, Star, Tag, FileText, Package, Heart, Layers,
+  BarChart2, Code2, Flame, Brain, Unlock, BookOpen, Users, Star, Tag, FileText, Package, Heart, Layers, FileCode2,
 }
 
 export interface PillColor {

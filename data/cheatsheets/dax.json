@@ -1,0 +1,15 @@
+{
+  "label": "DAX",
+  "headline": "DAX Cheat Sheet",
+  "tagline": "Measure. Calculate. Filter.",
+  "description": "Quick reference for DAX functions used in Power BI — from aggregations and CALCULATE to time intelligence patterns.",
+  "color": "F2C811",
+  "categories": [
+    {
+      "category": "Aggregation",
+      "items": [
+        { "name": "SUM", "syntax": "SUM(table[column])", "definition": "Adds up all numeric values in a column, ignoring blanks." }
+      ]
+    }
+  ]
+}

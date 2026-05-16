@@ -1,0 +1,15 @@
+{
+  "label": "SQL",
+  "headline": "SQL Cheat Sheet",
+  "tagline": "Query. Filter. Aggregate.",
+  "description": "Quick reference for the SQL commands you use every day — from basic SELECT statements to window functions and CTEs.",
+  "color": "4169E1",
+  "categories": [
+    {
+      "category": "Querying",
+      "items": [
+        { "name": "SELECT", "syntax": "SELECT col1, col2 FROM table", "definition": "Specifies which columns to return from a query." }
+      ]
+    }
+  ]
+}
