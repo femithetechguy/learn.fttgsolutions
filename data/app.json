@@ -1,0 +1,207 @@
+{
+  "site": {
+    "name": "FTTG Learn",
+    "company": "FTTG Solutions LLC",
+    "domain": "learn.fttgsolutions.com",
+    "mainSiteUrl": "https://www.fttgsolutions.com"
+  },
+
+  "logo": {
+    "altFull": "FTTG Learn",
+    "altIcon": "FTTG"
+  },
+
+  "meta": {
+    "title": "FTTG Learn — Build. Think. Grow.",
+    "description": "Technical training and philosophy for builders. Power BI, Python, full-stack development, and the principles that drive real growth.",
+    "keywords": ["Power BI", "DAX", "Python", "Next.js", "FTTG Solutions", "data engineering", "full-stack"],
+    "og": {
+      "title": "FTTG Learn",
+      "description": "Build. Think. Grow.",
+      "siteName": "FTTG Solutions"
+    }
+  },
+
+  "login": {
+    "brand": {
+      "siteLabel": "learn.fttgsolutions.com",
+      "headline": ["Build.", "Think.", "Grow."],
+      "subheading": "Technical training and timeless philosophy for people who build things that matter.",
+      "pillarsLabel": "Three pillars. One platform."
+    },
+    "form": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account or continue as a guest.",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "forgotPassword": "Forgot password?",
+      "signInButton": "Sign in",
+      "signingIn": "Signing in…",
+      "divider": "or",
+      "guestButton": "Continue as Guest",
+      "guestLoading": "Loading…",
+      "guestNote": "Guests have access to free lessons and previews.",
+      "createAccount": "Create an account",
+      "createAccountSuffix": "for full access.",
+      "backToSite": "← Back to fttgsolutions.com",
+      "errorFallback": "Login failed.",
+      "validationError": "Please fill in all fields."
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join FTTG Learn and start building.",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email address",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "submitButton": "Create account",
+      "submitting": "Creating account…",
+      "backToLogin": "Already have an account?",
+      "backToLoginLink": "Sign in",
+      "passwordMismatch": "Passwords do not match.",
+      "validationError": "Please fill in all fields.",
+      "errorFallback": "Could not create account."
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "emailLabel": "Email address",
+      "submitButton": "Send reset link",
+      "submitting": "Sending…",
+      "backToLogin": "Back to sign in",
+      "successTitle": "Check your inbox",
+      "successMessage": "If an account exists for that email, a reset link is on its way.",
+      "errorFallback": "Could not send reset link."
+    },
+    "stats": [
+      { "value": "3",    "label": "Pillars" },
+      { "value": "50+",  "label": "Lessons" },
+      { "value": "Free", "label": "Guest Access" }
+    ]
+  },
+
+  "pillars": [
+    { "label": "App Dev",    "tag": "Build. Ship. Repeat.",     "icon": "Code2",    "color": "#378ADD", "bg": "rgba(55,138,221,0.12)"  },
+    { "label": "Data & BI",  "tag": "Insight. Clarity. Power.", "icon": "BookOpen", "color": "#1D9E75", "bg": "rgba(29,158,117,0.12)"  },
+    { "label": "Philosophy", "tag": "Think. Reflect. Grow.",    "icon": "Flame",    "color": "#EF9F27", "bg": "rgba(239,159,39,0.12)"  },
+    { "label": "Crossover",  "tag": "Code meets mindset.",      "icon": "Brain",    "color": "#7F77DD", "bg": "rgba(127,119,221,0.12)" }
+  ],
+
+  "dashboard": {
+    "nav": {
+      "courses": "COURSES",
+      "coursesUrl": "/courses",
+      "coursesIcon": "BookOpen",
+      "articles": "ARTICLES",
+      "articlesUrl": "/articles",
+      "articlesIcon": "FileText",
+      "resources": "RESOURCES",
+      "resourcesUrl": "/resources",
+      "resourcesIcon": "Package",
+      "favorites": "FAVOURITES",
+      "favoritesUrl": "/favorites",
+      "favoritesIcon": "Heart",
+      "stack": "STACK",
+      "stackUrl": "/stack",
+      "stackIcon": "Layers",
+      "mainSiteLabel": "FTTG SOLUTIONS"
+    },
+    "hero": {
+      "guestBadge": "Guest mode — sign up for full access",
+      "guestTitle": "Explore FTTG Learn",
+      "memberGreetingLabel": "Welcome back",
+      "subtitle": "Technical training and timeless philosophy for builders. Pick a pillar and start learning."
+    },
+    "stats": [
+      { "value": "50+",  "label": "Lessons",     "color": "#D4AF37" },
+      { "value": "27h",  "label": "Content",      "color": "#1D9E75" },
+      { "value": "3",    "label": "Pillars",      "color": "#378ADD" },
+      { "value": "Free", "label": "Guest access", "color": "#EF9F27" }
+    ],
+    "filters": [
+      { "label": "All" },
+      { "label": "Free", "icon": "Unlock" },
+      { "label": "Data & BI" },
+      { "label": "App Dev" },
+      { "label": "Philosophy" },
+      { "label": "Crossover" }
+    ],
+    "ui": {
+      "guestBadge": "Guest",
+      "signIn": "Sign in",
+      "signOut": "Sign out",
+      "toggleMenu": "Toggle menu",
+      "defaultLearnerName": "Learner",
+      "startButton": "Start learning",
+      "lockedButton": "Members only",
+      "featuredBadge": "Featured",
+      "freeBadge": "Free",
+      "memberBadge": "Member",
+      "courseSingular": "course",
+      "coursePlural": "courses",
+      "lessonsSuffix": "lessons"
+    },
+    "upsell": {
+      "title": "Unlock everything",
+      "description": "Create a free account to access all member courses, track your progress, and join the community.",
+      "cta": "Create account"
+    }
+  },
+
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Pick a pillar and start building. Filter by topic or jump straight into a free lesson."
+  },
+
+  "articles": {
+    "title": "Articles",
+    "subtitle": "Insights, walkthroughs, and builder wisdom from the FTTG crew."
+  },
+
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Curated tools, docs, and links to accelerate your growth"
+  },
+
+  "footer": {
+    "brand": {
+      "tagline": "Technical training and timeless philosophy for builders."
+    },
+    "quickLinks": {
+      "heading": "Quick Links",
+      "links": [
+        { "label": "Courses",   "href": "/courses", "external": false },
+        { "label": "Articles",  "href": "/articles", "external": false },
+        { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
+      ]
+    },
+    "company": {
+      "heading": "Company",
+      "links": [
+        { "label": "About",   "href": "https://www.fttgsolutions.com/about",   "external": true },
+        { "label": "Contact", "href": "https://www.fttgsolutions.com/contact", "external": true },
+        { "label": "Blog",    "href": "https://www.fttgsolutions.com/blog",    "external": true }
+      ]
+    },
+    "newsletter": {
+      "heading": "Newsletter",
+      "description": "Subscribe to receive updates and insights",
+      "placeholder": "Your Email",
+      "button": "Subscribe"
+    },
+    "social": {
+      "youtube":        "https://www.youtube.com/@fttgsolutions",
+      "youtubeLabel":   "YouTube",
+      "instagram":      "https://www.instagram.com/fttgsolutions",
+      "instagramLabel": "Instagram",
+      "twitter":        "https://twitter.com/fttgsolutions",
+      "twitterLabel":   "Twitter",
+      "tiktok":         "https://www.tiktok.com/@fttgsolutions",
+      "tiktokLabel":    "TikTok"
+    },
+    "copyright": "© 2026 FTTG Solutions LLC. All Rights Reserved."
+  }
+}

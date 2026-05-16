@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import content from '@/lib/content'
 
 export const metadata: Metadata = {
-  title: 'FTTG Learn — Build. Think. Grow.',
-  description: 'Technical training and philosophy for builders. Power BI, Python, full-stack development, and the principles that drive real growth.',
-  keywords: ['Power BI', 'DAX', 'Python', 'Next.js', 'FTTG Solutions', 'data engineering', 'full-stack'],
+  title: content.meta.title,
+  description: content.meta.description,
+  keywords: content.meta.keywords,
   openGraph: {
-    title: 'FTTG Learn',
-    description: 'Build. Think. Grow.',
-    siteName: 'FTTG Solutions',
+    title: content.meta.og.title,
+    description: content.meta.og.description,
+    siteName: content.meta.og.siteName,
   },
 }
 

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "DAX Zero to Advanced",
+    "description": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
+    "pillar": "Data & BI",
+    "lessons": 12,
+    "duration": "4h 20m",
+    "level": "Intermediate",
+    "free": true,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Python ETL for Power BI",
+    "description": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
+    "pillar": "Data & BI",
+    "lessons": 8,
+    "duration": "3h 10m",
+    "level": "Advanced",
+    "free": false
+  }
+]

@@ -71,7 +71,7 @@ A Next.js 14 training platform hosted at `learn.fttgsolutions.com`, built as par
 | File | Path | Status |
 |---|---|---|
 | `page.tsx` | `src/app/page.tsx` | ✅ Done |
-| `layout.tsx` | `src/app/layout.tsx` | ✅ Done |
+| `layout.tsx` | `src/app/layout.tsx` | ✅ Done — explicit favicon metadata added |
 | `globals.css` | `src/app/globals.css` | ✅ Done |
 | `LoginPage.tsx` | `src/components/LoginPage.tsx` | ✅ Done |
 | `Dashboard.tsx` | `src/components/Dashboard.tsx` | ✅ Done |
@@ -170,10 +170,11 @@ A Next.js 14 training platform hosted at `learn.fttgsolutions.com`, built as par
 
 ## Pending — Infrastructure 🟡
 
-- [ ] Deploy to Vercel under `learn.fttgsolutions.com` subdomain
+- [x] Deploy to Vercel under `learn.fttgsolutions.com`
+- [x] Created `.env.example` (tracked) and `.env.local` (gitignored) with `NEXT_PUBLIC_SITE_URL`
+- [x] Fixed Vercel project icon — added `public/favicon.svg` + explicit `type: 'image/svg+xml'` in layout metadata (same pattern as fttgsolutions repo)
 - [ ] Add DNS CNAME: `learn` → `cname.vercel-dns.com`
 - [ ] Configure `next.config.js` with production image domains
-- [ ] Set up `.env.local` via Bitwarden CLI (project folder: `learn-fttgsolutions`)
 - [ ] Add environment variables: `NEXTAUTH_SECRET`, `DATABASE_URL`, `NEXT_PUBLIC_API_URL`
 
 ---
@@ -214,4 +215,4 @@ learn-fttg/
 
 ---
 
-*Last updated: May 2026 · FTTG Solutions LLC*
+*Last updated: 15 May 2026 · FTTG Solutions LLC*

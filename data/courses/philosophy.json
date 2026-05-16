@@ -1,0 +1,22 @@
+[
+  {
+    "id": 5,
+    "title": "The Builder's Philosophy",
+    "description": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
+    "pillar": "Philosophy",
+    "lessons": 6,
+    "duration": "2h 00m",
+    "level": "All levels",
+    "free": true
+  },
+  {
+    "id": 6,
+    "title": "Think & Build Rich — Napoleon Hill",
+    "description": "Chapter-by-chapter walk through Think and Grow Rich for modern builders.",
+    "pillar": "Philosophy",
+    "lessons": 14,
+    "duration": "6h 30m",
+    "level": "All levels",
+    "free": false
+  }
+]

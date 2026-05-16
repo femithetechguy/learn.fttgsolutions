@@ -3,135 +3,46 @@
 import { useState } from 'react'
 import {
   BookOpen, Code2, Brain, Flame, PlayCircle, Clock, Lock,
-  LogOut, Menu, X, ChevronRight, Sparkles, TrendingUp, Users, Star
+  ChevronRight, Sparkles, TrendingUp, Users, Star
 } from 'lucide-react'
+import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 import Logo from '@/components/Logo'
+import content from '@/lib/content'
+import coursesData from '@/lib/courses'
 
 interface DashboardProps {
   user: { name?: string; email?: string; role: 'member' | 'guest' | null }
   onLogout: () => void
 }
 
-const COURSES = [
-  {
-    id: 1,
-    title: 'DAX Zero to Advanced',
-    description: 'From SUM to TREATAS — real enterprise patterns from production dashboards.',
-    pillar: 'Data & BI',
-    pillarColor: '#1D9E75',
-    pillarBg: 'rgba(29,158,117,0.1)',
-    icon: BookOpen,
-    lessons: 12,
-    duration: '4h 20m',
-    level: 'Intermediate',
-    free: true,
-    progress: 0,
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Python ETL for Power BI',
-    description: 'Replace Power Query with pandas. SharePoint via Microsoft Graph API.',
-    pillar: 'Data & BI',
-    pillarColor: '#1D9E75',
-    pillarBg: 'rgba(29,158,117,0.1)',
-    icon: BookOpen,
-    lessons: 8,
-    duration: '3h 10m',
-    level: 'Advanced',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 3,
-    title: 'Next.js Personal Brand Site',
-    description: 'Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.',
-    pillar: 'App Dev',
-    pillarColor: '#378ADD',
-    pillarBg: 'rgba(55,138,221,0.1)',
-    icon: Code2,
-    lessons: 10,
-    duration: '5h 00m',
-    level: 'Intermediate',
-    free: true,
-    progress: 0,
-  },
-  {
-    id: 4,
-    title: 'NestJS API Architecture',
-    description: 'Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.',
-    pillar: 'App Dev',
-    pillarColor: '#378ADD',
-    pillarBg: 'rgba(55,138,221,0.1)',
-    icon: Code2,
-    lessons: 9,
-    duration: '3h 45m',
-    level: 'Advanced',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 5,
-    title: 'The Builder\'s Philosophy',
-    description: 'Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.',
-    pillar: 'Philosophy',
-    pillarColor: '#EF9F27',
-    pillarBg: 'rgba(239,159,39,0.1)',
-    icon: Flame,
-    lessons: 6,
-    duration: '2h 00m',
-    level: 'All levels',
-    free: true,
-    progress: 0,
-  },
-  {
-    id: 6,
-    title: 'Think & Build Rich — Napoleon Hill',
-    description: 'Chapter-by-chapter walk through Think and Grow Rich for modern builders.',
-    pillar: 'Philosophy',
-    pillarColor: '#EF9F27',
-    pillarBg: 'rgba(239,159,39,0.1)',
-    icon: Flame,
-    lessons: 14,
-    duration: '6h 30m',
-    level: 'All levels',
-    free: false,
-    progress: 0,
-  },
-  {
-    id: 7,
-    title: 'The Crossover Series',
-    description: 'Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.',
-    pillar: 'Crossover',
-    pillarColor: '#7F77DD',
-    pillarBg: 'rgba(127,119,221,0.1)',
-    icon: Brain,
-    lessons: 5,
-    duration: '2h 30m',
-    level: 'All levels',
-    free: true,
-    progress: 0,
-    featured: true,
-  },
-]
+const PILLAR_ICONS = { 'App Dev': Code2, 'Data & BI': BookOpen, 'Philosophy': Flame, 'Crossover': Brain } as const
+const STAT_ICONS = [PlayCircle, Clock, Users, Star]
 
-const STATS = [
-  { icon: PlayCircle, value: '50+', label: 'Lessons', color: '#D4AF37' },
-  { icon: Clock, value: '27h', label: 'Content', color: '#1D9E75' },
-  { icon: Users, value: '3', label: 'Pillars', color: '#378ADD' },
-  { icon: Star, value: 'Free', label: 'Guest access', color: '#EF9F27' },
-]
+const COURSES = coursesData.map(c => {
+  const pillar = content.pillars.find(p => p.label === c.pillar)
+  return {
+    ...c,
+    progress: 0,
+    featured: 'featured' in c ? c.featured : false,
+    icon: PILLAR_ICONS[c.pillar as keyof typeof PILLAR_ICONS],
+    pillarColor: pillar?.color ?? '#D4AF37',
+    pillarBg: pillar?.bg ?? 'rgba(212,175,55,0.1)',
+  }
+})
 
-const FILTER_PILLS = ['All', 'Data & BI', 'App Dev', 'Philosophy', 'Crossover', 'Free']
+const STATS = content.dashboard.stats.map((s, i) => ({ ...s, icon: STAT_ICONS[i] }))
+
+const FILTER_PILLS = content.dashboard.filters
+const { ui, hero, upsell } = content.dashboard
 
 export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [filter, setFilter] = useState('All')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isGuest = user.role === 'guest'
   const displayName = user.name
     ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
-    : 'Learner'
+    : ui.defaultLearnerName
 
   const filtered = COURSES.filter(c => {
     if (filter === 'All') return true
@@ -142,86 +53,36 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Logo size="sm" />
+      <Nav user={user} onLogout={onLogout} />
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-6">
-              <a href="#courses" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">Courses</a>
-              <a href="https://learn.fttgsolutions.com/articles" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors">Articles</a>
-              <a href="https://www.fttgsolutions.com" className="font-sans text-sm text-text-secondary hover:text-text-primary transition-colors" target="_blank" rel="noopener noreferrer">fttgsolutions.com</a>
-            </div>
-
-            {/* User area */}
-            <div className="hidden md:flex items-center gap-3">
-              {isGuest ? (
-                <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-xs">Guest</span>
-              ) : (
-                <span className="font-sans text-sm text-text-secondary">{displayName}</span>
-              )}
-              <button
-                onClick={onLogout}
-                className="flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
-              >
-                <LogOut size={14} />
-                {isGuest ? 'Sign in' : 'Sign out'}
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden text-text-secondary"
-              onClick={() => setMobileMenuOpen(v => !v)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-3">
-            <a href="#courses" className="block font-sans text-sm text-text-secondary py-1">Courses</a>
-            <a href="https://www.fttgsolutions.com" className="block font-sans text-sm text-text-secondary py-1">fttgsolutions.com</a>
-            <div className="pt-2 border-t border-white/5">
-              <button onClick={onLogout} className="flex items-center gap-2 font-sans text-sm text-text-muted">
-                <LogOut size={14} />
-                {isGuest ? 'Sign in' : 'Sign out'}
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+      {/* overflow-x-hidden here (not on outer div) so sticky nav isn't broken */}
+      <div className="overflow-x-hidden">
 
       {/* Hero section */}
       <div className="relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-gold/3 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 sm:w-[600px] h-64 sm:h-[400px] bg-gold/5 blur-3xl rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
           <div className="animate-fade-in">
             {isGuest ? (
               <>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4">
-                  <Sparkles size={12} className="text-gold" />
-                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">Browsing as guest — create an account for full access</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gold-muted border border-gold-border rounded-sm mb-4 max-w-full">
+                  <Sparkles size={12} className="text-gold flex-shrink-0" />
+                  <span className="font-sans text-xs font-semibold text-gold tracking-wide">{hero.guestBadge}</span>
                 </div>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
-                  Explore FTTG Learn
+                  {hero.guestTitle}
                 </h1>
               </>
             ) : (
               <>
-                <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-2">Welcome back</p>
+                <p className="font-sans text-text-muted text-sm tracking-widest uppercase mb-2">{hero.memberGreetingLabel}</p>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
                   Hey, {displayName} 👋
                 </h1>
               </>
             )}
             <p className="font-sans text-text-secondary text-lg mt-3 max-w-xl">
-              Technical training and timeless philosophy for builders. Pick a pillar and start learning.
+              {hero.subtitle}
             </p>
           </div>
 
@@ -249,22 +110,23 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       <div id="courses" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Filter pills */}
-        <div className="flex items-center gap-2 flex-wrap mb-8">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 mb-8 scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}>
           {FILTER_PILLS.map(f => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
+              key={f.label}
+              onClick={() => setFilter(f.label)}
               className={`font-sans text-xs font-semibold px-4 py-2 rounded-sm border transition-all duration-150 ${
-                filter === f
+                filter === f.label
                   ? 'bg-gold text-bg-primary border-gold'
                   : 'border-white/10 text-text-secondary hover:border-gold/40 hover:text-text-primary'
               }`}
             >
-              {f}
+              {f.label}
             </button>
           ))}
           <span className="font-sans text-text-muted text-xs ml-auto hidden sm:block">
-            {filtered.length} course{filtered.length !== 1 ? 's' : ''}
+            {filtered.length} {filtered.length !== 1 ? ui.coursePlural : ui.courseSingular}
           </span>
         </div>
 
@@ -284,8 +146,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 {/* Featured badge */}
                 {course.featured && (
                   <div className="absolute -top-2.5 left-5">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gold text-bg-primary text-[10px] font-bold tracking-wider uppercase rounded-sm">
-                      <Sparkles size={8} /> Featured
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gold text-bg-primary text-xs font-bold tracking-wider uppercase rounded-sm">
+                      <Sparkles size={9} /> {ui.featuredBadge}
                     </span>
                   </div>
                 )}
@@ -300,13 +162,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
+                      <span className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
                         {course.pillar}
                       </span>
                       {course.free ? (
-                        <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20 text-[10px]">Free</span>
+                        <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20">{ui.freeBadge}</span>
                       ) : (
-                        <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-[10px]">Member</span>
+                        <span className="tag-pill bg-gold-muted text-gold border border-gold-border">{ui.memberBadge}</span>
                       )}
                     </div>
                     <h3 className="font-display font-bold text-text-primary text-base leading-snug">
@@ -324,7 +186,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 <div className="flex items-center gap-3 font-sans text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <PlayCircle size={11} />
-                    {course.lessons} lessons
+                    {course.lessons} {ui.lessonsSuffix}
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock size={11} />
@@ -348,11 +210,11 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                   {locked ? (
                     <>
                       <Lock size={14} />
-                      Members only
+                      {ui.lockedButton}
                     </>
                   ) : (
                     <>
-                      Start learning
+                      {ui.startButton}
                       <ChevronRight size={14} />
                     </>
                   )}
@@ -366,36 +228,18 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {isGuest && (
           <div className="mt-10 p-6 card-dark border border-gold/20 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
             <div>
-              <h3 className="font-display font-bold text-text-primary text-lg">Unlock everything</h3>
-              <p className="font-sans text-text-secondary text-sm mt-1">
-                Create a free account to access all member courses, track your progress, and join the community.
-              </p>
+              <h3 className="font-display font-bold text-text-primary text-lg">{upsell.title}</h3>
+              <p className="font-sans text-text-secondary text-sm mt-1">{upsell.description}</p>
             </div>
-            <button className="btn-gold flex-shrink-0 text-sm">
-              Create account <ArrowRight size={14} />
-            </button>
+            <a href="/?view=register" className="btn-gold flex-shrink-0 text-sm inline-flex items-center gap-2">
+              {upsell.cta} <ArrowRight size={14} />
+            </a>
           </div>
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 mt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <Logo size="sm" showLearn={false} />
-          <p className="font-sans text-text-muted text-xs text-center">
-            © 2026 FTTG Solutions LLC · McDonough, GA ·{' '}
-            <a href="mailto:adefemi@kolawoles.com" className="hover:text-gold transition-colors">adefemi@kolawoles.com</a>
-          </p>
-          <a
-            href="https://www.fttgsolutions.com"
-            className="font-sans text-text-muted text-xs hover:text-text-secondary transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            fttgsolutions.com ↗
-          </a>
-        </div>
-      </footer>
+      <Footer />
+      </div>{/* end overflow-x-hidden wrapper */}
     </div>
   )
 }

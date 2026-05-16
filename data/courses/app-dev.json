@@ -1,0 +1,22 @@
+[
+  {
+    "id": 3,
+    "title": "Next.js Personal Brand Site",
+    "description": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
+    "pillar": "App Dev",
+    "lessons": 10,
+    "duration": "5h 00m",
+    "level": "Intermediate",
+    "free": true
+  },
+  {
+    "id": 4,
+    "title": "NestJS API Architecture",
+    "description": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
+    "pillar": "App Dev",
+    "lessons": 9,
+    "duration": "3h 45m",
+    "level": "Advanced",
+    "free": false
+  }
+]

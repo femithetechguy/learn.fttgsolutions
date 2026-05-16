@@ -1,0 +1,268 @@
+{
+  "categories": [
+    {
+      "heading": "Documentation",
+      "items": [
+        {
+          "label": "MDN Web Docs",
+          "url": "https://developer.mozilla.org",
+          "description": "The definitive reference for HTML, CSS, and JavaScript on the web.",
+          "tag": "Docs"
+        },
+        {
+          "label": "Next.js Documentation",
+          "url": "https://nextjs.org/docs",
+          "description": "Official docs for building full-stack React applications with Next.js.",
+          "tag": "Docs"
+        },
+        {
+          "label": "TypeScript Handbook",
+          "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+          "description": "The definitive guide to TypeScript from the Microsoft team.",
+          "tag": "Docs"
+        }
+      ]
+    },
+    {
+      "heading": "Tools & Platforms",
+      "items": [
+        {
+          "label": "Squarespace",
+          "url": "https://www.squarespace.com",
+          "description": "All-in-one website builder with hosting, domains, and e-commerce built in.",
+          "tag": "Hosting"
+        },
+        {
+          "label": "Hostinger",
+          "url": "https://www.hostinger.com",
+          "description": "Affordable web hosting with shared, VPS, and cloud plans plus a built-in website builder.",
+          "tag": "Hosting"
+        },
+        {
+          "label": "Vercel",
+          "url": "https://vercel.com",
+          "description": "Deploy and scale Next.js apps with zero configuration.",
+          "tag": "Hosting"
+        },
+        {
+          "label": "Supabase",
+          "url": "https://supabase.com",
+          "description": "Open-source Postgres database with built-in auth, APIs, and storage.",
+          "tag": "Backend"
+        },
+        {
+          "label": "Tailwind CSS",
+          "url": "https://tailwindcss.com",
+          "description": "Utility-first CSS framework for building UIs rapidly.",
+          "tag": "Styling"
+        },
+        {
+          "label": "React Icons",
+          "url": "https://react-icons.github.io/react-icons/",
+          "description": "Popular icon libraries (Font Awesome, Heroicons, and more) as React components.",
+          "tag": "Styling"
+        },
+        {
+          "label": "Font Awesome",
+          "url": "https://fontawesome.com",
+          "description": "The web's most popular icon library — thousands of icons in one toolkit.",
+          "tag": "Styling"
+        },
+        {
+          "label": "Google Fonts",
+          "url": "https://fonts.google.com",
+          "description": "Free, open-source fonts you can embed in any web project with one line of CSS.",
+          "tag": "Styling"
+        },
+        {
+          "label": "Nodemailer",
+          "url": "https://nodemailer.com",
+          "description": "The most popular Node.js library for sending emails via SMTP and other transports.",
+          "tag": "Backend"
+        },
+        {
+          "label": "Gmail API",
+          "url": "https://developers.google.com/gmail/api",
+          "description": "Google's REST API for reading, sending, and managing Gmail messages programmatically.",
+          "tag": "Backend"
+        },
+        {
+          "label": "Neon",
+          "url": "https://neon.tech",
+          "description": "Serverless Postgres with branching, autoscaling, and a generous free tier.",
+          "tag": "Backend"
+        },
+        {
+          "label": "Cloudinary",
+          "url": "https://cloudinary.com",
+          "description": "Cloud platform for image and video upload, transformation, and delivery.",
+          "tag": "Backend"
+        }
+      ]
+    },
+    {
+      "heading": "Data & BI",
+      "items": [
+        {
+          "label": "dbt Documentation",
+          "url": "https://docs.getdbt.com",
+          "description": "Transform data in your warehouse with SQL and version-controlled models.",
+          "tag": "Data"
+        },
+        {
+          "label": "Power BI Learning",
+          "url": "https://learn.microsoft.com/en-us/power-bi/",
+          "description": "Official Microsoft learning hub for Power BI dashboards and reports.",
+          "tag": "BI"
+        },
+        {
+          "label": "SQLBI",
+          "url": "https://www.sqlbi.com",
+          "description": "Deep-dive articles, courses, and tools for DAX and Power BI from Marco Russo and Alberto Ferrari.",
+          "tag": "BI"
+        },
+        {
+          "label": "Kaggle",
+          "url": "https://www.kaggle.com",
+          "description": "Datasets, notebooks, and competitions to sharpen your data skills.",
+          "tag": "Data"
+        },
+        {
+          "label": "DAX.guide",
+          "url": "https://dax.guide/",
+          "description": "Complete DAX function reference with examples, syntax, and compatibility notes.",
+          "tag": "BI"
+        },
+        {
+          "label": "SQLZoo",
+          "url": "https://sqlzoo.net/wiki/SQL_Tutorial",
+          "description": "Interactive SQL tutorials with hands-on exercises from basic queries to advanced joins.",
+          "tag": "Data"
+        },
+        {
+          "label": "PL-300 Certification",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/?practice-assessment-type=certification",
+          "description": "Microsoft's official Power BI Data Analyst Associate certification with practice assessments.",
+          "tag": "BI"
+        }
+      ]
+    },
+    {
+      "heading": "Community & Reading",
+      "items": [
+        {
+          "label": "FTTG Solutions",
+          "url": "https://www.fttgsolutions.com",
+          "description": "The main FTTG website — projects, blog posts, and updates.",
+          "tag": "FTTG"
+        },
+        {
+          "label": "Power BI Community",
+          "url": "https://community.fabric.microsoft.com/t5/Power-BI-forums/ct-p/powerbi",
+          "description": "Official Microsoft forum for Power BI questions, ideas, and announcements.",
+          "tag": "Community"
+        },
+        {
+          "label": "Reactiflux",
+          "url": "https://www.reactiflux.com",
+          "description": "The largest React Discord community — chat with thousands of React developers.",
+          "tag": "Community"
+        },
+        {
+          "label": "JavaScript Community (Discord)",
+          "url": "https://discord.gg/javascript",
+          "description": "One of the largest JavaScript Discord servers for help, discussion, and code review.",
+          "tag": "Community"
+        },
+        {
+          "label": "Node.js Community",
+          "url": "https://nodejs.org/en/get-involved",
+          "description": "Official Node.js get-involved page linking to forums, Slack, and GitHub discussions.",
+          "tag": "Community"
+        },
+        {
+          "label": "Dev.to",
+          "url": "https://dev.to",
+          "description": "Developer community with articles on software, careers, and tech culture.",
+          "tag": "Community"
+        },
+        {
+          "label": "roadmap.sh",
+          "url": "https://roadmap.sh",
+          "description": "Community-driven roadmaps for developers to guide their learning path.",
+          "tag": "Learning"
+        }
+      ]
+    },
+    {
+      "heading": "Desktop Tools",
+      "items": [
+        {
+          "label": "VS Code",
+          "url": "https://code.visualstudio.com/download",
+          "description": "Microsoft's free, lightweight code editor — the go-to for web and full-stack development.",
+          "tag": "Tools"
+        },
+        {
+          "label": "Azure Data Studio",
+          "url": "https://azure.microsoft.com/en-us/products/data-studio",
+          "description": "Cross-platform SQL and data tool with notebooks, query editor, and Azure integration.",
+          "tag": "Tools"
+        },
+        {
+          "label": "Power BI Desktop",
+          "url": "https://powerbi.microsoft.com/en-us/downloads/",
+          "description": "Microsoft's free desktop app for building and publishing Power BI reports.",
+          "tag": "Tools"
+        },
+        {
+          "label": "DAX Studio",
+          "url": "https://daxstudio.org/",
+          "description": "Free tool for writing, running, and tuning DAX queries against Analysis Services and Power BI.",
+          "tag": "Tools"
+        },
+        {
+          "label": "Tabular Editor",
+          "url": "https://tabulareditor.com/",
+          "description": "Advanced model authoring tool for Analysis Services and Power BI datasets — TE2 is free.",
+          "tag": "Tools"
+        },
+        {
+          "label": "Postman",
+          "url": "https://www.postman.com",
+          "description": "Industry-standard tool for building, testing, and documenting APIs with a visual interface.",
+          "tag": "Tools"
+        }
+      ]
+    },
+    {
+      "heading": "YouTube Channels",
+      "items": [
+        {
+          "label": "Guy in a Cube",
+          "url": "https://www.youtube.com/@GuyInACube",
+          "description": "Weekly Power BI tips, walkthroughs, and feature breakdowns from Adam and Patrick.",
+          "tag": "YouTube"
+        },
+        {
+          "label": "SQLBI",
+          "url": "https://www.youtube.com/@SQLBI",
+          "description": "In-depth DAX and Power BI tutorials from Marco Russo and Alberto Ferrari.",
+          "tag": "YouTube"
+        },
+        {
+          "label": "Amit Chandak",
+          "url": "https://www.youtube.com/@AmitChandak",
+          "description": "Power BI, DAX, and Microsoft Fabric tutorials with real-world business scenarios.",
+          "tag": "YouTube"
+        },
+        {
+          "label": "Analytics with Nags",
+          "url": "https://www.youtube.com/@AnalyticswithNags",
+          "description": "Power BI and data analytics walkthroughs focused on practical, job-ready skills.",
+          "tag": "YouTube"
+        }
+      ]
+    }
+  ]
+}

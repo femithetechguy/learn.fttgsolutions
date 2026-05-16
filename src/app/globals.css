@@ -120,4 +120,20 @@ body::before {
   .animate-delay-300 { animation-delay: 300ms; }
   .animate-delay-400 { animation-delay: 400ms; }
   .animate-delay-500 { animation-delay: 500ms; }
+
+  .text-shimmer-gold {
+    background: linear-gradient(90deg, #A8891E 0%, #F5DF80 30%, #D4AF37 50%, #F5DF80 70%, #A8891E 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
