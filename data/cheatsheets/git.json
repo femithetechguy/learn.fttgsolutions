@@ -1,0 +1,144 @@
+{
+  "label": "Git",
+  "headline": "Git Cheat Sheet",
+  "tagline": "Init. Commit. Push. Repeat.",
+  "description": "Quick reference for the Git commands you reach for every day — from initializing repos to branch management, history inspection, and collaboration.",
+  "color": "F05032",
+  "categories": [
+    {
+      "category": "Create a Repository",
+      "items": [
+        { "name": "git init", "syntax": "git init [project name]", "definition": "Initialize a new local repository in the current (or named) directory." },
+        { "name": "git clone", "syntax": "git clone <git_url>", "definition": "Download a full copy of a remote repository to your machine." },
+        { "name": "git clone (named)", "syntax": "git clone <git_url> <my_directory>", "definition": "Clone a remote repository into a custom-named local directory." }
+      ]
+    },
+    {
+      "category": "Make a Change",
+      "items": [
+        { "name": "git status", "syntax": "git status", "definition": "Show which files are modified, staged, or untracked." },
+        { "name": "git add (file)", "syntax": "git add [file]", "definition": "Stage a specific file for the next commit." },
+        { "name": "git add (all)", "syntax": "git add .", "definition": "Stage all changed and new files in the working directory." },
+        { "name": "git commit", "syntax": "git commit -m \"message\"", "definition": "Record staged changes with a descriptive message." },
+        { "name": "git commit (all)", "syntax": "git commit -am \"message\"", "definition": "Stage all tracked file changes and commit in one step." },
+        { "name": "git restore", "syntax": "git restore [file]", "definition": "Discard unstaged changes in the working directory for a file." },
+        { "name": "git restore --staged", "syntax": "git restore --staged [file]", "definition": "Unstage a file while keeping its changes in the working directory." },
+        { "name": "git reset (file)", "syntax": "git reset [file]", "definition": "Unstage a file without modifying its contents." },
+        { "name": "git reset --hard", "syntax": "git reset --hard", "definition": "Revert all uncommitted changes and return to the last commit state." },
+        { "name": "git diff", "syntax": "git diff", "definition": "Show unstaged differences between the working directory and the index." },
+        { "name": "git diff --staged", "syntax": "git diff --staged", "definition": "Show changes staged for the next commit but not yet committed." },
+        { "name": "git rebase", "syntax": "git rebase [branch]", "definition": "Reapply commits from the current branch on top of another branch." }
+      ]
+    },
+    {
+      "category": "Configuration",
+      "items": [
+        { "name": "config user.name", "syntax": "git config --global user.name \"Name\"", "definition": "Set the name that will appear on all commits globally." },
+        { "name": "config user.email", "syntax": "git config --global user.email \"email\"", "definition": "Set the email address that will appear on all commits globally." },
+        { "name": "config color.ui", "syntax": "git config --global color.ui auto", "definition": "Enable automatic colored output in the terminal." },
+        { "name": "config --edit", "syntax": "git config --global --edit", "definition": "Open the global Git configuration file in the default text editor." }
+      ]
+    },
+    {
+      "category": "Working with Branches",
+      "items": [
+        { "name": "git branch", "syntax": "git branch", "definition": "List all local branches in the repository." },
+        { "name": "git branch -av", "syntax": "git branch -av", "definition": "List all local and remote branches with their latest commits." },
+        { "name": "git checkout", "syntax": "git checkout <branch>", "definition": "Switch to an existing branch and update the working directory." },
+        { "name": "git checkout -b", "syntax": "git checkout -b <new_branch>", "definition": "Create a new branch and immediately switch to it." },
+        { "name": "git branch -d", "syntax": "git branch -d <branch>", "definition": "Delete a local branch (only if it has been fully merged)." },
+        { "name": "git merge", "syntax": "git merge <branchA>", "definition": "Merge the specified branch into the currently active branch." },
+        { "name": "git tag", "syntax": "git tag <my_tag>", "definition": "Create a lightweight tag pointing to the current commit." }
+      ]
+    },
+    {
+      "category": "Observe Your Repository",
+      "items": [
+        { "name": "git log", "syntax": "git log", "definition": "Display the full commit history for the active branch." },
+        { "name": "git log (range)", "syntax": "git log branchB..branchA", "definition": "Show commits in branchA that are not yet in branchB." },
+        { "name": "git log --follow", "syntax": "git log --follow [file]", "definition": "Track the change history of a file, including across renames." },
+        { "name": "git diff (branches)", "syntax": "git diff branchB...branchA", "definition": "Show the diff between what is in branchA but not in branchB." },
+        { "name": "git show", "syntax": "git show [SHA]", "definition": "Display the contents and metadata of a specific commit by its SHA." }
+      ]
+    },
+    {
+      "category": "Synchronize",
+      "items": [
+        { "name": "git fetch", "syntax": "git fetch [alias]", "definition": "Download all branches from a remote without merging." },
+        { "name": "git merge (remote)", "syntax": "git merge [alias]/[branch]", "definition": "Merge a remote-tracking branch into the current local branch." },
+        { "name": "git merge --no-ff", "syntax": "git merge --no-ff [alias]/[branch]", "definition": "Merge without fast-forwarding, always creating a merge commit." },
+        { "name": "git merge --ff-only", "syntax": "git merge --ff-only [alias]/[branch]", "definition": "Merge only if the branch can be fast-forwarded; abort otherwise." },
+        { "name": "git push", "syntax": "git push [alias] [branch]", "definition": "Upload local branch commits to the remote repository." },
+        { "name": "git pull", "syntax": "git pull", "definition": "Fetch from the tracked remote and merge into the current branch." },
+        { "name": "git cherry-pick", "syntax": "git cherry-pick [commit_id]", "definition": "Apply the changes from a specific commit onto the current branch." }
+      ]
+    },
+    {
+      "category": "Remote",
+      "items": [
+        { "name": "git remote add", "syntax": "git remote add [alias] [url]", "definition": "Register a new remote repository under a short alias." },
+        { "name": "git remote", "syntax": "git remote", "definition": "List the names of all configured remote connections." },
+        { "name": "git remote -v", "syntax": "git remote -v", "definition": "List all remotes along with their fetch and push URLs." },
+        { "name": "git remote rm", "syntax": "git remote rm [name]", "definition": "Remove a remote connection from the repository." },
+        { "name": "git remote set-url", "syntax": "git remote set-url origin [git_url]", "definition": "Update the URL of an existing remote (e.g. after a repo migration)." }
+      ]
+    },
+    {
+      "category": "Temporary Commits (Stash)",
+      "items": [
+        { "name": "git stash", "syntax": "git stash", "definition": "Save modified and staged changes onto a temporary stack." },
+        { "name": "git stash list", "syntax": "git stash list", "definition": "Show all entries currently saved in the stash stack." },
+        { "name": "git stash pop", "syntax": "git stash pop", "definition": "Apply the most recent stash entry and remove it from the stack." },
+        { "name": "git stash drop", "syntax": "git stash drop", "definition": "Discard the most recent stash entry without applying it." }
+      ]
+    },
+    {
+      "category": "Tracking Path Changes",
+      "items": [
+        { "name": "git rm", "syntax": "git rm [file]", "definition": "Delete a file from the working directory and stage the removal." },
+        { "name": "git mv", "syntax": "git mv [existing-path] [new-path]", "definition": "Move or rename a file and stage the change." },
+        { "name": "git log --stat -M", "syntax": "git log --stat -M", "definition": "Show commit logs with a summary of file movements and renames." }
+      ]
+    },
+    {
+      "category": "Rename Branch",
+      "items": [
+        { "name": "branch -m", "syntax": "git branch -m <new_name>", "definition": "Rename the currently checked-out local branch." },
+        { "name": "push renamed", "syntax": "git push origin -u <new_name>", "definition": "Push the renamed branch to origin and set upstream tracking." },
+        { "name": "delete old remote", "syntax": "git push origin --delete <old_name>", "definition": "Remove the old branch name from the remote repository." }
+      ]
+    },
+    {
+      "category": "Log Tricks",
+      "items": [
+        { "name": "log -S (search)", "syntax": "git log -S'<term>'", "definition": "Search commit history for changes that add or remove a specific string." },
+        { "name": "log -p (file)", "syntax": "git log -p <file_name>", "definition": "Show the full diff of every commit that touched a specific file." },
+        { "name": "log --graph", "syntax": "git log --pretty=oneline --graph --decorate --all", "definition": "Print a visual ASCII graph of the full branch and merge history." }
+      ]
+    },
+    {
+      "category": "Branch Tricks",
+      "items": [
+        { "name": "branch -vv", "syntax": "git branch -vv", "definition": "List branches with their upstream tracking info and last commit." },
+        { "name": "checkout -", "syntax": "git checkout -", "definition": "Switch back to the previously checked-out branch." },
+        { "name": "branch -r", "syntax": "git branch -r", "definition": "List only remote-tracking branches." },
+        { "name": "checkout file", "syntax": "git checkout <branch> -- <file>", "definition": "Restore a single file from another branch without switching branches." }
+      ]
+    },
+    {
+      "category": "Rewriting History",
+      "items": [
+        { "name": "commit --amend", "syntax": "git commit --amend -m \"new message\"", "definition": "Replace the most recent commit with an updated message or content." }
+      ]
+    },
+    {
+      "category": "Git Aliases",
+      "items": [
+        { "name": "alias co", "syntax": "git config --global alias.co checkout", "definition": "Create a shorthand `git co` for the checkout command." },
+        { "name": "alias br", "syntax": "git config --global alias.br branch", "definition": "Create a shorthand `git br` for the branch command." },
+        { "name": "alias ci", "syntax": "git config --global alias.ci commit", "definition": "Create a shorthand `git ci` for the commit command." },
+        { "name": "alias st", "syntax": "git config --global alias.st status", "definition": "Create a shorthand `git st` for the status command." }
+      ]
+    }
+  ]
+}

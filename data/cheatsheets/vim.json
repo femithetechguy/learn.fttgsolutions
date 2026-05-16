@@ -1,0 +1,256 @@
+{
+  "label": "Vim",
+  "headline": "Vim Cheat Sheet",
+  "tagline": "Move. Edit. Repeat.",
+  "description": "Quick reference for Vim commands — from basic motions and insert mode to search, replace, macros, and managing multiple files.",
+  "color": "019833",
+  "categories": [
+    {
+      "category": "Motions (Horizontal)",
+      "items": [
+        { "name": "h j k l", "syntax": "h / j / k / l", "definition": "Move left, down, up, right — the arrow key equivalents." },
+        { "name": "Start of line", "syntax": "0", "definition": "Jump to the very start of the current line." },
+        { "name": "First non-blank", "syntax": "^", "definition": "Jump to the first non-blank character of the current line." },
+        { "name": "End of line", "syntax": "$", "definition": "Jump to the end of the current line." },
+        { "name": "Previous word", "syntax": "b", "definition": "Move backward to the start of the previous word." },
+        { "name": "Next word", "syntax": "w", "definition": "Move forward to the start of the next word." },
+        { "name": "End of word", "syntax": "e", "definition": "Move forward to the end of the current or next word." },
+        { "name": "Find character", "syntax": "f{char}", "definition": "Jump forward to the next occurrence of a character on the line." },
+        { "name": "Find back", "syntax": "F{char}", "definition": "Jump backward to the previous occurrence of a character on the line." }
+      ]
+    },
+    {
+      "category": "Motions (Vertical)",
+      "items": [
+        { "name": "Half page up/down", "syntax": "Ctrl+u / Ctrl+d", "definition": "Scroll half a page up or down." },
+        { "name": "Full page up/down", "syntax": "Ctrl+b / Ctrl+f", "definition": "Scroll a full page up or down." },
+        { "name": "First line", "syntax": "gg", "definition": "Jump to the first line of the file." },
+        { "name": "Last line", "syntax": "G", "definition": "Jump to the last line of the file." },
+        { "name": "Go to line n", "syntax": ":n  or  nG", "definition": "Jump to line number n." },
+        { "name": "Next empty line", "syntax": "}", "definition": "Jump to the next blank line (paragraph forward)." },
+        { "name": "Previous empty line", "syntax": "{", "definition": "Jump to the previous blank line (paragraph backward)." },
+        { "name": "Screen top/mid/bot", "syntax": "H / M / L", "definition": "Jump to the top, middle, or bottom line visible on screen." },
+        { "name": "Center current line", "syntax": "zz", "definition": "Scroll the screen so the current line is centered." }
+      ]
+    },
+    {
+      "category": "Insert Mode",
+      "items": [
+        { "name": "Insert before cursor", "syntax": "i", "definition": "Enter insert mode before the cursor." },
+        { "name": "Insert after cursor", "syntax": "a", "definition": "Enter insert mode after the cursor." },
+        { "name": "Insert start of line", "syntax": "I", "definition": "Enter insert mode at the first non-blank character of the line." },
+        { "name": "Insert end of line", "syntax": "A", "definition": "Enter insert mode at the end of the current line." },
+        { "name": "New line below", "syntax": "o", "definition": "Open a new line below the current line and enter insert mode." },
+        { "name": "New line above", "syntax": "O", "definition": "Open a new line above the current line and enter insert mode." },
+        { "name": "Delete char & insert", "syntax": "s", "definition": "Delete the character under the cursor and enter insert mode." },
+        { "name": "Delete line & insert", "syntax": "S", "definition": "Delete the current line and enter insert mode." },
+        { "name": "Change to end of line", "syntax": "C", "definition": "Delete from cursor to end of line and enter insert mode." },
+        { "name": "Last insert point", "syntax": "gi", "definition": "Enter insert mode at the position of the last insert." },
+        { "name": "Exit insert mode", "syntax": "Esc  or  Ctrl+[", "definition": "Return to normal mode from insert mode." }
+      ]
+    },
+    {
+      "category": "Save & Exit",
+      "items": [
+        { "name": "Save", "syntax": ":w", "definition": "Write (save) the current file." },
+        { "name": "Quit", "syntax": ":q", "definition": "Close the current file (fails if unsaved changes exist)." },
+        { "name": "Save and quit", "syntax": ":wq  or  :x  or  ZZ", "definition": "Save the file and quit Vim." },
+        { "name": "Force quit", "syntax": ":q!  or  ZQ", "definition": "Quit without saving, discarding all changes." },
+        { "name": "Save and quit all", "syntax": ":wqa", "definition": "Save all open files and quit Vim." },
+        { "name": "Close all", "syntax": ":qa", "definition": "Close all open files (fails if any have unsaved changes)." },
+        { "name": "Force quit all", "syntax": ":qa!", "definition": "Force quit all files, discarding all changes." },
+        { "name": "Save to file", "syntax": ":w filename", "definition": "Write the current buffer to a specific file name." },
+        { "name": "Save as", "syntax": ":sav filename", "definition": "Save the file under a new name and start editing it." },
+        { "name": "Write readonly file", "syntax": ":w !sudo tee %", "definition": "Save a file that requires sudo permissions." }
+      ]
+    },
+    {
+      "category": "Editing (Normal Mode)",
+      "items": [
+        { "name": "Replace character", "syntax": "r{char}", "definition": "Replace the character under the cursor with another character." },
+        { "name": "Replace mode", "syntax": "R", "definition": "Enter replace mode — typed characters overwrite existing ones." },
+        { "name": "Undo", "syntax": "u", "definition": "Undo the last change. Prefix with a number to undo multiple times." },
+        { "name": "Undo line", "syntax": "U", "definition": "Undo all changes made to the current line." },
+        { "name": "Redo", "syntax": "Ctrl+r", "definition": "Redo the last undone change." },
+        { "name": "Join lines", "syntax": "J", "definition": "Join the current line with the next line." },
+        { "name": "Repeat last command", "syntax": ".", "definition": "Repeat the last normal-mode change command." }
+      ]
+    },
+    {
+      "category": "Cut, Copy & Paste",
+      "items": [
+        { "name": "Delete character", "syntax": "x", "definition": "Delete the character under the cursor (cuts to register)." },
+        { "name": "Delete word", "syntax": "dw", "definition": "Delete from cursor to the start of the next word." },
+        { "name": "Delete line", "syntax": "dd", "definition": "Delete the entire current line." },
+        { "name": "Delete to end", "syntax": "D", "definition": "Delete from cursor to the end of the line." },
+        { "name": "Yank (copy) line", "syntax": "yy", "definition": "Copy the current line into the register." },
+        { "name": "Paste after", "syntax": "p", "definition": "Paste the register contents after the cursor." },
+        { "name": "Paste before", "syntax": "P", "definition": "Paste the register contents before the cursor." },
+        { "name": "Swap characters", "syntax": "xp", "definition": "Transpose (swap) two characters." },
+        { "name": "Swap lines", "syntax": "ddp", "definition": "Swap the current line with the line below." },
+        { "name": "Yank to clipboard", "syntax": "\"+y  or  \"*y", "definition": "Yank (copy) selected text to the system clipboard." },
+        { "name": "Paste from clipboard", "syntax": "\"+p  or  \"*p", "definition": "Paste from the system clipboard." }
+      ]
+    },
+    {
+      "category": "Visual Mode",
+      "items": [
+        { "name": "Visual mode", "syntax": "v", "definition": "Enter character-wise visual mode to select text." },
+        { "name": "Visual line mode", "syntax": "V", "definition": "Enter line-wise visual mode to select whole lines." },
+        { "name": "Visual block mode", "syntax": "Ctrl+v", "definition": "Enter block (column) visual mode to select a rectangle of text." },
+        { "name": "Select all", "syntax": "ggVG", "definition": "Select the entire file." },
+        { "name": "Indent selection", "syntax": ">", "definition": "Shift the selected text one indent level to the right." },
+        { "name": "Outdent selection", "syntax": "<", "definition": "Shift the selected text one indent level to the left." },
+        { "name": "Delete selection", "syntax": "d  or  x", "definition": "Cut the current visual selection." },
+        { "name": "Yank selection", "syntax": "y", "definition": "Copy the current visual selection." }
+      ]
+    },
+    {
+      "category": "Operators",
+      "items": [
+        { "name": "d — delete", "syntax": "d{motion}", "definition": "Delete text covered by the motion (e.g. dw, dd, d$)." },
+        { "name": "y — yank", "syntax": "y{motion}", "definition": "Copy text covered by the motion (e.g. yy, yw, y$)." },
+        { "name": "c — change", "syntax": "c{motion}", "definition": "Delete text and enter insert mode (e.g. cw, cc, c$)." },
+        { "name": "= — format", "syntax": "={motion}", "definition": "Auto-indent code covered by the motion (e.g. gg=G for whole file)." },
+        { "name": "gU — uppercase", "syntax": "gU{motion}", "definition": "Convert text to uppercase (e.g. gUU for current line)." },
+        { "name": "gu — lowercase", "syntax": "gu{motion}", "definition": "Convert text to lowercase (e.g. guu for current line)." },
+        { "name": "Count prefix", "syntax": "{n}{operator}", "definition": "Repeat an operator n times (e.g. 3dd deletes 3 lines, 6yy copies 6)." }
+      ]
+    },
+    {
+      "category": "Text Objects",
+      "items": [
+        { "name": "Inner word", "syntax": "iw", "definition": "Select the word under the cursor, without surrounding spaces." },
+        { "name": "Around word", "syntax": "aw", "definition": "Select the word under the cursor, including surrounding spaces." },
+        { "name": "Inner quotes", "syntax": "i\"  or  i'", "definition": "Select text inside the nearest quote pair." },
+        { "name": "Around quotes", "syntax": "a\"  or  a'", "definition": "Select text including the surrounding quotes." },
+        { "name": "Inner brackets", "syntax": "i(  or  i[  or  i{", "definition": "Select text inside the nearest bracket pair." },
+        { "name": "Around brackets", "syntax": "a(  or  a[  or  a{", "definition": "Select text including the surrounding bracket pair." },
+        { "name": "Inner paragraph", "syntax": "ip", "definition": "Select the current paragraph (text block between blank lines)." },
+        { "name": "Inner tag", "syntax": "it", "definition": "Select the content inside an HTML/XML tag." },
+        { "name": "Change inner word", "syntax": "ciw", "definition": "Delete the word under the cursor and enter insert mode." },
+        { "name": "Change inner quotes", "syntax": "ci\"", "definition": "Delete the content inside quotes and enter insert mode." },
+        { "name": "Delete inner word", "syntax": "diw", "definition": "Delete the word under the cursor." },
+        { "name": "Delete in quotes", "syntax": "di\"", "definition": "Delete everything inside the nearest quotes." }
+      ]
+    },
+    {
+      "category": "Search",
+      "items": [
+        { "name": "Search forward", "syntax": "/{pattern}", "definition": "Search forward for a pattern. Press Enter to jump to the first match." },
+        { "name": "Search backward", "syntax": "?{pattern}", "definition": "Search backward for a pattern." },
+        { "name": "Next match", "syntax": "n", "definition": "Jump to the next match in the search direction." },
+        { "name": "Previous match", "syntax": "N", "definition": "Jump to the previous match." },
+        { "name": "Search current word", "syntax": "*", "definition": "Search forward for the word under the cursor." },
+        { "name": "Search word back", "syntax": "#", "definition": "Search backward for the word under the cursor." },
+        { "name": "Case insensitive", "syntax": "/foo\\c", "definition": "Search with case-insensitive matching." },
+        { "name": "Regex search", "syntax": "/\\v\\d+", "definition": "Search using a regular expression (\\v enables 'very magic' mode)." },
+        { "name": "Clear highlights", "syntax": ":noh", "definition": "Clear search highlighting without cancelling the search pattern." }
+      ]
+    },
+    {
+      "category": "Search & Replace",
+      "items": [
+        { "name": "Replace first (line)", "syntax": ":s/old/new", "definition": "Replace the first occurrence of 'old' with 'new' on the current line." },
+        { "name": "Replace all (line)", "syntax": ":s/old/new/g", "definition": "Replace all occurrences of 'old' on the current line." },
+        { "name": "Replace with confirm", "syntax": ":s/old/new/gc", "definition": "Replace all on the current line, asking for confirmation each time." },
+        { "name": "Replace first (file)", "syntax": ":%s/old/new", "definition": "Replace the first occurrence on every line in the file." },
+        { "name": "Replace all (file)", "syntax": ":%s/old/new/g", "definition": "Replace every occurrence of 'old' with 'new' throughout the file." },
+        { "name": "Replace (confirm)", "syntax": ":%s/old/new/gc", "definition": "Replace all in file, asking for confirmation at each match." },
+        { "name": "Replace (ignore case)", "syntax": ":%s/old/new/gi", "definition": "Replace all in file, ignoring case." },
+        { "name": "Replace in range", "syntax": ":2,6s/old/new/g", "definition": "Replace all occurrences between lines 2 and 6." }
+      ]
+    },
+    {
+      "category": "Macros",
+      "items": [
+        { "name": "Record macro", "syntax": "q{letter}", "definition": "Start recording a macro into register {letter} (e.g. qa records into 'a')." },
+        { "name": "Stop recording", "syntax": "q", "definition": "Stop recording the current macro." },
+        { "name": "Run macro", "syntax": "@{letter}", "definition": "Execute the macro stored in register {letter}." },
+        { "name": "Run macro n times", "syntax": "{n}@{letter}", "definition": "Execute a macro n times (e.g. 7@a runs macro 'a' seven times)." },
+        { "name": "Repeat last macro", "syntax": "@@", "definition": "Re-run the most recently executed macro." }
+      ]
+    },
+    {
+      "category": "Buffers",
+      "items": [
+        { "name": "Edit file", "syntax": ":e {file}", "definition": "Open a file in a new buffer." },
+        { "name": "Next buffer", "syntax": ":bn", "definition": "Switch to the next buffer." },
+        { "name": "Previous buffer", "syntax": ":bp", "definition": "Switch to the previous buffer." },
+        { "name": "Delete buffer", "syntax": ":bd", "definition": "Remove the current file from the buffer list." },
+        { "name": "List buffers", "syntax": ":ls", "definition": "List all currently open buffers." },
+        { "name": "Go to buffer", "syntax": ":b {file}", "definition": "Switch to a buffer by file name." },
+        { "name": "Split open", "syntax": ":sp {file}", "definition": "Open a file in a horizontal split." },
+        { "name": "Vertical split open", "syntax": ":vs {file}", "definition": "Open a file in a vertical split." }
+      ]
+    },
+    {
+      "category": "Windows",
+      "items": [
+        { "name": "Split horizontal", "syntax": "Ctrl+w s", "definition": "Split the current window horizontally." },
+        { "name": "Split vertical", "syntax": "Ctrl+w v", "definition": "Split the current window vertically." },
+        { "name": "Switch window", "syntax": "Ctrl+w w", "definition": "Cycle focus to the next window." },
+        { "name": "Close window", "syntax": "Ctrl+w q", "definition": "Close the focused window." },
+        { "name": "Move left/right", "syntax": "Ctrl+w h / Ctrl+w l", "definition": "Move focus to the window on the left or right." },
+        { "name": "Move up/down", "syntax": "Ctrl+w j / Ctrl+w k", "definition": "Move focus to the window above or below." },
+        { "name": "Equal size", "syntax": "Ctrl+w =", "definition": "Make all windows equally sized." },
+        { "name": "Swap windows", "syntax": "Ctrl+w x", "definition": "Swap the current window with the next one." }
+      ]
+    },
+    {
+      "category": "Tabs",
+      "items": [
+        { "name": "New tab", "syntax": ":tabe {file}", "definition": "Open a file in a new tab." },
+        { "name": "Close tab", "syntax": ":tabc", "definition": "Close the current tab." },
+        { "name": "Close other tabs", "syntax": ":tabo", "definition": "Close all tabs except the current one." },
+        { "name": "List tabs", "syntax": ":tabs", "definition": "List all open tabs and their windows." },
+        { "name": "Next tab", "syntax": ":tabn  or  gt", "definition": "Move to the next tab." },
+        { "name": "Previous tab", "syntax": ":tabp  or  gT", "definition": "Move to the previous tab." },
+        { "name": "Go to tab n", "syntax": "{n}gt", "definition": "Jump directly to tab number n." }
+      ]
+    },
+    {
+      "category": "Marks",
+      "items": [
+        { "name": "Set mark", "syntax": "m{letter}", "definition": "Mark the current cursor position with a letter (e.g. ma)." },
+        { "name": "Jump to mark", "syntax": "`{letter}", "definition": "Jump to the exact position of mark {letter}." },
+        { "name": "Jump to mark line", "syntax": "'{letter}", "definition": "Jump to the beginning of the line containing mark {letter}." },
+        { "name": "Last insert position", "syntax": "`^", "definition": "Jump to where the cursor was when insert mode was last exited." },
+        { "name": "Last change", "syntax": "`.", "definition": "Jump to the position of the last change in the current buffer." },
+        { "name": "List marks", "syntax": ":marks", "definition": "Show all current marks and their positions." },
+        { "name": "Delete mark", "syntax": ":delm {letter}", "definition": "Delete a specific mark." }
+      ]
+    },
+    {
+      "category": "Folds",
+      "items": [
+        { "name": "Open fold", "syntax": "zo", "definition": "Open (expand) the fold under the cursor." },
+        { "name": "Close fold", "syntax": "zc", "definition": "Close (collapse) the fold under the cursor." },
+        { "name": "Toggle fold", "syntax": "za", "definition": "Toggle the fold under the cursor open or closed." },
+        { "name": "Open all folds", "syntax": "zR", "definition": "Open every fold in the file." },
+        { "name": "Close all folds", "syntax": "zM", "definition": "Close every fold in the file." }
+      ]
+    },
+    {
+      "category": "Miscellaneous",
+      "items": [
+        { "name": "Toggle case", "syntax": "~", "definition": "Toggle the case of the character under the cursor." },
+        { "name": "Uppercase word", "syntax": "viw U", "definition": "Select the current word and convert it to uppercase." },
+        { "name": "Lowercase word", "syntax": "viw u", "definition": "Select the current word and convert it to lowercase." },
+        { "name": "Increase number", "syntax": "Ctrl+a", "definition": "Increment the number under the cursor." },
+        { "name": "Decrease number", "syntax": "Ctrl+x", "definition": "Decrement the number under the cursor." },
+        { "name": "Go back (jump)", "syntax": "Ctrl+o", "definition": "Jump back to the previous cursor location in the jump list." },
+        { "name": "Go forward (jump)", "syntax": "Ctrl+i", "definition": "Jump forward in the jump list." },
+        { "name": "Go to file", "syntax": "gf", "definition": "Open the file whose name is under the cursor." },
+        { "name": "Help", "syntax": ":h {topic}", "definition": "Open Vim's built-in help for a topic." },
+        { "name": "Reload file", "syntax": ":edit!", "definition": "Discard changes and reload the current file from disk." },
+        { "name": "Open terminal", "syntax": ":ter", "definition": "Open a terminal window inside Vim." },
+        { "name": "Sort lines", "syntax": ":sort", "definition": "Sort all lines in the file (or a selected range) alphabetically." },
+        { "name": "Shell command", "syntax": ":!{cmd}", "definition": "Execute a shell command without leaving Vim." },
+        { "name": "Insert command output", "syntax": ":r!{cmd}", "definition": "Insert the output of a shell command into the buffer." },
+        { "name": "Delete lines matching", "syntax": ":g/foo/d", "definition": "Delete every line in the file that contains the pattern 'foo'." },
+        { "name": "Delete blank lines", "syntax": ":g/^\\s*$/d", "definition": "Remove all blank/whitespace-only lines from the file." }
+      ]
+    }
+  ]
+}

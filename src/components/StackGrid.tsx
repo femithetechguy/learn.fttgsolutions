@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { Info } from 'lucide-react'
 import { SI_MAP, CUSTOM_MAP } from '@/lib/brand-icons'
 
 interface StackTool     { name: string; slug: string; color: string; definition?: string }
@@ -29,13 +30,22 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
     })
   }
 
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('click', handler)
+    return () => document.removeEventListener('click', handler)
+  }, [open])
+
   return (
     <span
       ref={ref}
-      className="group relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
-      onMouseEnter={() => { calcPos(); setOpen(true) }}
-      onMouseLeave={() => setOpen(false)}
-      onClick={() => { calcPos(); setOpen(v => !v) }}
+      className="group relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
+      onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; calcPos(); setOpen(true) }}
+      onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setOpen(false) }}
+      onClick={(e) => { if ((e.nativeEvent as PointerEvent).pointerType === 'mouse') return; calcPos(); setOpen(v => !v) }}
     >
       {path && (
         <svg
@@ -53,6 +63,12 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
       <span className="font-sans text-xs text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
         {name}
       </span>
+      {definition && (
+        <Info
+          size={10}
+          className={`shrink-0 transition-colors duration-200 ${open ? 'text-gold' : 'text-text-muted opacity-40 group-hover:opacity-80 group-hover:text-text-secondary'}`}
+        />
+      )}
 
       {definition && open && pos && typeof window !== 'undefined' && createPortal(
         <span

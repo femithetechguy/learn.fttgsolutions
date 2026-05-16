@@ -2,13 +2,201 @@
   "label": "SQL",
   "headline": "SQL Cheat Sheet",
   "tagline": "Query. Filter. Aggregate.",
-  "description": "Quick reference for the SQL commands you use every day — from basic SELECT statements to window functions and CTEs.",
+  "description": "Quick reference for SQL — from basic SELECT queries to joins, aggregations, window functions, CTEs, and DDL.",
   "color": "4169E1",
   "categories": [
     {
       "category": "Querying",
       "items": [
-        { "name": "SELECT", "syntax": "SELECT col1, col2 FROM table", "definition": "Specifies which columns to return from a query." }
+        { "name": "SELECT", "syntax": "SELECT col1, col2 FROM table", "definition": "Retrieve specific columns from a table." },
+        { "name": "SELECT *", "syntax": "SELECT * FROM table", "definition": "Retrieve all columns from a table." },
+        { "name": "SELECT DISTINCT", "syntax": "SELECT DISTINCT col FROM table", "definition": "Return only unique values, removing duplicates." },
+        { "name": "AS (alias)", "syntax": "SELECT col AS alias FROM table", "definition": "Give a column or table a temporary display name." },
+        { "name": "LIMIT", "syntax": "SELECT * FROM table LIMIT 10", "definition": "Return only the first n rows of results." },
+        { "name": "OFFSET", "syntax": "SELECT * FROM table LIMIT 10 OFFSET 20", "definition": "Skip a number of rows before starting to return results — used for pagination." },
+        { "name": "ORDER BY", "syntax": "SELECT * FROM table ORDER BY col ASC", "definition": "Sort the result set by one or more columns. ASC (default) or DESC." },
+        { "name": "ORDER BY multiple", "syntax": "ORDER BY col1 ASC, col2 DESC", "definition": "Sort by a primary column, then a secondary column for ties." }
+      ]
+    },
+    {
+      "category": "Filtering",
+      "items": [
+        { "name": "WHERE", "syntax": "SELECT * FROM table WHERE col = 'value'", "definition": "Filter rows to only those matching a condition." },
+        { "name": "Comparison operators", "syntax": "=   equal\n!=  not equal\n>   greater than\n<   less than\n>=  greater than or equal\n<=  less than or equal", "definition": "Compare a column value against a literal or another column. Use these inside WHERE clauses." },
+        { "name": "AND / OR", "syntax": "WHERE col1 = 'a' AND col2 > 10", "definition": "Combine multiple conditions. AND requires both; OR requires either." },
+        { "name": "NOT", "syntax": "WHERE NOT col = 'value'", "definition": "Negate a condition — return rows where the condition is false." },
+        { "name": "IN", "syntax": "WHERE col IN ('a', 'b', 'c')", "definition": "Match any value in a list — shorthand for multiple OR conditions." },
+        { "name": "NOT IN", "syntax": "WHERE col NOT IN ('a', 'b')", "definition": "Exclude rows whose column value appears in the list." },
+        { "name": "BETWEEN", "syntax": "WHERE col BETWEEN 10 AND 50", "definition": "Filter rows where a value falls within an inclusive range." },
+        { "name": "LIKE", "syntax": "WHERE name LIKE 'J%'", "definition": "Pattern matching. % matches any string, _ matches exactly one character." },
+        { "name": "NOT LIKE", "syntax": "WHERE name NOT LIKE 'J%'", "definition": "Exclude rows whose column matches a pattern. Opposite of LIKE." },
+        { "name": "ILIKE", "syntax": "WHERE name ILIKE 'j%'", "definition": "Case-insensitive pattern matching (PostgreSQL / some dialects)." },
+        { "name": "IS NULL", "syntax": "WHERE col IS NULL", "definition": "Return rows where the column has no value (NULL)." },
+        { "name": "IS NOT NULL", "syntax": "WHERE col IS NOT NULL", "definition": "Return rows where the column has a value." },
+        { "name": "EXISTS", "syntax": "WHERE EXISTS (SELECT 1 FROM t2 WHERE t2.id = t1.id)", "definition": "Return rows where the subquery produces at least one result." }
+      ]
+    },
+    {
+      "category": "Aggregation",
+      "items": [
+        { "name": "COUNT", "syntax": "SELECT COUNT(*) FROM table", "definition": "Count the number of rows. COUNT(col) ignores NULLs." },
+        { "name": "SUM", "syntax": "SELECT SUM(col) FROM table", "definition": "Add up all numeric values in a column." },
+        { "name": "AVG", "syntax": "SELECT AVG(col) FROM table", "definition": "Return the arithmetic mean of a numeric column." },
+        { "name": "MIN / MAX", "syntax": "SELECT MIN(col), MAX(col) FROM table", "definition": "Return the smallest and largest value in a column." },
+        { "name": "GROUP BY", "syntax": "SELECT col, COUNT(*) FROM table GROUP BY col", "definition": "Group rows with the same value so aggregate functions are applied per group." },
+        { "name": "HAVING", "syntax": "GROUP BY col HAVING COUNT(*) > 5", "definition": "Filter groups after aggregation — like WHERE but for grouped results." },
+        { "name": "GROUP BY multiple", "syntax": "GROUP BY col1, col2", "definition": "Group by a combination of columns — each unique pair becomes its own group." },
+        { "name": "COUNT DISTINCT", "syntax": "SELECT COUNT(DISTINCT col) FROM table", "definition": "Count the number of unique non-null values in a column." }
+      ]
+    },
+    {
+      "category": "Joins",
+      "items": [
+        { "name": "INNER JOIN", "syntax": "SELECT * FROM a\nINNER JOIN b ON a.id = b.a_id", "definition": "Return only rows that have a match in both tables." },
+        { "name": "LEFT JOIN", "syntax": "SELECT * FROM a\nLEFT JOIN b ON a.id = b.a_id", "definition": "Return all rows from the left table, with matched rows from the right. NULLs where no match." },
+        { "name": "RIGHT JOIN", "syntax": "SELECT * FROM a\nRIGHT JOIN b ON a.id = b.a_id", "definition": "Return all rows from the right table, with matched rows from the left. NULLs where no match." },
+        { "name": "FULL OUTER JOIN", "syntax": "SELECT * FROM a\nFULL OUTER JOIN b ON a.id = b.a_id", "definition": "Return all rows from both tables, with NULLs where there is no match on either side." },
+        { "name": "CROSS JOIN", "syntax": "SELECT * FROM a CROSS JOIN b", "definition": "Return every combination of rows from both tables (Cartesian product)." },
+        { "name": "SELF JOIN", "syntax": "SELECT a.name, b.name\nFROM employees a\nJOIN employees b ON a.manager_id = b.id", "definition": "Join a table to itself — useful for hierarchical or comparative queries." },
+        { "name": "Multiple joins", "syntax": "FROM a\nJOIN b ON a.id = b.a_id\nJOIN c ON b.id = c.b_id", "definition": "Chain joins across three or more tables in one query." }
+      ]
+    },
+    {
+      "category": "Subqueries",
+      "items": [
+        { "name": "Subquery (WHERE)", "syntax": "SELECT * FROM orders\nWHERE customer_id IN (\n  SELECT id FROM customers WHERE city = 'NYC'\n)", "definition": "Use the result of an inner query as a filter in the outer query." },
+        { "name": "Subquery (FROM)", "syntax": "SELECT * FROM (\n  SELECT col, COUNT(*) AS n FROM t GROUP BY col\n) AS sub\nWHERE n > 5", "definition": "Use a query result as a derived table — must be given an alias." },
+        { "name": "Correlated subquery", "syntax": "SELECT * FROM orders o\nWHERE amount > (\n  SELECT AVG(amount) FROM orders WHERE customer_id = o.customer_id\n)", "definition": "A subquery that references columns from the outer query — re-runs for each outer row." },
+        { "name": "Scalar subquery", "syntax": "SELECT name, (SELECT MAX(score) FROM scores WHERE user_id = u.id) AS top\nFROM users u", "definition": "A subquery in the SELECT list that returns a single value per row." }
+      ]
+    },
+    {
+      "category": "CTEs",
+      "items": [
+        { "name": "WITH (CTE)", "syntax": "WITH cte AS (\n  SELECT col, COUNT(*) AS n\n  FROM table\n  GROUP BY col\n)\nSELECT * FROM cte WHERE n > 10", "definition": "Common Table Expression — a named temporary result set that can be referenced in the main query like a table." },
+        { "name": "Multiple CTEs", "syntax": "WITH a AS (\n  SELECT ...\n),\nb AS (\n  SELECT ... FROM a\n)\nSELECT * FROM b", "definition": "Chain multiple CTEs — later ones can reference earlier ones." },
+        { "name": "Recursive CTE", "syntax": "WITH RECURSIVE cte AS (\n  SELECT id, parent_id FROM tree WHERE parent_id IS NULL\n  UNION ALL\n  SELECT t.id, t.parent_id FROM tree t JOIN cte ON t.parent_id = cte.id\n)\nSELECT * FROM cte", "definition": "Self-referencing CTE used to traverse hierarchical data like org charts or category trees." }
+      ]
+    },
+    {
+      "category": "Window Functions",
+      "items": [
+        { "name": "ROW_NUMBER", "syntax": "ROW_NUMBER() OVER (ORDER BY col)", "definition": "Assign a unique sequential number to each row in the result set." },
+        { "name": "RANK", "syntax": "RANK() OVER (ORDER BY score DESC)", "definition": "Rank rows — tied rows get the same rank, and the next rank is skipped." },
+        { "name": "DENSE_RANK", "syntax": "DENSE_RANK() OVER (ORDER BY score DESC)", "definition": "Rank rows — tied rows get the same rank, but no ranks are skipped." },
+        { "name": "PARTITION BY", "syntax": "ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC)", "definition": "Reset the window function for each group — like GROUP BY but without collapsing rows." },
+        { "name": "SUM (running total)", "syntax": "SUM(amount) OVER (ORDER BY date ROWS UNBOUNDED PRECEDING)", "definition": "Calculate a cumulative sum — adds up all previous rows up to the current one." },
+        { "name": "LAG", "syntax": "LAG(col, 1) OVER (ORDER BY date)", "definition": "Access the value from the previous row in the result set." },
+        { "name": "LEAD", "syntax": "LEAD(col, 1) OVER (ORDER BY date)", "definition": "Access the value from the next row in the result set." },
+        { "name": "FIRST_VALUE", "syntax": "FIRST_VALUE(col) OVER (PARTITION BY group ORDER BY date)", "definition": "Return the first value in the window frame for each partition." },
+        { "name": "LAST_VALUE", "syntax": "LAST_VALUE(col) OVER (PARTITION BY group ORDER BY date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)", "definition": "Return the last value in the window frame. Requires explicit frame clause for correct results." },
+        { "name": "NTILE", "syntax": "NTILE(4) OVER (ORDER BY score DESC)", "definition": "Divide rows into n equal buckets and assign a bucket number to each row." }
+      ]
+    },
+    {
+      "category": "Set Operations",
+      "items": [
+        { "name": "UNION", "syntax": "SELECT col FROM a\nUNION\nSELECT col FROM b", "definition": "Combine results of two queries, removing duplicate rows." },
+        { "name": "UNION ALL", "syntax": "SELECT col FROM a\nUNION ALL\nSELECT col FROM b", "definition": "Combine results of two queries, keeping all rows including duplicates." },
+        { "name": "INTERSECT", "syntax": "SELECT col FROM a\nINTERSECT\nSELECT col FROM b", "definition": "Return only rows that appear in both result sets." },
+        { "name": "EXCEPT", "syntax": "SELECT col FROM a\nEXCEPT\nSELECT col FROM b", "definition": "Return rows from the first query that do not appear in the second." }
+      ]
+    },
+    {
+      "category": "Insert, Update, Delete",
+      "items": [
+        { "name": "INSERT", "syntax": "INSERT INTO table (col1, col2)\nVALUES ('a', 1)", "definition": "Add a new row to a table." },
+        { "name": "INSERT multiple", "syntax": "INSERT INTO table (col1, col2)\nVALUES ('a', 1), ('b', 2), ('c', 3)", "definition": "Insert multiple rows in a single statement." },
+        { "name": "INSERT SELECT", "syntax": "INSERT INTO table (col1, col2)\nSELECT col1, col2 FROM other_table", "definition": "Populate a table from the results of a query." },
+        { "name": "UPDATE", "syntax": "UPDATE table SET col1 = 'new'\nWHERE id = 1", "definition": "Modify existing rows that match a condition." },
+        { "name": "UPDATE multiple cols", "syntax": "UPDATE table\nSET col1 = 'a', col2 = 10\nWHERE id = 1", "definition": "Update several columns at once in the same statement." },
+        { "name": "DELETE", "syntax": "DELETE FROM table WHERE id = 1", "definition": "Remove rows matching a condition. Omit WHERE to delete all rows." },
+        { "name": "TRUNCATE", "syntax": "TRUNCATE TABLE table", "definition": "Remove all rows from a table quickly — faster than DELETE, not logged per-row." }
+      ]
+    },
+    {
+      "category": "Table DDL",
+      "items": [
+        { "name": "CREATE TABLE", "syntax": "CREATE TABLE users (\n  id   INT PRIMARY KEY,\n  name VARCHAR(100) NOT NULL,\n  age  INT\n)", "definition": "Create a new table with defined columns and data types." },
+        { "name": "DROP TABLE", "syntax": "DROP TABLE table", "definition": "Permanently delete a table and all its data." },
+        { "name": "DROP IF EXISTS", "syntax": "DROP TABLE IF EXISTS table", "definition": "Drop a table only if it exists — prevents an error if it doesn't." },
+        { "name": "ALTER — add column", "syntax": "ALTER TABLE table ADD COLUMN email VARCHAR(255)", "definition": "Add a new column to an existing table." },
+        { "name": "ALTER — drop column", "syntax": "ALTER TABLE table DROP COLUMN email", "definition": "Remove a column from an existing table." },
+        { "name": "ALTER — rename column", "syntax": "ALTER TABLE table RENAME COLUMN old TO new", "definition": "Rename a column without changing its data or type." },
+        { "name": "RENAME TABLE", "syntax": "ALTER TABLE old_name RENAME TO new_name", "definition": "Rename an existing table." },
+        { "name": "CREATE INDEX", "syntax": "CREATE INDEX idx_name ON table (col)", "definition": "Create an index to speed up queries that filter or sort on a column." },
+        { "name": "CREATE UNIQUE INDEX", "syntax": "CREATE UNIQUE INDEX idx ON table (col)", "definition": "Create an index that also enforces uniqueness on the column." }
+      ]
+    },
+    {
+      "category": "Constraints",
+      "items": [
+        { "name": "PRIMARY KEY", "syntax": "id INT PRIMARY KEY", "definition": "Uniquely identifies each row. Implies NOT NULL and UNIQUE." },
+        { "name": "FOREIGN KEY", "syntax": "FOREIGN KEY (col) REFERENCES other_table(id)", "definition": "Enforce referential integrity — col must match a value in the referenced table." },
+        { "name": "UNIQUE", "syntax": "email VARCHAR(255) UNIQUE", "definition": "Ensure all values in a column are distinct." },
+        { "name": "NOT NULL", "syntax": "name VARCHAR(100) NOT NULL", "definition": "Prevent NULL values from being inserted into a column." },
+        { "name": "DEFAULT", "syntax": "status VARCHAR(20) DEFAULT 'active'", "definition": "Set a fallback value used when no value is supplied on insert." },
+        { "name": "CHECK", "syntax": "age INT CHECK (age >= 0)", "definition": "Reject rows where the column value fails a condition." }
+      ]
+    },
+    {
+      "category": "Conditional & NULL",
+      "items": [
+        { "name": "CASE WHEN", "syntax": "CASE\n  WHEN score >= 90 THEN 'A'\n  WHEN score >= 80 THEN 'B'\n  ELSE 'C'\nEND", "definition": "Return different values based on conditions — like an if/else in SQL." },
+        { "name": "CASE (simple)", "syntax": "CASE status\n  WHEN 'active'   THEN 1\n  WHEN 'inactive' THEN 0\n  ELSE NULL\nEND", "definition": "Match a column against specific values and return a result for each match." },
+        { "name": "COALESCE", "syntax": "COALESCE(col1, col2, 'default')", "definition": "Return the first non-NULL value from the list — great for fallback values." },
+        { "name": "NULLIF", "syntax": "NULLIF(col, 0)", "definition": "Return NULL if both arguments are equal, otherwise return the first argument. Useful to avoid division by zero." },
+        { "name": "IIF / IF", "syntax": "IIF(col > 0, 'positive', 'other')", "definition": "Inline conditional (SQL Server / Access). Use CASE WHEN for broader compatibility." }
+      ]
+    },
+    {
+      "category": "String Functions",
+      "items": [
+        { "name": "UPPER / LOWER", "syntax": "UPPER(col)  /  LOWER(col)", "definition": "Convert a string to all uppercase or all lowercase." },
+        { "name": "LENGTH / LEN", "syntax": "LENGTH(col)  /  LEN(col)", "definition": "Return the number of characters in a string." },
+        { "name": "TRIM", "syntax": "TRIM(col)", "definition": "Remove leading and trailing whitespace from a string." },
+        { "name": "SUBSTRING", "syntax": "SUBSTRING(col, 1, 5)", "definition": "Extract part of a string — start position and length." },
+        { "name": "CONCAT", "syntax": "CONCAT(first, ' ', last)", "definition": "Join two or more strings together." },
+        { "name": "REPLACE", "syntax": "REPLACE(col, 'old', 'new')", "definition": "Replace all occurrences of a substring within a string." },
+        { "name": "LIKE pattern", "syntax": "LIKE '%keyword%'", "definition": "% matches any sequence of characters; _ matches exactly one character." },
+        { "name": "POSITION / CHARINDEX", "syntax": "POSITION('a' IN col)", "definition": "Return the position of a substring within a string (1-based). Returns 0 if not found." },
+        { "name": "LEFT / RIGHT", "syntax": "LEFT(col, 3)  /  RIGHT(col, 3)", "definition": "Return the first or last n characters of a string." }
+      ]
+    },
+    {
+      "category": "Date Functions",
+      "items": [
+        { "name": "NOW / GETDATE", "syntax": "NOW()  /  GETDATE()", "definition": "Return the current date and time. NOW() is standard SQL / PostgreSQL; GETDATE() is SQL Server." },
+        { "name": "CURRENT_DATE", "syntax": "CURRENT_DATE", "definition": "Return today's date without the time component." },
+        { "name": "DATE_PART / EXTRACT", "syntax": "EXTRACT(YEAR FROM col)\nDATE_PART('month', col)", "definition": "Pull a specific part (year, month, day, hour) out of a date value." },
+        { "name": "DATE_TRUNC", "syntax": "DATE_TRUNC('month', col)", "definition": "Truncate a date to the start of a period (month, week, year, etc.)." },
+        { "name": "DATEDIFF", "syntax": "DATEDIFF(day, start_date, end_date)", "definition": "Return the difference between two dates in the specified unit (SQL Server / MySQL)." },
+        { "name": "DATE_ADD / INTERVAL", "syntax": "col + INTERVAL '7 days'", "definition": "Add a time interval to a date value." },
+        { "name": "CAST to date", "syntax": "CAST('2024-01-01' AS DATE)", "definition": "Convert a string or timestamp to a date type." },
+        { "name": "FORMAT date", "syntax": "TO_CHAR(col, 'YYYY-MM-DD')", "definition": "Format a date as a string in a specific pattern (PostgreSQL). Use FORMAT() in SQL Server." }
+      ]
+    },
+    {
+      "category": "Numeric Functions",
+      "items": [
+        { "name": "ROUND", "syntax": "ROUND(col, 2)", "definition": "Round a number to a specified number of decimal places." },
+        { "name": "FLOOR / CEILING", "syntax": "FLOOR(col)  /  CEILING(col)", "definition": "Round down to the nearest integer or up to the nearest integer." },
+        { "name": "ABS", "syntax": "ABS(col)", "definition": "Return the absolute (positive) value of a number." },
+        { "name": "MOD", "syntax": "MOD(col, 2)  or  col % 2", "definition": "Return the remainder of a division." },
+        { "name": "POWER", "syntax": "POWER(col, 3)", "definition": "Raise a number to a specified power." },
+        { "name": "SQRT", "syntax": "SQRT(col)", "definition": "Return the square root of a number." },
+        { "name": "CAST numeric", "syntax": "CAST(col AS DECIMAL(10,2))", "definition": "Convert a value to a specific numeric type, controlling precision and scale." }
+      ]
+    },
+    {
+      "category": "Views & Transactions",
+      "items": [
+        { "name": "CREATE VIEW", "syntax": "CREATE VIEW view_name AS\nSELECT col1, col2 FROM table WHERE condition", "definition": "Save a query as a named virtual table that can be queried like a real table." },
+        { "name": "DROP VIEW", "syntax": "DROP VIEW view_name", "definition": "Delete a view (does not affect the underlying data)." },
+        { "name": "BEGIN", "syntax": "BEGIN", "definition": "Start a transaction — changes can be rolled back until committed." },
+        { "name": "COMMIT", "syntax": "COMMIT", "definition": "Permanently save all changes made in the current transaction." },
+        { "name": "ROLLBACK", "syntax": "ROLLBACK", "definition": "Undo all changes made since the transaction began." },
+        { "name": "SAVEPOINT", "syntax": "SAVEPOINT point1\nROLLBACK TO point1", "definition": "Set a named checkpoint within a transaction to partially roll back to." }
       ]
     }
   ]
