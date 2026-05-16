@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { SHEETS } from '../../../../data/cheatsheets/registry'
+import { SHEET_ICON_PATHS } from '../../../lib/sheet-icons'
 
 export const runtime     = 'edge'
 export const alt         = 'Cheat Sheet'
@@ -11,7 +12,8 @@ export default function Image({ params }: { params: { slug: string } }) {
   if (!sheet) return new ImageResponse(<div>Not found</div>, size)
 
   const { headline, tagline, color } = sheet.data
-  const accent = `#${color}`
+  const accent   = `#${color}`
+  const iconPath = SHEET_ICON_PATHS[params.slug] ?? null
 
   return new ImageResponse(
     (
@@ -22,9 +24,8 @@ export default function Image({ params }: { params: { slug: string } }) {
           background: '#0d0d0f',
           display: 'flex',
           flexDirection: 'column',
-          padding: '0',
+          padding: 0,
           fontFamily: 'system-ui, -apple-system, sans-serif',
-          position: 'relative',
         }}
       >
         {/* Top accent bar */}
@@ -41,22 +42,8 @@ export default function Image({ params }: { params: { slug: string } }) {
           }}
         >
           {/* Top label */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-            }}
-          >
-            {/* Color dot */}
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: '50%',
-                background: accent,
-              }}
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ width: 10, height: 10, borderRadius: '50%', background: accent }} />
             <span
               style={{
                 color: accent,
@@ -70,18 +57,31 @@ export default function Image({ params }: { params: { slug: string } }) {
             </span>
           </div>
 
-          {/* Main headline */}
+          {/* Main headline row: icon + text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <div
-              style={{
-                color: '#ffffff',
-                fontSize: 80,
-                fontWeight: 800,
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-              }}
-            >
-              {headline}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+              {iconPath && (
+                <svg
+                  width={88}
+                  height={88}
+                  viewBox="0 0 24 24"
+                  fill={accent}
+                  style={{ flexShrink: 0, opacity: 0.9 }}
+                >
+                  <path d={iconPath} />
+                </svg>
+              )}
+              <div
+                style={{
+                  color: '#ffffff',
+                  fontSize: iconPath ? 72 : 80,
+                  fontWeight: 800,
+                  lineHeight: 1.05,
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {headline}
+              </div>
             </div>
             <div
               style={{

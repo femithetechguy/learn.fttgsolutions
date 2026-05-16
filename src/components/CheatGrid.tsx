@@ -22,6 +22,7 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
   const ref            = useRef<HTMLSpanElement>(null)
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const didLongPress   = useRef(false)
+  const pointerTypeRef = useRef<string>('mouse')
 
   const calcPos = () => {
     if (!ref.current) return
@@ -46,7 +47,7 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
     }
   }
 
-  // Close tooltip on outside click / tap
+  // Close tooltip on outside tap/click
   useEffect(() => {
     if (!open) return
     const handler = (e: MouseEvent) => {
@@ -59,29 +60,39 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
   return (
     <span
       ref={ref}
-      className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
-      /* Desktop hover → show tooltip */
+      // select-none prevents text-selection on long-press which would trigger the context menu
+      className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5 select-none"
+      /* Desktop: hover shows tooltip */
       onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; calcPos(); setOpen(true) }}
       onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setOpen(false) }}
-      /* Mobile long-press → show tooltip */
       onPointerDown={(e) => {
+        pointerTypeRef.current = e.pointerType
         if (e.pointerType === 'mouse') return
+        // Mobile: long-press = copy
         didLongPress.current = false
         longPressTimer.current = setTimeout(() => {
           didLongPress.current = true
           calcPos()
-          setOpen(true)
+          copy()
         }, LONG_PRESS_MS)
       }}
-      /* Cancel long-press if finger moves (scrolling) */
+      // Cancel long-press if finger moves (user is scrolling)
       onPointerMove={(e) => { if (e.pointerType !== 'mouse') cancelLongPress() }}
       onPointerUp={cancelLongPress}
       onPointerCancel={cancelLongPress}
-      /* Click: copy on tap; skip if long-press already handled it */
+      // Suppress browser context menu that appears on long-press
+      onContextMenu={(e) => e.preventDefault()}
       onClick={() => {
-        if (didLongPress.current) { didLongPress.current = false; return }
-        calcPos()
-        copy()
+        if (pointerTypeRef.current !== 'mouse') {
+          // Mobile tap = toggle definition tooltip
+          if (didLongPress.current) { didLongPress.current = false; return }
+          calcPos()
+          setOpen(prev => !prev)
+        } else {
+          // Desktop click = copy
+          calcPos()
+          copy()
+        }
       }}
     >
       <span className="font-mono text-xs uppercase tracking-wider text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
@@ -92,7 +103,7 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
         : <Copy size={10} className="shrink-0 text-text-muted opacity-40 group-hover:opacity-80 group-hover:text-text-secondary transition-colors duration-200" />
       }
 
-      {/* Definition tooltip — desktop hover only */}
+      {/* Definition tooltip */}
       {open && !copied && pos && typeof window !== 'undefined' && createPortal(
         <span
           className="fixed z-[9999] w-80 bg-bg-elevated border border-white/20 rounded-sm shadow-2xl pointer-events-none overflow-hidden"
@@ -151,7 +162,7 @@ export default function CheatGrid({ categories, columns = 2 }: CheatGridProps) {
     <div>
       {/* Interaction hint — adapts to touch vs pointer device */}
       <p className="font-sans text-xs text-text-muted mb-6">
-        <span className="[@media(hover:none)]:inline hidden">Tap to copy &middot; Hold for definition</span>
+        <span className="[@media(hover:none)]:inline hidden">Tap for definition &middot; Hold to copy</span>
         <span className="[@media(hover:hover)]:inline hidden">Hover for definition &middot; Click to copy</span>
       </p>
 
