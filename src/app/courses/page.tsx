@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { ICON_MAP } from '@/components/FilterBar'
 import FavoriteButton from '@/components/FavoriteButton'
+import DataBiIntroPin from '@/components/DataBiIntroPin'
 import content from '@/lib/content'
 import coursesData from '@/lib/courses'
 
@@ -77,6 +78,9 @@ export default function CoursesPage() {
 
           {filtered.length === 0 && <EmptyState query={search || undefined} />}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {filter === 'Data & BI' && (
+              <DataBiIntroPin courseCount={COURSES.filter(c => c.pillar === 'Data & BI').length} />
+            )}
             {filtered.map(course => {
               const Icon = course.Icon
               return (

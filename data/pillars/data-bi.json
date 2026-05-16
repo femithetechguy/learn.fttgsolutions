@@ -1,0 +1,48 @@
+{
+  "pillarLabel": "Data & BI",
+  "headline": "Data & Business Intelligence",
+  "tagline": "70% Business Understanding · 30% Tools.",
+  "description": "Learn to translate raw data into real decisions. We cover the full modern data stack — from SQL fundamentals and Python automation to Power BI dashboards deployed in production.",
+  "stack": [
+    {
+      "category": "BI & Dashboarding",
+      "tools": [
+        { "name": "Power BI",  "slug": "powerbi",        "color": "F2C811" },
+        { "name": "Looker",    "slug": "looker",          "color": "4285F4" },
+        { "name": "Metabase",  "slug": "metabase",        "color": "509EE3" }
+      ]
+    },
+    {
+      "category": "Languages",
+      "tools": [
+        { "name": "Python",    "slug": "python",          "color": "FFD43B" },
+        { "name": "R",         "slug": "r",               "color": "276DC3" },
+        { "name": "SQL",       "slug": "postgresql",      "color": "4169E1" }
+      ]
+    },
+    {
+      "category": "Cloud Warehouses",
+      "tools": [
+        { "name": "Snowflake", "slug": "snowflake",       "color": "29B5E8" },
+        { "name": "BigQuery",  "slug": "googlebigquery",  "color": "669DF6" },
+        { "name": "Databricks","slug": "databricks",      "color": "FF3621" }
+      ]
+    },
+    {
+      "category": "Python Ecosystem",
+      "tools": [
+        { "name": "Pandas",    "slug": "pandas",          "color": "AA7CE0" },
+        { "name": "Jupyter",   "slug": "jupyter",         "color": "F37626" },
+        { "name": "Plotly",    "slug": "plotly",          "color": "7A76FF" }
+      ]
+    },
+    {
+      "category": "AI Analytics",
+      "tools": [
+        { "name": "Claude",      "slug": "claude",        "color": "D97757" },
+        { "name": "Google Colab","slug": "googlecolab",   "color": "F9AB00" },
+        { "name": "Airflow",     "slug": "apacheairflow", "color": "017CEE" }
+      ]
+    }
+  ]
+}
