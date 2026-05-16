@@ -73,7 +73,7 @@ export default function CheatsheetPage() {
                   <div className="flex items-center gap-2 shrink-0 mt-2">
                     <button
                       onClick={handleShare}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
                       title="Share this cheat sheet"
                     >
                       {shared
@@ -83,7 +83,7 @@ export default function CheatsheetPage() {
                     </button>
                     <Link
                       href={`/cheatsheets/${slug}/print`}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
                       title="Print this cheat sheet"
                     >
                       <Printer size={13} />
@@ -116,8 +116,8 @@ export default function CheatsheetPage() {
                     onClick={() => setQuery('')}
                     className={`inline-flex items-center gap-1.5 font-sans text-sm font-semibold uppercase px-4 py-2 rounded-sm border transition-all duration-150 ${
                       isActive
-                        ? 'text-bg-primary border-transparent'
-                        : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-text-primary'
+                        ? 'text-bg-primary border-transparent bevel-active'
+                        : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-text-primary bevel-sm'
                     }`}
                     style={isActive ? { background: c, borderColor: c } : {}}
                   >

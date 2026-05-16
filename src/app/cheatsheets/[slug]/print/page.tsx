@@ -43,6 +43,7 @@ export default function PrintPage() {
           <button
             onClick={() => window.print()}
             className="flex items-center gap-1.5 px-4 py-2 bg-black text-white text-sm rounded font-medium hover:bg-gray-800 transition-colors"
+            style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.25)' }}
           >
             <Printer size={14} />
             Print

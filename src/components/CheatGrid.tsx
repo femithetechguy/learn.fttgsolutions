@@ -61,7 +61,7 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
     <span
       ref={ref}
       // select-none prevents text-selection on long-press which would trigger the context menu
-      className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5 select-none"
+      className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5 select-none bevel-sm"
       /* Desktop: hover shows tooltip */
       onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; calcPos(); setOpen(true) }}
       onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setOpen(false) }}
