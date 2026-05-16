@@ -1,32 +1,41 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { SI_MAP, CUSTOM_MAP } from '@/lib/brand-icons'
 
 interface StackTool     { name: string; slug: string; color: string; definition?: string }
 interface StackCategory { category: string; tools: StackTool[] }
 
+interface TooltipPos {
+  top:       number
+  left:      number
+  placement: 'top' | 'bottom'
+}
+
 function ToolChip({ slug, name, color, definition }: StackTool) {
   const path = (slug ? SI_MAP[slug]?.path : undefined) ?? (slug ? CUSTOM_MAP[slug] : undefined)
-  const [open, setOpen]   = useState(false)
-  const [above, setAbove] = useState(true)
+  const [open, setOpen] = useState(false)
+  const [pos,  setPos]  = useState<TooltipPos | null>(null)
   const ref = useRef<HTMLSpanElement>(null)
 
-  const handleOpen = () => {
-    if (ref.current) {
-      const { top } = ref.current.getBoundingClientRect()
-      setAbove(top > 90)
-    }
-    setOpen(true)
+  const calcPos = () => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    setPos({
+      placement: rect.top > 90 ? 'top' : 'bottom',
+      top:  rect.top > 90 ? rect.top - 8 : rect.bottom + 8,
+      left: rect.left + rect.width / 2,
+    })
   }
 
   return (
     <span
       ref={ref}
       className="group relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-default transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
-      onMouseEnter={handleOpen}
+      onMouseEnter={() => { calcPos(); setOpen(true) }}
       onMouseLeave={() => setOpen(false)}
-      onClick={() => { handleOpen(); setOpen(v => !v) }}
+      onClick={() => { calcPos(); setOpen(v => !v) }}
     >
       {path && (
         <svg
@@ -41,13 +50,24 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
           <path d={path} />
         </svg>
       )}
-      <span className="font-sans text-xs text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">{name}</span>
+      <span className="font-sans text-xs text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
+        {name}
+      </span>
 
-      {definition && open && (
-        <span className={`pointer-events-none absolute left-1/2 -translate-x-1/2 w-72 px-3 py-2 bg-bg-elevated border border-white/15 rounded-sm font-sans text-xs text-text-primary z-50 shadow-xl leading-relaxed whitespace-normal text-left
-          ${above ? 'bottom-full mb-2' : 'top-full mt-2'}`}>
+      {definition && open && pos && typeof window !== 'undefined' && createPortal(
+        <span
+          className="fixed z-[9999] w-72 px-3 py-2 bg-bg-elevated border border-white/20 rounded-sm font-sans text-xs text-text-primary shadow-2xl leading-relaxed whitespace-normal text-left pointer-events-none"
+          style={{
+            top:       pos.top,
+            left:      pos.left,
+            transform: pos.placement === 'top'
+              ? 'translateX(-50%) translateY(-100%)'
+              : 'translateX(-50%)',
+          }}
+        >
           {definition}
-        </span>
+        </span>,
+        document.body
       )}
     </span>
   )
