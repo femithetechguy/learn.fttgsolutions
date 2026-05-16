@@ -5,43 +5,169 @@
   "description": "Learn to translate raw data into real decisions. We cover the full modern data stack — from SQL fundamentals and Python automation to Power BI dashboards deployed in production.",
   "stack": [
     {
-      "category": "BI & Dashboarding",
+      "category": "Spreadsheets",
       "tools": [
-        { "name": "Power BI",  "slug": "powerbi",        "color": "F2C811" },
-        { "name": "Looker",    "slug": "looker",          "color": "4285F4" },
-        { "name": "Metabase",  "slug": "metabase",        "color": "509EE3" }
+        { "name": "Excel",         "slug": "",              "color": "217346" },
+        { "name": "Google Sheets", "slug": "googlesheets",  "color": "34A853" },
+        { "name": "Airtable",      "slug": "airtable",      "color": "18BFFF" }
       ]
     },
     {
-      "category": "Languages",
+      "category": "SQL Databases",
       "tools": [
-        { "name": "Python",    "slug": "python",          "color": "FFD43B" },
-        { "name": "R",         "slug": "r",               "color": "276DC3" },
-        { "name": "SQL",       "slug": "postgresql",      "color": "4169E1" }
+        { "name": "PostgreSQL",  "slug": "postgresql",  "color": "4169E1" },
+        { "name": "MySQL",       "slug": "mysql",        "color": "4479A1" },
+        { "name": "SQL Server",  "slug": "",             "color": "CC2927" },
+        { "name": "Oracle",      "slug": "",             "color": "F80000" },
+        { "name": "SQLite",      "slug": "sqlite",       "color": "6BB5FF" }
       ]
     },
     {
       "category": "Cloud Warehouses",
       "tools": [
-        { "name": "Snowflake", "slug": "snowflake",       "color": "29B5E8" },
-        { "name": "BigQuery",  "slug": "googlebigquery",  "color": "669DF6" },
-        { "name": "Databricks","slug": "databricks",      "color": "FF3621" }
+        { "name": "Snowflake",       "slug": "snowflake",        "color": "29B5E8" },
+        { "name": "BigQuery",        "slug": "googlebigquery",   "color": "669DF6" },
+        { "name": "Amazon Redshift", "slug": "",                 "color": "8C4FFF" },
+        { "name": "Azure Synapse",   "slug": "",                 "color": "0078D4" },
+        { "name": "Databricks SQL",  "slug": "databricks",       "color": "FF3621" }
       ]
     },
     {
-      "category": "Python Ecosystem",
+      "category": "Data Lake / Lakehouse",
       "tools": [
-        { "name": "Pandas",    "slug": "pandas",          "color": "AA7CE0" },
-        { "name": "Jupyter",   "slug": "jupyter",         "color": "F37626" },
-        { "name": "Plotly",    "slug": "plotly",          "color": "7A76FF" }
+        { "name": "Databricks",     "slug": "databricks",  "color": "FF3621" },
+        { "name": "Delta Lake",     "slug": "",            "color": "00ADD4" },
+        { "name": "Apache Iceberg", "slug": "",            "color": "4A90D9" },
+        { "name": "Amazon S3",      "slug": "",            "color": "E67F28" },
+        { "name": "Azure Data Lake","slug": "",            "color": "0078D4" }
+      ]
+    },
+    {
+      "category": "Data Ingestion",
+      "tools": [
+        { "name": "Fivetran",   "slug": "",          "color": "0073FF" },
+        { "name": "Airbyte",    "slug": "airbyte",   "color": "615EFF" },
+        { "name": "Stitch",     "slug": "",          "color": "7B9FFF" },
+        { "name": "Matillion",  "slug": "matillion", "color": "19E57F" },
+        { "name": "Hevo Data",  "slug": "",          "color": "FF5B2E" }
+      ]
+    },
+    {
+      "category": "Data Transformation",
+      "tools": [
+        { "name": "dbt",      "slug": "",  "color": "FF694A" },
+        { "name": "Dataform", "slug": "",  "color": "4A8CF7" },
+        { "name": "Coalesce", "slug": "",  "color": "6B56FF" },
+        { "name": "SQLMesh",  "slug": "",  "color": "5B7CFA" },
+        { "name": "Alteryx",  "slug": "",  "color": "0076BD" }
+      ]
+    },
+    {
+      "category": "Programming Languages",
+      "tools": [
+        { "name": "SQL",    "slug": "postgresql",  "color": "4169E1" },
+        { "name": "Python", "slug": "python",      "color": "FFD43B" },
+        { "name": "R",      "slug": "r",           "color": "276DC3" },
+        { "name": "Julia",  "slug": "julia",       "color": "9558B2" }
+      ]
+    },
+    {
+      "category": "Python Libraries",
+      "tools": [
+        { "name": "Pandas",   "slug": "pandas",        "color": "AA7CE0" },
+        { "name": "NumPy",    "slug": "numpy",          "color": "4DABCF" },
+        { "name": "Polars",   "slug": "polars",         "color": "0075FF" },
+        { "name": "PySpark",  "slug": "apachespark",   "color": "E25A1C" },
+        { "name": "DuckDB",   "slug": "duckdb",         "color": "E6CE00" }
+      ]
+    },
+    {
+      "category": "BI & Dashboarding",
+      "tools": [
+        { "name": "Power BI",        "slug": "powerbi",         "color": "F2C811" },
+        { "name": "Tableau",         "slug": "",                "color": "E97627" },
+        { "name": "Looker Studio",   "slug": "looker",          "color": "4285F4" },
+        { "name": "Qlik Sense",      "slug": "qlik",            "color": "009848" },
+        { "name": "Metabase",        "slug": "metabase",        "color": "509EE3" },
+        { "name": "Apache Superset", "slug": "apachesuperset",  "color": "20A6C9" }
+      ]
+    },
+    {
+      "category": "Visualization Libs",
+      "tools": [
+        { "name": "Matplotlib", "slug": "",        "color": "11557C" },
+        { "name": "Seaborn",    "slug": "",        "color": "4C72B0" },
+        { "name": "Plotly",     "slug": "plotly",  "color": "7A76FF" },
+        { "name": "Altair",     "slug": "",        "color": "4E97CA" },
+        { "name": "Bokeh",      "slug": "",        "color": "FC8100" }
+      ]
+    },
+    {
+      "category": "Product Analytics",
+      "tools": [
+        { "name": "Mixpanel",         "slug": "mixpanel",        "color": "7856FF" },
+        { "name": "Amplitude",        "slug": "",                "color": "1C86EE" },
+        { "name": "PostHog",          "slug": "posthog",         "color": "FF813F" },
+        { "name": "Heap",             "slug": "",                "color": "FF5F5F" },
+        { "name": "Google Analytics", "slug": "googleanalytics", "color": "E37400" }
+      ]
+    },
+    {
+      "category": "Data Notebooks",
+      "tools": [
+        { "name": "Jupyter",      "slug": "jupyter",      "color": "F37626" },
+        { "name": "Google Colab", "slug": "googlecolab",  "color": "F9AB00" },
+        { "name": "Hex",          "slug": "",             "color": "7C5CBF" },
+        { "name": "Deepnote",     "slug": "deepnote",     "color": "3793EF" },
+        { "name": "Observable",   "slug": "observable",   "color": "7CC4F8" }
+      ]
+    },
+    {
+      "category": "Workflow Orchestration",
+      "tools": [
+        { "name": "Apache Airflow", "slug": "apacheairflow", "color": "017CEE" },
+        { "name": "Dagster",        "slug": "",              "color": "7B3FE4" },
+        { "name": "Prefect",        "slug": "prefect",       "color": "8A9FFF" },
+        { "name": "Mage",           "slug": "",              "color": "7B68EE" }
+      ]
+    },
+    {
+      "category": "Data Quality",
+      "tools": [
+        { "name": "Great Expectations", "slug": "", "color": "FF5A5F" },
+        { "name": "Soda",               "slug": "", "color": "2BA3EC" },
+        { "name": "Monte Carlo",        "slug": "", "color": "4B6BFB" },
+        { "name": "Anomalo",            "slug": "", "color": "FF6B35" },
+        { "name": "Telmai",             "slug": "", "color": "5B67CA" }
+      ]
+    },
+    {
+      "category": "Data Governance",
+      "tools": [
+        { "name": "Atlan",             "slug": "", "color": "5E6AD2" },
+        { "name": "Alation",           "slug": "", "color": "00B4D8" },
+        { "name": "Collibra",          "slug": "", "color": "0070C0" },
+        { "name": "Microsoft Purview", "slug": "", "color": "0078D4" },
+        { "name": "DataHub",           "slug": "", "color": "20B2AA" }
+      ]
+    },
+    {
+      "category": "Reverse ETL",
+      "tools": [
+        { "name": "Hightouch",   "slug": "", "color": "5865F2" },
+        { "name": "Census",      "slug": "", "color": "06B6D4" },
+        { "name": "RudderStack", "slug": "", "color": "3DBA90" },
+        { "name": "Grouparoo",   "slug": "", "color": "8B72E0" }
       ]
     },
     {
       "category": "AI Analytics",
       "tools": [
-        { "name": "Claude",      "slug": "claude",        "color": "D97757" },
-        { "name": "Google Colab","slug": "googlecolab",   "color": "F9AB00" },
-        { "name": "Airflow",     "slug": "apacheairflow", "color": "017CEE" }
+        { "name": "ChatGPT",          "slug": "",       "color": "74AA9C" },
+        { "name": "Claude",           "slug": "claude", "color": "D97757" },
+        { "name": "Gemini",           "slug": "",       "color": "8E75B2" },
+        { "name": "Power BI Copilot", "slug": "",       "color": "F2C811" },
+        { "name": "ThoughtSpot Sage", "slug": "",       "color": "00A3E0" }
       ]
     }
   ]
