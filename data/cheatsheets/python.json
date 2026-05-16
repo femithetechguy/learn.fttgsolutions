@@ -2,13 +2,225 @@
   "label": "Python",
   "headline": "Python Cheat Sheet",
   "tagline": "Read. Transform. Automate.",
-  "description": "Quick reference for Python syntax and data-focused libraries — pandas, built-ins, string methods, and control flow.",
+  "description": "Quick reference for Python syntax and built-ins — variables, strings, lists, dicts, loops, functions, classes, file I/O, and more.",
   "color": "FFD43B",
   "categories": [
     {
-      "category": "Core Built-ins",
+      "category": "Getting Started",
       "items": [
-        { "name": "print()", "syntax": "print(value)", "definition": "Outputs a value to the console." }
+        { "name": "print()", "syntax": "print(\"Hello, World!\")", "definition": "Output a value to the console." },
+        { "name": "Variables", "syntax": "age = 18\nname = \"John\"", "definition": "Store data without declaring a type — Python infers it automatically." },
+        { "name": "input()", "syntax": "name = input(\"Enter your name: \")", "definition": "Read a string from the user via the console." },
+        { "name": "type()", "syntax": "print(type(x))", "definition": "Return the data type of a variable." },
+        { "name": "Comment", "syntax": "# This is a comment", "definition": "Single-line comment — Python ignores everything after the #." },
+        { "name": "Multiline comment", "syntax": "\"\"\" line 1\nline 2 \"\"\"", "definition": "Triple-quoted string used as a multiline comment or docstring." }
+      ]
+    },
+    {
+      "category": "Data Types",
+      "items": [
+        { "name": "str", "syntax": "x = \"Hello\"", "definition": "Text data. Use single or double quotes interchangeably." },
+        { "name": "int", "syntax": "x = 42", "definition": "Whole numbers, positive or negative, with no decimal point." },
+        { "name": "float", "syntax": "x = 3.14", "definition": "Numbers with a decimal point." },
+        { "name": "bool", "syntax": "x = True", "definition": "Boolean value — either True or False." },
+        { "name": "list", "syntax": "x = [1, 2, 3]", "definition": "Ordered, mutable sequence — items can be added, removed, or changed." },
+        { "name": "tuple", "syntax": "x = (1, 2, 3)", "definition": "Ordered, immutable sequence — cannot be changed after creation." },
+        { "name": "dict", "syntax": "x = {\"key\": \"value\"}", "definition": "Key-value mapping — keys must be unique and hashable." },
+        { "name": "set", "syntax": "x = {1, 2, 3}", "definition": "Unordered collection of unique items." },
+        { "name": "int()", "syntax": "int(\"3\")  # → 3", "definition": "Cast a value to an integer." },
+        { "name": "float()", "syntax": "float(\"3.14\")  # → 3.14", "definition": "Cast a value to a float." },
+        { "name": "str()", "syntax": "str(42)  # → \"42\"", "definition": "Cast a value to a string." },
+        { "name": "bool()", "syntax": "bool(0)  # → False", "definition": "Cast a value to a boolean. 0, None, empty string/list/dict are all False." }
+      ]
+    },
+    {
+      "category": "Arithmetic & Operators",
+      "items": [
+        { "name": "Addition", "syntax": "10 + 30  # → 40", "definition": "Add two values." },
+        { "name": "Subtraction", "syntax": "40 - 10  # → 30", "definition": "Subtract one value from another." },
+        { "name": "Multiplication", "syntax": "50 * 5  # → 250", "definition": "Multiply two values." },
+        { "name": "Float division", "syntax": "16 / 4  # → 4.0", "definition": "Divide and always return a float." },
+        { "name": "Integer division", "syntax": "16 // 4  # → 4", "definition": "Divide and floor the result to an integer." },
+        { "name": "Modulo", "syntax": "25 % 2  # → 1", "definition": "Return the remainder of a division." },
+        { "name": "Exponentiation", "syntax": "5 ** 3  # → 125", "definition": "Raise a number to a power." },
+        { "name": "Compound assignment", "syntax": "counter += 10", "definition": "Shorthand for counter = counter + 10. Works with -, *, /, // etc." },
+        { "name": "and", "syntax": "a and b", "definition": "True only if both a and b are truthy." },
+        { "name": "or", "syntax": "a or b", "definition": "True if at least one of a or b is truthy." },
+        { "name": "not", "syntax": "not a", "definition": "Invert the boolean value of a." },
+        { "name": "is", "syntax": "x is None", "definition": "True if both variables point to the same object in memory." }
+      ]
+    },
+    {
+      "category": "Strings",
+      "items": [
+        { "name": "Index access", "syntax": "s[0]   # first char\ns[-1]  # last char", "definition": "Access a character by position. Negative indices count from the end." },
+        { "name": "Slicing", "syntax": "s[2:5]", "definition": "Extract a substring from index 2 up to (not including) index 5." },
+        { "name": "Slice from start", "syntax": "s[:4]", "definition": "Slice from the beginning up to index 3." },
+        { "name": "Slice to end", "syntax": "s[2:]", "definition": "Slice from index 2 to the end of the string." },
+        { "name": "Reverse string", "syntax": "s[::-1]", "definition": "Return a reversed copy of the string using a -1 stride." },
+        { "name": "len()", "syntax": "len(s)", "definition": "Return the number of characters in a string." },
+        { "name": "Concatenation", "syntax": "\"spam\" + \"egg\"  # → \"spamegg\"", "definition": "Join two strings end to end." },
+        { "name": "Repeat", "syntax": "\"ha\" * 3  # → \"hahaha\"", "definition": "Repeat a string n times." },
+        { "name": "in operator", "syntax": "\"spam\" in \"I like spam\"  # → True", "definition": "Test whether a substring exists inside a string." },
+        { "name": "Loop characters", "syntax": "for c in \"hello\": print(c)", "definition": "Iterate through each character in a string." },
+        { "name": "join()", "syntax": "\"-\".join([\"a\",\"b\",\"c\"])  # → \"a-b-c\"", "definition": "Concatenate a list of strings with a separator." },
+        { "name": "split()", "syntax": "\"a,b,c\".split(\",\")", "definition": "Split a string into a list on a delimiter." },
+        { "name": "strip()", "syntax": "\"  hi  \".strip()  # → \"hi\"", "definition": "Remove leading and trailing whitespace." },
+        { "name": "replace()", "syntax": "\"foo bar\".replace(\"foo\", \"baz\")", "definition": "Return a copy of the string with a substring replaced." },
+        { "name": "lower() / upper()", "syntax": "s.lower()  /  s.upper()", "definition": "Convert all characters to lowercase or uppercase." },
+        { "name": "endswith()", "syntax": "\"hello!\".endswith(\"!\")  # → True", "definition": "Return True if the string ends with the given suffix." }
+      ]
+    },
+    {
+      "category": "String Formatting",
+      "items": [
+        { "name": "f-string (basic)", "syntax": "f\"Hello, {name}!\"", "definition": "Embed a variable directly in a string. Requires Python 3.6+." },
+        { "name": "f-string (expression)", "syntax": "f\"{x} + 10 = {x + 10}\"", "definition": "Evaluate any expression inside the curly braces." },
+        { "name": "f-string (decimals)", "syntax": "f\"{3.14159:.2f}\"  # → \"3.14\"", "definition": "Format a float to a fixed number of decimal places." },
+        { "name": "f-string (zero pad)", "syntax": "f\"{n:010}\"  # → \"0000012345\"", "definition": "Pad a number with leading zeros to a given total width." },
+        { "name": "f-string (thousands)", "syntax": "f\"{1000000:,.2f}\"  # → \"1,000,000.00\"", "definition": "Format a number with comma thousand separators." },
+        { "name": "f-string (percentage)", "syntax": "f\"{0.25:.0%}\"  # → \"25%\"", "definition": "Format a float as a percentage." },
+        { "name": "f-string (binary)", "syntax": "f\"{10:b}\"  # → \"1010\"", "definition": "Format an integer as a binary string." },
+        { "name": "f-string (hex)", "syntax": "f\"{200:x}\"  # → \"c8\"", "definition": "Format an integer as a lowercase hexadecimal string." },
+        { "name": "format() method", "syntax": "\"{} is {} years old\".format(name, age)", "definition": "Inject values into a string using positional placeholders." },
+        { "name": "% formatting", "syntax": "\"%s is %d years old\" % (name, age)", "definition": "Old-style string formatting using the % operator." }
+      ]
+    },
+    {
+      "category": "Lists",
+      "items": [
+        { "name": "Create list", "syntax": "li = [1, 2, 3]", "definition": "Define a list with initial values." },
+        { "name": "From range", "syntax": "li = list(range(1, 11))", "definition": "Create a list of numbers from a range." },
+        { "name": "append()", "syntax": "li.append(4)", "definition": "Add an element to the end of the list." },
+        { "name": "extend()", "syntax": "li.extend([5, 6, 7])", "definition": "Add all elements of another list to the end." },
+        { "name": "pop()", "syntax": "li.pop()    # removes last\nli.pop(0)  # removes first", "definition": "Remove and return an element by index (default: last)." },
+        { "name": "del", "syntax": "del li[0]", "definition": "Delete an element at a specific index." },
+        { "name": "Index access", "syntax": "li[0]   # first\nli[-1]  # last", "definition": "Access an element by position. Negative indices count from the end." },
+        { "name": "Slicing", "syntax": "li[1:4]   # indices 1-3\nli[::-1]  # reversed", "definition": "Extract a sub-list using start:stop:step notation." },
+        { "name": "sort()", "syntax": "li.sort()", "definition": "Sort the list in place in ascending order." },
+        { "name": "reverse()", "syntax": "li.reverse()", "definition": "Reverse the list in place." },
+        { "name": "count()", "syntax": "li.count(3)", "definition": "Return the number of times a value appears in the list." },
+        { "name": "len()", "syntax": "len(li)", "definition": "Return the number of elements in the list." },
+        { "name": "Repeat list", "syntax": "[0] * 5  # → [0,0,0,0,0]", "definition": "Create a list by repeating elements n times." },
+        { "name": "List comprehension", "syntax": "[x**2 for x in range(10) if x % 2 == 0]", "definition": "Build a new list by applying an expression to each item, with optional filtering." },
+        { "name": "filter()", "syntax": "list(filter(lambda x: x > 0, nums))", "definition": "Return only the elements for which the function returns True." }
+      ]
+    },
+    {
+      "category": "Tuples & Sets",
+      "items": [
+        { "name": "Tuple", "syntax": "t = (1, 2, 3)", "definition": "Ordered, immutable sequence. Cannot be modified after creation." },
+        { "name": "Tuple unpack", "syntax": "a, b, c = (1, 2, 3)", "definition": "Unpack tuple values into individual variables." },
+        { "name": "Set", "syntax": "s = {1, 2, 3}", "definition": "Unordered collection of unique items — duplicates are ignored." },
+        { "name": "set.add()", "syntax": "s.add(4)", "definition": "Add a single element to the set." },
+        { "name": "set.remove()", "syntax": "s.remove(2)", "definition": "Remove an element from the set (raises KeyError if not found)." },
+        { "name": "Union", "syntax": "s1 | s2", "definition": "Return all unique elements from both sets." },
+        { "name": "Intersection", "syntax": "s1 & s2", "definition": "Return only elements that appear in both sets." },
+        { "name": "Difference", "syntax": "s1 - s2", "definition": "Return elements in s1 that are not in s2." }
+      ]
+    },
+    {
+      "category": "Dictionaries",
+      "items": [
+        { "name": "Create dict", "syntax": "d = {\"name\": \"John\", \"age\": 30}", "definition": "Define a dictionary with key-value pairs." },
+        { "name": "Access value", "syntax": "d[\"name\"]  # → \"John\"", "definition": "Retrieve a value by its key. Raises KeyError if missing." },
+        { "name": "get()", "syntax": "d.get(\"age\", 0)", "definition": "Retrieve a value by key, returning a default if the key doesn't exist." },
+        { "name": "Add / update", "syntax": "d[\"email\"] = \"j@j.com\"", "definition": "Add a new key-value pair or overwrite an existing key." },
+        { "name": "update()", "syntax": "d.update({\"city\": \"NYC\"})", "definition": "Merge another dictionary into this one." },
+        { "name": "del key", "syntax": "del d[\"age\"]", "definition": "Remove a key-value pair from the dictionary." },
+        { "name": "keys()", "syntax": "d.keys()", "definition": "Return a view of all keys in the dictionary." },
+        { "name": "values()", "syntax": "d.values()", "definition": "Return a view of all values in the dictionary." },
+        { "name": "items()", "syntax": "d.items()", "definition": "Return a view of all (key, value) pairs." },
+        { "name": "Loop dict", "syntax": "for k, v in d.items():\n  print(k, v)", "definition": "Iterate over key-value pairs." },
+        { "name": "Dict comprehension", "syntax": "{k: v*2 for k, v in d.items()}", "definition": "Build a new dictionary using an expression over existing key-value pairs." },
+        { "name": "in operator", "syntax": "\"name\" in d  # → True", "definition": "Check whether a key exists in the dictionary." }
+      ]
+    },
+    {
+      "category": "Control Flow",
+      "items": [
+        { "name": "if / elif / else", "syntax": "if x > 10:\n  ...\nelif x == 10:\n  ...\nelse:\n  ...", "definition": "Branch execution based on one or more conditions." },
+        { "name": "Ternary operator", "syntax": "result = \"a\" if a > b else \"b\"", "definition": "Assign a value based on a condition in a single line." },
+        { "name": "pass", "syntax": "if x: pass", "definition": "Do nothing — placeholder where a statement is syntactically required." }
+      ]
+    },
+    {
+      "category": "Loops",
+      "items": [
+        { "name": "for loop", "syntax": "for item in my_list:\n  print(item)", "definition": "Iterate over every item in an iterable." },
+        { "name": "while loop", "syntax": "while x < 10:\n  x += 1", "definition": "Repeat a block as long as a condition is true." },
+        { "name": "range()", "syntax": "range(5)        # 0-4\nrange(2, 8)     # 2-7\nrange(0, 10, 2) # 0,2,4,6,8", "definition": "Generate a sequence of numbers with optional start, stop, and step." },
+        { "name": "enumerate()", "syntax": "for i, val in enumerate(items):", "definition": "Loop with both the index and the value available." },
+        { "name": "zip()", "syntax": "for a, b in zip(list1, list2):", "definition": "Loop over two or more iterables in parallel." },
+        { "name": "break", "syntax": "if x == 5: break", "definition": "Exit the loop immediately." },
+        { "name": "continue", "syntax": "if x == 5: continue", "definition": "Skip the rest of the current iteration and move to the next." },
+        { "name": "for / else", "syntax": "for n in nums:\n  if n > 100: break\nelse:\n  print(\"not found\")", "definition": "The else block runs only if the loop finished without hitting a break." }
+      ]
+    },
+    {
+      "category": "Functions",
+      "items": [
+        { "name": "Define function", "syntax": "def greet(name):\n  return f\"Hello, {name}\"", "definition": "Define a reusable block of code that optionally returns a value." },
+        { "name": "Default argument", "syntax": "def add(x, y=10):\n  return x + y", "definition": "Provide a fallback value used when the argument is omitted." },
+        { "name": "*args", "syntax": "def total(*args):\n  return sum(args)", "definition": "Accept any number of positional arguments as a tuple." },
+        { "name": "**kwargs", "syntax": "def show(**kwargs):\n  print(kwargs)", "definition": "Accept any number of keyword arguments as a dictionary." },
+        { "name": "Multiple return", "syntax": "def swap(a, b):\n  return b, a\nx, y = swap(x, y)", "definition": "Return a tuple and unpack it into separate variables." },
+        { "name": "Lambda", "syntax": "double = lambda x: x * 2", "definition": "A small anonymous function defined in a single expression." },
+        { "name": "map()", "syntax": "list(map(lambda x: x*2, nums))", "definition": "Apply a function to every element of an iterable." }
+      ]
+    },
+    {
+      "category": "Classes & OOP",
+      "items": [
+        { "name": "Define class", "syntax": "class Dog:\n  def __init__(self, name):\n    self.name = name", "definition": "Define a class with a constructor that initialises instance attributes." },
+        { "name": "Instantiate", "syntax": "my_dog = Dog(\"Rex\")", "definition": "Create an instance of a class." },
+        { "name": "Method", "syntax": "def bark(self):\n  print(\"Woof!\")", "definition": "A function defined inside a class. self refers to the current instance." },
+        { "name": "Class variable", "syntax": "class Dog:\n  species = \"Canis lupus\"", "definition": "A variable shared across all instances of the class." },
+        { "name": "Inheritance", "syntax": "class Poodle(Dog):\n  pass", "definition": "Create a subclass that inherits all attributes and methods from the parent." },
+        { "name": "super()", "syntax": "super().__init__(name)", "definition": "Call a method from the parent class — commonly used in __init__." },
+        { "name": "__repr__()", "syntax": "def __repr__(self):\n  return self.name", "definition": "Define how the object is displayed as a string (e.g. in print or repr())." },
+        { "name": "Custom exception", "syntax": "class MyError(Exception):\n  pass", "definition": "Create a custom exception type by inheriting from Exception." }
+      ]
+    },
+    {
+      "category": "File Handling",
+      "items": [
+        { "name": "Read file", "syntax": "with open(\"file.txt\", \"r\") as f:\n  contents = f.read()", "definition": "Open a file and read its entire contents as a string." },
+        { "name": "Read line by line", "syntax": "with open(\"file.txt\") as f:\n  for line in f:\n    print(line)", "definition": "Iterate over each line without loading the whole file into memory." },
+        { "name": "Write file", "syntax": "with open(\"file.txt\", \"w\") as f:\n  f.write(\"hello\")", "definition": "Write a string to a file, creating it if it doesn't exist." },
+        { "name": "Write JSON", "syntax": "import json\nwith open(\"f.json\", \"w\") as f:\n  json.dump(data, f)", "definition": "Serialise a Python object to a JSON file." },
+        { "name": "Read JSON", "syntax": "with open(\"f.json\") as f:\n  data = json.load(f)", "definition": "Deserialise a JSON file back into a Python object." },
+        { "name": "Delete file", "syntax": "import os\nos.remove(\"file.txt\")", "definition": "Delete a file from the filesystem." },
+        { "name": "Check file exists", "syntax": "if os.path.exists(\"file.txt\"):\n  os.remove(\"file.txt\")", "definition": "Safely check if a file exists before acting on it." }
+      ]
+    },
+    {
+      "category": "Modules",
+      "items": [
+        { "name": "import", "syntax": "import math\nmath.sqrt(16)  # → 4.0", "definition": "Import an entire module and access its members with dot notation." },
+        { "name": "from import", "syntax": "from math import ceil, floor", "definition": "Import specific names from a module directly into the current namespace." },
+        { "name": "import as", "syntax": "import numpy as np", "definition": "Import a module under a shorter alias." },
+        { "name": "dir()", "syntax": "dir(math)", "definition": "List all attributes and functions available in a module." }
+      ]
+    },
+    {
+      "category": "Error Handling",
+      "items": [
+        { "name": "try / except", "syntax": "try:\n  x = 1 / 0\nexcept ZeroDivisionError as e:\n  print(e)", "definition": "Catch a specific exception and handle it gracefully." },
+        { "name": "Multiple exceptions", "syntax": "except (TypeError, ValueError):", "definition": "Handle several exception types with a single except clause." },
+        { "name": "else clause", "syntax": "else:\n  print(\"no error\")", "definition": "Execute this block only if no exception was raised in try." },
+        { "name": "finally clause", "syntax": "finally:\n  print(\"always runs\")", "definition": "Always execute this block — used for cleanup like closing files." },
+        { "name": "raise", "syntax": "raise ValueError(\"bad input\")", "definition": "Manually trigger an exception." }
+      ]
+    },
+    {
+      "category": "Generators & Advanced",
+      "items": [
+        { "name": "Generator function", "syntax": "def evens(n):\n  for i in range(n):\n    if i % 2 == 0: yield i", "definition": "Use yield to produce values lazily one at a time instead of building a full list." },
+        { "name": "Generator expression", "syntax": "squares = (x**2 for x in range(10))", "definition": "Compact lazy generator — like a list comprehension but uses parentheses." },
+        { "name": "heapq (min-heap)", "syntax": "import heapq\nheapq.heapify(lst)\nheapq.heappush(lst, 5)\nsmallest = heapq.heappop(lst)", "definition": "Turn a list into a min-heap. Push and pop maintain the heap property in O(log n)." },
+        { "name": "deque", "syntax": "from collections import deque\nq = deque([1,2,3])\nq.appendleft(0)\nq.popleft()", "definition": "Double-ended queue with O(1) appends and pops from both ends — good for stacks and queues." },
+        { "name": "enumerate (start)", "syntax": "for i, line in enumerate(lines, start=1):\n  print(i, line)", "definition": "Loop with a counter that can start at any number." }
       ]
     }
   ]

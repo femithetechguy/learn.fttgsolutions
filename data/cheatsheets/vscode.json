@@ -1,0 +1,162 @@
+{
+  "label": "VS Code",
+  "headline": "VS Code Cheat Sheet",
+  "tagline": "Edit. Navigate. Debug.",
+  "description": "Quick reference for the VS Code keyboard shortcuts and commands you reach for every day — from editing and navigation to multi-cursor, search, and the terminal.",
+  "color": "007ACC",
+  "categories": [
+    {
+      "category": "General",
+      "items": [
+        { "name": "Command Palette", "syntax": "Ctrl+Shift+P / Cmd+Shift+P", "definition": "Open the command palette to search and run any VS Code command." },
+        { "name": "Quick Open", "syntax": "Ctrl+P / Cmd+P", "definition": "Quickly open a file by name." },
+        { "name": "New Window", "syntax": "Ctrl+Shift+N / Cmd+Shift+N", "definition": "Open a new VS Code window or instance." },
+        { "name": "Close Window", "syntax": "Ctrl+Shift+W / Cmd+W", "definition": "Close the current window or instance." },
+        { "name": "User Settings", "syntax": "Ctrl+, / Cmd+,", "definition": "Open the user settings editor." },
+        { "name": "Keyboard Shortcuts", "syntax": "Ctrl+K Ctrl+S / Cmd+K Cmd+S", "definition": "Open the keyboard shortcuts editor." }
+      ]
+    },
+    {
+      "category": "Basic Editing",
+      "items": [
+        { "name": "Cut Line", "syntax": "Ctrl+X / Cmd+X", "definition": "Cut the current line (no selection needed)." },
+        { "name": "Copy Line", "syntax": "Ctrl+C / Cmd+C", "definition": "Copy the current line (no selection needed)." },
+        { "name": "Move Line Up/Down", "syntax": "Alt+Up/Down / Opt+Up/Down", "definition": "Move the current line up or down." },
+        { "name": "Copy Line Up/Down", "syntax": "Shift+Alt+Up/Down / Shift+Opt+Up/Down", "definition": "Duplicate the current line above or below." },
+        { "name": "Delete Line", "syntax": "Ctrl+Shift+K / Cmd+Shift+K", "definition": "Delete the entire current line." },
+        { "name": "Insert Line Below", "syntax": "Ctrl+Enter / Cmd+Enter", "definition": "Insert a new line below the current line." },
+        { "name": "Insert Line Above", "syntax": "Ctrl+Shift+Enter / Cmd+Shift+Enter", "definition": "Insert a new line above the current line." },
+        { "name": "Jump to Bracket", "syntax": "Ctrl+Shift+\\ / Cmd+Shift+\\", "definition": "Jump to the matching opening or closing bracket." },
+        { "name": "Indent Line", "syntax": "Ctrl+] / Cmd+]", "definition": "Indent the current line one level to the right." },
+        { "name": "Outdent Line", "syntax": "Ctrl+[ / Cmd+[", "definition": "Outdent the current line one level to the left." },
+        { "name": "Go to Start of File", "syntax": "Ctrl+Home / Cmd+Up", "definition": "Move the cursor to the very beginning of the file." },
+        { "name": "Go to End of File", "syntax": "Ctrl+End / Cmd+Down", "definition": "Move the cursor to the very end of the file." },
+        { "name": "Fold Region", "syntax": "Ctrl+Shift+[ / Opt+Cmd+[", "definition": "Collapse the current code region." },
+        { "name": "Unfold Region", "syntax": "Ctrl+Shift+] / Opt+Cmd+]", "definition": "Expand the current collapsed code region." },
+        { "name": "Fold All", "syntax": "Ctrl+K Ctrl+0 / Cmd+K Cmd+0", "definition": "Collapse all foldable code regions in the file." },
+        { "name": "Unfold All", "syntax": "Ctrl+K Ctrl+J / Cmd+K Cmd+J", "definition": "Expand all collapsed code regions in the file." },
+        { "name": "Toggle Line Comment", "syntax": "Ctrl+/ / Cmd+/", "definition": "Comment or uncomment the current line." },
+        { "name": "Toggle Block Comment", "syntax": "Shift+Alt+A / Shift+Opt+A", "definition": "Wrap or unwrap the selection in a block comment." },
+        { "name": "Toggle Word Wrap", "syntax": "Alt+Z / Opt+Z", "definition": "Toggle soft word wrapping for long lines." }
+      ]
+    },
+    {
+      "category": "Navigation",
+      "items": [
+        { "name": "Go to Line", "syntax": "Ctrl+G / Ctrl+G", "definition": "Jump directly to a specific line number." },
+        { "name": "Go to Symbol", "syntax": "Ctrl+Shift+O / Cmd+Shift+O", "definition": "Navigate to a symbol (function, class, variable) in the current file." },
+        { "name": "Show All Symbols", "syntax": "Ctrl+T / Cmd+T", "definition": "Search for any symbol across all open files." },
+        { "name": "Problems Panel", "syntax": "Ctrl+Shift+M / Cmd+Shift+M", "definition": "Open the Problems panel showing errors and warnings." },
+        { "name": "Next Error/Warning", "syntax": "F8", "definition": "Jump to the next error or warning in the file." },
+        { "name": "Previous Error/Warning", "syntax": "Shift+F8", "definition": "Jump to the previous error or warning in the file." },
+        { "name": "Go Back", "syntax": "Alt+Left / Ctrl+-", "definition": "Navigate back to the previous cursor location." },
+        { "name": "Go Forward", "syntax": "Alt+Right / Ctrl+Shift+-", "definition": "Navigate forward to the next cursor location." },
+        { "name": "Go to Definition", "syntax": "F12", "definition": "Jump to the definition of the symbol under the cursor." },
+        { "name": "Peek Definition", "syntax": "Alt+F12 / Opt+F12", "definition": "Show the definition inline without leaving the current file." },
+        { "name": "Show References", "syntax": "Shift+F12", "definition": "Show all references to the symbol under the cursor." }
+      ]
+    },
+    {
+      "category": "Search & Replace",
+      "items": [
+        { "name": "Find", "syntax": "Ctrl+F / Cmd+F", "definition": "Open the find bar to search within the current file." },
+        { "name": "Replace", "syntax": "Ctrl+H / Opt+Cmd+F", "definition": "Open find and replace in the current file." },
+        { "name": "Find Next", "syntax": "F3 / Cmd+G", "definition": "Jump to the next match for the current search term." },
+        { "name": "Find Previous", "syntax": "Shift+F3 / Cmd+Shift+G", "definition": "Jump to the previous match for the current search term." },
+        { "name": "Select All Matches", "syntax": "Alt+Enter / Opt+Enter", "definition": "Select every occurrence of the current search match." },
+        { "name": "Add Next Match", "syntax": "Ctrl+D / Cmd+D", "definition": "Add the next occurrence of the selected word to the selection." },
+        { "name": "Search in Files", "syntax": "Ctrl+Shift+F / Cmd+Shift+F", "definition": "Open the global search panel to search across all files." },
+        { "name": "Replace in Files", "syntax": "Ctrl+Shift+H / Cmd+Shift+H", "definition": "Open global search and replace across all files." }
+      ]
+    },
+    {
+      "category": "Multi-Cursor & Selection",
+      "items": [
+        { "name": "Add Cursor", "syntax": "Alt+Click / Opt+Click", "definition": "Add an additional cursor at the clicked position." },
+        { "name": "Add Cursor Above", "syntax": "Ctrl+Alt+Up / Opt+Cmd+Up", "definition": "Add a new cursor on the line above." },
+        { "name": "Add Cursor Below", "syntax": "Ctrl+Alt+Down / Opt+Cmd+Down", "definition": "Add a new cursor on the line below." },
+        { "name": "Undo Cursor", "syntax": "Ctrl+U / Cmd+U", "definition": "Remove the most recently added cursor." },
+        { "name": "Select Current Line", "syntax": "Ctrl+I / Cmd+L", "definition": "Select the entire current line." },
+        { "name": "Select All Occurrences", "syntax": "Ctrl+Shift+L / Cmd+Shift+L", "definition": "Select every occurrence of the current selection." },
+        { "name": "Expand Selection", "syntax": "Shift+Alt+Right / Ctrl+Shift+Cmd+Right", "definition": "Expand the selection to the next logical block." },
+        { "name": "Shrink Selection", "syntax": "Shift+Alt+Left / Ctrl+Shift+Cmd+Left", "definition": "Shrink the selection to the previous logical block." },
+        { "name": "Column Selection", "syntax": "Shift+Alt+Drag / Shift+Opt+Drag", "definition": "Drag to create a rectangular (box) multi-line selection." }
+      ]
+    },
+    {
+      "category": "IntelliSense & Languages",
+      "items": [
+        { "name": "Trigger Suggestion", "syntax": "Ctrl+Space / Ctrl+Space", "definition": "Manually trigger IntelliSense code completion suggestions." },
+        { "name": "Parameter Hints", "syntax": "Ctrl+Shift+Space / Cmd+Shift+Space", "definition": "Show parameter hints for the current function call." },
+        { "name": "Format Document", "syntax": "Shift+Alt+F / Shift+Opt+F", "definition": "Auto-format the entire file using the configured formatter." },
+        { "name": "Format Selection", "syntax": "Ctrl+K Ctrl+F / Cmd+K Cmd+F", "definition": "Format only the currently selected code." },
+        { "name": "Quick Fix", "syntax": "Ctrl+. / Cmd+.", "definition": "Show available quick fixes and refactoring actions." },
+        { "name": "Rename Symbol", "syntax": "F2", "definition": "Rename a symbol and update all its references across files." },
+        { "name": "Trim Whitespace", "syntax": "Ctrl+K Ctrl+X / Cmd+K Cmd+X", "definition": "Remove trailing whitespace from all lines." },
+        { "name": "Change Language", "syntax": "Ctrl+K M / Cmd+K M", "definition": "Change the syntax highlighting language for the current file." }
+      ]
+    },
+    {
+      "category": "Editor Management",
+      "items": [
+        { "name": "Close Editor", "syntax": "Ctrl+W / Cmd+W", "definition": "Close the current editor tab." },
+        { "name": "Reopen Closed Editor", "syntax": "Ctrl+Shift+T / Cmd+Shift+T", "definition": "Reopen the most recently closed editor tab." },
+        { "name": "Split Editor", "syntax": "Ctrl+\\ / Cmd+\\", "definition": "Split the editor into two side-by-side panes." },
+        { "name": "Focus Editor Group 1/2/3", "syntax": "Ctrl+1/2/3 / Cmd+1/2/3", "definition": "Switch focus to the first, second, or third editor group." },
+        { "name": "Next Tab", "syntax": "Ctrl+Tab / Ctrl+Tab", "definition": "Switch to the next open editor tab." },
+        { "name": "Previous Tab", "syntax": "Ctrl+Shift+Tab / Ctrl+Shift+Tab", "definition": "Switch to the previous open editor tab." },
+        { "name": "Close All Editors", "syntax": "Ctrl+K Ctrl+W / Cmd+K Cmd+W", "definition": "Close every open editor tab." }
+      ]
+    },
+    {
+      "category": "File Management",
+      "items": [
+        { "name": "New File", "syntax": "Ctrl+N / Cmd+N", "definition": "Create a new untitled file." },
+        { "name": "Open File", "syntax": "Ctrl+O / Cmd+O", "definition": "Open an existing file from disk." },
+        { "name": "Save", "syntax": "Ctrl+S / Cmd+S", "definition": "Save the current file." },
+        { "name": "Save As", "syntax": "Ctrl+Shift+S / Cmd+Shift+S", "definition": "Save the current file under a new name or location." },
+        { "name": "Save All", "syntax": "Ctrl+K S / Opt+Cmd+S", "definition": "Save all open unsaved files at once." },
+        { "name": "Copy File Path", "syntax": "Ctrl+K P / Cmd+K P", "definition": "Copy the full path of the active file to the clipboard." },
+        { "name": "Reveal in Explorer", "syntax": "Ctrl+K R / Cmd+K R", "definition": "Reveal the active file in the OS file explorer (Finder/Explorer)." }
+      ]
+    },
+    {
+      "category": "View & Display",
+      "items": [
+        { "name": "Toggle Sidebar", "syntax": "Ctrl+B / Cmd+B", "definition": "Show or hide the left sidebar panel." },
+        { "name": "Toggle Full Screen", "syntax": "F11 / Ctrl+Cmd+F", "definition": "Enter or exit full screen mode." },
+        { "name": "Zoom In", "syntax": "Ctrl+= / Cmd+=", "definition": "Increase the editor zoom level." },
+        { "name": "Zoom Out", "syntax": "Ctrl+- / Cmd+-", "definition": "Decrease the editor zoom level." },
+        { "name": "Show Explorer", "syntax": "Ctrl+Shift+E / Cmd+Shift+E", "definition": "Open the file explorer panel." },
+        { "name": "Show Source Control", "syntax": "Ctrl+Shift+G / Ctrl+Shift+G", "definition": "Open the Git source control panel." },
+        { "name": "Show Extensions", "syntax": "Ctrl+Shift+X / Cmd+Shift+X", "definition": "Open the extensions marketplace panel." },
+        { "name": "Show Output", "syntax": "Ctrl+Shift+U / Cmd+Shift+U", "definition": "Open the output panel to see logs." },
+        { "name": "Markdown Preview", "syntax": "Ctrl+Shift+V / Cmd+Shift+V", "definition": "Open a side-by-side Markdown preview." },
+        { "name": "Zen Mode", "syntax": "Ctrl+K Z / Cmd+K Z", "definition": "Enter distraction-free Zen Mode. Press Esc twice to exit." }
+      ]
+    },
+    {
+      "category": "Debug",
+      "items": [
+        { "name": "Start / Continue", "syntax": "F5", "definition": "Start debugging or continue after a breakpoint pause." },
+        { "name": "Stop Debug", "syntax": "Shift+F5", "definition": "Stop the current debug session." },
+        { "name": "Toggle Breakpoint", "syntax": "F9", "definition": "Add or remove a breakpoint on the current line." },
+        { "name": "Step Over", "syntax": "F10", "definition": "Execute the current line and pause on the next one." },
+        { "name": "Step Into", "syntax": "F11", "definition": "Step into the function call on the current line." },
+        { "name": "Step Out", "syntax": "Shift+F11", "definition": "Step out of the current function back to the caller." },
+        { "name": "Show Hover", "syntax": "Ctrl+K Ctrl+I / Cmd+K Cmd+I", "definition": "Show the debug hover tooltip for the value under the cursor." }
+      ]
+    },
+    {
+      "category": "Integrated Terminal",
+      "items": [
+        { "name": "Toggle Terminal", "syntax": "Ctrl+` / Ctrl+`", "definition": "Show or hide the integrated terminal panel." },
+        { "name": "New Terminal", "syntax": "Ctrl+Shift+` / Ctrl+Shift+`", "definition": "Open a new integrated terminal instance." },
+        { "name": "Scroll Up", "syntax": "Ctrl+Up / Cmd+Up", "definition": "Scroll the terminal output up one line." },
+        { "name": "Scroll Down", "syntax": "Ctrl+Down / Cmd+Down", "definition": "Scroll the terminal output down one line." },
+        { "name": "Scroll to Top", "syntax": "Ctrl+Home / Cmd+Home", "definition": "Jump to the very top of the terminal output." },
+        { "name": "Scroll to Bottom", "syntax": "Ctrl+End / Cmd+End", "definition": "Jump to the very bottom of the terminal output." }
+      ]
+    }
+  ]
+}
