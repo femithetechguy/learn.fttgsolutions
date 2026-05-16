@@ -16,6 +16,7 @@ const { nav, ui } = content.dashboard
 
 const NAV_LINKS = [
   { label: nav.courses,   href: nav.coursesUrl,   icon: nav.coursesIcon,   activeColor: 'text-text-primary', hoverColor: 'hover:text-text-primary' },
+  { label: nav.stack,     href: nav.stackUrl,     icon: nav.stackIcon,     activeColor: 'text-text-primary', hoverColor: 'hover:text-text-primary' },
   { label: nav.articles,  href: nav.articlesUrl,  icon: nav.articlesIcon,  activeColor: 'text-text-primary', hoverColor: 'hover:text-text-primary' },
   { label: nav.resources, href: nav.resourcesUrl, icon: nav.resourcesIcon, activeColor: 'text-text-primary', hoverColor: 'hover:text-text-primary' },
   { label: nav.favorites, href: nav.favoritesUrl, icon: nav.favoritesIcon, activeColor: 'text-gold',         hoverColor: 'hover:text-gold' },

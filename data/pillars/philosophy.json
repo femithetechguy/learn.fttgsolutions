@@ -1,0 +1,67 @@
+{
+  "pillarLabel": "Philosophy",
+  "headline": "The Builder's Philosophy",
+  "tagline": "Think. Reflect. Grow.",
+  "description": "The tools that built empires weren't digital. We study the thinkers, books, and mental models that turn skilled developers into complete builders — people who understand why, not just how.",
+  "stack": [
+    {
+      "category": "Foundational Thinkers",
+      "tools": [
+        { "name": "Jim Rohn",         "slug": "", "color": "D4AF37" },
+        { "name": "Napoleon Hill",    "slug": "", "color": "D4AF37" },
+        { "name": "Earl Nightingale", "slug": "", "color": "D4AF37" },
+        { "name": "Marcus Aurelius",  "slug": "", "color": "D4AF37" },
+        { "name": "Epictetus",        "slug": "", "color": "D4AF37" }
+      ]
+    },
+    {
+      "category": "Essential Reading",
+      "tools": [
+        { "name": "Think & Grow Rich",             "slug": "", "color": "EF9F27" },
+        { "name": "Richest Man in Babylon",        "slug": "", "color": "EF9F27" },
+        { "name": "Meditations",                   "slug": "", "color": "EF9F27" },
+        { "name": "As a Man Thinketh",             "slug": "", "color": "EF9F27" },
+        { "name": "The Compound Effect",           "slug": "", "color": "EF9F27" }
+      ]
+    },
+    {
+      "category": "Mental Models",
+      "tools": [
+        { "name": "First Principles",        "slug": "", "color": "7F77DD" },
+        { "name": "Compounding",             "slug": "", "color": "7F77DD" },
+        { "name": "80/20 Principle",         "slug": "", "color": "7F77DD" },
+        { "name": "Inversion",               "slug": "", "color": "7F77DD" },
+        { "name": "Second-Order Thinking",   "slug": "", "color": "7F77DD" }
+      ]
+    },
+    {
+      "category": "Builder Principles",
+      "tools": [
+        { "name": "Discipline",         "slug": "", "color": "1D9E75" },
+        { "name": "Long-term Thinking", "slug": "", "color": "1D9E75" },
+        { "name": "Mastery",            "slug": "", "color": "1D9E75" },
+        { "name": "Purpose",            "slug": "", "color": "1D9E75" },
+        { "name": "Consistency",        "slug": "", "color": "1D9E75" }
+      ]
+    },
+    {
+      "category": "Daily Practices",
+      "tools": [
+        { "name": "Journaling",          "slug": "", "color": "9E7CC1" },
+        { "name": "Deep Work",           "slug": "", "color": "9E7CC1" },
+        { "name": "Weekly Review",       "slug": "", "color": "9E7CC1" },
+        { "name": "Mentorship",          "slug": "", "color": "9E7CC1" },
+        { "name": "Environment Design",  "slug": "", "color": "9E7CC1" }
+      ]
+    },
+    {
+      "category": "Applied Stoicism",
+      "tools": [
+        { "name": "Memento Mori",    "slug": "", "color": "8B8B8B" },
+        { "name": "Amor Fati",       "slug": "", "color": "8B8B8B" },
+        { "name": "Dichotomy of Control", "slug": "", "color": "8B8B8B" },
+        { "name": "Premeditatio Malorum", "slug": "", "color": "8B8B8B" }
+      ]
+    }
+  ]
+}
