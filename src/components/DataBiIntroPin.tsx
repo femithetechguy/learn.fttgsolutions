@@ -105,7 +105,7 @@ export default function DataBiIntroPin({ courseCount }: { courseCount: number })
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-2.5 content-start">
         {introData.stack.map(row => (
           <div key={row.category} className="flex items-start gap-2">
-            <span className="font-sans text-[9px] font-semibold tracking-wide text-text-muted uppercase w-28 shrink-0 pt-1.5 leading-tight">
+            <span className="font-sans text-[10px] font-bold tracking-widest text-text-secondary uppercase w-32 shrink-0 pt-1.5 leading-tight">
               {row.category}
             </span>
             <div className="flex flex-wrap gap-1">
