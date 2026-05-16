@@ -1,0 +1,127 @@
+{
+  "label": "AI Prompts",
+  "headline": "AI Prompts Cheat Sheet",
+  "tagline": "Prompt. Generate. Iterate.",
+  "description": "Ready-to-use prompt templates for ChatGPT and other LLMs — writing, coding, SEO, research, data, social media, email, and more.",
+  "color": "10A37F",
+  "categories": [
+    {
+      "category": "Prompt Basics",
+      "items": [
+        { "name": "Role prompt", "syntax": "Act as a [role]. [Your request].", "definition": "Give the AI a persona before your request to shape the tone and expertise of the response." },
+        { "name": "Format control", "syntax": "Give me [output] in [format: bullet list / table / numbered steps / JSON].", "definition": "Specify the desired output format to get structured, usable responses." },
+        { "name": "Tone control", "syntax": "Write in a [formal / casual / friendly / professional / persuasive] tone.", "definition": "Explicitly state the tone to match your audience." },
+        { "name": "Length control", "syntax": "Keep your response under [100 words / 5 bullet points / 3 paragraphs].", "definition": "Constrain length to keep outputs focused and usable." },
+        { "name": "Iterate & refine", "syntax": "Rewrite the above but make it more [concise / detailed / engaging / simple].", "definition": "Follow-up prompts are powerful — treat AI output as a first draft to refine." },
+        { "name": "Chain of thought", "syntax": "Think step by step. Then give me your final answer.", "definition": "Asking for reasoning before the answer often produces more accurate results." },
+        { "name": "Few-shot example", "syntax": "Here are two examples of what I want:\nExample 1: ...\nExample 2: ...\nNow do the same for: [your input]", "definition": "Providing examples before the actual request dramatically improves output quality and consistency." }
+      ]
+    },
+    {
+      "category": "Writing & Blogging",
+      "items": [
+        { "name": "Generate ideas", "syntax": "Give me 10 blog post ideas about [topic] for [target audience].", "definition": "Use audience context to get more targeted, relevant topic ideas." },
+        { "name": "Create outline", "syntax": "Create a detailed outline for a blog post titled: \"[title]\".", "definition": "Get a structured skeleton you can fill in or hand to the AI to expand." },
+        { "name": "Write full post", "syntax": "Write a [word count]-word blog post about [topic]. Use headings, bullet points, and a clear call to action.", "definition": "Specify word count and structure upfront to reduce editing after generation." },
+        { "name": "Expand paragraph", "syntax": "Expand the following paragraph into [2 paragraphs / 200 words]: [paste text]", "definition": "Useful for growing a bullet point or rough note into polished prose." },
+        { "name": "Summarize text", "syntax": "Summarize the following in [3 bullet points / 1 paragraph]: [paste text]", "definition": "Condense long articles, reports, or passages quickly." },
+        { "name": "Change tone", "syntax": "Rewrite this in a more [casual / formal / persuasive] tone: [paste text]", "definition": "Adapt existing content for a different audience or channel." },
+        { "name": "Proofread & edit", "syntax": "Proofread the following for grammar, clarity, and flow. Suggest improvements: [paste text]", "definition": "Get a second pass on any written content before publishing." },
+        { "name": "Create title options", "syntax": "Give me 5 catchy titles for a blog post about [topic].", "definition": "Generate title variations to A/B test or choose the most compelling option." },
+        { "name": "Check for bias", "syntax": "Review the following text and flag any biased or non-inclusive language: [paste text]", "definition": "Identify language that may alienate readers or misrepresent groups." }
+      ]
+    },
+    {
+      "category": "Coding",
+      "items": [
+        { "name": "Explain code", "syntax": "Explain what the following code does, line by line: [paste code]", "definition": "Useful for understanding unfamiliar code or onboarding on a codebase." },
+        { "name": "Debug code", "syntax": "Why is this code not working? Explain the bug and provide a fix: [paste code]", "definition": "Paste broken code and get a diagnosis plus corrected version." },
+        { "name": "Write function", "syntax": "Write a [language] function that [description of what it should do].", "definition": "Describe the desired behavior and let the AI write the implementation." },
+        { "name": "Refactor code", "syntax": "Refactor the following [language] code to be more readable and efficient: [paste code]", "definition": "Clean up code without changing its behavior." },
+        { "name": "Convert language", "syntax": "Convert the following code from [language A] to [language B]: [paste code]", "definition": "Translate implementations across programming languages." },
+        { "name": "Add comments", "syntax": "Add clear inline comments to this code: [paste code]", "definition": "Annotate existing code for documentation or team readability." },
+        { "name": "Generate regex", "syntax": "Write a regex to match [description, e.g. email addresses / phone numbers / US ZIP codes].", "definition": "Describe the pattern in plain language and get a working regular expression." },
+        { "name": "Write tests", "syntax": "Write unit tests for the following function in [testing framework]: [paste code]", "definition": "Generate test cases covering expected inputs, edge cases, and error conditions." }
+      ]
+    },
+    {
+      "category": "SEO & Keywords",
+      "items": [
+        { "name": "Keyword list", "syntax": "Generate a list of 20 SEO keywords for [topic / niche].", "definition": "Get a broad keyword set to research further in your SEO tool." },
+        { "name": "Long-tail keywords", "syntax": "Give me 10 long-tail keyword phrases for [topic] targeting [audience].", "definition": "Long-tail keywords are more specific and often easier to rank for." },
+        { "name": "LSI keywords", "syntax": "List 15 semantically related (LSI) keywords for the term: [keyword].", "definition": "Latent Semantic Indexing keywords help search engines understand topic depth." },
+        { "name": "Meta title & description", "syntax": "Write an SEO-optimized meta title and meta description for a page about [topic]. Target keyword: [keyword].", "definition": "Keep title under 60 characters and description under 160 characters." },
+        { "name": "FAQs from keyword", "syntax": "List 10 questions people commonly ask about [topic].", "definition": "Great for FAQ sections and featured snippet optimization." },
+        { "name": "Alt text for images", "syntax": "Write descriptive alt text for an image of [describe image] on a page about [topic].", "definition": "Descriptive alt text improves accessibility and image SEO." },
+        { "name": "Content brief", "syntax": "Create an SEO content brief for a blog post targeting the keyword \"[keyword]\". Include: target audience, search intent, headings, and related topics.", "definition": "A structured brief to guide content creation for a target keyword." }
+      ]
+    },
+    {
+      "category": "Email & Marketing",
+      "items": [
+        { "name": "Write email", "syntax": "Write a [cold outreach / follow-up / welcome / re-engagement] email for [product/service] targeting [audience].", "definition": "Specify the email type and audience to get a ready-to-send draft." },
+        { "name": "Email subject lines", "syntax": "Give me 5 email subject lines for a campaign about [topic]. Optimize for open rate.", "definition": "Generate multiple options to A/B test." },
+        { "name": "Ad copy", "syntax": "Write a [Facebook / Google / LinkedIn] ad for [product/service]. Include a headline, body text, and CTA.", "definition": "Specify the platform to match character limits and tone conventions." },
+        { "name": "Ad headline variations", "syntax": "Write 5 headline variations for an ad about [product/service]. Emphasize [benefit / urgency / social proof].", "definition": "Test multiple angles to find the highest-performing message." },
+        { "name": "Facebook audience", "syntax": "Suggest 5 Facebook audience targeting ideas for a business that sells [product/service].", "definition": "Get interest, demographic, and behavioral targeting ideas for paid campaigns." },
+        { "name": "Product description", "syntax": "Write a compelling product description for [product name]. Highlight key benefits and include a CTA.", "definition": "Focus on benefits over features to appeal to buyers' motivations." }
+      ]
+    },
+    {
+      "category": "Social Media",
+      "items": [
+        { "name": "Post ideas", "syntax": "Give me 5 social media post ideas about [topic] for [platform: LinkedIn / Instagram / Twitter / TikTok].", "definition": "Platform-specific ideas that match the format and tone of each channel." },
+        { "name": "Write caption", "syntax": "Write an engaging caption for a [platform] post about [topic]. Include relevant hashtags.", "definition": "Get a ready-to-post caption with hashtag suggestions." },
+        { "name": "Hashtag suggestions", "syntax": "Suggest 15 hashtags for a post about [topic] on [platform].", "definition": "Mix popular and niche hashtags to maximize reach." },
+        { "name": "Reply to comment", "syntax": "Write a friendly and professional reply to this comment: \"[paste comment]\"", "definition": "Generate a polished response to customer or audience comments." },
+        { "name": "Content calendar", "syntax": "Create a 1-week social media content calendar for [business type] on [platforms]. Include post topics and formats.", "definition": "Get a structured plan with variety across formats (tips, questions, promos, etc.)." },
+        { "name": "Meme idea", "syntax": "Give me a meme idea about [topic] that would resonate with [target audience].", "definition": "Generate relatable humor concepts tailored to a specific niche." }
+      ]
+    },
+    {
+      "category": "Data & Spreadsheets",
+      "items": [
+        { "name": "Create table", "syntax": "Organize the following data into a table with columns for [col1, col2, col3]: [paste data]", "definition": "Structure raw data into a clean, readable tabular format." },
+        { "name": "Explain formula", "syntax": "Explain what this Excel/Google Sheets formula does: [paste formula]", "definition": "Understand complex formulas in plain language." },
+        { "name": "Write formula", "syntax": "Write an Excel/Google Sheets formula to [description, e.g. calculate the average of column B if column A is 'Sales'].", "definition": "Describe what you want to calculate and get the formula with an explanation." },
+        { "name": "Generate dummy data", "syntax": "Generate a table of 10 rows of realistic dummy data with columns: [col1, col2, col3].", "definition": "Create placeholder data for testing, demos, or mockups." },
+        { "name": "Extract data", "syntax": "Extract all [emails / phone numbers / dates / prices] from the following text: [paste text]", "definition": "Pull specific data types from unstructured text." },
+        { "name": "Write macro", "syntax": "Write a Google Apps Script / Excel VBA macro that [description of task].", "definition": "Automate repetitive spreadsheet tasks with a generated macro." }
+      ]
+    },
+    {
+      "category": "Research & Summarization",
+      "items": [
+        { "name": "Explain concept", "syntax": "Explain [concept] in simple terms, as if I'm a [beginner / 10-year-old / non-technical person].", "definition": "Adjust complexity by specifying the audience's knowledge level." },
+        { "name": "Compare options", "syntax": "Compare [option A] vs [option B]. List pros and cons in a table.", "definition": "Get a side-by-side breakdown to support a decision." },
+        { "name": "Summarize article", "syntax": "Summarize the key points from the following article in 5 bullet points: [paste text]", "definition": "Condense long-form content into actionable takeaways." },
+        { "name": "Historical context", "syntax": "Give me a brief history of [topic / event / invention]. Focus on key milestones.", "definition": "Get background context quickly without reading a full article." },
+        { "name": "Pros and cons", "syntax": "List the pros and cons of [topic / decision / technology].", "definition": "Balanced view of any subject to support decision-making." },
+        { "name": "Book recommendations", "syntax": "Recommend 5 books similar to [book title]. Explain why each is relevant.", "definition": "Get curated reading suggestions based on a known reference." },
+        { "name": "Translate text", "syntax": "Translate the following text to [language]: [paste text]", "definition": "Quick translation across languages. Specify formal/informal if needed." }
+      ]
+    },
+    {
+      "category": "Education & Teaching",
+      "items": [
+        { "name": "Create quiz", "syntax": "Create a 5-question multiple-choice quiz about [topic]. Include answer key.", "definition": "Generate ready-to-use quiz questions with correct answers." },
+        { "name": "Create lesson plan", "syntax": "Create a lesson plan for a [time] class on [topic] for [grade level / audience]. Include objectives, activities, and assessment.", "definition": "Get a structured lesson outline for a specific topic and audience." },
+        { "name": "Assignment ideas", "syntax": "Give me 5 assignment ideas for a course on [topic] that test [skill / knowledge area].", "definition": "Generate varied assessment types (essays, projects, discussions, etc.)." },
+        { "name": "Explain like a teacher", "syntax": "Teach me [concept] step by step with examples.", "definition": "Ask for a structured, example-driven explanation of any concept." },
+        { "name": "Create flashcards", "syntax": "Create 10 flashcard questions and answers for [topic].", "definition": "Generate Q&A pairs for active recall study sessions." },
+        { "name": "Grade writing", "syntax": "Grade the following essay on a scale of 1–10 and provide specific feedback: [paste essay]", "definition": "Get a scored evaluation with actionable improvement notes." }
+      ]
+    },
+    {
+      "category": "YouTube & Video",
+      "items": [
+        { "name": "Video ideas", "syntax": "Give me 10 YouTube video ideas about [topic] for [target audience].", "definition": "Generate content ideas aligned with audience interests." },
+        { "name": "Write script", "syntax": "Write a [length] YouTube video script about [topic]. Include an intro hook, main content, and CTA.", "definition": "Get a full script structure ready to record." },
+        { "name": "Video outline", "syntax": "Create a content outline for a YouTube video on [topic]. Include section headers and talking points.", "definition": "Plan a video structure before scripting or recording." },
+        { "name": "Write description", "syntax": "Write a YouTube video description for a video about [topic]. Include keywords: [keyword1, keyword2].", "definition": "SEO-optimized description with a natural keyword integration." },
+        { "name": "Create timestamps", "syntax": "Create YouTube timestamps from the following transcript: [paste transcript]", "definition": "Generate chapter markers to improve viewer navigation." },
+        { "name": "Reply to comment", "syntax": "Write a friendly reply to this YouTube comment: \"[paste comment]\"", "definition": "Respond professionally and engagingly to build community." }
+      ]
+    }
+  ]
+}

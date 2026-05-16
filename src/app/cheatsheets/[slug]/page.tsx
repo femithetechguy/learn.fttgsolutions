@@ -113,7 +113,7 @@ export default function CheatsheetPage() {
                     key={s.key}
                     href={`/cheatsheets/${s.key}`}
                     onClick={() => setQuery('')}
-                    className={`font-sans text-sm font-semibold px-5 py-2 rounded-sm border transition-all duration-150 ${
+                    className={`font-sans text-sm font-semibold uppercase px-5 py-2 rounded-sm border transition-all duration-150 ${
                       isActive
                         ? 'text-bg-primary border-transparent'
                         : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-text-primary'

@@ -1,0 +1,89 @@
+{
+  "label": "JSON",
+  "headline": "JSON Cheat Sheet",
+  "tagline": "Structure. Exchange. Parse.",
+  "description": "Quick reference for JSON — data types, syntax rules, escape sequences, objects, arrays, and JavaScript parse/stringify patterns.",
+  "color": "5C6AC4",
+  "categories": [
+    {
+      "category": "Data Types",
+      "items": [
+        { "name": "String", "syntax": "\"hello world\"", "definition": "A sequence of Unicode characters wrapped in double quotes. Single quotes are NOT valid in JSON." },
+        { "name": "Number (integer)", "syntax": "42", "definition": "A whole number. Can be positive or negative. Hexadecimal (0xFF) is NOT allowed." },
+        { "name": "Number (decimal)", "syntax": "3.14", "definition": "A floating-point number with a decimal fraction." },
+        { "name": "Number (exponent)", "syntax": "1.5e10", "definition": "Scientific notation using e, e+, e-, E, E+, or E." },
+        { "name": "Boolean", "syntax": "true / false", "definition": "Lowercase only. true or false — no quotes, no capitals." },
+        { "name": "Null", "syntax": "null", "definition": "Represents an empty or non-existent value. Lowercase only." },
+        { "name": "Object", "syntax": "{ \"key\": \"value\" }", "definition": "An unordered collection of key/value pairs wrapped in curly braces. Keys must be strings." },
+        { "name": "Array", "syntax": "[1, \"two\", true]", "definition": "An ordered list of values wrapped in square brackets. Values can be any JSON type." }
+      ]
+    },
+    {
+      "category": "Object Syntax",
+      "items": [
+        { "name": "Basic object", "syntax": "{ \"name\": \"Alice\", \"age\": 30 }", "definition": "Key/value pairs separated by commas. Keys must be double-quoted strings." },
+        { "name": "Nested object", "syntax": "{ \"user\": { \"id\": 1, \"role\": \"admin\" } }", "definition": "Objects can contain other objects as values." },
+        { "name": "Empty object", "syntax": "{}", "definition": "A valid JSON object with no properties." },
+        { "name": "Mixed types", "syntax": "{ \"name\": \"Bob\", \"score\": 95, \"active\": true, \"notes\": null }", "definition": "Values in one object can be different types." }
+      ]
+    },
+    {
+      "category": "Array Syntax",
+      "items": [
+        { "name": "Basic array", "syntax": "[1, 2, 3, 4, 5]", "definition": "An ordered list of values. Begins with [ and ends with ]." },
+        { "name": "Mixed array", "syntax": "[1, \"hello\", true, null]", "definition": "Arrays can contain values of different types." },
+        { "name": "Array of objects", "syntax": "[{ \"id\": 1 }, { \"id\": 2 }]", "definition": "A common pattern — each element is an object, great for lists of records." },
+        { "name": "Object of arrays", "syntax": "{ \"tags\": [\"a\", \"b\", \"c\"] }", "definition": "An object whose property value is an array." },
+        { "name": "2D array", "syntax": "[[1, 2], [3, 4], [5, 6]]", "definition": "Arrays can nest other arrays to create multi-dimensional structures." },
+        { "name": "Empty array", "syntax": "[]", "definition": "A valid JSON array with no elements." }
+      ]
+    },
+    {
+      "category": "String Escape Sequences",
+      "items": [
+        { "name": "Double quote", "syntax": "\\\"", "definition": "Escape a literal double quote inside a JSON string." },
+        { "name": "Backslash", "syntax": "\\\\", "definition": "Escape a literal backslash inside a JSON string." },
+        { "name": "Forward slash", "syntax": "\\/", "definition": "Optionally escape a forward slash — useful in HTML contexts." },
+        { "name": "Newline", "syntax": "\\n", "definition": "Insert a line break inside a string value." },
+        { "name": "Carriage return", "syntax": "\\r", "definition": "Insert a carriage return inside a string value." },
+        { "name": "Tab", "syntax": "\\t", "definition": "Insert a horizontal tab inside a string value." },
+        { "name": "Backspace", "syntax": "\\b", "definition": "Insert a backspace character inside a string value." },
+        { "name": "Form feed", "syntax": "\\f", "definition": "Insert a form feed character inside a string value." },
+        { "name": "Unicode", "syntax": "\\u0041", "definition": "Insert a Unicode character using \\u followed by exactly four hex digits. Example: \\u0041 = 'A'." }
+      ]
+    },
+    {
+      "category": "JavaScript — Parse & Stringify",
+      "items": [
+        { "name": "Parse string → object", "syntax": "const obj = JSON.parse(jsonString);", "definition": "Converts a JSON string into a JavaScript object. Throws SyntaxError if the string is invalid JSON." },
+        { "name": "Stringify object → string", "syntax": "const str = JSON.stringify(obj);", "definition": "Converts a JavaScript object into a JSON string." },
+        { "name": "Pretty print", "syntax": "JSON.stringify(obj, null, 2);", "definition": "Third argument sets indentation (2 or 4 spaces). Produces human-readable output." },
+        { "name": "Replacer filter", "syntax": "JSON.stringify(obj, ['name', 'age']);", "definition": "Second argument can be an array of keys to include, or a function to transform values." },
+        { "name": "Reviver function", "syntax": "JSON.parse(str, (key, val) => val);", "definition": "Second argument to JSON.parse — a function called for each key/value to transform the result." },
+        { "name": "Deep clone", "syntax": "const clone = JSON.parse(JSON.stringify(obj));", "definition": "A simple way to deep-copy a plain object. Does NOT work for functions, Dates, or undefined values." }
+      ]
+    },
+    {
+      "category": "Accessing Data (JavaScript)",
+      "items": [
+        { "name": "Dot notation", "syntax": "obj.name", "definition": "Access an object property by name. Returns undefined for missing properties." },
+        { "name": "Bracket notation", "syntax": "obj[\"name\"]", "definition": "Access a property using a string key. Required when the key contains spaces or special characters." },
+        { "name": "Nested object", "syntax": "obj.user.address.city", "definition": "Chain dot notation to drill into nested objects." },
+        { "name": "Array index", "syntax": "arr[0]", "definition": "Access the first element of an array. Arrays are zero-indexed." },
+        { "name": "Array of objects", "syntax": "arr[1].name", "definition": "Access the name property of the second element in an array of objects." },
+        { "name": "Optional chaining", "syntax": "obj?.user?.city", "definition": "Safely access nested properties — returns undefined instead of throwing if a middle value is null/undefined." }
+      ]
+    },
+    {
+      "category": "Common Mistakes",
+      "items": [
+        { "name": "Single quotes", "syntax": "{ \"key\": 'value' }  ← INVALID", "definition": "All strings in JSON must use double quotes. Single quotes are not allowed." },
+        { "name": "Trailing comma", "syntax": "{ \"a\": 1, }  ← INVALID", "definition": "JSON does not allow trailing commas after the last property or element." },
+        { "name": "Unquoted key", "syntax": "{ key: \"value\" }  ← INVALID", "definition": "Object keys must always be double-quoted strings." },
+        { "name": "Hex number", "syntax": "{ \"n\": 0xFF }  ← INVALID", "definition": "Only decimal numeric literals are allowed. Hexadecimal, octal, and binary are not valid JSON." },
+        { "name": "Undefined", "syntax": "{ \"val\": undefined }  ← INVALID", "definition": "undefined is not a JSON type. Use null instead." },
+        { "name": "Comments", "syntax": "// comments are NOT allowed", "definition": "JSON has no comment syntax. Use a separate documentation field if needed." }
+      ]
+    }
+  ]
+}

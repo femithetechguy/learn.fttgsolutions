@@ -1,0 +1,166 @@
+{
+  "label": "JavaScript",
+  "headline": "JavaScript Cheat Sheet",
+  "tagline": "Dynamic. Async. Everywhere.",
+  "description": "Quick reference for JavaScript — variables, types, functions, arrays, objects, classes, promises, async/await, and the Fetch API.",
+  "color": "F7DF1E",
+  "categories": [
+    {
+      "category": "Variables & Types",
+      "items": [
+        { "name": "let", "syntax": "let name = 'Alice';", "definition": "Block-scoped variable. Can be reassigned. Preferred for values that change." },
+        { "name": "const", "syntax": "const PI = 3.14;", "definition": "Block-scoped constant. Cannot be reassigned after declaration. Preferred by default." },
+        { "name": "var", "syntax": "var count = 0;", "definition": "Function-scoped (or globally scoped). Hoisted to the top of its scope. Avoid in modern JS." },
+        { "name": "typeof", "syntax": "typeof 42       // 'number'\ntypeof 'hi'     // 'string'\ntypeof true     // 'boolean'\ntypeof null     // 'object' (quirk)\ntypeof {}       // 'object'\ntypeof []       // 'object'\ntypeof fn       // 'function'\ntypeof undefined // 'undefined'", "definition": "Returns a string describing the type of the operand. Note: typeof null === 'object' is a historical quirk." },
+        { "name": "null vs undefined", "syntax": "let a = null;      // intentionally empty\nlet b;             // undefined (not set)", "definition": "null is an intentional absence of value. undefined means a variable was declared but never assigned." },
+        { "name": "Template literals", "syntax": "const msg = `Hello, ${name}!`;", "definition": "Backtick strings allow embedded expressions (${}) and multi-line content." }
+      ]
+    },
+    {
+      "category": "Operators",
+      "items": [
+        { "name": "Arithmetic", "syntax": "+ - * / % **", "definition": "Add, subtract, multiply, divide, modulus (remainder), exponentiation (** is ES2016)." },
+        { "name": "Strict equality", "syntax": "1 === 1   // true\n1 === '1' // false", "definition": "=== checks both value and type. Always prefer === over == to avoid implicit type coercion." },
+        { "name": "Loose equality", "syntax": "0 == false  // true\nnull == undefined // true", "definition": "== performs type coercion before comparing. Can produce surprising results — use === instead." },
+        { "name": "Logical AND / OR", "syntax": "true && false  // false\nfalse || true  // true", "definition": "Short-circuit operators. && returns the first falsy value; || returns the first truthy value." },
+        { "name": "Nullish coalescing (??)", "syntax": "null ?? 'default'   // 'default'\n0 ?? 'default'      // 0", "definition": "Returns the right side only if the left side is null or undefined. Unlike ||, 0 and '' are not treated as fallbacks." },
+        { "name": "Optional chaining (?.)", "syntax": "user?.address?.city", "definition": "Safely access nested properties. Returns undefined instead of throwing if any intermediate value is null/undefined." },
+        { "name": "Ternary", "syntax": "const label = age >= 18 ? 'adult' : 'minor';", "definition": "Shorthand if/else expression. Returns one of two values based on a condition." },
+        { "name": "Spread (...)", "syntax": "const copy = [...arr];\nconst merged = { ...a, ...b };", "definition": "Expands an iterable or object into individual elements. Creates shallow copies." },
+        { "name": "Destructuring", "syntax": "const { name, age } = person;\nconst [first, second] = arr;", "definition": "Unpack values from arrays or properties from objects into distinct variables." }
+      ]
+    },
+    {
+      "category": "Strings",
+      "items": [
+        { "name": "length", "syntax": "'hello'.length  // 5", "definition": "Returns the number of characters in the string." },
+        { "name": "toUpperCase / toLowerCase", "syntax": "'Hello'.toUpperCase()  // 'HELLO'", "definition": "Return a new string converted to upper or lower case." },
+        { "name": "trim()", "syntax": "'  hi  '.trim()  // 'hi'", "definition": "Removes leading and trailing whitespace." },
+        { "name": "includes()", "syntax": "'hello'.includes('ell')  // true", "definition": "Returns true if the string contains the given substring." },
+        { "name": "startsWith / endsWith", "syntax": "'hello'.startsWith('he')  // true", "definition": "Check whether a string begins or ends with a given substring." },
+        { "name": "slice()", "syntax": "'hello'.slice(1, 4)  // 'ell'", "definition": "Extracts a portion from start (inclusive) to end (exclusive). Negative indices count from the end." },
+        { "name": "replace()", "syntax": "'foo bar'.replace('foo', 'baz')  // 'baz bar'", "definition": "Replaces the first match. Use /regex/g flag to replace all occurrences." },
+        { "name": "split()", "syntax": "'a,b,c'.split(',')  // ['a','b','c']", "definition": "Splits a string into an array using the given separator." },
+        { "name": "padStart / padEnd", "syntax": "'5'.padStart(3, '0')  // '005'", "definition": "Pads the start or end of a string to a target length." },
+        { "name": "repeat()", "syntax": "'ab'.repeat(3)  // 'ababab'", "definition": "Returns the string repeated n times." }
+      ]
+    },
+    {
+      "category": "Arrays",
+      "items": [
+        { "name": "push / pop", "syntax": "arr.push('x');   // add to end\narr.pop();       // remove from end", "definition": "push() adds one or more elements to the end and returns the new length. pop() removes and returns the last element." },
+        { "name": "unshift / shift", "syntax": "arr.unshift('x'); // add to start\narr.shift();      // remove from start", "definition": "unshift() adds to the start; shift() removes and returns the first element." },
+        { "name": "map()", "syntax": "[1,2,3].map(n => n * 2)  // [2,4,6]", "definition": "Returns a new array with each element transformed by the callback. Does not mutate the original." },
+        { "name": "filter()", "syntax": "[1,2,3,4].filter(n => n > 2)  // [3,4]", "definition": "Returns a new array with only the elements for which the callback returns true." },
+        { "name": "reduce()", "syntax": "[1,2,3].reduce((acc, n) => acc + n, 0)  // 6", "definition": "Reduces an array to a single value by applying the callback with an accumulator and current element." },
+        { "name": "find() / findIndex()", "syntax": "arr.find(n => n > 3)       // first match\narr.findIndex(n => n > 3)  // index of first match", "definition": "find() returns the first matching element; findIndex() returns its index. Both return undefined/-1 if not found." },
+        { "name": "includes()", "syntax": "[1,2,3].includes(2)  // true", "definition": "Returns true if the array contains the given value." },
+        { "name": "some() / every()", "syntax": "arr.some(n => n > 3)   // at least one match\narr.every(n => n > 0)  // all match", "definition": "some() returns true if any element passes; every() returns true only if all elements pass." },
+        { "name": "flat() / flatMap()", "syntax": "[[1,2],[3]].flat()  // [1,2,3]", "definition": "flat() flattens nested arrays by one level (or more with a depth argument). flatMap() combines map and flat." },
+        { "name": "slice()", "syntax": "[1,2,3,4].slice(1, 3)  // [2,3]", "definition": "Returns a shallow copy of a portion of the array. Does not mutate the original." },
+        { "name": "splice()", "syntax": "arr.splice(1, 2, 'x');", "definition": "Mutates the array: removes elements at index 1, removes 2 elements, and inserts 'x' in their place." },
+        { "name": "sort()", "syntax": "arr.sort((a, b) => a - b);  // ascending numbers", "definition": "Sorts in-place. Without a comparator, sorts as strings. Pass a comparator for numeric or custom sorts." },
+        { "name": "forEach()", "syntax": "arr.forEach(item => console.log(item));", "definition": "Executes a function for each element. Returns undefined — use map() if you need a new array." },
+        { "name": "Array.from()", "syntax": "Array.from('abc')       // ['a','b','c']\nArray.from({length:3}, (_,i) => i)  // [0,1,2]", "definition": "Creates a new array from an iterable or array-like object. Accepts an optional mapping function." }
+      ]
+    },
+    {
+      "category": "Objects",
+      "items": [
+        { "name": "Object literal", "syntax": "const person = { name: 'Alice', age: 30 };", "definition": "Create an object with key/value pairs. Keys without spaces don't need quotes." },
+        { "name": "Shorthand property", "syntax": "const name = 'Alice';\nconst person = { name };  // same as { name: name }", "definition": "If the variable name matches the key, you can omit the repetition." },
+        { "name": "Computed property", "syntax": "const key = 'color';\nconst obj = { [key]: 'blue' };", "definition": "Wrap the key in [] to use a dynamic expression as the property name." },
+        { "name": "Optional chaining", "syntax": "obj?.address?.city", "definition": "Returns undefined instead of throwing when a property in the chain is null/undefined." },
+        { "name": "Object.keys()", "syntax": "Object.keys(obj)  // ['name', 'age']", "definition": "Returns an array of an object's own enumerable property names." },
+        { "name": "Object.values()", "syntax": "Object.values(obj)  // ['Alice', 30]", "definition": "Returns an array of an object's own enumerable property values." },
+        { "name": "Object.entries()", "syntax": "Object.entries(obj)  // [['name','Alice'],['age',30]]", "definition": "Returns an array of [key, value] pairs for each own enumerable property." },
+        { "name": "Object.assign()", "syntax": "const merged = Object.assign({}, a, b);", "definition": "Copies own enumerable properties from source objects into the target. Later sources overwrite earlier ones." },
+        { "name": "Spread merge", "syntax": "const merged = { ...a, ...b };", "definition": "Shallow merge objects. Properties in b overwrite matching properties in a." },
+        { "name": "delete operator", "syntax": "delete person.age;", "definition": "Removes a property from an object." }
+      ]
+    },
+    {
+      "category": "Functions",
+      "items": [
+        { "name": "Function declaration", "syntax": "function add(a, b) {\n  return a + b;\n}", "definition": "Hoisted to the top of its scope — can be called before it appears in the code." },
+        { "name": "Function expression", "syntax": "const add = function(a, b) {\n  return a + b;\n};", "definition": "Not hoisted. Assigned to a variable like any other value." },
+        { "name": "Arrow function", "syntax": "const add = (a, b) => a + b;", "definition": "Concise syntax. Implicit return when the body is a single expression (no braces). Does not bind its own this." },
+        { "name": "Default parameters", "syntax": "function greet(name = 'World') {\n  return `Hello, ${name}!`;\n}", "definition": "Provide a default value used when the argument is undefined or omitted." },
+        { "name": "Rest parameters", "syntax": "function sum(...nums) {\n  return nums.reduce((a, n) => a + n, 0);\n}", "definition": "Collects all remaining arguments into an array." },
+        { "name": "Callback", "syntax": "setTimeout(() => console.log('done'), 1000);", "definition": "A function passed as an argument to another function, to be called later." },
+        { "name": "IIFE", "syntax": "(function() { console.log('runs immediately'); })();", "definition": "Immediately Invoked Function Expression — executes as soon as it is defined." }
+      ]
+    },
+    {
+      "category": "Conditionals & Loops",
+      "items": [
+        { "name": "if / else if / else", "syntax": "if (x > 0) { ... }\nelse if (x === 0) { ... }\nelse { ... }", "definition": "Standard conditional branching." },
+        { "name": "switch", "syntax": "switch (status) {\n  case 200: break;\n  case 404: break;\n  default: break;\n}", "definition": "Matches a value against cases. Include break to prevent fall-through." },
+        { "name": "for loop", "syntax": "for (let i = 0; i < 5; i++) { ... }", "definition": "Classic counted iteration with init, condition, and update." },
+        { "name": "for...of", "syntax": "for (const item of arr) { ... }", "definition": "Iterate over iterable values (arrays, strings, Maps, Sets)." },
+        { "name": "for...in", "syntax": "for (const key in obj) { ... }", "definition": "Iterate over an object's enumerable property keys. Avoid for arrays." },
+        { "name": "while / do-while", "syntax": "while (cond) { ... }\ndo { ... } while (cond);", "definition": "while checks before each iteration. do-while always runs the body at least once." },
+        { "name": "break / continue", "syntax": "break;     // exit loop\ncontinue;  // skip to next iteration", "definition": "break exits the loop entirely. continue skips the remaining body for the current iteration." }
+      ]
+    },
+    {
+      "category": "Classes",
+      "items": [
+        { "name": "Class definition", "syntax": "class Animal {\n  constructor(name) { this.name = name; }\n  speak() { return `${this.name} speaks.`; }\n}", "definition": "A class is a blueprint for creating objects. The constructor initializes each instance." },
+        { "name": "Inheritance", "syntax": "class Dog extends Animal {\n  constructor(name) { super(name); }\n  speak() { return `${this.name} barks.`; }\n}", "definition": "extends inherits from a parent class. super() calls the parent constructor." },
+        { "name": "Static method", "syntax": "class MathHelper {\n  static add(a, b) { return a + b; }\n}\nMathHelper.add(1, 2);", "definition": "Static methods belong to the class, not instances. Call directly on the class." },
+        { "name": "Getter / Setter", "syntax": "class Circle {\n  get area() { return Math.PI * this.r ** 2; }\n  set radius(v) { this.r = v; }\n}", "definition": "get/set allow property-like access while executing logic." },
+        { "name": "Private fields (ES2022)", "syntax": "class Counter {\n  #count = 0;\n  increment() { this.#count++; }\n}", "definition": "Fields prefixed with # are private — inaccessible outside the class." }
+      ]
+    },
+    {
+      "category": "Modules (ES6)",
+      "items": [
+        { "name": "Named export", "syntax": "export function add(a, b) { return a + b; }\nexport const PI = 3.14;", "definition": "Export one or more named bindings from a module file." },
+        { "name": "Default export", "syntax": "export default function main() { ... }", "definition": "Each module can have one default export. Import it with any name." },
+        { "name": "Named import", "syntax": "import { add, PI } from './math.js';", "definition": "Import specific named exports from a module." },
+        { "name": "Default import", "syntax": "import main from './main.js';", "definition": "Import the default export. The name is chosen by the importer." },
+        { "name": "Rename import", "syntax": "import { add as sum } from './math.js';", "definition": "Use as to rename an import to avoid naming conflicts." },
+        { "name": "Import all", "syntax": "import * as Math from './math.js';", "definition": "Import all named exports as properties of a namespace object." }
+      ]
+    },
+    {
+      "category": "Promises",
+      "items": [
+        { "name": "Create", "syntax": "const p = new Promise((resolve, reject) => {\n  if (ok) resolve(value);\n  else reject(new Error('failed'));\n});", "definition": "A Promise represents a value that may be available now, later, or never. Starts in pending state." },
+        { "name": ".then()", "syntax": "p.then(value => console.log(value));", "definition": "Registers a callback for when the promise resolves. Returns a new promise for chaining." },
+        { "name": ".catch()", "syntax": "p.catch(err => console.error(err));", "definition": "Registers a callback for when the promise rejects." },
+        { "name": ".finally()", "syntax": "p.finally(() => cleanup());", "definition": "Runs regardless of whether the promise resolved or rejected — good for cleanup." },
+        { "name": "Promise.all()", "syntax": "Promise.all([p1, p2, p3]).then(([r1, r2, r3]) => ...);", "definition": "Waits for all promises to resolve. Rejects immediately if any one rejects." },
+        { "name": "Promise.allSettled()", "syntax": "Promise.allSettled([p1, p2]).then(results => ...);", "definition": "Waits for all promises regardless of outcome. Each result has status (fulfilled/rejected) and value/reason." },
+        { "name": "Promise.race()", "syntax": "Promise.race([p1, p2]).then(first => ...);", "definition": "Resolves or rejects as soon as the first promise settles." }
+      ]
+    },
+    {
+      "category": "Async / Await",
+      "items": [
+        { "name": "async function", "syntax": "async function fetchData() {\n  const data = await getData();\n  return data;\n}", "definition": "Declares an async function. Always returns a Promise. Enables await inside the body." },
+        { "name": "await", "syntax": "const result = await somePromise;", "definition": "Pauses execution of the async function until the promise settles. Unwraps the resolved value." },
+        { "name": "try / catch errors", "syntax": "async function load() {\n  try {\n    const data = await fetch(url);\n  } catch (err) {\n    console.error(err);\n  }\n}", "definition": "Use try/catch to handle rejected promises when using await." },
+        { "name": "Parallel with await", "syntax": "const [a, b] = await Promise.all([fetch(url1), fetch(url2)]);", "definition": "Kick off multiple promises simultaneously, then await all of them together." }
+      ]
+    },
+    {
+      "category": "Fetch API",
+      "items": [
+        { "name": "GET request", "syntax": "const res = await fetch('https://api.example.com/data');\nconst json = await res.json();", "definition": "fetch() returns a Promise. Call .json() on the response to parse the body as JSON." },
+        { "name": "POST request", "syntax": "const res = await fetch('/api/items', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ name: 'item' }),\n});", "definition": "Pass an options object to send POST with a JSON body." },
+        { "name": "Check status", "syntax": "if (!res.ok) throw new Error(`HTTP error: ${res.status}`);", "definition": "fetch() does not reject on HTTP error codes (4xx, 5xx). Always check res.ok." },
+        { "name": "Response methods", "syntax": "res.json()   // parse as JSON\nres.text()   // parse as plain text\nres.blob()   // parse as Blob (files, images)", "definition": "Each response method returns a Promise. You can only consume the body once." }
+      ]
+    },
+    {
+      "category": "Error Handling",
+      "items": [
+        { "name": "try / catch / finally", "syntax": "try {\n  riskyOperation();\n} catch (err) {\n  console.error(err.message);\n} finally {\n  cleanup();\n}", "definition": "try wraps risky code, catch receives the Error object, finally always runs." },
+        { "name": "throw", "syntax": "throw new Error('Something went wrong');", "definition": "Throw any value as an error. Prefer throwing Error objects so stack traces are available." },
+        { "name": "Error types", "syntax": "TypeError\nRangeError\nReferenceError\nSyntaxError", "definition": "Built-in Error subtypes provide more specific information about what went wrong." }
+      ]
+    }
+  ]
+}
