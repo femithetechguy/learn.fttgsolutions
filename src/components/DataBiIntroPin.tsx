@@ -7,7 +7,7 @@ export default function DataBiIntroPin({ courseCount }: { courseCount: number })
 
       {/* Left: heading block */}
       <div className="flex flex-col gap-3 lg:w-60 shrink-0">
-        <span className="font-sans text-[10px] font-semibold tracking-widest uppercase text-accent-bi">
+        <span className="font-sans text-xs font-semibold tracking-widest uppercase text-accent-bi">
           {introData.pillarLabel}
         </span>
         <h2 className="font-display text-2xl font-bold text-text-primary leading-tight">

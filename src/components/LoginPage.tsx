@@ -76,7 +76,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
                 )}
               </div>
 
-              <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight">{label}</p>
+              <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
               <p className="font-sans text-text-muted text-[8px] mt-0.5 leading-tight">{tag}</p>
             </div>
           ))}
@@ -93,7 +93,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
           <div className="w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
             {cx.Icon && <cx.Icon size={10} style={{ color: cx.color }} />}
           </div>
-          <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight mt-1.5 text-center">{cx.label}</p>
+          <p className="font-sans font-semibold text-text-primary text-xs leading-tight mt-1.5 text-center">{cx.label}</p>
           <p className="font-sans text-text-muted text-[7px] leading-tight mt-0.5 text-center">{cx.tag}</p>
 
           <div className="flex-1" />

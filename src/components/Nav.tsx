@@ -80,7 +80,7 @@ export default function Nav({ user, onLogout }: NavProps) {
                 {onLogout && (
                   <button
                     onClick={onLogout}
-                    className="flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors duration-200"
+                    className="flex items-center gap-1.5 font-sans text-sm text-text-muted hover:text-text-secondary transition-colors duration-200"
                   >
                     <LogOut size={14} />
                     {isGuest ? ui.signIn : ui.signOut}
@@ -88,7 +88,7 @@ export default function Nav({ user, onLogout }: NavProps) {
                 )}
               </>
             ) : (
-              <a href="/" className="font-sans text-xs text-text-muted hover:text-text-secondary transition-colors duration-200">
+              <a href="/" className="font-sans text-sm text-text-muted hover:text-text-secondary transition-colors duration-200">
                 {ui.signIn}
               </a>
             )}
