@@ -164,7 +164,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
             )}
 
             <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
-            <p className="font-sans text-text-muted text-[9px] mt-0.5 leading-tight">{tag}</p>
+            <p className="font-sans text-text-muted text-[11px] mt-0.5 leading-tight">{tag}</p>
           </div>
         ))}
       </div>
@@ -181,7 +181,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
           </div>
           <div className="flex-shrink-0">
             <p className="font-sans font-semibold text-text-primary text-xs">{cx.label}</p>
-            <p className="font-sans text-text-muted text-[9px]">{cx.tag}</p>
+            <p className="font-sans text-text-muted text-[11px]">{cx.tag}</p>
           </div>
           <div className="flex-1 flex items-center justify-end gap-2">
             <div className="flex flex-col gap-0.5 text-right">
@@ -588,7 +588,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
           <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
             <div className="gold-line mb-3" />
             <div className="mb-2">
-              <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
+              <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
                 {login.brand.siteLabel}
               </p>
               <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
@@ -599,7 +599,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
                 <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
               </h2>
             </div>
-            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
+            <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
               {login.brand.pillarsLabel}
             </p>
             <PillarCards mobile />
