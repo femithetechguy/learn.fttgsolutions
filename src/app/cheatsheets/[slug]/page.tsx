@@ -3,10 +3,11 @@
 import { useState, useMemo } from 'react'
 import { useParams, notFound } from 'next/navigation'
 import Link from 'next/link'
-import { FileCode2, Search, X, Share2, Printer, Check } from 'lucide-react'
+import { Search, X, Share2, Printer, Check } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import CheatGrid from '@/components/CheatGrid'
+import SheetIcon from '@/components/SheetIcon'
 import { SHEETS } from '../../../../data/cheatsheets/registry'
 
 export default function CheatsheetPage() {
@@ -61,7 +62,7 @@ export default function CheatsheetPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
             <div className="animate-fade-in flex items-start gap-4">
               <div className="w-11 h-11 rounded-sm flex items-center justify-center shrink-0 mt-1" style={{ background: `${color}18` }}>
-                <FileCode2 size={20} style={{ color }} />
+                <SheetIcon sheetKey={slug} color={color} size={22} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-sans text-sm text-text-muted tracking-widest uppercase mb-1">Cheat Sheets</p>
@@ -72,7 +73,7 @@ export default function CheatsheetPage() {
                   <div className="flex items-center gap-2 shrink-0 mt-2">
                     <button
                       onClick={handleShare}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
                       title="Share this cheat sheet"
                     >
                       {shared
@@ -82,7 +83,7 @@ export default function CheatsheetPage() {
                     </button>
                     <Link
                       href={`/cheatsheets/${slug}/print`}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
                       title="Print this cheat sheet"
                     >
                       <Printer size={13} />
@@ -113,13 +114,18 @@ export default function CheatsheetPage() {
                     key={s.key}
                     href={`/cheatsheets/${s.key}`}
                     onClick={() => setQuery('')}
-                    className={`font-sans text-sm font-semibold uppercase px-5 py-2 rounded-sm border transition-all duration-150 ${
+                    className={`inline-flex items-center gap-1.5 font-sans text-sm font-semibold uppercase px-4 py-2 rounded-sm border transition-all duration-150 ${
                       isActive
-                        ? 'text-bg-primary border-transparent'
-                        : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-text-primary'
+                        ? 'text-bg-primary border-transparent bevel-active'
+                        : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-text-primary bevel-sm'
                     }`}
                     style={isActive ? { background: c, borderColor: c } : {}}
                   >
+                    <SheetIcon
+                      sheetKey={s.key}
+                      color={isActive ? 'currentColor' : c}
+                      size={14}
+                    />
                     {s.data.label}
                   </Link>
                 )

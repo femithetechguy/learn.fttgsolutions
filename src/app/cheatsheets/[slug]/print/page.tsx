@@ -5,6 +5,7 @@ import { useParams, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Printer } from 'lucide-react'
 import { SHEETS } from '../../../../../data/cheatsheets/registry'
+import SheetIcon from '@/components/SheetIcon'
 
 export default function PrintPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -42,6 +43,7 @@ export default function PrintPage() {
           <button
             onClick={() => window.print()}
             className="flex items-center gap-1.5 px-4 py-2 bg-black text-white text-sm rounded font-medium hover:bg-gray-800 transition-colors"
+            style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.25)' }}
           >
             <Printer size={14} />
             Print
@@ -51,7 +53,10 @@ export default function PrintPage() {
         {/* Sheet header */}
         <div className="mb-3 pb-2 border-b-2 border-black">
           <p className="text-[9px] uppercase tracking-widest font-bold" style={{ color }}>learn.fttgsolutions.com · Cheat Sheets</p>
-          <h1 className="text-xl font-bold leading-tight text-black mt-0.5">{sheet.data.headline}</h1>
+          <div className="flex items-center gap-2 mt-0.5">
+            <SheetIcon sheetKey={slug} color={color} size={18} />
+            <h1 className="text-xl font-bold leading-tight text-black">{sheet.data.headline}</h1>
+          </div>
           <p className="text-gray-600 text-xs mt-0.5 font-medium">{sheet.data.tagline}</p>
         </div>
 
