@@ -1,0 +1,177 @@
+{
+  "label": "Java",
+  "headline": "Java Cheat Sheet",
+  "tagline": "Write Once. Run Anywhere.",
+  "description": "Quick reference for Java — data types, strings, arrays, loops, collections, classes, exception handling, and more.",
+  "color": "E76F00",
+  "categories": [
+    {
+      "category": "Getting Started",
+      "items": [
+        { "name": "Hello World", "syntax": "public class Hello {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World!\");\n  }\n}", "definition": "Every Java program needs a class with a main method as its entry point." },
+        { "name": "Print", "syntax": "System.out.println(\"text\");", "definition": "Prints a line to the console. Use print() to omit the newline, or printf() for formatted output." },
+        { "name": "Comments", "syntax": "// single line\n/* multi-line */\n/** javadoc */", "definition": "Three comment styles: single-line (//), block (/* */), and Javadoc (/** */) for documentation." },
+        { "name": "Import", "syntax": "import java.util.ArrayList;", "definition": "Import a class from a package to use it without its fully qualified name." }
+      ]
+    },
+    {
+      "category": "Primitive Data Types",
+      "items": [
+        { "name": "int", "syntax": "int age = 25;", "definition": "32-bit signed integer. Range: -2,147,483,648 to 2,147,483,647. Default: 0." },
+        { "name": "long", "syntax": "long big = 10000000000L;", "definition": "64-bit signed integer. Suffix L for literals. Use when int is too small." },
+        { "name": "double", "syntax": "double price = 9.99;", "definition": "64-bit floating-point. Default choice for decimals. Default: 0.0." },
+        { "name": "float", "syntax": "float rate = 3.14f;", "definition": "32-bit floating-point. Suffix f for literals. Less precise than double." },
+        { "name": "boolean", "syntax": "boolean flag = true;", "definition": "true or false only. Default: false." },
+        { "name": "char", "syntax": "char letter = 'A';", "definition": "Single 16-bit Unicode character. Use single quotes." },
+        { "name": "byte", "syntax": "byte b = 127;", "definition": "8-bit signed integer. Range: -128 to 127. Default: 0." },
+        { "name": "short", "syntax": "short s = 32000;", "definition": "16-bit signed integer. Range: -32,768 to 32,767. Default: 0." }
+      ]
+    },
+    {
+      "category": "Variables & Type Casting",
+      "items": [
+        { "name": "Declare & assign", "syntax": "int x = 10;", "definition": "Declare a variable with a type, name, and value in one statement." },
+        { "name": "Widening cast", "syntax": "int i = 42;\ndouble d = i;", "definition": "Automatically converts a smaller type to a larger type. No data loss." },
+        { "name": "Narrowing cast", "syntax": "double d = 9.99;\nint i = (int) d;", "definition": "Explicitly convert a larger type to a smaller type. May lose data (9.99 → 9)." },
+        { "name": "String → int", "syntax": "int n = Integer.parseInt(\"42\");", "definition": "Parse a String to an int. Throws NumberFormatException if the string is not a valid integer." },
+        { "name": "String → double", "syntax": "double d = Double.parseDouble(\"3.14\");", "definition": "Parse a String to a double." },
+        { "name": "int → String", "syntax": "String s = String.valueOf(42);", "definition": "Convert any primitive to a String using String.valueOf()." },
+        { "name": "var (Java 10+)", "syntax": "var list = new ArrayList<String>();", "definition": "Local variable type inference — the compiler infers the type from the right-hand side." }
+      ]
+    },
+    {
+      "category": "Strings",
+      "items": [
+        { "name": "Create", "syntax": "String s = \"Hello\";\nString s2 = new String(\"Hello\");", "definition": "String literals are preferred — they are cached in the string pool." },
+        { "name": "Concatenate", "syntax": "String full = \"Hello\" + \" \" + \"World\";", "definition": "Use + to join strings. Numbers are automatically converted to strings." },
+        { "name": "Length", "syntax": "s.length()", "definition": "Returns the number of characters in the string." },
+        { "name": "charAt()", "syntax": "s.charAt(0)", "definition": "Returns the character at the given index (zero-based)." },
+        { "name": "indexOf()", "syntax": "s.indexOf(\"lo\")", "definition": "Returns the index of the first occurrence of a substring, or -1 if not found." },
+        { "name": "substring()", "syntax": "s.substring(1, 4)", "definition": "Extracts characters from start index (inclusive) to end index (exclusive)." },
+        { "name": "toUpperCase()", "syntax": "s.toUpperCase()", "definition": "Returns a new string with all characters converted to uppercase." },
+        { "name": "toLowerCase()", "syntax": "s.toLowerCase()", "definition": "Returns a new string with all characters converted to lowercase." },
+        { "name": "trim()", "syntax": "s.trim()", "definition": "Removes leading and trailing whitespace from the string." },
+        { "name": "replace()", "syntax": "s.replace(\"old\", \"new\")", "definition": "Returns a new string with all occurrences of the first argument replaced by the second." },
+        { "name": "contains()", "syntax": "s.contains(\"ell\")", "definition": "Returns true if the string contains the specified sequence of characters." },
+        { "name": "startsWith()", "syntax": "s.startsWith(\"He\")", "definition": "Returns true if the string begins with the specified prefix." },
+        { "name": "endsWith()", "syntax": "s.endsWith(\"lo\")", "definition": "Returns true if the string ends with the specified suffix." },
+        { "name": "equals()", "syntax": "s.equals(s2)", "definition": "Compares two strings by value. Use equals() not == for string comparison." },
+        { "name": "isEmpty()", "syntax": "s.isEmpty()", "definition": "Returns true if the string has length zero." },
+        { "name": "split()", "syntax": "String[] parts = s.split(\",\");", "definition": "Splits the string around matches of the given regex and returns a String array." },
+        { "name": "StringBuilder", "syntax": "StringBuilder sb = new StringBuilder();\nsb.append(\"Hello\");\nsb.append(\" World\");\nString result = sb.toString();", "definition": "Mutable string builder — use instead of concatenating with + in loops for better performance." }
+      ]
+    },
+    {
+      "category": "Arrays",
+      "items": [
+        { "name": "Declare & init", "syntax": "int[] nums = {1, 2, 3, 4, 5};", "definition": "Declare and initialize an array with literal values." },
+        { "name": "Declare with size", "syntax": "String[] names = new String[3];", "definition": "Create an array of a fixed size. Elements default to null (objects) or 0 (primitives)." },
+        { "name": "Access element", "syntax": "nums[0]", "definition": "Access element at index 0. Arrays are zero-indexed." },
+        { "name": "Length", "syntax": "nums.length", "definition": "The .length property (not a method) returns the number of elements." },
+        { "name": "Sort", "syntax": "Arrays.sort(nums);", "definition": "Sorts the array in ascending order in-place. Import java.util.Arrays." },
+        { "name": "To string", "syntax": "Arrays.toString(nums)", "definition": "Returns a readable string representation like [1, 2, 3]." },
+        { "name": "2D array", "syntax": "int[][] grid = {{1,2},{3,4}};", "definition": "Declare a 2D array with nested initializers." },
+        { "name": "2D access", "syntax": "grid[0][1]", "definition": "Access the element at row 0, column 1." }
+      ]
+    },
+    {
+      "category": "Operators",
+      "items": [
+        { "name": "Arithmetic", "syntax": "+ - * / %", "definition": "Add, subtract, multiply, divide, and modulus (remainder)." },
+        { "name": "Increment", "syntax": "i++ / ++i", "definition": "Post-increment (i++) returns current value then adds 1. Pre-increment (++i) adds 1 first." },
+        { "name": "Decrement", "syntax": "i-- / --i", "definition": "Post-decrement returns current value then subtracts 1. Pre-decrement subtracts 1 first." },
+        { "name": "Comparison", "syntax": "== != > < >= <=", "definition": "Compare two values. Return a boolean. Use .equals() for object comparison." },
+        { "name": "Logical", "syntax": "&& || !", "definition": "AND (&&), OR (||), NOT (!). Short-circuit — the right side isn't evaluated if the result is determined by the left." },
+        { "name": "Assignment", "syntax": "+= -= *= /= %=", "definition": "Compound assignment operators. x += 5 is shorthand for x = x + 5." },
+        { "name": "Ternary", "syntax": "int max = (a > b) ? a : b;", "definition": "Shorthand if/else. condition ? valueIfTrue : valueIfFalse." },
+        { "name": "instanceof", "syntax": "obj instanceof String", "definition": "Returns true if obj is an instance of String (or a subclass/interface)." },
+        { "name": "Bitwise", "syntax": "& | ^ ~ << >>", "definition": "AND, OR, XOR, NOT, left-shift, right-shift — operate on individual bits." }
+      ]
+    },
+    {
+      "category": "Conditionals",
+      "items": [
+        { "name": "if / else if / else", "syntax": "if (x > 0) {\n  // ...\n} else if (x == 0) {\n  // ...\n} else {\n  // ...\n}", "definition": "Standard conditional branching. Only one branch executes." },
+        { "name": "switch", "syntax": "switch (day) {\n  case 1: System.out.println(\"Mon\"); break;\n  case 2: System.out.println(\"Tue\"); break;\n  default: System.out.println(\"Other\");\n}", "definition": "Matches a value against cases. Always include break to prevent fall-through. default is optional." },
+        { "name": "switch expression (Java 14+)", "syntax": "String result = switch (day) {\n  case 1 -> \"Mon\";\n  case 2 -> \"Tue\";\n  default -> \"Other\";\n};", "definition": "Arrow syntax returns a value directly. No break needed." }
+      ]
+    },
+    {
+      "category": "Loops",
+      "items": [
+        { "name": "for loop", "syntax": "for (int i = 0; i < 5; i++) {\n  System.out.println(i);\n}", "definition": "Classic counted loop with init, condition, and update expressions." },
+        { "name": "enhanced for (for-each)", "syntax": "for (String item : list) {\n  System.out.println(item);\n}", "definition": "Iterate over arrays or collections without index management." },
+        { "name": "while loop", "syntax": "while (condition) {\n  // ...\n}", "definition": "Repeats while the condition is true. May not execute at all if condition is false initially." },
+        { "name": "do-while loop", "syntax": "do {\n  // ...\n} while (condition);", "definition": "Like while, but the body always executes at least once before the condition is checked." },
+        { "name": "break", "syntax": "if (i == 3) break;", "definition": "Immediately exits the loop body." },
+        { "name": "continue", "syntax": "if (i == 3) continue;", "definition": "Skips the rest of the current iteration and moves to the next." }
+      ]
+    },
+    {
+      "category": "Collections",
+      "items": [
+        { "name": "ArrayList", "syntax": "List<String> list = new ArrayList<>();\nlist.add(\"a\");\nlist.get(0);\nlist.size();\nlist.remove(0);", "definition": "Ordered, resizable list backed by an array. Fast random access but slow inserts/removes in the middle." },
+        { "name": "HashMap", "syntax": "Map<String, Integer> map = new HashMap<>();\nmap.put(\"a\", 1);\nmap.get(\"a\");\nmap.containsKey(\"a\");\nmap.remove(\"a\");", "definition": "Key-value store with O(1) average lookup. Unordered. Keys and values must be objects." },
+        { "name": "HashSet", "syntax": "Set<String> set = new HashSet<>();\nset.add(\"x\");\nset.contains(\"x\");\nset.remove(\"x\");", "definition": "Unordered collection of unique values. O(1) average add/contains/remove." },
+        { "name": "LinkedList", "syntax": "Queue<String> q = new LinkedList<>();\nq.add(\"first\");\nq.poll();", "definition": "Doubly-linked list. Use as a Queue (FIFO) or Deque. Slow random access." },
+        { "name": "ArrayDeque", "syntax": "Deque<String> dq = new ArrayDeque<>();\ndq.addFirst(\"a\");\ndq.addLast(\"b\");\ndq.peek();\ndq.pop();", "definition": "Resizable array-based deque. Use as a Stack (LIFO) or Queue. Generally faster than LinkedList." },
+        { "name": "Iterate map", "syntax": "map.forEach((key, val) -> System.out.println(key + \":\" + val));", "definition": "Iterate all key/value pairs using forEach with a lambda." },
+        { "name": "Collections.sort()", "syntax": "Collections.sort(list);", "definition": "Sort a List in natural order. Pass a Comparator for custom ordering." }
+      ]
+    },
+    {
+      "category": "Classes & Objects",
+      "items": [
+        { "name": "Class definition", "syntax": "public class Dog {\n  String name;\n  Dog(String name) { this.name = name; }\n  void bark() { System.out.println(\"Woof!\"); }\n}", "definition": "A class is a blueprint. The constructor initializes a new object instance." },
+        { "name": "Create object", "syntax": "Dog d = new Dog(\"Rex\");", "definition": "Instantiate a class with new and call its constructor." },
+        { "name": "this keyword", "syntax": "this.name = name;", "definition": "Refers to the current object instance. Used to distinguish fields from constructor/method parameters." },
+        { "name": "Inheritance", "syntax": "public class Poodle extends Dog {\n  Poodle(String name) { super(name); }\n}", "definition": "extends sets the parent class. super() calls the parent constructor." },
+        { "name": "Interface", "syntax": "interface Swimmable { void swim(); }\nclass Duck extends Animal implements Swimmable { ... }", "definition": "Interfaces define a contract of methods a class must implement. A class can implement multiple interfaces." },
+        { "name": "Static method", "syntax": "public static int add(int a, int b) { return a + b; }", "definition": "Belongs to the class, not an instance. Call as ClassName.method() without creating an object." },
+        { "name": "Getter / Setter", "syntax": "public String getName() { return name; }\npublic void setName(String name) { this.name = name; }", "definition": "Encapsulate private fields with public accessor and mutator methods." }
+      ]
+    },
+    {
+      "category": "Exception Handling",
+      "items": [
+        { "name": "try / catch / finally", "syntax": "try {\n  int result = 10 / 0;\n} catch (ArithmeticException e) {\n  System.out.println(e.getMessage());\n} finally {\n  System.out.println(\"Always runs\");\n}", "definition": "try wraps risky code, catch handles specific exceptions, finally always executes (cleanup)." },
+        { "name": "throws declaration", "syntax": "public void readFile() throws IOException { ... }", "definition": "Declares that a method may throw a checked exception — callers must handle or rethrow it." },
+        { "name": "throw", "syntax": "throw new IllegalArgumentException(\"Bad input\");", "definition": "Explicitly throw an exception. Use custom messages to aid debugging." },
+        { "name": "Common exceptions", "syntax": "NullPointerException\nArrayIndexOutOfBoundsException\nClassCastException\nNumberFormatException\nIllegalArgumentException\nIOException", "definition": "Frequently encountered Java exceptions. RuntimeExceptions are unchecked; IOException requires handling." }
+      ]
+    },
+    {
+      "category": "Access Modifiers",
+      "items": [
+        { "name": "public", "syntax": "public int value;", "definition": "Accessible from any class in any package." },
+        { "name": "protected", "syntax": "protected int value;", "definition": "Accessible within the same package and by subclasses in other packages." },
+        { "name": "default (package-private)", "syntax": "int value;", "definition": "No modifier — accessible only within the same package." },
+        { "name": "private", "syntax": "private int value;", "definition": "Accessible only within the declaring class. Used for encapsulation." },
+        { "name": "final", "syntax": "final int MAX = 100;", "definition": "Variable: cannot be reassigned. Method: cannot be overridden. Class: cannot be extended." },
+        { "name": "static", "syntax": "static int count = 0;", "definition": "Belongs to the class rather than any instance. Shared across all objects." }
+      ]
+    },
+    {
+      "category": "Math Methods",
+      "items": [
+        { "name": "max() / min()", "syntax": "Math.max(10, 20)  // 20\nMath.min(10, 20)  // 10", "definition": "Return the larger or smaller of two values." },
+        { "name": "abs()", "syntax": "Math.abs(-7)  // 7", "definition": "Returns the absolute (non-negative) value." },
+        { "name": "pow()", "syntax": "Math.pow(2, 10)  // 1024.0", "definition": "Returns the first argument raised to the power of the second." },
+        { "name": "sqrt()", "syntax": "Math.sqrt(16)  // 4.0", "definition": "Returns the positive square root." },
+        { "name": "round()", "syntax": "Math.round(3.7)  // 4", "definition": "Rounds to the nearest integer." },
+        { "name": "random()", "syntax": "Math.random()  // 0.0 to <1.0", "definition": "Returns a random double in [0, 1). Multiply and cast to get integers: (int)(Math.random() * 10)." },
+        { "name": "floor() / ceil()", "syntax": "Math.floor(3.9)  // 3.0\nMath.ceil(3.1)   // 4.0", "definition": "floor() rounds down; ceil() rounds up." }
+      ]
+    },
+    {
+      "category": "User Input",
+      "items": [
+        { "name": "Scanner setup", "syntax": "import java.util.Scanner;\nScanner sc = new Scanner(System.in);", "definition": "Import Scanner and create an instance connected to standard input." },
+        { "name": "Read string", "syntax": "String line = sc.nextLine();", "definition": "Reads a full line of input as a String." },
+        { "name": "Read int", "syntax": "int n = sc.nextInt();", "definition": "Reads the next token as an integer. Throws InputMismatchException for non-integers." },
+        { "name": "Read double", "syntax": "double d = sc.nextDouble();", "definition": "Reads the next token as a double." },
+        { "name": "Close scanner", "syntax": "sc.close();", "definition": "Release the scanner resource when done reading input." }
+      ]
+    }
+  ]
+}

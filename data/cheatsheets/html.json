@@ -1,0 +1,199 @@
+{
+  "label": "HTML",
+  "headline": "HTML Cheat Sheet",
+  "tagline": "Structure. Semantics. Content.",
+  "description": "Quick reference for HTML elements and attributes — from document structure and text formatting to forms, tables, media, and semantic layout.",
+  "color": "E34F26",
+  "categories": [
+    {
+      "category": "Document Structure",
+      "items": [
+        { "name": "<!DOCTYPE>", "syntax": "<!DOCTYPE html>", "definition": "Must be the very first line — tells the browser this is an HTML5 document." },
+        { "name": "<html>", "syntax": "<html lang=\"en\">...</html>", "definition": "Root element that wraps all page content. Set lang for accessibility and SEO." },
+        { "name": "<head>", "syntax": "<head>...</head>", "definition": "Contains metadata, title, styles, and scripts — nothing visible on the page." },
+        { "name": "<body>", "syntax": "<body>...</body>", "definition": "Contains all visible page content." },
+        { "name": "<title>", "syntax": "<title>Page Title</title>", "definition": "Sets the text shown in the browser tab and used by search engines." },
+        { "name": "<meta charset>", "syntax": "<meta charset=\"UTF-8\">", "definition": "Declares character encoding. UTF-8 supports all languages and symbols." },
+        { "name": "<meta viewport>", "syntax": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">", "definition": "Makes the page scale correctly on mobile devices." },
+        { "name": "<!-- -->", "syntax": "<!-- this is a comment -->", "definition": "HTML comment — not displayed in the browser, useful for notes in your code." }
+      ]
+    },
+    {
+      "category": "Text & Formatting",
+      "items": [
+        { "name": "<p>", "syntax": "<p>Paragraph text.</p>", "definition": "Defines a paragraph. Browsers add space above and below." },
+        { "name": "<br>", "syntax": "<br>", "definition": "Line break — moves content to the next line without starting a new paragraph." },
+        { "name": "<hr>", "syntax": "<hr>", "definition": "Horizontal rule — draws a thematic dividing line across the page." },
+        { "name": "<strong>", "syntax": "<strong>Important text</strong>", "definition": "Bold text with semantic importance — screen readers emphasise it." },
+        { "name": "<b>", "syntax": "<b>Bold text</b>", "definition": "Bold text for stylistic purposes only, no semantic meaning." },
+        { "name": "<em>", "syntax": "<em>Emphasised text</em>", "definition": "Italic text with semantic emphasis — screen readers stress it." },
+        { "name": "<i>", "syntax": "<i>Italic text</i>", "definition": "Italic text for stylistic purposes — used for technical terms, foreign words." },
+        { "name": "<u>", "syntax": "<u>Underlined text</u>", "definition": "Underline text. Avoid for links — users may confuse it with a hyperlink." },
+        { "name": "<mark>", "syntax": "<mark>Highlighted text</mark>", "definition": "Highlight text as if with a marker pen — yellow background by default." },
+        { "name": "<del>", "syntax": "<del>Deleted text</del>", "definition": "Strikethrough text representing removed content." },
+        { "name": "<ins>", "syntax": "<ins>Inserted text</ins>", "definition": "Underlined text representing newly added content." },
+        { "name": "<small>", "syntax": "<small>Fine print</small>", "definition": "Renders text smaller — used for disclaimers, copyright, side comments." },
+        { "name": "<sup>", "syntax": "E = mc<sup>2</sup>", "definition": "Superscript text — raised above the baseline. Used for exponents and footnotes." },
+        { "name": "<sub>", "syntax": "H<sub>2</sub>O", "definition": "Subscript text — lowered below the baseline. Used in chemical formulas." },
+        { "name": "<code>", "syntax": "<code>let x = 1</code>", "definition": "Inline code snippet — displayed in monospace font." },
+        { "name": "<pre>", "syntax": "<pre>  indented\n  text</pre>", "definition": "Preformatted text — preserves all whitespace and line breaks exactly as written." },
+        { "name": "<kbd>", "syntax": "<kbd>Ctrl</kbd>+<kbd>C</kbd>", "definition": "Represents keyboard input — usually styled like a key cap." },
+        { "name": "<blockquote>", "syntax": "<blockquote>Quoted text</blockquote>", "definition": "Block-level quotation — indented by default. Use cite attribute for the source URL." }
+      ]
+    },
+    {
+      "category": "Headings",
+      "items": [
+        { "name": "<h1>", "syntax": "<h1>Page Title</h1>", "definition": "Top-level heading. Use only once per page — critical for SEO and accessibility." },
+        { "name": "<h2>", "syntax": "<h2>Section Title</h2>", "definition": "Second-level heading for major sections." },
+        { "name": "<h3>", "syntax": "<h3>Subsection</h3>", "definition": "Third-level heading for subsections within an h2 section." },
+        { "name": "<h4> – <h6>", "syntax": "<h4>...</h4>  through  <h6>...</h6>", "definition": "Fourth through sixth level headings. Use hierarchy in order — don't skip levels." }
+      ]
+    },
+    {
+      "category": "Links",
+      "items": [
+        { "name": "<a>", "syntax": "<a href=\"https://example.com\">Link text</a>", "definition": "Hyperlink — navigates to another page, section, file, or resource." },
+        { "name": "target=\"_blank\"", "syntax": "<a href=\"url\" target=\"_blank\">Open in new tab</a>", "definition": "Open the link in a new browser tab. Add rel=\"noopener\" for security." },
+        { "name": "Email link", "syntax": "<a href=\"mailto:hi@example.com\">Email us</a>", "definition": "Opens the user's default email client with the address pre-filled." },
+        { "name": "Phone link", "syntax": "<a href=\"tel:+1234567890\">Call us</a>", "definition": "Dials the number on mobile devices when tapped." },
+        { "name": "Anchor link", "syntax": "<a href=\"#section-id\">Jump to section</a>", "definition": "Scrolls to an element on the same page with the matching id." },
+        { "name": "rel=\"noopener\"", "syntax": "<a href=\"url\" target=\"_blank\" rel=\"noopener noreferrer\">", "definition": "Prevents the new tab from accessing the opener page — important for security." }
+      ]
+    },
+    {
+      "category": "Images & Media",
+      "items": [
+        { "name": "<img>", "syntax": "<img src=\"photo.jpg\" alt=\"Description\" width=\"400\" height=\"300\">", "definition": "Embeds an image. Always include alt text for accessibility." },
+        { "name": "loading=\"lazy\"", "syntax": "<img src=\"photo.jpg\" loading=\"lazy\" alt=\"...\">", "definition": "Defer loading the image until it's near the viewport — improves page speed." },
+        { "name": "<figure>", "syntax": "<figure>\n  <img src=\"photo.jpg\" alt=\"...\">\n  <figcaption>Caption</figcaption>\n</figure>", "definition": "Wraps an image with an optional caption. Semantically links the image and its description." },
+        { "name": "<picture>", "syntax": "<picture>\n  <source srcset=\"img.webp\" type=\"image/webp\">\n  <img src=\"img.jpg\" alt=\"...\">\n</picture>", "definition": "Serves different image formats or sizes based on the browser and screen." },
+        { "name": "<video>", "syntax": "<video controls width=\"100%\">\n  <source src=\"video.mp4\" type=\"video/mp4\">\n</video>", "definition": "Embeds a video. The controls attribute shows play/pause/volume UI." },
+        { "name": "<audio>", "syntax": "<audio controls src=\"audio.mp3\">Fallback</audio>", "definition": "Embeds an audio player. Add controls to show the browser's default UI." },
+        { "name": "<iframe>", "syntax": "<iframe src=\"https://example.com\" title=\"Example\" width=\"600\" height=\"400\"></iframe>", "definition": "Embeds another web page inside the current one. Always include a title." },
+        { "name": "<canvas>", "syntax": "<canvas id=\"myCanvas\" width=\"500\" height=\"300\"></canvas>", "definition": "A blank drawing surface — graphics are rendered onto it using JavaScript." }
+      ]
+    },
+    {
+      "category": "Semantic Layout",
+      "items": [
+        { "name": "<div>", "syntax": "<div class=\"container\">...</div>", "definition": "Generic block-level container with no semantic meaning. Used for layout and styling." },
+        { "name": "<span>", "syntax": "<span class=\"highlight\">text</span>", "definition": "Generic inline container with no semantic meaning. Used to style part of a text." },
+        { "name": "<header>", "syntax": "<header>...</header>", "definition": "Page or section header — typically contains logo, nav, or introductory content." },
+        { "name": "<nav>", "syntax": "<nav><ul>...</ul></nav>", "definition": "Navigation links section — helps screen readers and search engines find the menu." },
+        { "name": "<main>", "syntax": "<main>...</main>", "definition": "The primary unique content of the page. Only one per page." },
+        { "name": "<article>", "syntax": "<article>...</article>", "definition": "Self-contained content that could stand alone — blog post, news article, comment." },
+        { "name": "<section>", "syntax": "<section>...</section>", "definition": "Thematic grouping of content, usually with a heading." },
+        { "name": "<aside>", "syntax": "<aside>...</aside>", "definition": "Supplementary content tangentially related to the main content — sidebars, callouts." },
+        { "name": "<footer>", "syntax": "<footer>...</footer>", "definition": "Page or section footer — typically contains copyright, links, or contact info." },
+        { "name": "<details>", "syntax": "<details>\n  <summary>Click to expand</summary>\n  Hidden content here.\n</details>", "definition": "Native accordion/disclosure widget. Content is hidden until the user clicks the summary." }
+      ]
+    },
+    {
+      "category": "Tables",
+      "items": [
+        { "name": "<table>", "syntax": "<table>...</table>", "definition": "Defines a data table. Use only for tabular data, not for layout." },
+        { "name": "<thead>", "syntax": "<thead><tr><th>Name</th></tr></thead>", "definition": "Groups the header row(s) of the table. Repeated when printing on multiple pages." },
+        { "name": "<tbody>", "syntax": "<tbody><tr><td>Data</td></tr></tbody>", "definition": "Groups the body rows of the table — the main data." },
+        { "name": "<tfoot>", "syntax": "<tfoot><tr><td>Total</td></tr></tfoot>", "definition": "Groups footer rows — totals, summaries. Rendered last but declared after thead." },
+        { "name": "<tr>", "syntax": "<tr><td>Cell</td></tr>", "definition": "Defines a table row." },
+        { "name": "<th>", "syntax": "<th scope=\"col\">Column Header</th>", "definition": "Header cell — bold and centred by default. Use scope=\"col\" or scope=\"row\"." },
+        { "name": "<td>", "syntax": "<td>Data cell</td>", "definition": "Standard data cell." },
+        { "name": "colspan", "syntax": "<td colspan=\"2\">Spans 2 cols</td>", "definition": "Makes a cell span across multiple columns." },
+        { "name": "rowspan", "syntax": "<td rowspan=\"3\">Spans 3 rows</td>", "definition": "Makes a cell span across multiple rows." },
+        { "name": "<caption>", "syntax": "<caption>Monthly Sales</caption>", "definition": "Provides a title for the table — important for accessibility." }
+      ]
+    },
+    {
+      "category": "Lists",
+      "items": [
+        { "name": "<ul>", "syntax": "<ul>\n  <li>Apples</li>\n  <li>Bananas</li>\n</ul>", "definition": "Unordered (bulleted) list — for items with no meaningful sequence." },
+        { "name": "<ol>", "syntax": "<ol>\n  <li>First</li>\n  <li>Second</li>\n</ol>", "definition": "Ordered (numbered) list — for items where sequence matters." },
+        { "name": "<li>", "syntax": "<li>List item</li>", "definition": "A single item inside a ul or ol. Can contain nested lists." },
+        { "name": "<dl>", "syntax": "<dl>\n  <dt>HTML</dt>\n  <dd>HyperText Markup Language</dd>\n</dl>", "definition": "Definition list — pairs of terms and their descriptions. Good for glossaries and FAQs." },
+        { "name": "<dt>", "syntax": "<dt>Term</dt>", "definition": "The term being defined in a description list." },
+        { "name": "<dd>", "syntax": "<dd>The definition of the term.</dd>", "definition": "The description or definition of the preceding dt term." }
+      ]
+    },
+    {
+      "category": "Forms",
+      "items": [
+        { "name": "<form>", "syntax": "<form method=\"POST\" action=\"/submit\">...</form>", "definition": "Container for form controls. method is GET or POST; action is the server endpoint." },
+        { "name": "<label>", "syntax": "<label for=\"email\">Email</label>\n<input id=\"email\" type=\"email\">", "definition": "Associates a text label with a form control. Clicking the label focuses the input." },
+        { "name": "<input>", "syntax": "<input type=\"text\" name=\"username\" placeholder=\"Enter name\">", "definition": "The most versatile form element — behaviour changes entirely with the type attribute." },
+        { "name": "<textarea>", "syntax": "<textarea name=\"bio\" rows=\"4\" cols=\"40\"></textarea>", "definition": "Multi-line text input. Set rows and cols or use CSS for sizing." },
+        { "name": "<select>", "syntax": "<select name=\"city\">\n  <option value=\"nyc\">New York</option>\n</select>", "definition": "Dropdown selection list. Use multiple attribute to allow multiple selections." },
+        { "name": "<option>", "syntax": "<option value=\"nyc\">New York</option>", "definition": "A selectable item inside a select element. value is what gets submitted." },
+        { "name": "<button>", "syntax": "<button type=\"submit\">Submit</button>", "definition": "Clickable button. type can be submit (default), reset, or button." },
+        { "name": "<fieldset>", "syntax": "<fieldset>\n  <legend>Address</legend>\n  ...\n</fieldset>", "definition": "Groups related form fields with an optional border and legend caption." },
+        { "name": "<datalist>", "syntax": "<input list=\"colours\">\n<datalist id=\"colours\">\n  <option value=\"Red\">\n</datalist>", "definition": "Provides autocomplete suggestions for a text input without restricting values." }
+      ]
+    },
+    {
+      "category": "Input Types",
+      "items": [
+        { "name": "text", "syntax": "<input type=\"text\">", "definition": "Single-line text field — the default input type." },
+        { "name": "password", "syntax": "<input type=\"password\">", "definition": "Masked text field — characters are hidden as the user types." },
+        { "name": "email", "syntax": "<input type=\"email\">", "definition": "Email address field — validates format and shows email keyboard on mobile." },
+        { "name": "number", "syntax": "<input type=\"number\" min=\"0\" max=\"100\">", "definition": "Numeric input with optional min, max, and step constraints." },
+        { "name": "tel", "syntax": "<input type=\"tel\">", "definition": "Phone number field — shows numeric keyboard on mobile." },
+        { "name": "url", "syntax": "<input type=\"url\">", "definition": "URL input — validates format and shows URL keyboard on mobile." },
+        { "name": "search", "syntax": "<input type=\"search\">", "definition": "Search field — may show a clear button and uses search keyboard on mobile." },
+        { "name": "checkbox", "syntax": "<input type=\"checkbox\" name=\"agree\">", "definition": "Tick box — allows multiple selections from a group." },
+        { "name": "radio", "syntax": "<input type=\"radio\" name=\"plan\" value=\"pro\">", "definition": "Radio button — only one option in a group (same name) can be selected." },
+        { "name": "range", "syntax": "<input type=\"range\" min=\"0\" max=\"100\" step=\"5\">", "definition": "Slider for selecting a value within a range." },
+        { "name": "color", "syntax": "<input type=\"color\">", "definition": "Color picker that returns a hex value." },
+        { "name": "date", "syntax": "<input type=\"date\">", "definition": "Date picker — returns a yyyy-mm-dd value." },
+        { "name": "time", "syntax": "<input type=\"time\">", "definition": "Time picker — returns an hh:mm value." },
+        { "name": "datetime-local", "syntax": "<input type=\"datetime-local\">", "definition": "Combined date and time picker." },
+        { "name": "file", "syntax": "<input type=\"file\" accept=\".jpg,.png\">", "definition": "File upload control. Use accept to restrict allowed file types." },
+        { "name": "hidden", "syntax": "<input type=\"hidden\" name=\"token\" value=\"abc\">", "definition": "Invisible field that submits a value — used for CSRF tokens and tracking." },
+        { "name": "submit", "syntax": "<input type=\"submit\" value=\"Send\">", "definition": "Button that submits the form." },
+        { "name": "reset", "syntax": "<input type=\"reset\">", "definition": "Button that resets all form fields to their default values." }
+      ]
+    },
+    {
+      "category": "Input Attributes",
+      "items": [
+        { "name": "placeholder", "syntax": "placeholder=\"Enter email…\"", "definition": "Hint text shown inside the input when it is empty." },
+        { "name": "required", "syntax": "required", "definition": "Form cannot be submitted until this field has a value." },
+        { "name": "disabled", "syntax": "disabled", "definition": "Prevents user interaction — the field's value is not submitted." },
+        { "name": "readonly", "syntax": "readonly", "definition": "User cannot edit the value, but it is still submitted with the form." },
+        { "name": "autofocus", "syntax": "autofocus", "definition": "Automatically focuses this field when the page loads." },
+        { "name": "autocomplete", "syntax": "autocomplete=\"off\"", "definition": "Controls whether the browser offers to fill in the field automatically." },
+        { "name": "minlength / maxlength", "syntax": "minlength=\"6\" maxlength=\"20\"", "definition": "Minimum and maximum number of characters allowed in a text field." },
+        { "name": "min / max", "syntax": "min=\"0\" max=\"100\"", "definition": "Minimum and maximum values for number, range, or date inputs." },
+        { "name": "step", "syntax": "step=\"5\"", "definition": "The increment for number and range inputs." },
+        { "name": "pattern", "syntax": "pattern=\"[A-Z]{3}\"", "definition": "Regular expression the value must match for the form to submit." },
+        { "name": "multiple", "syntax": "multiple", "definition": "Allows the user to select multiple files (file input) or options (select)." },
+        { "name": "checked", "syntax": "checked", "definition": "Pre-selects a checkbox or radio button when the page loads." }
+      ]
+    },
+    {
+      "category": "Script & Style",
+      "items": [
+        { "name": "<script> inline", "syntax": "<script>\n  console.log('hello')\n</script>", "definition": "Embeds JavaScript directly in the HTML document." },
+        { "name": "<script> external", "syntax": "<script src=\"app.js\" defer></script>", "definition": "Loads an external JS file. defer runs the script after the HTML is parsed." },
+        { "name": "<style>", "syntax": "<style>\n  h1 { color: red; }\n</style>", "definition": "Embeds CSS styles directly in the document — best placed in <head>." },
+        { "name": "<link> stylesheet", "syntax": "<link rel=\"stylesheet\" href=\"style.css\">", "definition": "Links an external CSS file — the standard way to add styles to a page." },
+        { "name": "<link> favicon", "syntax": "<link rel=\"icon\" href=\"favicon.ico\">", "definition": "Sets the favicon shown in the browser tab." },
+        { "name": "defer", "syntax": "<script src=\"app.js\" defer></script>", "definition": "Script runs after the HTML is fully parsed — keeps the page fast." },
+        { "name": "async", "syntax": "<script src=\"app.js\" async></script>", "definition": "Script downloads in parallel and runs as soon as it's ready, without waiting for parsing." }
+      ]
+    },
+    {
+      "category": "Meta & SEO",
+      "items": [
+        { "name": "description", "syntax": "<meta name=\"description\" content=\"Page summary here.\">", "definition": "Short description of the page shown in search engine results." },
+        { "name": "canonical", "syntax": "<link rel=\"canonical\" href=\"https://example.com/page\">", "definition": "Tells search engines the preferred URL for this page — avoids duplicate content." },
+        { "name": "robots", "syntax": "<meta name=\"robots\" content=\"index, follow\">", "definition": "Instructs search engine crawlers whether to index and follow links on this page." },
+        { "name": "og:title", "syntax": "<meta property=\"og:title\" content=\"Page Title\">", "definition": "Title shown when the page is shared on social media (Open Graph)." },
+        { "name": "og:description", "syntax": "<meta property=\"og:description\" content=\"Description.\">", "definition": "Description shown in social media previews." },
+        { "name": "og:image", "syntax": "<meta property=\"og:image\" content=\"https://example.com/img.jpg\">", "definition": "Image shown when the page is shared on Facebook, LinkedIn, etc." },
+        { "name": "og:url", "syntax": "<meta property=\"og:url\" content=\"https://example.com/page\">", "definition": "Canonical URL for social sharing." },
+        { "name": "twitter:card", "syntax": "<meta name=\"twitter:card\" content=\"summary_large_image\">", "definition": "Controls how the page appears when shared on Twitter/X." },
+        { "name": "twitter:image", "syntax": "<meta name=\"twitter:image\" content=\"https://example.com/img.jpg\">", "definition": "Image shown in Twitter/X card previews." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "label": "Markdown",
+  "headline": "Markdown Cheat Sheet",
+  "tagline": "Write. Format. Render.",
+  "description": "Quick reference for Markdown — headings, emphasis, lists, links, images, tables, code blocks, and more. Works in GitHub, Notion, VS Code, and anywhere Markdown is rendered.",
+  "color": "083FA1",
+  "categories": [
+    {
+      "category": "Headings",
+      "items": [
+        { "name": "H1", "syntax": "# Heading 1", "definition": "Top-level heading. There should typically be only one H1 per document." },
+        { "name": "H2", "syntax": "## Heading 2", "definition": "Second-level heading — used for major sections." },
+        { "name": "H3", "syntax": "### Heading 3", "definition": "Third-level heading — used for sub-sections." },
+        { "name": "H4 – H6", "syntax": "#### H4\n##### H5\n###### H6", "definition": "Deeper heading levels using 4, 5, or 6 hash symbols." },
+        { "name": "Setext H1", "syntax": "Heading 1\n=========", "definition": "Alternate H1 syntax using a line of = signs beneath the text." },
+        { "name": "Setext H2", "syntax": "Heading 2\n---------", "definition": "Alternate H2 syntax using a line of - signs beneath the text." }
+      ]
+    },
+    {
+      "category": "Emphasis",
+      "items": [
+        { "name": "Bold", "syntax": "**bold text**", "definition": "Wrap text in double asterisks or double underscores (__bold__) for bold." },
+        { "name": "Italic", "syntax": "*italic text*", "definition": "Wrap text in single asterisks or single underscores (_italic_) for italic." },
+        { "name": "Bold + Italic", "syntax": "***bold and italic***", "definition": "Triple asterisks (or underscores) for combined bold and italic emphasis." },
+        { "name": "Strikethrough", "syntax": "~~strikethrough~~", "definition": "Wrap text in double tildes to render with a strikethrough line. (GFM extension)" },
+        { "name": "Inline code", "syntax": "`inline code`", "definition": "Wrap text in backticks to render as monospaced code inline." },
+        { "name": "Highlight", "syntax": "==highlighted==", "definition": "Some renderers (like Obsidian) support == for highlighted text." }
+      ]
+    },
+    {
+      "category": "Lists",
+      "items": [
+        { "name": "Unordered list", "syntax": "- Item 1\n- Item 2\n- Item 3", "definition": "Use -, *, or + as bullet markers. All three are interchangeable." },
+        { "name": "Ordered list", "syntax": "1. First\n2. Second\n3. Third", "definition": "Number followed by a period. Numbers don't need to be sequential — the renderer counts them." },
+        { "name": "Nested list", "syntax": "- Item 1\n  - Sub-item A\n  - Sub-item B\n- Item 2", "definition": "Indent sub-items by 2–4 spaces (or one tab) to create nesting." },
+        { "name": "Task / checkbox", "syntax": "- [ ] Unchecked task\n- [x] Completed task", "definition": "GitHub Flavored Markdown (GFM) renders these as interactive checkboxes. x = checked." }
+      ]
+    },
+    {
+      "category": "Links",
+      "items": [
+        { "name": "Inline link", "syntax": "[Link text](https://example.com)", "definition": "Square brackets hold the display text, parentheses hold the URL." },
+        { "name": "Link with title", "syntax": "[Link text](https://example.com \"Tooltip text\")", "definition": "Add a quoted title inside the parentheses to show a tooltip on hover." },
+        { "name": "Reference link", "syntax": "[Link text][ref]\n\n[ref]: https://example.com", "definition": "Define the URL separately using a label. Keeps the text clean for long URLs used multiple times." },
+        { "name": "Bare URL", "syntax": "<https://example.com>", "definition": "Angle brackets auto-link a URL. Also works for email: <user@example.com>." },
+        { "name": "Anchor link", "syntax": "[Go to section](#section-heading)", "definition": "Link to a heading within the same document. Headings become anchors (lowercase, hyphens for spaces)." }
+      ]
+    },
+    {
+      "category": "Images",
+      "items": [
+        { "name": "Basic image", "syntax": "![Alt text](image.png)", "definition": "Same as a link but with a ! prefix. Alt text improves accessibility and SEO." },
+        { "name": "Image with title", "syntax": "![Alt text](image.png \"Title here\")", "definition": "Adds a tooltip title that appears on hover." },
+        { "name": "Reference image", "syntax": "![Alt text][img-ref]\n\n[img-ref]: image.png", "definition": "Define the image URL separately using a reference label." },
+        { "name": "Linked image", "syntax": "[![Alt text](image.png)](https://example.com)", "definition": "Wrap an image in a link by nesting the image syntax inside link brackets." }
+      ]
+    },
+    {
+      "category": "Code",
+      "items": [
+        { "name": "Inline code", "syntax": "`const x = 1;`", "definition": "Single backticks render code inline with monospaced font." },
+        { "name": "Fenced code block", "syntax": "```javascript\nconsole.log('hello');\n```", "definition": "Triple backticks create a code block. Add a language identifier for syntax highlighting." },
+        { "name": "Tilde fence", "syntax": "~~~css\n.btn { color: red; }\n~~~", "definition": "Alternative to backtick fencing. Useful when your code contains backticks." },
+        { "name": "Indented code block", "syntax": "    // 4 spaces indent\n    const x = 1;", "definition": "Indent each line by 4 spaces or 1 tab. Works in basic Markdown without backticks." }
+      ]
+    },
+    {
+      "category": "Blockquotes",
+      "items": [
+        { "name": "Basic blockquote", "syntax": "> This is a blockquote.", "definition": "Prefix lines with > to create a blockquote." },
+        { "name": "Multi-line", "syntax": "> Line one\n> Line two\n> Line three", "definition": "Prefix each line with > for a multi-line blockquote." },
+        { "name": "Nested blockquote", "syntax": "> Outer quote\n>\n> > Inner (nested) quote", "definition": "Use >> (with a blank > line between) to nest blockquotes." },
+        { "name": "Blockquote with content", "syntax": "> ### Heading inside quote\n> Some text.", "definition": "Blockquotes can contain other Markdown elements like headings and lists." }
+      ]
+    },
+    {
+      "category": "Tables",
+      "items": [
+        { "name": "Basic table", "syntax": "| Name  | Age |\n|-------|-----|\n| Alice | 30  |\n| Bob   | 25  |", "definition": "GFM tables: headers in the first row, a separator row of dashes, then data rows. Pipes separate columns." },
+        { "name": "Left align", "syntax": "| Column |\n|:-------|\n| data   |", "definition": "Colon on the left of the separator dashes aligns the column to the left." },
+        { "name": "Center align", "syntax": "| Column |\n|:------:|\n| data   |", "definition": "Colons on both sides of the dashes centers the column." },
+        { "name": "Right align", "syntax": "| Column |\n|-------:|\n| data   |", "definition": "Colon on the right of the dashes aligns the column to the right." }
+      ]
+    },
+    {
+      "category": "Horizontal Rules",
+      "items": [
+        { "name": "Dashes", "syntax": "---", "definition": "Three or more dashes on their own line produce a horizontal divider rule." },
+        { "name": "Asterisks", "syntax": "***", "definition": "Three or more asterisks also produce a horizontal rule." },
+        { "name": "Underscores", "syntax": "___", "definition": "Three or more underscores produce a horizontal rule." }
+      ]
+    },
+    {
+      "category": "Escaping & Special",
+      "items": [
+        { "name": "Escape character", "syntax": "\\*not italic\\*", "definition": "Prefix a Markdown character with \\ to display it literally." },
+        { "name": "Escapable chars", "syntax": "\\ ` * _ {} [] () # + - . !", "definition": "These characters have special meaning in Markdown. Escape them with \\ when you want the literal symbol." },
+        { "name": "Line break", "syntax": "First line  \nSecond line", "definition": "End a line with two or more spaces, then press Enter to insert a hard line break (\\<br\\>)." },
+        { "name": "Comment (HTML)", "syntax": "<!-- This is a comment -->", "definition": "Markdown supports HTML comments. They are not rendered in the output." },
+        { "name": "HTML inline", "syntax": "<strong>bold</strong>", "definition": "Raw HTML is supported in most Markdown renderers. Useful for features Markdown doesn't natively support." },
+        { "name": "Paragraph break", "syntax": "Paragraph one.\n\nParagraph two.", "definition": "A blank line between text creates a new paragraph." }
+      ]
+    },
+    {
+      "category": "GFM Extensions",
+      "items": [
+        { "name": "Strikethrough", "syntax": "~~text~~", "definition": "GitHub Flavored Markdown (GFM) renders double tildes as strikethrough text." },
+        { "name": "Task list", "syntax": "- [ ] Todo\n- [x] Done", "definition": "Interactive checkboxes in GitHub pull requests, issues, and wikis." },
+        { "name": "Footnote", "syntax": "Text[^1]\n\n[^1]: Footnote content.", "definition": "Some renderers (GitHub, Obsidian) support footnotes with a [^label] syntax." },
+        { "name": "Definition list", "syntax": "Term\n: Definition here", "definition": "Supported in some Markdown flavors (MultiMarkdown, Pandoc) — not standard GFM." },
+        { "name": "Emoji", "syntax": ":rocket: :tada: :white_check_mark:", "definition": "GitHub and many other renderers support emoji shortcodes wrapped in colons." },
+        { "name": "Auto-link", "syntax": "www.example.com", "definition": "GFM auto-links URLs that start with http://, https://, or www. without needing angle brackets." }
+      ]
+    }
+  ]
+}

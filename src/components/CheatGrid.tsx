@@ -13,11 +13,15 @@ interface TooltipPos {
   placement: 'top' | 'bottom'
 }
 
+const LONG_PRESS_MS = 500
+
 function CheatChip({ name, syntax, definition }: CheatItem) {
   const [open,   setOpen]   = useState(false)
   const [copied, setCopied] = useState(false)
   const [pos,    setPos]    = useState<TooltipPos | null>(null)
-  const ref = useRef<HTMLSpanElement>(null)
+  const ref            = useRef<HTMLSpanElement>(null)
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const didLongPress   = useRef(false)
 
   const calcPos = () => {
     if (!ref.current) return
@@ -35,7 +39,14 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
     setTimeout(() => setCopied(false), 1500)
   }
 
-  // Close definition tooltip on outside click (touch devices)
+  const cancelLongPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }
+
+  // Close tooltip on outside click / tap
   useEffect(() => {
     if (!open) return
     const handler = (e: MouseEvent) => {
@@ -49,11 +60,31 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
     <span
       ref={ref}
       className="group inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
+      /* Desktop hover → show tooltip */
       onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; calcPos(); setOpen(true) }}
       onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setOpen(false) }}
-      onClick={(e) => { calcPos(); copy() }}
+      /* Mobile long-press → show tooltip */
+      onPointerDown={(e) => {
+        if (e.pointerType === 'mouse') return
+        didLongPress.current = false
+        longPressTimer.current = setTimeout(() => {
+          didLongPress.current = true
+          calcPos()
+          setOpen(true)
+        }, LONG_PRESS_MS)
+      }}
+      /* Cancel long-press if finger moves (scrolling) */
+      onPointerMove={(e) => { if (e.pointerType !== 'mouse') cancelLongPress() }}
+      onPointerUp={cancelLongPress}
+      onPointerCancel={cancelLongPress}
+      /* Click: copy on tap; skip if long-press already handled it */
+      onClick={() => {
+        if (didLongPress.current) { didLongPress.current = false; return }
+        calcPos()
+        copy()
+      }}
     >
-      <span className="font-mono text-xs text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
+      <span className="font-mono text-xs uppercase tracking-wider text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
         {name}
       </span>
       {copied
@@ -83,7 +114,7 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
         document.body
       )}
 
-      {/* Copied flash — appears at chip position for 1.5s */}
+      {/* Copied flash */}
       {copied && pos && typeof window !== 'undefined' && createPortal(
         <span
           className="fixed z-[9999] inline-flex items-center gap-1 px-2.5 py-1.5 bg-bg-elevated border border-green-400/30 rounded-sm shadow-2xl pointer-events-none font-sans text-xs text-green-400 font-medium"
@@ -117,19 +148,27 @@ export default function CheatGrid({ categories, columns = 2 }: CheatGridProps) {
   }[columns]
 
   return (
-    <div className={`grid ${colClass} gap-x-10 gap-y-3`}>
-      {categories.map(row => (
-        <div key={row.category} className="flex items-start gap-2 sm:gap-3">
-          <span className="font-sans text-xs font-bold tracking-widest text-text-primary uppercase w-28 sm:w-36 shrink-0 pt-1.5 leading-tight">
-            {row.category}
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {row.items.map(item => (
-              <CheatChip key={item.name} {...item} />
-            ))}
+    <div>
+      {/* Interaction hint — adapts to touch vs pointer device */}
+      <p className="font-sans text-xs text-text-muted mb-6">
+        <span className="[@media(hover:none)]:inline hidden">Tap to copy &middot; Hold for definition</span>
+        <span className="[@media(hover:hover)]:inline hidden">Hover for definition &middot; Click to copy</span>
+      </p>
+
+      <div className={`grid ${colClass} gap-x-10 gap-y-3`}>
+        {categories.map(row => (
+          <div key={row.category} className="flex items-start gap-2 sm:gap-3">
+            <span className="font-sans text-xs font-bold tracking-widest text-text-primary uppercase w-28 sm:w-36 shrink-0 pt-1.5 leading-tight">
+              {row.category}
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {row.items.map(item => (
+                <CheatChip key={item.name} {...item} />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

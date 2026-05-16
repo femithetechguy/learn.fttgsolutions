@@ -1,0 +1,81 @@
+{
+  "label": "Homebrew",
+  "headline": "Homebrew Cheat Sheet",
+  "tagline": "Install. Update. Clean.",
+  "description": "Quick reference for Homebrew — the macOS package manager. Install formulae, manage casks, tap repositories, and keep everything up to date.",
+  "color": "FBB040",
+  "categories": [
+    {
+      "category": "Installation",
+      "items": [
+        { "name": "Install Xcode tools", "syntax": "xcode-select --install", "definition": "Install the Xcode Command Line Tools — required before installing Homebrew." },
+        { "name": "Install Homebrew", "syntax": "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"", "definition": "Download and run the official Homebrew installer." },
+        { "name": "Check version", "syntax": "brew --version", "definition": "Display the currently installed version of Homebrew." },
+        { "name": "Help", "syntax": "brew help", "definition": "Show general Homebrew help and a list of available commands." },
+        { "name": "Command help", "syntax": "brew help <command>", "definition": "Show detailed help for a specific subcommand (e.g. brew help install)." },
+        { "name": "Doctor", "syntax": "brew doctor", "definition": "Check your system for potential Homebrew problems and suggest fixes." }
+      ]
+    },
+    {
+      "category": "Install & Remove",
+      "items": [
+        { "name": "Install", "syntax": "brew install <formula>", "definition": "Download and install a package (formula)." },
+        { "name": "Uninstall", "syntax": "brew uninstall <formula>", "definition": "Remove an installed package." },
+        { "name": "Reinstall", "syntax": "brew reinstall <formula>", "definition": "Uninstall and re-install a package from scratch." },
+        { "name": "Info", "syntax": "brew info <formula>", "definition": "Show details about a package — version, dependencies, install path, options." },
+        { "name": "List installed", "syntax": "brew list", "definition": "List all currently installed formulae." },
+        { "name": "List versions", "syntax": "brew list --versions <formula>", "definition": "Show all installed versions of a specific package." },
+        { "name": "Search", "syntax": "brew search <text>", "definition": "Search available formulae and casks by name or keyword." },
+        { "name": "Search all", "syntax": "brew search", "definition": "List every available formula and cask in all tapped repositories." }
+      ]
+    },
+    {
+      "category": "Update & Upgrade",
+      "items": [
+        { "name": "Update", "syntax": "brew update", "definition": "Fetch the latest version of Homebrew and all formula definitions." },
+        { "name": "Outdated", "syntax": "brew outdated", "definition": "List all installed packages that have a newer version available." },
+        { "name": "Upgrade all", "syntax": "brew upgrade", "definition": "Upgrade all installed packages to their latest versions." },
+        { "name": "Upgrade one", "syntax": "brew upgrade <formula>", "definition": "Upgrade a specific package to its latest version." },
+        { "name": "Pin", "syntax": "brew pin <formula>", "definition": "Lock a package at its current version — it will be skipped by brew upgrade." },
+        { "name": "Unpin", "syntax": "brew unpin <formula>", "definition": "Remove the version lock, allowing the package to be upgraded again." }
+      ]
+    },
+    {
+      "category": "Link & Switch",
+      "items": [
+        { "name": "Link", "syntax": "brew link <formula>", "definition": "Symlink a formula's binaries into /usr/local so they are on your PATH." },
+        { "name": "Unlink", "syntax": "brew unlink <formula>", "definition": "Remove symlinks for a formula without uninstalling it — useful when switching versions." },
+        { "name": "Switch version", "syntax": "brew switch <formula> <version>", "definition": "Relink an already-installed older version of a package." }
+      ]
+    },
+    {
+      "category": "Taps (Repositories)",
+      "items": [
+        { "name": "List taps", "syntax": "brew tap", "definition": "Display all currently tapped third-party repositories." },
+        { "name": "Tap", "syntax": "brew tap <user/repo>", "definition": "Add a GitHub-hosted tap (e.g. brew tap hashicorp/tap)." },
+        { "name": "Tap with URL", "syntax": "brew tap <user/repo> <url>", "definition": "Add a tap from a custom Git URL instead of GitHub." },
+        { "name": "Untap", "syntax": "brew untap <user/repo>", "definition": "Remove a tapped repository and all its formulae." }
+      ]
+    },
+    {
+      "category": "Casks (Mac Apps)",
+      "items": [
+        { "name": "Enable casks", "syntax": "brew tap homebrew/cask", "definition": "Tap the official cask repository to enable GUI app installation." },
+        { "name": "Install cask", "syntax": "brew install --cask <cask>", "definition": "Install a macOS GUI application (e.g. brew install --cask firefox)." },
+        { "name": "Uninstall cask", "syntax": "brew uninstall --cask <cask>", "definition": "Remove an installed macOS application." },
+        { "name": "Reinstall cask", "syntax": "brew reinstall --cask <cask>", "definition": "Remove and re-install a GUI application." },
+        { "name": "List casks", "syntax": "brew list --cask", "definition": "List all installed casks (GUI apps)." },
+        { "name": "Search casks", "syntax": "brew search --casks <text>", "definition": "Search only casks by name or keyword." }
+      ]
+    },
+    {
+      "category": "Cleanup",
+      "items": [
+        { "name": "Cleanup all", "syntax": "brew cleanup", "definition": "Remove old versions of all installed packages and clear the download cache." },
+        { "name": "Cleanup one", "syntax": "brew cleanup <formula>", "definition": "Remove old versions of a specific package only." },
+        { "name": "Dry run", "syntax": "brew cleanup -n", "definition": "Preview what would be removed by cleanup without actually deleting anything." },
+        { "name": "Remove cache", "syntax": "brew cleanup --prune=all", "definition": "Delete all cached downloads regardless of age." }
+      ]
+    }
+  ]
+}

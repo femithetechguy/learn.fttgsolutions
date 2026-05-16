@@ -1,0 +1,305 @@
+{
+  "label": "CSS3",
+  "headline": "CSS3 Cheat Sheet",
+  "tagline": "Select. Style. Animate.",
+  "description": "Quick reference for CSS3 — selectors, box model, flexbox, grid, animations, variables, and more. Everything you need to style the web.",
+  "color": "264DE4",
+  "categories": [
+    {
+      "category": "Basic Selectors",
+      "items": [
+        { "name": "Universal", "syntax": "*", "definition": "Selects all elements on the page." },
+        { "name": "Type", "syntax": "div", "definition": "Selects all elements of the given HTML tag." },
+        { "name": "Class", "syntax": ".classname", "definition": "Selects all elements with the given class attribute." },
+        { "name": "ID", "syntax": "#idname", "definition": "Selects the element with the given ID attribute." },
+        { "name": "Group", "syntax": "div, p", "definition": "Selects all matching elements from a comma-separated list." },
+        { "name": "Chaining", "syntax": "div.classname", "definition": "Selects elements that match both the type and the class." },
+        { "name": "Type + ID", "syntax": "div#idname", "definition": "Selects an element that matches both the type and the ID." }
+      ]
+    },
+    {
+      "category": "Combinators",
+      "items": [
+        { "name": "Descendant", "syntax": "div p", "definition": "Selects all <p> elements anywhere inside a <div>." },
+        { "name": "Direct child", "syntax": "div > p", "definition": "Selects <p> elements that are direct children of a <div>." },
+        { "name": "Adjacent sibling", "syntax": "div + p", "definition": "Selects the first <p> element immediately after a <div>." },
+        { "name": "General sibling", "syntax": "div ~ p", "definition": "Selects all <p> elements that are siblings after a <div>." }
+      ]
+    },
+    {
+      "category": "Attribute Selectors",
+      "items": [
+        { "name": "Has attribute", "syntax": "[target]", "definition": "Selects elements that have a target attribute, regardless of value." },
+        { "name": "Exact value", "syntax": "[target=\"_blank\"]", "definition": "Selects elements whose target attribute equals exactly \"_blank\"." },
+        { "name": "Starts with", "syntax": "[href^=\"/index\"]", "definition": "Selects elements whose href starts with \"/index\"." },
+        { "name": "Ends with", "syntax": "[href$=\".doc\"]", "definition": "Selects elements whose href ends with \".doc\"." },
+        { "name": "Contains", "syntax": "[class*=\"chair\"]", "definition": "Selects elements whose class contains the substring \"chair\"." },
+        { "name": "Word match", "syntax": "[title~=\"chair\"]", "definition": "Selects elements whose title contains \"chair\" as a whole word." },
+        { "name": "Prefix", "syntax": "[class|=\"chair\"]", "definition": "Selects elements whose class is \"chair\" or starts with \"chair-\"." }
+      ]
+    },
+    {
+      "category": "Pseudo-classes",
+      "items": [
+        { "name": ":link", "syntax": "a:link", "definition": "Selects unvisited links." },
+        { "name": ":visited", "syntax": "a:visited", "definition": "Selects links the user has already visited." },
+        { "name": ":hover", "syntax": "a:hover", "definition": "Selects an element when the user hovers over it." },
+        { "name": ":active", "syntax": "a:active", "definition": "Selects an element while it is being clicked or activated." },
+        { "name": ":focus", "syntax": "input:focus", "definition": "Selects an element that currently has keyboard focus." },
+        { "name": ":not()", "syntax": "p:not(.intro)", "definition": "Selects every <p> that does not have the class \"intro\"." },
+        { "name": ":root", "syntax": ":root", "definition": "Selects the root element of the document — typically <html>." },
+        { "name": ":target", "syntax": "#section:target", "definition": "Selects the element whose ID matches the URL fragment (#section)." },
+        { "name": ":empty", "syntax": "div:empty", "definition": "Selects elements that have no children (including text nodes)." },
+        { "name": ":lang()", "syntax": "p:lang(fr)", "definition": "Selects elements with a specific lang attribute value." }
+      ]
+    },
+    {
+      "category": "Structural Pseudo-classes",
+      "items": [
+        { "name": ":first-child", "syntax": "p:first-child", "definition": "Selects <p> elements that are the first child of their parent." },
+        { "name": ":last-child", "syntax": "p:last-child", "definition": "Selects <p> elements that are the last child of their parent." },
+        { "name": ":nth-child()", "syntax": "li:nth-child(2)", "definition": "Selects the 2nd child element. Accepts numbers, keywords (odd/even), or expressions like 3n+1." },
+        { "name": ":nth-last-child()", "syntax": "li:nth-last-child(2)", "definition": "Same as :nth-child() but counts from the last child." },
+        { "name": ":first-of-type", "syntax": "p:first-of-type", "definition": "Selects the first <p> sibling of its type within its parent." },
+        { "name": ":last-of-type", "syntax": "p:last-of-type", "definition": "Selects the last <p> sibling of its type within its parent." },
+        { "name": ":nth-of-type()", "syntax": "p:nth-of-type(2)", "definition": "Selects the nth sibling of the same type within its parent." },
+        { "name": ":nth-last-of-type()", "syntax": "p:nth-last-of-type(2)", "definition": "Same as :nth-of-type() but counts from the last of that type." },
+        { "name": ":only-child", "syntax": "p:only-child", "definition": "Selects <p> elements that are the only child of their parent." },
+        { "name": ":only-of-type", "syntax": "p:only-of-type", "definition": "Selects <p> elements that are the only sibling of their type." }
+      ]
+    },
+    {
+      "category": "Input Pseudo-classes",
+      "items": [
+        { "name": ":checked", "syntax": "input:checked", "definition": "Selects checked checkboxes or radio buttons." },
+        { "name": ":disabled", "syntax": "input:disabled", "definition": "Selects form elements that are disabled." },
+        { "name": ":enabled", "syntax": "input:enabled", "definition": "Selects form elements that are enabled (not disabled)." },
+        { "name": ":required", "syntax": "input:required", "definition": "Selects input elements with the required attribute." },
+        { "name": ":optional", "syntax": "input:optional", "definition": "Selects input elements without the required attribute." },
+        { "name": ":valid", "syntax": "input:valid", "definition": "Selects input elements with a value that passes validation." },
+        { "name": ":invalid", "syntax": "input:invalid", "definition": "Selects input elements with a value that fails validation." },
+        { "name": ":in-range", "syntax": "input:in-range", "definition": "Selects inputs whose value is within the min/max range." },
+        { "name": ":out-of-range", "syntax": "input:out-of-range", "definition": "Selects inputs whose value is outside the min/max range." },
+        { "name": ":read-only", "syntax": "input:read-only", "definition": "Selects elements with the readonly attribute." },
+        { "name": ":read-write", "syntax": "input:read-write", "definition": "Selects elements that are editable (not readonly)." },
+        { "name": ":indeterminate", "syntax": "input:indeterminate", "definition": "Selects checkboxes or radio buttons in an indeterminate state." }
+      ]
+    },
+    {
+      "category": "Pseudo-elements",
+      "items": [
+        { "name": "::before", "syntax": "p::before { content: '→'; }", "definition": "Inserts generated content before the element's content." },
+        { "name": "::after", "syntax": "p::after { content: '←'; }", "definition": "Inserts generated content after the element's content." },
+        { "name": "::first-letter", "syntax": "p::first-letter", "definition": "Selects the first letter of a block-level element." },
+        { "name": "::first-line", "syntax": "p::first-line", "definition": "Selects the first line of a block-level element." },
+        { "name": "::selection", "syntax": "::selection { background: gold; }", "definition": "Styles the portion of text selected by the user." },
+        { "name": "::placeholder", "syntax": "input::placeholder", "definition": "Styles the placeholder text inside an input or textarea." }
+      ]
+    },
+    {
+      "category": "Colors",
+      "items": [
+        { "name": "Named", "syntax": "color: red;", "definition": "Use any CSS named color keyword (red, orange, rebeccapurple, etc.)." },
+        { "name": "Hex", "syntax": "color: #264DE4;", "definition": "6-digit hex (#rrggbb) or 3-digit shorthand (#rgb)." },
+        { "name": "Hex + alpha", "syntax": "color: #264DE480;", "definition": "8-digit hex (#rrggbbaa) — last two digits set opacity (00–FF)." },
+        { "name": "rgb()", "syntax": "color: rgb(38, 77, 228);", "definition": "Red, Green, Blue values from 0–255." },
+        { "name": "rgba()", "syntax": "color: rgba(38, 77, 228, 0.5);", "definition": "rgb() with an alpha channel from 0 (transparent) to 1 (opaque)." },
+        { "name": "hsl()", "syntax": "color: hsl(228, 72%, 52%);", "definition": "Hue (0–360 degrees), Saturation (%), Lightness (%)." },
+        { "name": "hsla()", "syntax": "color: hsla(228, 72%, 52%, 0.5);", "definition": "hsl() with an alpha channel." },
+        { "name": "currentcolor", "syntax": "border-color: currentcolor;", "definition": "Inherits the element's current color value." },
+        { "name": "transparent", "syntax": "background: transparent;", "definition": "Fully transparent — shorthand for rgba(0,0,0,0)." }
+      ]
+    },
+    {
+      "category": "Backgrounds",
+      "items": [
+        { "name": "Color", "syntax": "background-color: #f0f0f0;", "definition": "Sets a solid background color." },
+        { "name": "Image", "syntax": "background-image: url('bg.png');", "definition": "Sets an image as the background." },
+        { "name": "Gradient", "syntax": "background: linear-gradient(to right, red, blue);", "definition": "Creates a linear color gradient as the background." },
+        { "name": "Radial gradient", "syntax": "background: radial-gradient(circle, red, blue);", "definition": "Creates a circular/elliptical color gradient." },
+        { "name": "Position", "syntax": "background-position: center top;", "definition": "Sets the starting position of the background image." },
+        { "name": "Size", "syntax": "background-size: cover;", "definition": "cover scales to fill the container; contain scales to fit without cropping." },
+        { "name": "Repeat", "syntax": "background-repeat: no-repeat;", "definition": "Controls whether and how the background image tiles." },
+        { "name": "Attachment", "syntax": "background-attachment: fixed;", "definition": "fixed keeps the image stationary while scrolling; scroll moves with the page." },
+        { "name": "Clip", "syntax": "background-clip: border-box;", "definition": "Defines how far the background extends: border-box, padding-box, or content-box." },
+        { "name": "Shorthand", "syntax": "background: #fff url('img.png') center/cover no-repeat;", "definition": "Combines color, image, position/size, repeat, and attachment in one declaration." }
+      ]
+    },
+    {
+      "category": "Typography",
+      "items": [
+        { "name": "font-family", "syntax": "font-family: Arial, sans-serif;", "definition": "Sets the typeface. List fallbacks separated by commas." },
+        { "name": "font-size", "syntax": "font-size: 16px;", "definition": "Sets the size of the text. Accepts px, em, rem, %, vw, etc." },
+        { "name": "font-weight", "syntax": "font-weight: bold;", "definition": "Sets text thickness: normal (400), bold (700), or a numeric value 100–900." },
+        { "name": "font-style", "syntax": "font-style: italic;", "definition": "Sets text style: normal, italic, or oblique." },
+        { "name": "line-height", "syntax": "line-height: 1.5;", "definition": "Sets the height of a line box. Unitless values (like 1.5) are relative to font-size." },
+        { "name": "letter-spacing", "syntax": "letter-spacing: 0.05em;", "definition": "Sets the space between characters." },
+        { "name": "word-spacing", "syntax": "word-spacing: 4px;", "definition": "Sets the space between words." },
+        { "name": "text-align", "syntax": "text-align: center;", "definition": "Aligns text horizontally: left, right, center, or justify." },
+        { "name": "text-decoration", "syntax": "text-decoration: underline;", "definition": "Adds a line to text: underline, overline, line-through, or none." },
+        { "name": "text-transform", "syntax": "text-transform: uppercase;", "definition": "Changes text case: uppercase, lowercase, or capitalize." },
+        { "name": "text-indent", "syntax": "text-indent: 2em;", "definition": "Indents the first line of a text block." },
+        { "name": "white-space", "syntax": "white-space: nowrap;", "definition": "Controls how whitespace and line breaks are handled." },
+        { "name": "font shorthand", "syntax": "font: italic bold 16px/1.5 Arial, sans-serif;", "definition": "Combines style, weight, size, line-height, and family in one declaration." },
+        { "name": "@font-face", "syntax": "@font-face { font-family: 'MyFont'; src: url('font.woff2'); }", "definition": "Loads a custom font from a file for use throughout the stylesheet." }
+      ]
+    },
+    {
+      "category": "Box Model",
+      "items": [
+        { "name": "width / height", "syntax": "width: 200px; height: 100px;", "definition": "Sets the element's content area dimensions." },
+        { "name": "max-width", "syntax": "max-width: 100%;", "definition": "Caps the element's width. Commonly used to make images responsive." },
+        { "name": "min-width", "syntax": "min-width: 320px;", "definition": "Sets the minimum width below which the element won't shrink." },
+        { "name": "max-height / min-height", "syntax": "max-height: 500px; min-height: 100vh;", "definition": "Caps or floors the element's height." },
+        { "name": "padding", "syntax": "padding: 10px 20px;", "definition": "Space inside the border. Shorthand: top/bottom left/right; or all four sides separately." },
+        { "name": "margin", "syntax": "margin: 0 auto;", "definition": "Space outside the border. margin: 0 auto centers a block element horizontally." },
+        { "name": "border", "syntax": "border: 1px solid #ccc;", "definition": "Shorthand for border-width, border-style, and border-color." },
+        { "name": "border-radius", "syntax": "border-radius: 8px;", "definition": "Rounds the corners of an element's border box." },
+        { "name": "box-sizing", "syntax": "box-sizing: border-box;", "definition": "border-box includes padding and border in the element's total width and height." },
+        { "name": "overflow", "syntax": "overflow: hidden;", "definition": "Controls content that overflows: visible, hidden, scroll, or auto." },
+        { "name": "visibility", "syntax": "visibility: hidden;", "definition": "Hides the element but it still occupies space (unlike display: none)." },
+        { "name": "display", "syntax": "display: block;", "definition": "Sets the display model: block, inline, inline-block, flex, grid, none, etc." },
+        { "name": "outline", "syntax": "outline: 2px solid blue;", "definition": "Like border but does not affect layout — often used for focus rings." },
+        { "name": "box-shadow", "syntax": "box-shadow: 0 4px 12px rgba(0,0,0,0.15);", "definition": "Adds one or more shadow effects around the element's frame." }
+      ]
+    },
+    {
+      "category": "Positioning",
+      "items": [
+        { "name": "position: static", "syntax": "position: static;", "definition": "Default — element follows normal document flow; top/left/etc. have no effect." },
+        { "name": "position: relative", "syntax": "position: relative; top: 10px; left: 20px;", "definition": "Offsets the element from its normal position without affecting surrounding elements." },
+        { "name": "position: absolute", "syntax": "position: absolute; top: 0; right: 0;", "definition": "Removes element from flow; positioned relative to the nearest non-static ancestor." },
+        { "name": "position: fixed", "syntax": "position: fixed; bottom: 0;", "definition": "Like absolute but positioned relative to the viewport — stays put on scroll." },
+        { "name": "position: sticky", "syntax": "position: sticky; top: 60px;", "definition": "Acts as relative until the element hits the given offset, then sticks like fixed." },
+        { "name": "z-index", "syntax": "z-index: 10;", "definition": "Controls stacking order of positioned elements. Higher value = in front." },
+        { "name": "top / right / bottom / left", "syntax": "top: 0; left: 50%;", "definition": "Offsets for positioned elements (non-static). Can use px, %, vw, etc." }
+      ]
+    },
+    {
+      "category": "Flexbox — Container",
+      "items": [
+        { "name": "Enable flex", "syntax": "display: flex;", "definition": "Creates a flex container; direct children become flex items." },
+        { "name": "flex-direction", "syntax": "flex-direction: row;", "definition": "Sets the main axis: row (default), row-reverse, column, column-reverse." },
+        { "name": "flex-wrap", "syntax": "flex-wrap: wrap;", "definition": "nowrap (default) keeps all items on one line; wrap allows items to move to the next line." },
+        { "name": "justify-content", "syntax": "justify-content: space-between;", "definition": "Aligns items along the main axis: flex-start, center, flex-end, space-between, space-around, space-evenly." },
+        { "name": "align-items", "syntax": "align-items: center;", "definition": "Aligns items along the cross axis: flex-start, flex-end, center, stretch, baseline." },
+        { "name": "align-content", "syntax": "align-content: space-between;", "definition": "Aligns flex lines when there is extra space on the cross axis (only applies when wrapping)." },
+        { "name": "gap", "syntax": "gap: 16px;", "definition": "Sets spacing between flex items (row-gap and column-gap in one declaration)." },
+        { "name": "flex-flow", "syntax": "flex-flow: row wrap;", "definition": "Shorthand for flex-direction and flex-wrap." }
+      ]
+    },
+    {
+      "category": "Flexbox — Items",
+      "items": [
+        { "name": "flex-grow", "syntax": "flex-grow: 1;", "definition": "Defines how much an item grows relative to the others when extra space is available." },
+        { "name": "flex-shrink", "syntax": "flex-shrink: 0;", "definition": "Defines how much an item shrinks relative to the others when space is tight." },
+        { "name": "flex-basis", "syntax": "flex-basis: 200px;", "definition": "Sets the initial main size of the item before growing or shrinking." },
+        { "name": "flex shorthand", "syntax": "flex: 1 1 auto;", "definition": "Combines flex-grow, flex-shrink, and flex-basis. flex: 1 is shorthand for 1 1 0." },
+        { "name": "align-self", "syntax": "align-self: flex-end;", "definition": "Overrides align-items for a specific item." },
+        { "name": "order", "syntax": "order: 2;", "definition": "Changes the visual order of a flex item without altering the DOM. Lower = first." }
+      ]
+    },
+    {
+      "category": "Grid — Container",
+      "items": [
+        { "name": "Enable grid", "syntax": "display: grid;", "definition": "Creates a grid container; direct children become grid items." },
+        { "name": "grid-template-columns", "syntax": "grid-template-columns: 1fr 1fr 1fr;", "definition": "Defines the number and size of columns. fr = fraction of available space." },
+        { "name": "grid-template-rows", "syntax": "grid-template-rows: 80px auto 60px;", "definition": "Defines the number and size of rows." },
+        { "name": "grid-template-areas", "syntax": "grid-template-areas: 'header header' 'sidebar main' 'footer footer';", "definition": "Names areas of the grid for use with grid-area on children." },
+        { "name": "gap", "syntax": "gap: 16px 24px;", "definition": "Sets row and column gutters between grid cells." },
+        { "name": "justify-items", "syntax": "justify-items: center;", "definition": "Aligns all items along the inline (row) axis within their cells." },
+        { "name": "align-items", "syntax": "align-items: start;", "definition": "Aligns all items along the block (column) axis within their cells." },
+        { "name": "justify-content", "syntax": "justify-content: space-between;", "definition": "Aligns the entire grid along the row axis when the grid is smaller than the container." },
+        { "name": "align-content", "syntax": "align-content: start;", "definition": "Aligns the entire grid along the column axis when the grid is smaller than the container." },
+        { "name": "repeat()", "syntax": "grid-template-columns: repeat(3, 1fr);", "definition": "Shorthand to repeat a track definition a number of times." },
+        { "name": "minmax()", "syntax": "grid-template-columns: repeat(3, minmax(100px, 1fr));", "definition": "Sets a minimum and maximum size for a track." },
+        { "name": "auto-fill / auto-fit", "syntax": "grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));", "definition": "auto-fill creates as many columns as fit; auto-fit collapses empty tracks." }
+      ]
+    },
+    {
+      "category": "Grid — Items",
+      "items": [
+        { "name": "grid-column", "syntax": "grid-column: 1 / 3;", "definition": "Spans the item from column line 1 to column line 3 (occupies 2 columns)." },
+        { "name": "grid-row", "syntax": "grid-row: 2 / span 2;", "definition": "Places the item starting at row 2 and spanning 2 rows." },
+        { "name": "grid-area", "syntax": "grid-area: header;", "definition": "Places the item into a named area defined by grid-template-areas." },
+        { "name": "grid-area (manual)", "syntax": "grid-area: 1 / 1 / 3 / 4;", "definition": "Shorthand for grid-row-start / grid-column-start / grid-row-end / grid-column-end." },
+        { "name": "justify-self", "syntax": "justify-self: end;", "definition": "Overrides justify-items for a single item along the row axis." },
+        { "name": "align-self", "syntax": "align-self: center;", "definition": "Overrides align-items for a single item along the column axis." }
+      ]
+    },
+    {
+      "category": "Transitions",
+      "items": [
+        { "name": "transition", "syntax": "transition: all 0.3s ease;", "definition": "Shorthand for transition-property, duration, timing-function, and delay." },
+        { "name": "transition-property", "syntax": "transition-property: opacity, transform;", "definition": "Specifies which CSS properties to animate. Use 'all' or a comma-separated list." },
+        { "name": "transition-duration", "syntax": "transition-duration: 0.3s;", "definition": "How long the transition takes to complete." },
+        { "name": "transition-timing-function", "syntax": "transition-timing-function: ease-in-out;", "definition": "The acceleration curve: ease, linear, ease-in, ease-out, ease-in-out, cubic-bezier()." },
+        { "name": "transition-delay", "syntax": "transition-delay: 0.1s;", "definition": "How long to wait before the transition starts." }
+      ]
+    },
+    {
+      "category": "Animations",
+      "items": [
+        { "name": "@keyframes", "syntax": "@keyframes slide-in { from { transform: translateX(-100%); } to { transform: translateX(0); } }", "definition": "Defines the animation sequence using from/to or percentage-based keyframes." },
+        { "name": "animation-name", "syntax": "animation-name: slide-in;", "definition": "Specifies the name of the @keyframes animation to apply." },
+        { "name": "animation-duration", "syntax": "animation-duration: 0.5s;", "definition": "Sets how long one cycle of the animation takes." },
+        { "name": "animation-timing-function", "syntax": "animation-timing-function: ease;", "definition": "The acceleration curve for the animation: ease, linear, ease-in, ease-out, ease-in-out." },
+        { "name": "animation-delay", "syntax": "animation-delay: 0.2s;", "definition": "How long to wait before the animation starts." },
+        { "name": "animation-iteration-count", "syntax": "animation-iteration-count: infinite;", "definition": "How many times the animation repeats. Use a number or 'infinite'." },
+        { "name": "animation-direction", "syntax": "animation-direction: alternate;", "definition": "normal, reverse, alternate, or alternate-reverse — controls playback direction." },
+        { "name": "animation-fill-mode", "syntax": "animation-fill-mode: forwards;", "definition": "forwards keeps the end state after the animation; backwards applies the start state before it begins." },
+        { "name": "animation-play-state", "syntax": "animation-play-state: paused;", "definition": "running or paused — toggle to start/stop the animation via JavaScript." },
+        { "name": "animation shorthand", "syntax": "animation: slide-in 0.5s ease 0.2s 1 normal forwards;", "definition": "Combines name, duration, timing-function, delay, iteration-count, direction, and fill-mode." }
+      ]
+    },
+    {
+      "category": "Transforms",
+      "items": [
+        { "name": "translate", "syntax": "transform: translate(50px, 20px);", "definition": "Moves the element by X and Y without affecting document flow." },
+        { "name": "translateX / Y", "syntax": "transform: translateX(-50%);", "definition": "Moves the element along a single axis. -50% is commonly used for centering." },
+        { "name": "scale", "syntax": "transform: scale(1.2);", "definition": "Scales the element up or down. scale(1.2) = 120% of original size." },
+        { "name": "rotate", "syntax": "transform: rotate(45deg);", "definition": "Rotates the element clockwise by the given angle." },
+        { "name": "skew", "syntax": "transform: skew(15deg, 5deg);", "definition": "Skews the element along the X and Y axes." },
+        { "name": "transform-origin", "syntax": "transform-origin: top left;", "definition": "Sets the pivot point for transforms. Default is center center." },
+        { "name": "Multiple transforms", "syntax": "transform: rotate(45deg) scale(1.2) translateX(10px);", "definition": "Apply multiple transforms in a single declaration — they are applied right to left." }
+      ]
+    },
+    {
+      "category": "CSS Variables",
+      "items": [
+        { "name": "Define variable", "syntax": ":root { --primary: #264DE4; }", "definition": "Declares a custom property at :root so it's globally accessible." },
+        { "name": "Use variable", "syntax": "color: var(--primary);", "definition": "Reads the value of a custom property with var()." },
+        { "name": "With fallback", "syntax": "color: var(--primary, #333);", "definition": "The second argument to var() is a fallback if the variable is undefined." },
+        { "name": "Local scope", "syntax": ".card { --gap: 8px; gap: var(--gap); }", "definition": "Variables can be scoped to any selector — they cascade like other properties." },
+        { "name": "Update via JS", "syntax": "el.style.setProperty('--primary', '#ff0000');", "definition": "Custom properties can be read and updated at runtime with JavaScript." }
+      ]
+    },
+    {
+      "category": "Responsive & Media Queries",
+      "items": [
+        { "name": "Media query", "syntax": "@media (max-width: 768px) { ... }", "definition": "Applies styles only when the viewport is 768px wide or narrower." },
+        { "name": "Min-width", "syntax": "@media (min-width: 1024px) { ... }", "definition": "Applies styles when the viewport is at least 1024px wide (desktop-first approach)." },
+        { "name": "Orientation", "syntax": "@media (orientation: landscape) { ... }", "definition": "Targets devices in landscape (wider than tall) orientation." },
+        { "name": "Dark mode", "syntax": "@media (prefers-color-scheme: dark) { ... }", "definition": "Applies styles when the OS is set to dark mode." },
+        { "name": "Reduced motion", "syntax": "@media (prefers-reduced-motion: reduce) { ... }", "definition": "Disables or simplifies animations for users who prefer less motion." },
+        { "name": "Print", "syntax": "@media print { ... }", "definition": "Applies styles only when the page is being printed." },
+        { "name": "Viewport units", "syntax": "width: 100vw; height: 100vh;", "definition": "vw = 1% of viewport width; vh = 1% of viewport height." }
+      ]
+    },
+    {
+      "category": "Miscellaneous",
+      "items": [
+        { "name": "opacity", "syntax": "opacity: 0.5;", "definition": "Sets transparency of the element and its children from 0 (invisible) to 1 (fully visible)." },
+        { "name": "cursor", "syntax": "cursor: pointer;", "definition": "Changes the mouse cursor style: pointer, default, move, not-allowed, copy, etc." },
+        { "name": "pointer-events", "syntax": "pointer-events: none;", "definition": "none makes the element transparent to mouse/touch events." },
+        { "name": "user-select", "syntax": "user-select: none;", "definition": "Controls whether text can be selected: none, text, all, auto." },
+        { "name": "scroll-behavior", "syntax": "scroll-behavior: smooth;", "definition": "Enables smooth animated scrolling when navigating to anchor links." },
+        { "name": "object-fit", "syntax": "object-fit: cover;", "definition": "How replaced elements (img, video) fill their container: cover, contain, fill, none, scale-down." },
+        { "name": "aspect-ratio", "syntax": "aspect-ratio: 16 / 9;", "definition": "Maintains a fixed width-to-height ratio as the element resizes." },
+        { "name": "clip-path", "syntax": "clip-path: circle(50%);", "definition": "Clips an element to a shape: circle, ellipse, polygon, or inset." },
+        { "name": "filter", "syntax": "filter: blur(4px) brightness(0.8);", "definition": "Applies visual filters: blur, brightness, contrast, grayscale, sepia, drop-shadow, etc." },
+        { "name": "!important", "syntax": "color: red !important;", "definition": "Overrides any other declaration for this property regardless of specificity. Use sparingly." }
+      ]
+    }
+  ]
+}
