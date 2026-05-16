@@ -104,6 +104,9 @@
       "favorites": "FAVOURITES",
       "favoritesUrl": "/favorites",
       "favoritesIcon": "Heart",
+      "stack": "STACK",
+      "stackUrl": "/stack",
+      "stackIcon": "Layers",
       "mainSiteLabel": "FTTG SOLUTIONS"
     },
     "hero": {

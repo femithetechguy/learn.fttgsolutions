@@ -1,0 +1,13 @@
+[
+  {
+    "id": 7,
+    "title": "The Crossover Series",
+    "description": "Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.",
+    "pillar": "Crossover",
+    "lessons": 5,
+    "duration": "2h 30m",
+    "level": "All levels",
+    "free": true,
+    "featured": true
+  }
+]

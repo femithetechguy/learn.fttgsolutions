@@ -1,2 +1,2 @@
-import data from '../../articles.json'
+import data from '../../data/articles.json'
 export default data

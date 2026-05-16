@@ -76,7 +76,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
                 )}
               </div>
 
-              <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight">{label}</p>
+              <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
               <p className="font-sans text-text-muted text-[8px] mt-0.5 leading-tight">{tag}</p>
             </div>
           ))}
@@ -93,7 +93,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
           <div className="w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
             {cx.Icon && <cx.Icon size={10} style={{ color: cx.color }} />}
           </div>
-          <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight mt-1.5 text-center">{cx.label}</p>
+          <p className="font-sans font-semibold text-text-primary text-xs leading-tight mt-1.5 text-center">{cx.label}</p>
           <p className="font-sans text-text-muted text-[7px] leading-tight mt-0.5 text-center">{cx.tag}</p>
 
           <div className="flex-1" />
@@ -164,7 +164,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
             )}
 
             <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
-            <p className="font-sans text-text-muted text-[9px] mt-0.5 leading-tight">{tag}</p>
+            <p className="font-sans text-text-muted text-[11px] mt-0.5 leading-tight">{tag}</p>
           </div>
         ))}
       </div>
@@ -181,7 +181,7 @@ function PillarCards({ mobile = false }: { mobile?: boolean }) {
           </div>
           <div className="flex-shrink-0">
             <p className="font-sans font-semibold text-text-primary text-xs">{cx.label}</p>
-            <p className="font-sans text-text-muted text-[9px]">{cx.tag}</p>
+            <p className="font-sans text-text-muted text-[11px]">{cx.tag}</p>
           </div>
           <div className="flex-1 flex items-center justify-end gap-2">
             <div className="flex flex-col gap-0.5 text-right">
@@ -588,7 +588,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
           <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
             <div className="gold-line mb-3" />
             <div className="mb-2">
-              <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
+              <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
                 {login.brand.siteLabel}
               </p>
               <h2 className="font-display text-2xl font-bold leading-tight text-text-primary">
@@ -599,7 +599,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
                 <span className="inline-block animate-slide-up animate-delay-400">{login.brand.headline[2]}</span>
               </h2>
             </div>
-            <p className="font-sans text-text-muted text-[9px] tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
+            <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-1.5 animate-fade-in animate-delay-500">
               {login.brand.pillarsLabel}
             </p>
             <PillarCards mobile />

@@ -107,7 +107,7 @@ export default function ResourcesPage() {
                         <div className="flex items-start justify-between gap-3">
                           <div>
                             <span
-                              className="tag-pill text-[10px] font-semibold mb-2 inline-block"
+                              className="tag-pill font-semibold mb-2 inline-block"
                               style={{ color: colors.text, background: colors.bg, borderColor: colors.border, borderWidth: 1, borderStyle: 'solid' }}
                             >
                               {item.tag}

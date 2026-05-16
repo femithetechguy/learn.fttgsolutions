@@ -152,13 +152,13 @@ export default function FavoritesPage() {
                         {Icon && <Icon size={18} style={{ color: course.pillarColor }} />}
                       </div>
                       <div>
-                        <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
+                        <span className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
                           {course.pillar}
                         </span>
                         <h3 className="font-display font-bold text-text-primary text-base leading-snug mt-0.5">{course.title}</h3>
                       </div>
                       <p className="font-sans text-text-secondary text-sm leading-relaxed flex-1">{course.description}</p>
-                      <div className="flex items-center gap-3 font-sans text-xs text-text-muted">
+                      <div className="flex items-center gap-3 font-sans text-sm text-text-muted">
                         <span className="flex items-center gap-1"><PlayCircle size={11} />{course.lessons} lessons</span>
                         <span className="flex items-center gap-1"><Clock size={11} />{course.duration}</span>
                         <span className="flex items-center gap-1"><TrendingUp size={11} />{course.level}</span>
@@ -185,7 +185,7 @@ export default function FavoritesPage() {
                       className="card-dark p-5 flex flex-col gap-3 group border border-transparent hover:border-white/10 transition-all duration-200">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <span className="tag-pill text-[10px] font-semibold mb-2 inline-block"
+                          <span className="tag-pill font-semibold mb-2 inline-block"
                             style={{ color: colors.text, background: colors.bg, borderColor: colors.border, borderWidth: 1, borderStyle: 'solid' }}>
                             {item.tag}
                           </span>

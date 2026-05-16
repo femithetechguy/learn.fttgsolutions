@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import EmptyState from '@/components/EmptyState'
 import FilterBar, { ICON_MAP } from '@/components/FilterBar'
 import FavoriteButton from '@/components/FavoriteButton'
+import DataBiIntroPin from '@/components/DataBiIntroPin'
 import content from '@/lib/content'
 import coursesData from '@/lib/courses'
 
@@ -77,6 +78,9 @@ export default function CoursesPage() {
 
           {filtered.length === 0 && <EmptyState query={search || undefined} />}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {filter === 'Data & BI' && (
+              <DataBiIntroPin courseCount={COURSES.filter(c => c.pillar === 'Data & BI').length} />
+            )}
             {filtered.map(course => {
               const Icon = course.Icon
               return (
@@ -88,8 +92,8 @@ export default function CoursesPage() {
                 >
                   {course.featured && (
                     <div className="absolute -top-2.5 left-5">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gold text-bg-primary text-[10px] font-bold tracking-wider uppercase rounded-sm">
-                        <Sparkles size={8} /> {ui.featuredBadge}
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gold text-bg-primary text-xs font-bold tracking-wider uppercase rounded-sm">
+                        <Sparkles size={9} /> {ui.featuredBadge}
                       </span>
                     </div>
                   )}
@@ -104,13 +108,13 @@ export default function CoursesPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-sans text-[10px] font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
+                        <span className="font-sans text-xs font-semibold tracking-widest uppercase" style={{ color: course.pillarColor }}>
                           {course.pillar}
                         </span>
                         {course.free ? (
-                          <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20 text-[10px]">{ui.freeBadge}</span>
+                          <span className="tag-pill bg-accent-bi/10 text-accent-bi border border-accent-bi/20">{ui.freeBadge}</span>
                         ) : (
-                          <span className="tag-pill bg-gold-muted text-gold border border-gold-border text-[10px]">{ui.memberBadge}</span>
+                          <span className="tag-pill bg-gold-muted text-gold border border-gold-border">{ui.memberBadge}</span>
                         )}
                       </div>
                       <h3 className="font-display font-bold text-text-primary text-base leading-snug">
