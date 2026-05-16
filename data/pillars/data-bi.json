@@ -7,167 +7,167 @@
     {
       "category": "Spreadsheets",
       "tools": [
-        { "name": "Excel",         "slug": "",              "color": "217346" },
-        { "name": "Google Sheets", "slug": "googlesheets",  "color": "34A853" },
-        { "name": "Airtable",      "slug": "airtable",      "color": "18BFFF" }
+        { "name": "Excel",         "slug": "",             "color": "217346", "definition": "Microsoft's spreadsheet — still the most widely used data tool in the world, especially in enterprise." },
+        { "name": "Google Sheets", "slug": "googlesheets", "color": "34A853", "definition": "Browser-based spreadsheets with real-time collaboration — great for lightweight data work and sharing." },
+        { "name": "Airtable",      "slug": "airtable",     "color": "18BFFF", "definition": "A spreadsheet-database hybrid — structured data with a friendly UI, popular for no-code workflows." }
       ]
     },
     {
       "category": "SQL Databases",
       "tools": [
-        { "name": "PostgreSQL",  "slug": "postgresql",  "color": "4169E1" },
-        { "name": "MySQL",       "slug": "mysql",        "color": "4479A1" },
-        { "name": "SQL Server",  "slug": "",             "color": "CC2927" },
-        { "name": "Oracle",      "slug": "",             "color": "F80000" },
-        { "name": "SQLite",      "slug": "sqlite",       "color": "6BB5FF" }
+        { "name": "PostgreSQL",  "slug": "postgresql",  "color": "4169E1", "definition": "The most powerful open-source SQL database — handles complex queries, JSON, and scales well." },
+        { "name": "MySQL",       "slug": "mysql",       "color": "4479A1", "definition": "The world's most-used open-source database — fast, reliable, and the backbone of most web apps." },
+        { "name": "SQL Server",  "slug": "",            "color": "CC2927", "definition": "Microsoft's enterprise database — common in corporate environments and integrates natively with Power BI." },
+        { "name": "Oracle",      "slug": "",            "color": "F80000", "definition": "Enterprise-grade database used by large corporations — powerful but expensive and complex to operate." },
+        { "name": "SQLite",      "slug": "sqlite",      "color": "6BB5FF", "definition": "A lightweight file-based database — perfect for local apps, mobile, and rapid prototyping." }
       ]
     },
     {
       "category": "Cloud Warehouses",
       "tools": [
-        { "name": "Snowflake",       "slug": "snowflake",        "color": "29B5E8" },
-        { "name": "BigQuery",        "slug": "googlebigquery",   "color": "669DF6" },
-        { "name": "Amazon Redshift", "slug": "",                 "color": "8C4FFF" },
-        { "name": "Azure Synapse",   "slug": "",                 "color": "0078D4" },
-        { "name": "Databricks SQL",  "slug": "databricks",       "color": "FF3621" }
+        { "name": "Snowflake",       "slug": "snowflake",       "color": "29B5E8", "definition": "Cloud data warehouse that separates storage and compute — pay per query, scales instantly." },
+        { "name": "BigQuery",        "slug": "googlebigquery",  "color": "669DF6", "definition": "Google's serverless data warehouse — query terabytes of data with SQL in seconds." },
+        { "name": "Amazon Redshift", "slug": "",                "color": "8C4FFF", "definition": "AWS's columnar data warehouse built for large-scale analytics workloads." },
+        { "name": "Azure Synapse",   "slug": "",                "color": "0078D4", "definition": "Microsoft's unified analytics platform combining SQL warehouse and Spark in one service." },
+        { "name": "Databricks SQL",  "slug": "databricks",      "color": "FF3621", "definition": "SQL layer on top of Databricks — run analytical queries against your data lakehouse." }
       ]
     },
     {
       "category": "Data Lake / Lakehouse",
       "tools": [
-        { "name": "Databricks",     "slug": "databricks",  "color": "FF3621" },
-        { "name": "Delta Lake",     "slug": "",            "color": "00ADD4" },
-        { "name": "Apache Iceberg", "slug": "",            "color": "4A90D9" },
-        { "name": "Amazon S3",      "slug": "",            "color": "E67F28" },
-        { "name": "Azure Data Lake","slug": "",            "color": "0078D4" }
+        { "name": "Databricks",      "slug": "databricks", "color": "FF3621", "definition": "Unified platform for data engineering, ML, and analytics — built on Apache Spark." },
+        { "name": "Delta Lake",      "slug": "",           "color": "00ADD4", "definition": "Open storage format that adds ACID transactions and versioning to your data lake." },
+        { "name": "Apache Iceberg",  "slug": "",           "color": "4A90D9", "definition": "Open table format for huge analytic datasets — enables time travel and schema evolution." },
+        { "name": "Amazon S3",       "slug": "",           "color": "E67F28", "definition": "AWS object storage — the backbone of most cloud data lakes, storing files cheaply at scale." },
+        { "name": "Azure Data Lake", "slug": "",           "color": "0078D4", "definition": "Microsoft's cloud storage service optimised for big data analytics workloads." }
       ]
     },
     {
       "category": "Data Ingestion",
       "tools": [
-        { "name": "Fivetran",   "slug": "",          "color": "0073FF" },
-        { "name": "Airbyte",    "slug": "airbyte",   "color": "615EFF" },
-        { "name": "Stitch",     "slug": "",          "color": "7B9FFF" },
-        { "name": "Matillion",  "slug": "matillion", "color": "19E57F" },
-        { "name": "Hevo Data",  "slug": "",          "color": "FF5B2E" }
+        { "name": "Fivetran",  "slug": "",          "color": "0073FF", "definition": "Automated pipelines that sync your SaaS tools and databases into your warehouse — no code required." },
+        { "name": "Airbyte",   "slug": "airbyte",   "color": "615EFF", "definition": "Open-source EL tool with 300+ connectors — move data from any source to your warehouse." },
+        { "name": "Stitch",    "slug": "",          "color": "7B9FFF", "definition": "Simple cloud ETL for developers — connects data sources to your warehouse in minutes." },
+        { "name": "Matillion", "slug": "matillion", "color": "19E57F", "definition": "Low-code ETL built for cloud warehouses — visual pipelines for Snowflake, BigQuery, and Redshift." },
+        { "name": "Hevo Data", "slug": "",          "color": "FF5B2E", "definition": "No-code real-time data pipeline that loads data from 150+ sources into your warehouse." }
       ]
     },
     {
       "category": "Data Transformation",
       "tools": [
-        { "name": "dbt",      "slug": "",  "color": "FF694A" },
-        { "name": "Dataform", "slug": "",  "color": "4A8CF7" },
-        { "name": "Coalesce", "slug": "",  "color": "6B56FF" },
-        { "name": "SQLMesh",  "slug": "",  "color": "5B7CFA" },
-        { "name": "Alteryx",  "slug": "",  "color": "0076BD" }
+        { "name": "dbt",      "slug": "", "color": "FF694A", "definition": "Transforms raw warehouse data using SQL — handles testing, docs, and deployment of your data models." },
+        { "name": "Dataform", "slug": "", "color": "4A8CF7", "definition": "Google's SQL-based transformation tool — similar to dbt, natively integrated with BigQuery." },
+        { "name": "Coalesce", "slug": "", "color": "6B56FF", "definition": "Visual data transformation platform purpose-built for Snowflake — drag-and-drop with SQL underneath." },
+        { "name": "SQLMesh",  "slug": "", "color": "5B7CFA", "definition": "Next-gen transformation framework with built-in testing, environments, and incremental models." },
+        { "name": "Alteryx",  "slug": "", "color": "0076BD", "definition": "No-code/low-code analytics automation — drag-and-drop workflow builder for data prep and blending." }
       ]
     },
     {
       "category": "Programming Languages",
       "tools": [
-        { "name": "SQL",    "slug": "postgresql",  "color": "4169E1" },
-        { "name": "Python", "slug": "python",      "color": "FFD43B" },
-        { "name": "R",      "slug": "r",           "color": "276DC3" },
-        { "name": "Julia",  "slug": "julia",       "color": "9558B2" }
+        { "name": "SQL",    "slug": "postgresql", "color": "4169E1", "definition": "The language of data — used to query, filter, join, and aggregate data from any relational database." },
+        { "name": "Python", "slug": "python",     "color": "FFD43B", "definition": "The most versatile language for data work — used for cleaning, analysis, automation, and ML." },
+        { "name": "R",      "slug": "r",          "color": "276DC3", "definition": "Statistical computing language — preferred by data scientists for statistical analysis and visualisation." },
+        { "name": "Julia",  "slug": "julia",      "color": "9558B2", "definition": "High-performance language for scientific computing — as fast as C but as readable as Python." }
       ]
     },
     {
       "category": "Python Libraries",
       "tools": [
-        { "name": "Pandas",   "slug": "pandas",        "color": "AA7CE0" },
-        { "name": "NumPy",    "slug": "numpy",          "color": "4DABCF" },
-        { "name": "Polars",   "slug": "polars",         "color": "0075FF" },
-        { "name": "PySpark",  "slug": "apachespark",   "color": "E25A1C" },
-        { "name": "DuckDB",   "slug": "duckdb",         "color": "E6CE00" }
+        { "name": "Pandas",  "slug": "pandas",      "color": "AA7CE0", "definition": "Python's core data manipulation library — load, clean, filter, and reshape any dataset with DataFrames." },
+        { "name": "NumPy",   "slug": "numpy",       "color": "4DABCF", "definition": "Fast numerical computing in Python — the foundation beneath pandas, scipy, and machine learning." },
+        { "name": "Polars",  "slug": "polars",      "color": "0075FF", "definition": "Lightning-fast DataFrame library written in Rust — 10-100x faster than pandas for large datasets." },
+        { "name": "PySpark", "slug": "apachespark", "color": "E25A1C", "definition": "Python API for Apache Spark — distributed data processing for datasets too large for one machine." },
+        { "name": "DuckDB",  "slug": "duckdb",      "color": "E6CE00", "definition": "In-process SQL analytics engine — query CSVs and Parquet files at Spark speeds, zero setup." }
       ]
     },
     {
       "category": "BI & Dashboarding",
       "tools": [
-        { "name": "Power BI",        "slug": "powerbi",         "color": "F2C811" },
-        { "name": "Tableau",         "slug": "",                "color": "E97627" },
-        { "name": "Looker Studio",   "slug": "looker",          "color": "4285F4" },
-        { "name": "Qlik Sense",      "slug": "qlik",            "color": "009848" },
-        { "name": "Metabase",        "slug": "metabase",        "color": "509EE3" },
-        { "name": "Apache Superset", "slug": "apachesuperset",  "color": "20A6C9" }
+        { "name": "Power BI",        "slug": "powerbi",        "color": "F2C811", "definition": "Microsoft's drag-and-drop dashboard tool — connects to any source and publishes reports across your org." },
+        { "name": "Tableau",         "slug": "",               "color": "E97627", "definition": "Industry-leading visual analytics — turns complex data into interactive, shareable dashboards." },
+        { "name": "Looker Studio",   "slug": "looker",         "color": "4285F4", "definition": "Google's free dashboarding tool — connects to BigQuery, Sheets, and 800+ data sources." },
+        { "name": "Qlik Sense",      "slug": "qlik",           "color": "009848", "definition": "Associative analytics platform — lets users explore data relationships without predefined queries." },
+        { "name": "Metabase",        "slug": "metabase",       "color": "509EE3", "definition": "Open-source BI tool teams can self-host — lets non-technical users ask questions of their database." },
+        { "name": "Apache Superset", "slug": "apachesuperset", "color": "20A6C9", "definition": "Open-source data exploration and dashboarding — powerful, free alternative to Tableau." }
       ]
     },
     {
       "category": "Visualization Libs",
       "tools": [
-        { "name": "Matplotlib", "slug": "",        "color": "11557C" },
-        { "name": "Seaborn",    "slug": "",        "color": "4C72B0" },
-        { "name": "Plotly",     "slug": "plotly",  "color": "7A76FF" },
-        { "name": "Altair",     "slug": "",        "color": "4E97CA" },
-        { "name": "Bokeh",      "slug": "",        "color": "FC8100" }
+        { "name": "Matplotlib", "slug": "",       "color": "3A8BBD", "definition": "Python's foundational plotting library — full control over every chart element, verbose but powerful." },
+        { "name": "Seaborn",    "slug": "",       "color": "4C72B0", "definition": "Statistical visualisation library built on Matplotlib — beautiful defaults for common chart types." },
+        { "name": "Plotly",     "slug": "plotly", "color": "7A76FF", "definition": "Interactive chart library for Python and JS — hover, zoom, and filter directly in the chart." },
+        { "name": "Altair",     "slug": "",       "color": "4E97CA", "definition": "Declarative visualisation library based on Vega-Lite — clean grammar for statistical charts." },
+        { "name": "Bokeh",      "slug": "",       "color": "FC8100", "definition": "Interactive web-ready visualisations in Python — great for building dashboards in the browser." }
       ]
     },
     {
       "category": "Product Analytics",
       "tools": [
-        { "name": "Mixpanel",         "slug": "mixpanel",        "color": "7856FF" },
-        { "name": "Amplitude",        "slug": "",                "color": "1C86EE" },
-        { "name": "PostHog",          "slug": "posthog",         "color": "FF813F" },
-        { "name": "Heap",             "slug": "",                "color": "FF5F5F" },
-        { "name": "Google Analytics", "slug": "googleanalytics", "color": "E37400" }
+        { "name": "Mixpanel",         "slug": "mixpanel",        "color": "7856FF", "definition": "Event-based product analytics — track exactly what users do in your app and build funnels." },
+        { "name": "Amplitude",        "slug": "",                "color": "1C86EE", "definition": "Product analytics platform focused on user behaviour — helps teams understand what drives retention." },
+        { "name": "PostHog",          "slug": "posthog",         "color": "FF813F", "definition": "Open-source product analytics with feature flags and session replay — self-hostable and privacy-friendly." },
+        { "name": "Heap",             "slug": "",                "color": "FF5F5F", "definition": "Auto-captures every user interaction — no manual event tracking, retroactively analyse any behaviour." },
+        { "name": "Google Analytics", "slug": "googleanalytics", "color": "E37400", "definition": "Web analytics platform — tracks traffic, sessions, and conversions across your website." }
       ]
     },
     {
       "category": "Data Notebooks",
       "tools": [
-        { "name": "Jupyter",      "slug": "jupyter",      "color": "F37626" },
-        { "name": "Google Colab", "slug": "googlecolab",  "color": "F9AB00" },
-        { "name": "Hex",          "slug": "",             "color": "7C5CBF" },
-        { "name": "Deepnote",     "slug": "deepnote",     "color": "3793EF" },
-        { "name": "Observable",   "slug": "observable",   "color": "7CC4F8" }
+        { "name": "Jupyter",      "slug": "jupyter",     "color": "F37626", "definition": "The standard interactive notebook for data science — mix code, output, and markdown in one document." },
+        { "name": "Google Colab", "slug": "googlecolab", "color": "F9AB00", "definition": "Free cloud-hosted Jupyter notebooks with GPU access — no setup, runs straight in your browser." },
+        { "name": "Hex",          "slug": "",            "color": "7C5CBF", "definition": "Collaborative data notebook with a polished app-publishing layer — built for data teams." },
+        { "name": "Deepnote",     "slug": "deepnote",    "color": "3793EF", "definition": "Real-time collaborative data notebook — like Google Docs, but for data science." },
+        { "name": "Observable",   "slug": "observable",  "color": "7CC4F8", "definition": "JavaScript-based reactive notebooks — best for interactive data visualisation in the browser." }
       ]
     },
     {
       "category": "Workflow Orchestration",
       "tools": [
-        { "name": "Apache Airflow", "slug": "apacheairflow", "color": "017CEE" },
-        { "name": "Dagster",        "slug": "",              "color": "7B3FE4" },
-        { "name": "Prefect",        "slug": "prefect",       "color": "8A9FFF" },
-        { "name": "Mage",           "slug": "",              "color": "7B68EE" }
+        { "name": "Apache Airflow", "slug": "apacheairflow", "color": "017CEE", "definition": "Python-based scheduler for data pipelines — define DAGs to run, monitor, and retry jobs automatically." },
+        { "name": "Dagster",        "slug": "",              "color": "7B3FE4", "definition": "Modern data orchestration — asset-first approach with built-in lineage and observability." },
+        { "name": "Prefect",        "slug": "prefect",       "color": "8A9FFF", "definition": "Python-first workflow orchestration — simpler than Airflow with a clean UI and cloud option." },
+        { "name": "Mage",           "slug": "",              "color": "7B68EE", "definition": "Modern pipeline tool with a visual editor — combines notebook-style development with orchestration." }
       ]
     },
     {
       "category": "Data Quality",
       "tools": [
-        { "name": "Great Expectations", "slug": "", "color": "FF5A5F" },
-        { "name": "Soda",               "slug": "", "color": "2BA3EC" },
-        { "name": "Monte Carlo",        "slug": "", "color": "4B6BFB" },
-        { "name": "Anomalo",            "slug": "", "color": "FF6B35" },
-        { "name": "Telmai",             "slug": "", "color": "5B67CA" }
+        { "name": "Great Expectations", "slug": "", "color": "FF5A5F", "definition": "Python library for validating your data — write expectations, run tests automatically in your pipeline." },
+        { "name": "Soda",               "slug": "", "color": "2BA3EC", "definition": "SQL-based data quality testing — define checks in YAML and monitor your data contracts." },
+        { "name": "Monte Carlo",        "slug": "", "color": "4B6BFB", "definition": "Data observability platform — detects data incidents before they reach dashboards or models." },
+        { "name": "Anomalo",            "slug": "", "color": "FF6B35", "definition": "AI-powered data quality monitoring — automatically learns your data patterns and alerts on anomalies." },
+        { "name": "Telmai",             "slug": "", "color": "5B67CA", "definition": "No-code data observability — monitors pipelines and flags quality issues in real-time." }
       ]
     },
     {
       "category": "Data Governance",
       "tools": [
-        { "name": "Atlan",             "slug": "", "color": "5E6AD2" },
-        { "name": "Alation",           "slug": "", "color": "00B4D8" },
-        { "name": "Collibra",          "slug": "", "color": "0070C0" },
-        { "name": "Microsoft Purview", "slug": "", "color": "0078D4" },
-        { "name": "DataHub",           "slug": "", "color": "20B2AA" }
+        { "name": "Atlan",             "slug": "", "color": "5E6AD2", "definition": "Active data catalogue — connects your data assets, lineage, and documentation in one searchable hub." },
+        { "name": "Alation",           "slug": "", "color": "00B4D8", "definition": "Enterprise data catalogue — helps teams find, understand, and govern data assets across the org." },
+        { "name": "Collibra",          "slug": "", "color": "0070C0", "definition": "Data governance platform for large enterprises — manages data policies, ownership, and compliance." },
+        { "name": "Microsoft Purview", "slug": "", "color": "0078D4", "definition": "Microsoft's unified data governance solution — maps and classifies data across Azure and beyond." },
+        { "name": "DataHub",           "slug": "", "color": "20B2AA", "definition": "Open-source metadata platform from LinkedIn — discover and understand data assets across your stack." }
       ]
     },
     {
       "category": "Reverse ETL",
       "tools": [
-        { "name": "Hightouch",   "slug": "", "color": "5865F2" },
-        { "name": "Census",      "slug": "", "color": "06B6D4" },
-        { "name": "RudderStack", "slug": "", "color": "3DBA90" },
-        { "name": "Grouparoo",   "slug": "", "color": "8B72E0" }
+        { "name": "Hightouch",   "slug": "", "color": "5865F2", "definition": "Syncs your warehouse data to CRMs, ad platforms, and 200+ destinations — no custom pipelines needed." },
+        { "name": "Census",      "slug": "", "color": "06B6D4", "definition": "Pushes your warehouse models into Salesforce, HubSpot, and any SaaS tool your team uses." },
+        { "name": "RudderStack", "slug": "", "color": "3DBA90", "definition": "Open-source customer data platform — collects, transforms, and routes event data to any destination." },
+        { "name": "Grouparoo",   "slug": "", "color": "8B72E0", "definition": "Open-source reverse ETL for syncing warehouse data to marketing and sales tools." }
       ]
     },
     {
       "category": "AI Analytics",
       "tools": [
-        { "name": "ChatGPT",          "slug": "",       "color": "74AA9C" },
-        { "name": "Claude",           "slug": "claude", "color": "D97757" },
-        { "name": "Gemini",           "slug": "",       "color": "8E75B2" },
-        { "name": "Power BI Copilot", "slug": "",       "color": "F2C811" },
-        { "name": "ThoughtSpot Sage", "slug": "",       "color": "00A3E0" }
+        { "name": "ChatGPT",          "slug": "",       "color": "74AA9C", "definition": "OpenAI's AI — used to write SQL, explain data, generate reports, and automate analysis workflows." },
+        { "name": "Claude",           "slug": "claude", "color": "D97757", "definition": "Anthropic's AI — strong at reasoning through complex data problems and writing clean, documented code." },
+        { "name": "Gemini",           "slug": "",       "color": "8E75B2", "definition": "Google's multimodal AI — integrates with BigQuery and Sheets for AI-assisted data workflows." },
+        { "name": "Power BI Copilot", "slug": "",       "color": "F2C811", "definition": "Microsoft's AI layer in Power BI — generate reports and DAX measures using natural language." },
+        { "name": "ThoughtSpot Sage", "slug": "",       "color": "00A3E0", "definition": "AI-powered search analytics — ask questions of your data in plain English, get instant answers." }
       ]
     }
   ]

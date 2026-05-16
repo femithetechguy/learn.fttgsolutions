@@ -7,60 +7,60 @@
     {
       "category": "Foundational Thinkers",
       "tools": [
-        { "name": "Jim Rohn",         "slug": "", "color": "D4AF37" },
-        { "name": "Napoleon Hill",    "slug": "", "color": "D4AF37" },
-        { "name": "Earl Nightingale", "slug": "", "color": "D4AF37" },
-        { "name": "Marcus Aurelius",  "slug": "", "color": "D4AF37" },
-        { "name": "Epictetus",        "slug": "", "color": "D4AF37" }
+        { "name": "Jim Rohn",         "slug": "", "color": "D4AF37", "definition": "America's foremost business philosopher — taught that personal development is the foundation of all success." },
+        { "name": "Napoleon Hill",    "slug": "", "color": "D4AF37", "definition": "Interviewed 500 successful people over 20 years and distilled their mindset into a replicable system." },
+        { "name": "Earl Nightingale", "slug": "", "color": "D4AF37", "definition": "Radio broadcaster who defined success as 'the progressive realisation of a worthy goal.'" },
+        { "name": "Marcus Aurelius",  "slug": "", "color": "D4AF37", "definition": "Roman emperor who wrote private meditations on virtue, duty, and self-mastery — still essential reading." },
+        { "name": "Epictetus",        "slug": "", "color": "D4AF37", "definition": "Stoic philosopher who taught that freedom comes from mastering your response to what you can't control." }
       ]
     },
     {
       "category": "Essential Reading",
       "tools": [
-        { "name": "Think & Grow Rich",             "slug": "", "color": "EF9F27" },
-        { "name": "Richest Man in Babylon",        "slug": "", "color": "EF9F27" },
-        { "name": "Meditations",                   "slug": "", "color": "EF9F27" },
-        { "name": "As a Man Thinketh",             "slug": "", "color": "EF9F27" },
-        { "name": "The Compound Effect",           "slug": "", "color": "EF9F27" }
+        { "name": "Think & Grow Rich",      "slug": "", "color": "EF9F27", "definition": "Napoleon Hill's 1937 masterwork — 13 principles distilled from decades of studying the ultra-successful." },
+        { "name": "Richest Man in Babylon", "slug": "", "color": "EF9F27", "definition": "Timeless wealth parables set in ancient Babylon — simple rules for saving, investing, and growing money." },
+        { "name": "Meditations",            "slug": "", "color": "EF9F27", "definition": "Marcus Aurelius's private journal — raw reflections on discipline, perspective, and ruling your own mind." },
+        { "name": "As a Man Thinketh",      "slug": "", "color": "EF9F27", "definition": "James Allen's short 1903 essay — your thoughts shape your character, circumstances, and destiny." },
+        { "name": "The Compound Effect",    "slug": "", "color": "EF9F27", "definition": "Darren Hardy's guide to small consistent actions — tiny daily choices compounding into extraordinary results." }
       ]
     },
     {
       "category": "Mental Models",
       "tools": [
-        { "name": "First Principles",        "slug": "", "color": "7F77DD" },
-        { "name": "Compounding",             "slug": "", "color": "7F77DD" },
-        { "name": "80/20 Principle",         "slug": "", "color": "7F77DD" },
-        { "name": "Inversion",               "slug": "", "color": "7F77DD" },
-        { "name": "Second-Order Thinking",   "slug": "", "color": "7F77DD" }
+        { "name": "First Principles",      "slug": "", "color": "7F77DD", "definition": "Strip a problem to its fundamental truths and reason up — the thinking tool behind every breakthrough innovation." },
+        { "name": "Compounding",           "slug": "", "color": "7F77DD", "definition": "Small consistent gains multiplied over time — the most powerful force in skills, finance, and relationships." },
+        { "name": "80/20 Principle",       "slug": "", "color": "7F77DD", "definition": "80% of results come from 20% of effort — identify the vital few actions that drive the most output." },
+        { "name": "Inversion",             "slug": "", "color": "7F77DD", "definition": "Solve problems by thinking backwards — instead of how to succeed, ask what would guarantee failure." },
+        { "name": "Second-Order Thinking", "slug": "", "color": "7F77DD", "definition": "Consider the consequences of consequences — what happens after the thing you're planning actually happens?" }
       ]
     },
     {
       "category": "Builder Principles",
       "tools": [
-        { "name": "Discipline",         "slug": "", "color": "1D9E75" },
-        { "name": "Long-term Thinking", "slug": "", "color": "1D9E75" },
-        { "name": "Mastery",            "slug": "", "color": "1D9E75" },
-        { "name": "Purpose",            "slug": "", "color": "1D9E75" },
-        { "name": "Consistency",        "slug": "", "color": "1D9E75" }
+        { "name": "Discipline",         "slug": "", "color": "1D9E75", "definition": "Doing what needs to be done regardless of how you feel — the gap between knowing and doing is closed here." },
+        { "name": "Long-term Thinking", "slug": "", "color": "1D9E75", "definition": "Sacrificing short-term comfort for compounding gains — the lens that separates builders from consumers." },
+        { "name": "Mastery",            "slug": "", "color": "1D9E75", "definition": "Pursuing deep expertise over breadth — deliberate daily practice building irreplaceable, differentiated skill." },
+        { "name": "Purpose",            "slug": "", "color": "1D9E75", "definition": "A clear reason why that outlasts motivation — the anchor that keeps you building when conditions are difficult." },
+        { "name": "Consistency",        "slug": "", "color": "1D9E75", "definition": "Showing up daily without waiting for inspiration — repetition is the engine of skill and reputation." }
       ]
     },
     {
       "category": "Daily Practices",
       "tools": [
-        { "name": "Journaling",          "slug": "", "color": "9E7CC1" },
-        { "name": "Deep Work",           "slug": "", "color": "9E7CC1" },
-        { "name": "Weekly Review",       "slug": "", "color": "9E7CC1" },
-        { "name": "Mentorship",          "slug": "", "color": "9E7CC1" },
-        { "name": "Environment Design",  "slug": "", "color": "9E7CC1" }
+        { "name": "Journaling",         "slug": "", "color": "9E7CC1", "definition": "Writing to think clearly — externalising thoughts on paper forces clarity that staying in your head never does." },
+        { "name": "Deep Work",          "slug": "", "color": "9E7CC1", "definition": "Cal Newport's term for focused, undistracted output — where the highest-value work actually gets done." },
+        { "name": "Weekly Review",      "slug": "", "color": "9E7CC1", "definition": "Stepping back to assess the week, clear your mind, and deliberately plan what comes next." },
+        { "name": "Mentorship",         "slug": "", "color": "9E7CC1", "definition": "Learning from someone ahead of you — compressing years of trial and error into months of guided growth." },
+        { "name": "Environment Design", "slug": "", "color": "9E7CC1", "definition": "Shaping your surroundings to make good habits effortless and bad habits inconvenient." }
       ]
     },
     {
       "category": "Applied Stoicism",
       "tools": [
-        { "name": "Memento Mori",    "slug": "", "color": "8B8B8B" },
-        { "name": "Amor Fati",       "slug": "", "color": "8B8B8B" },
-        { "name": "Dichotomy of Control", "slug": "", "color": "8B8B8B" },
-        { "name": "Premeditatio Malorum", "slug": "", "color": "8B8B8B" }
+        { "name": "Memento Mori",           "slug": "", "color": "8B8B8B", "definition": "Remember you will die — a daily reminder to live deliberately and not waste time on what doesn't matter." },
+        { "name": "Amor Fati",              "slug": "", "color": "8B8B8B", "definition": "Love your fate — embrace everything that happens, including hardship, as fuel for growth." },
+        { "name": "Dichotomy of Control",   "slug": "", "color": "8B8B8B", "definition": "There are things in your control and things that are not — wisdom is knowing which is which." },
+        { "name": "Premeditatio Malorum",   "slug": "", "color": "8B8B8B", "definition": "Pre-meditate the bad — visualise what could go wrong so you're not blindsided when it does." }
       ]
     }
   ]
