@@ -8,6 +8,7 @@ export interface Article {
   date:     string
   readTime: number
   src:      string
+  author?:  string
 }
 
 export interface ArticlesData {

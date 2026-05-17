@@ -5,13 +5,24 @@
   "comingSoonSubtext": "In the meantime, go build something.",
   "articles": [
     {
+      "slug": "sql-thinks-in-sets",
+      "title": "SQL Thinks in Sets",
+      "subtitle": "Why learning to stop thinking row by row is the unlock that makes SQL finally click.",
+      "pillar": "data-bi",
+      "date": "2025-05-16",
+      "readTime": 5,
+      "src": "articles/sql-thinks-in-sets.md",
+      "author": "FTTG"
+    },
+    {
       "slug": "thinking-in-models",
       "title": "Thinking in Models",
       "subtitle": "How to approach data problems by building mental models before touching a single tool.",
       "pillar": "data-bi",
       "date": "2025-05-14",
       "readTime": 5,
-      "src": "articles/thinking-in-models.md"
+      "src": "articles/thinking-in-models.md",
+      "author": "FTTG"
     },
     {
       "slug": "ship-before-perfect",
@@ -20,7 +31,8 @@
       "pillar": "app-dev",
       "date": "2025-05-12",
       "readTime": 4,
-      "src": "articles/ship-before-perfect.md"
+      "src": "articles/ship-before-perfect.md",
+      "author": "FTTG"
     },
     {
       "slug": "systems-over-goals",
@@ -29,7 +41,8 @@
       "pillar": "philosophy",
       "date": "2025-05-10",
       "readTime": 6,
-      "src": "articles/systems-over-goals.md"
+      "src": "articles/systems-over-goals.md",
+      "author": "FTTG"
     }
   ]
 }

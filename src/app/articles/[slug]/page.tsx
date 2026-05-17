@@ -60,6 +60,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                   >
                     {meta?.label}
                   </span>
+                  {article.author && (
+                    <span className="font-sans text-xs text-text-muted">By {article.author}</span>
+                  )}
                   <span className="flex items-center gap-1.5 font-sans text-xs text-text-muted">
                     <Clock size={11} />
                     {article.readTime} min read
