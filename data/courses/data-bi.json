@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "slug": "dax-zero-to-advanced",
     "title": "DAX Zero to Advanced",
     "description": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
     "pillar": "Data & BI",
@@ -12,6 +13,7 @@
   },
   {
     "id": 2,
+    "slug": "python-etl-for-power-bi",
     "title": "Python ETL for Power BI",
     "description": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
     "pillar": "Data & BI",

@@ -1,0 +1,73 @@
+{
+  "slug": "builders-philosophy",
+  "title": "The Builder's Philosophy",
+  "subtitle": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
+  "pillar": "philosophy",
+  "pillarLabel": "Philosophy",
+  "pillarColor": "#EF9F27",
+  "level": "All levels",
+  "totalDuration": "2h 00m",
+  "free": true,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Philosophy Foundations",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "Why Builders Need a Philosophy",
+          "duration": "14:00",
+          "videoId": "",
+          "free": true,
+          "description": "Skills without philosophy produce technicians. Philosophy without skills produces talkers. This is the bridge."
+        },
+        {
+          "id": "l2",
+          "title": "Jim Rohn: The Five Fundamentals",
+          "duration": "18:00",
+          "videoId": "",
+          "free": true,
+          "description": "Philosophy, attitude, activity, results, lifestyle — applied to a modern tech career."
+        },
+        {
+          "id": "l3",
+          "title": "Earl Nightingale: The Strangest Secret",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "We become what we think about. What does that mean for a developer or data analyst in 2025?"
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Applied Builder Mindset",
+      "lessons": [
+        {
+          "id": "l4",
+          "title": "Designing Your Personal Development Plan",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Not a vision board. A structured, quarterly-reviewed system for skill and character growth."
+        },
+        {
+          "id": "l5",
+          "title": "Consistency Over Intensity",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "Why 30 minutes daily beats 8-hour weekend sprints — and how to build the daily practice."
+        },
+        {
+          "id": "l6",
+          "title": "Your Environment Is Your Future",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "Curate what you read, who you spend time with, and what you build — these are your life inputs."
+        }
+      ]
+    }
+  ]
+}

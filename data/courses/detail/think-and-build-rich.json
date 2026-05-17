@@ -1,0 +1,149 @@
+{
+  "slug": "think-and-build-rich",
+  "title": "Think & Build Rich",
+  "subtitle": "Chapter-by-chapter walk through Think and Grow Rich for modern builders.",
+  "pillar": "philosophy",
+  "pillarLabel": "Philosophy",
+  "pillarColor": "#EF9F27",
+  "level": "All levels",
+  "totalDuration": "6h 30m",
+  "free": false,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "The Mental Principles",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "Desire — The Starting Point of All Achievement",
+          "duration": "22:00",
+          "videoId": "",
+          "free": true,
+          "description": "Chapter 2 in context. The difference between wishing and burning desire — and what it looks like for a builder."
+        },
+        {
+          "id": "l2",
+          "title": "Faith — Visualization of Belief",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Self-confidence, autosuggestion, and programming your subconscious toward your goal."
+        },
+        {
+          "id": "l3",
+          "title": "Autosuggestion — Self-Programming",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "The technique Hill teaches — why it feels weird, why it works, and how to adapt it without the fluff."
+        },
+        {
+          "id": "l4",
+          "title": "Specialized Knowledge",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "Hill's argument for deep expertise over general knowledge — a direct challenge to 'learn everything' culture."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Imagination & Planning",
+      "lessons": [
+        {
+          "id": "l5",
+          "title": "Imagination — The Workshop of the Mind",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "Synthetic vs creative imagination. How builders use both to design products and solve problems."
+        },
+        {
+          "id": "l6",
+          "title": "Organized Planning",
+          "duration": "24:00",
+          "videoId": "",
+          "free": false,
+          "description": "The Mastermind in action. Building a plan that survives first contact with reality."
+        },
+        {
+          "id": "l7",
+          "title": "Decision — The Mastery of Procrastination",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "How successful people decide. The connection between decisiveness and building momentum."
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Persistence & Power",
+      "lessons": [
+        {
+          "id": "l8",
+          "title": "Persistence — The Sustained Effort",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "Hill's four steps to persistence — applied to shipping, studying, and staying consistent."
+        },
+        {
+          "id": "l9",
+          "title": "The Mastermind Alliance",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "Two or more minds working in perfect harmony. How to find and build yours as a modern tech builder."
+        },
+        {
+          "id": "l10",
+          "title": "The Mystery of Sex Transmutation",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Hill's most misunderstood chapter — redirecting creative energy into productive output, no mysticism."
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "The Subconscious & Beyond",
+      "lessons": [
+        {
+          "id": "l11",
+          "title": "The Subconscious Mind",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "What goes in shapes what comes out. Programming inputs consciously."
+        },
+        {
+          "id": "l12",
+          "title": "The Brain as a Broadcasting Station",
+          "duration": "12:00",
+          "videoId": "",
+          "free": false,
+          "description": "Hill's intuition chapter interpreted through modern neuroscience and pattern recognition."
+        },
+        {
+          "id": "l13",
+          "title": "The Sixth Sense",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Gut feeling as trained pattern recognition. What 'creative imagination' really means for a builder."
+        },
+        {
+          "id": "l14",
+          "title": "The Six Ghosts of Fear",
+          "duration": "22:00",
+          "videoId": "",
+          "free": false,
+          "description": "Poverty, criticism, ill health, loss of love, old age, death — the fears that quietly sabotage builders."
+        }
+      ]
+    }
+  ]
+}
