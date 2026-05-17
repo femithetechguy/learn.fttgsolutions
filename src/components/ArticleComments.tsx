@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { MessageSquare, CornerDownRight, Send } from 'lucide-react'
 import { useAuth } from '@/lib/auth-context'
+import commentsData from '../../data/article_comments.json'
 
 // ─── Types (ready for backend wiring) ────────────────────────────────────────
 
@@ -153,7 +154,7 @@ export default function ArticleComments({ slug }: { slug: string }) {
   const [submitted, setSubmitted] = useState(false)
 
   // TODO: replace with real fetch(`/api/articles/${slug}/comments`)
-  const comments: Comment[] = []
+  const comments: Comment[] = (commentsData as Record<string, Comment[]>)[slug] ?? []
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
