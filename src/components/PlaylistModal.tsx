@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
+import Fuse from 'fuse.js'
 import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark, RefreshCw, Search } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
@@ -152,15 +153,7 @@ function highlight(text: string, query: string) {
   )
 }
 
-function matches(lesson: Lesson, mod: CourseModule, q: string): boolean {
-  const lower = q.toLowerCase()
-  return (
-    lesson.title.toLowerCase().includes(lower) ||
-    (lesson.description?.toLowerCase().includes(lower) ?? false) ||
-    (lesson.transcript?.toLowerCase().includes(lower) ?? false) ||
-    mod.title.toLowerCase().includes(lower)
-  )
-}
+type SearchItem = { lesson: Lesson; mod: CourseModule; modTitle: string }
 
 function SearchResults({
   modules, query, activeLesson, activeIntroModId, pillarColor, activeItemRef, onSelect,
@@ -173,8 +166,25 @@ function SearchResults({
   activeItemRef: React.RefObject<HTMLButtonElement>
   onSelect: (lesson: Lesson) => void
 }) {
-  const results = modules.flatMap(m =>
-    m.lessons.filter(l => matches(l, m, query)).map(l => ({ lesson: l, mod: m }))
+  const fuse = useMemo(() => {
+    const items: SearchItem[] = modules.flatMap(m =>
+      m.lessons.map(l => ({ lesson: l, mod: m, modTitle: m.title }))
+    )
+    return new Fuse(items, {
+      keys: [
+        { name: 'lesson.title',       weight: 0.5 },
+        { name: 'modTitle',           weight: 0.2 },
+        { name: 'lesson.description', weight: 0.2 },
+        { name: 'lesson.transcript',  weight: 0.1 },
+      ],
+      threshold: 0.4,
+      includeScore: true,
+    })
+  }, [modules])
+
+  const results = useMemo(
+    () => fuse.search(query).map(r => r.item),
+    [fuse, query]
   )
 
   if (results.length === 0) {
@@ -191,7 +201,7 @@ function SearchResults({
       <p className="px-4 pb-1.5 text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.28)' }}>
         {results.length} result{results.length !== 1 ? 's' : ''}
       </p>
-      {results.map(({ lesson, mod }) => {
+      {results.map(({ lesson, mod, modTitle }) => {
         const isActive = lesson.id === activeLesson.id && activeIntroModId === null
         return (
           <button
@@ -216,7 +226,7 @@ function SearchResults({
                 {highlight(lesson.title, query)}
               </p>
               <p className="text-[0.61rem] mt-0.5" style={{ color: 'rgba(255,255,255,0.26)' }}>
-                {mod.title} · {lesson.duration}
+                {modTitle} · {lesson.duration}
               </p>
             </div>
           </button>
