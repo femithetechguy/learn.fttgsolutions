@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen } from 'lucide-react'
+import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
+import { useAuth } from '@/lib/auth-context'
+import GuestGatePopup from './GuestGatePopup'
 
 interface Props {
   courseTitle: string
@@ -137,7 +139,11 @@ function ModuleTree({
 /* ── Main modal ── */
 export default function PlaylistModal({ courseTitle, pillarColor, modules, activeLesson, initialIntroModId = null, onSelect, onClose }: Props) {
   const activeItemRef = useRef<HTMLButtonElement>(null)
+  const bookmarkBtnRef = useRef<HTMLButtonElement>(null)
   const [copied, setCopied] = useState(false)
+  const [bookmarked, setBookmarked] = useState(false)
+  const [showGuestPopup, setShowGuestPopup] = useState(false)
+  const { isAuthenticated } = useAuth()
   // null = viewing a lesson; module id = viewing that module's intro/overview
   const [activeIntroModId, setActiveIntroModId] = useState<string | null>(initialIntroModId)
 
@@ -269,6 +275,27 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
           >
             {copied ? <Check size={13} /> : <LinkIcon size={13} />}
           </button>
+
+          {/* Bookmark */}
+          <button
+            ref={bookmarkBtnRef}
+            onClick={() => {
+              if (!isAuthenticated) { setShowGuestPopup(v => !v); return }
+              setBookmarked(v => !v)
+            }}
+            title={isAuthenticated ? (bookmarked ? 'Remove bookmark' : 'Bookmark this lesson') : 'Sign in to bookmark'}
+            className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
+            style={{ color: bookmarked ? pillarColor : 'rgba(255,255,255,0.68)' }}
+          >
+            <Bookmark size={13} fill={bookmarked && isAuthenticated ? 'currentColor' : 'none'} />
+          </button>
+          {showGuestPopup && (
+            <GuestGatePopup
+              anchorRef={bookmarkBtnRef}
+              onClose={() => setShowGuestPopup(false)}
+            />
+          )}
+
           <button
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm text-text-muted hover:text-text-primary transition-colors"
