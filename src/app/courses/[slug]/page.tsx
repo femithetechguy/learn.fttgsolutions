@@ -9,16 +9,23 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollHomeButton from '@/components/ScrollHomeButton'
 import CourseBlackboard, { CourseDetail } from '@/components/CourseBlackboard'
+import { findLessonBySlug } from '@/lib/lesson-slug'
 
 const chalkFont = Special_Elite({ weight: '400', subsets: ['latin'], variable: '--font-chalk' })
 
-export default function CourseBoardPage({ params }: { params: { slug: string } }) {
+export default function CourseBoardPage({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { v?: string }
+}) {
   const filePath = path.join(process.cwd(), 'data', 'courses', 'detail', `${params.slug}.json`)
   if (!fs.existsSync(filePath)) notFound()
 
   const course: CourseDetail = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
-  // Render markdown notes if the course has a links file
+  // Resolve linked markdown notes
   let notesHtml: string | null = null
   if (course.links) {
     const mdPath = path.join(process.cwd(), 'data', course.links)
@@ -27,6 +34,11 @@ export default function CourseBoardPage({ params }: { params: { slug: string } }
     }
   }
 
+  // Pre-open a specific lesson if ?v= is present
+  const initialLesson = searchParams.v
+    ? findLessonBySlug(course.modules, searchParams.v)
+    : null
+
   return (
     <div className={`min-h-screen bg-bg-primary bg-grid ${chalkFont.variable}`}>
       <Nav />
@@ -34,7 +46,6 @@ export default function CourseBoardPage({ params }: { params: { slug: string } }
       <div className="overflow-x-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20">
 
-          {/* Back link */}
           <Link
             href="/courses"
             className="inline-flex items-center gap-1.5 font-sans text-sm text-text-muted hover:text-text-secondary transition-colors mb-8"
@@ -43,10 +54,8 @@ export default function CourseBoardPage({ params }: { params: { slug: string } }
             All Courses
           </Link>
 
-          {/* Blackboard */}
-          <CourseBlackboard course={course} />
+          <CourseBlackboard course={course} initialLesson={initialLesson} />
 
-          {/* Course notes — rendered when a markdown file is linked */}
           {notesHtml && (
             <div className="mt-14">
               <div className="gold-line mb-10" />

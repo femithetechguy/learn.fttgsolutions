@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { X, Clock, Play } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { X, Clock, Play, Link as LinkIcon, Check } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
+import { lessonToSlug } from '@/lib/lesson-slug'
 
 interface Props {
   courseTitle: string
@@ -15,8 +16,20 @@ interface Props {
 
 export default function PlaylistModal({ courseTitle, pillarColor, modules, activeLesson, onSelect, onClose }: Props) {
   const activeItemRef = useRef<HTMLButtonElement>(null)
+  const [copied, setCopied] = useState(false)
   const allLessons = modules.flatMap(m => m.lessons)
   const activeIndex = allLessons.findIndex(l => l.id === activeLesson.id)
+
+  // Sync URL whenever the active lesson changes
+  useEffect(() => {
+    const slug = lessonToSlug(activeLesson.title)
+    const url = `${window.location.pathname}?v=${slug}`
+    window.history.replaceState({}, '', url)
+    return () => {
+      // Clear ?v= when modal unmounts
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [activeLesson.id])
 
   // Scroll active item into view whenever selection changes
   useEffect(() => {
@@ -29,6 +42,12 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-[#080808]">
@@ -46,6 +65,17 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             {activeLesson.title}
           </p>
         </div>
+        {/* Share / copy link */}
+        <button
+          onClick={copyLink}
+          title="Copy shareable link"
+          className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
+          style={{ color: copied ? '#4ade80' : 'rgba(255,255,255,0.4)' }}
+        >
+          {copied ? <Check size={13} /> : <LinkIcon size={13} />}
+        </button>
+
+        {/* Close */}
         <button
           onClick={onClose}
           className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-sm bevel-sm text-text-muted hover:text-text-primary transition-colors"

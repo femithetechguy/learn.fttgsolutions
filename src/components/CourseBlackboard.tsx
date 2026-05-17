@@ -8,8 +8,14 @@ import type { CourseDetail, Lesson } from '@/types/course'
 // Re-export for the server page import
 export type { CourseDetail } from '@/types/course'
 
-export default function CourseBlackboard({ course }: { course: CourseDetail }) {
-  const [activeLesson, setActiveLesson] = useState<Lesson | null>(null)
+export default function CourseBlackboard({
+  course,
+  initialLesson = null,
+}: {
+  course: CourseDetail
+  initialLesson?: Lesson | null
+}) {
+  const [activeLesson, setActiveLesson] = useState<Lesson | null>(initialLesson)
   const total = course.modules.reduce((s, m) => s + m.lessons.length, 0)
 
   return (
