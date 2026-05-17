@@ -31,6 +31,7 @@ export default function ArticlePrintPage({ params }: { params: { slug: string } 
   return (
     <>
       <style>{`
+        ::selection { background: rgba(0,0,0,0.12); color: black; }
         @page { margin: 1cm 1.2cm; size: A4; }
         @media print {
           .no-print { display: none !important; }

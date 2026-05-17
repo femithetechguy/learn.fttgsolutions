@@ -36,6 +36,7 @@ export default function StackPrintPage() {
   return (
     <>
       <style>{`
+        ::selection { background: rgba(0,0,0,0.12); color: black; }
         @page { margin: 0.8cm 1cm; size: A4; }
         @media print {
           .no-print { display: none !important; }
