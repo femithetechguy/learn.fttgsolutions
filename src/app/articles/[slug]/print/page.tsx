@@ -74,7 +74,9 @@ export default function ArticlePrintPage({ params }: { params: { slug: string } 
           </p>
           <h1 className="text-2xl font-bold leading-tight text-black mt-1">{article.title}</h1>
           <p className="text-gray-500 text-sm mt-0.5">{article.subtitle}</p>
-          <p className="text-gray-400 text-xs mt-1">{formatDate(article.date)} · {article.readTime} min read</p>
+          <p className="text-gray-400 text-xs mt-1">
+            {article.author && <>{article.author} · </>}{formatDate(article.date)} · {article.readTime} min read
+          </p>
         </div>
 
         {/* Article body */}
