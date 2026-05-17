@@ -27,10 +27,18 @@ function CheatChip({ name, syntax, definition }: CheatItem) {
   const calcPos = () => {
     if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
+    const TOOLTIP_W = 320 // matches w-80
+    const MARGIN    = 8
+    const rawLeft   = rect.left + rect.width / 2
+    // Clamp so the tooltip never bleeds past either viewport edge
+    const left = Math.min(
+      Math.max(rawLeft, TOOLTIP_W / 2 + MARGIN),
+      window.innerWidth - TOOLTIP_W / 2 - MARGIN,
+    )
     setPos({
       placement: rect.top > 90 ? 'top' : 'bottom',
       top:  rect.top > 90 ? rect.top - 8 : rect.bottom + 8,
-      left: rect.left + rect.width / 2,
+      left,
     })
   }
 
