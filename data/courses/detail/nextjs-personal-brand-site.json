@@ -1,0 +1,111 @@
+{
+  "slug": "nextjs-personal-brand-site",
+  "title": "Next.js Personal Brand Site",
+  "subtitle": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
+  "pillar": "app-dev",
+  "pillarLabel": "App Dev",
+  "pillarColor": "#378ADD",
+  "level": "Intermediate",
+  "totalDuration": "5h 00m",
+  "free": true,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Project Foundation",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "Design System from Scratch",
+          "duration": "18:00",
+          "videoId": "",
+          "free": true,
+          "description": "CSS variables, typography scale, dark palette — set up the system before writing a single component."
+        },
+        {
+          "id": "l2",
+          "title": "Next.js App Router: Layout, Pages, Fonts",
+          "duration": "14:00",
+          "videoId": "",
+          "free": true,
+          "description": "Server Components, metadata API, custom Google Fonts — the modern Next.js 14 setup."
+        },
+        {
+          "id": "l3",
+          "title": "Tailwind CSS Configuration",
+          "duration": "10:00",
+          "videoId": "",
+          "free": false,
+          "description": "Extend the Tailwind config with your brand tokens. Theme, screens, and safe-listing classes."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Core Pages & Components",
+      "lessons": [
+        {
+          "id": "l4",
+          "title": "Hero Section with Three.js Background",
+          "duration": "28:00",
+          "videoId": "",
+          "free": false,
+          "description": "Add a lightweight React Three Fiber canvas behind your hero. Particles, geometry, or abstract blobs."
+        },
+        {
+          "id": "l5",
+          "title": "Projects Grid with Hover Effects",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Build a responsive project showcase with image zoom, tilt, and color-accent on hover."
+        },
+        {
+          "id": "l6",
+          "title": "Blog with MDX and Dynamic Routing",
+          "duration": "22:00",
+          "videoId": "",
+          "free": false,
+          "description": "Write posts in MDX, render with dynamic routes. Syntax highlighting with Shiki."
+        },
+        {
+          "id": "l7",
+          "title": "Contact Form with Server Action",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "No API route needed. Use Next.js Server Actions with Resend for email delivery."
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Animation & Deployment",
+      "lessons": [
+        {
+          "id": "l8",
+          "title": "Page Transitions with Framer Motion",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "AnimatePresence, layout animations, and scroll-triggered reveals — the full Framer Motion toolkit."
+        },
+        {
+          "id": "l9",
+          "title": "OG Images and SEO Metadata",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Generate dynamic OG images with next/og. Twitter cards, canonical URLs, and sitemap."
+        },
+        {
+          "id": "l10",
+          "title": "Deploy to Vercel with Custom Domain",
+          "duration": "10:00",
+          "videoId": "",
+          "free": false,
+          "description": "Connect your GitHub repo, configure environment variables, and go live with your brand."
+        }
+      ]
+    }
+  ]
+}

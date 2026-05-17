@@ -1,6 +1,7 @@
 [
   {
     "id": 3,
+    "slug": "nextjs-personal-brand-site",
     "title": "Next.js Personal Brand Site",
     "description": "Build your dev identity: dark aesthetic, React Three Fiber, Framer Motion.",
     "pillar": "App Dev",
@@ -11,6 +12,7 @@
   },
   {
     "id": 4,
+    "slug": "nestjs-api-architecture",
     "title": "NestJS API Architecture",
     "description": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
     "pillar": "App Dev",

@@ -1,0 +1,127 @@
+{
+  "slug": "dax-zero-to-advanced",
+  "title": "DAX Zero to Advanced",
+  "subtitle": "From SUM to TREATAS — real enterprise patterns from production dashboards.",
+  "pillar": "data-bi",
+  "pillarLabel": "Data & BI",
+  "pillarColor": "#1D9E75",
+  "level": "Intermediate",
+  "totalDuration": "4h 20m",
+  "free": true,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "The Fundamentals",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "What Is DAX and Why It Matters",
+          "duration": "12:30",
+          "videoId": "",
+          "free": true,
+          "description": "Understand the DAX engine, how it relates to the Power BI data model, and why most beginners start wrong."
+        },
+        {
+          "id": "l2",
+          "title": "Row Context vs Filter Context",
+          "duration": "18:45",
+          "videoId": "",
+          "free": true,
+          "description": "The single concept that unlocks everything else in DAX. We build mental models, not just formulas."
+        },
+        {
+          "id": "l3",
+          "title": "CALCULATE — The Most Important Function",
+          "duration": "22:10",
+          "videoId": "",
+          "free": true,
+          "description": "How CALCULATE modifies filter context and why it appears in nearly every advanced measure."
+        },
+        {
+          "id": "l4",
+          "title": "SUM, SUMX and the Iterator Pattern",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Aggregators vs iterators — when to use each and why SUMX is often the right call."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Time Intelligence & Iterators",
+      "lessons": [
+        {
+          "id": "l5",
+          "title": "Time Intelligence: DATESYTD, DATESMTD",
+          "duration": "15:20",
+          "videoId": "",
+          "free": false,
+          "description": "Build year-to-date, quarter-to-date, and period-over-period comparisons cleanly."
+        },
+        {
+          "id": "l6",
+          "title": "RANKX and Dynamic Ranking",
+          "duration": "12:00",
+          "videoId": "",
+          "free": false,
+          "description": "Rank products, salespeople, or regions dynamically — tied ranks, dense ranking, and all edge cases."
+        },
+        {
+          "id": "l7",
+          "title": "Variables and RETURN",
+          "duration": "9:45",
+          "videoId": "",
+          "free": false,
+          "description": "Write readable, debuggable DAX with VAR/RETURN. Eliminate repeated calculations."
+        },
+        {
+          "id": "l8",
+          "title": "FILTER, ALL and Context Transition",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Master ALL, ALLEXCEPT, and ALLSELECTED. Understand context transition inside CALCULATE."
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Advanced Enterprise Patterns",
+      "lessons": [
+        {
+          "id": "l9",
+          "title": "TREATAS and Virtual Relationships",
+          "duration": "20:30",
+          "videoId": "",
+          "free": false,
+          "description": "When the data model can't have a physical relationship, TREATAS creates a virtual one in DAX."
+        },
+        {
+          "id": "l10",
+          "title": "Dynamic Segmentation with SWITCH",
+          "duration": "17:15",
+          "videoId": "",
+          "free": false,
+          "description": "Build customer tiers, price bands, and performance brackets that respond to slicer selections."
+        },
+        {
+          "id": "l11",
+          "title": "CROSSFILTER and Bidirectional Relationships",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Control filter propagation direction in DAX — understand the risks of many-to-many and when to use it."
+        },
+        {
+          "id": "l12",
+          "title": "Performance Tuning with DAX Studio",
+          "duration": "23:50",
+          "videoId": "",
+          "free": false,
+          "description": "Read storage engine and formula engine query plans. Find and fix slow measures in production."
+        }
+      ]
+    }
+  ]
+}

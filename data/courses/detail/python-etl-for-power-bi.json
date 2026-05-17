@@ -1,0 +1,95 @@
+{
+  "slug": "python-etl-for-power-bi",
+  "title": "Python ETL for Power BI",
+  "subtitle": "Replace Power Query with pandas. SharePoint via Microsoft Graph API.",
+  "pillar": "data-bi",
+  "pillarLabel": "Data & BI",
+  "pillarColor": "#1D9E75",
+  "level": "Advanced",
+  "totalDuration": "3h 10m",
+  "free": false,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Setup & Python Fundamentals for Data",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "Why Python ETL Over Power Query",
+          "duration": "10:00",
+          "videoId": "",
+          "free": true,
+          "description": "The cases where Python wins: complex transforms, API calls, and repeatability beyond what Power Query can do."
+        },
+        {
+          "id": "l2",
+          "title": "Environment Setup: venv, pip, Jupyter",
+          "duration": "12:00",
+          "videoId": "",
+          "free": false,
+          "description": "Set up a clean, isolated Python environment for data work. No Anaconda baggage."
+        },
+        {
+          "id": "l3",
+          "title": "Pandas Crash Course for BI Developers",
+          "duration": "22:00",
+          "videoId": "",
+          "free": false,
+          "description": "DataFrames, series, merge, groupby — everything you need coming from a SQL/Power Query background."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "ETL Patterns with Pandas",
+      "lessons": [
+        {
+          "id": "l4",
+          "title": "Read Excel, CSV, and JSON Files",
+          "duration": "14:00",
+          "videoId": "",
+          "free": false,
+          "description": "Load messy files, handle encoding issues, and normalize columns programmatically."
+        },
+        {
+          "id": "l5",
+          "title": "Data Cleaning: nulls, types, duplicates",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "The cleaning pipeline that runs before any transform. Make it repeatable and testable."
+        },
+        {
+          "id": "l6",
+          "title": "Merging and Reshaping Data",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "pd.merge, pivot_table, melt — match what you'd do in Power Query but with code you can version."
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Power BI Integration",
+      "lessons": [
+        {
+          "id": "l7",
+          "title": "SharePoint via Microsoft Graph API",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Authenticate with Graph API and pull SharePoint list data or Excel files without manual exports."
+        },
+        {
+          "id": "l8",
+          "title": "Write to Power BI via Python Script Visual",
+          "duration": "18:10",
+          "videoId": "",
+          "free": false,
+          "description": "Use Python inside Power BI Desktop as a data source and as a visual. Production caveats included."
+        }
+      ]
+    }
+  ]
+}
