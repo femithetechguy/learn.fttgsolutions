@@ -85,15 +85,13 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
         {/* ── Playlist sidebar ── */}
         <div
-          className="flex-1 md:flex-none overflow-y-auto"
+          className="flex-1 md:flex-none md:w-80 lg:w-[360px] overflow-y-auto overflow-x-hidden"
           style={{
-            width: undefined,
             borderTop: '1px solid rgba(255,255,255,0.07)',
             background: '#0d0d0d',
           }}
         >
-          {/* Sidebar becomes fixed-width panel on desktop */}
-          <div className="md:w-80 lg:w-[360px] md:h-full">
+          <div>
 
             {/* Sticky count header */}
             <div
@@ -125,7 +123,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                       key={lesson.id}
                       ref={isActive ? activeItemRef : undefined}
                       onClick={() => onSelect(lesson)}
-                      className="w-full flex items-center gap-3 px-3 py-2 text-left transition-colors"
+                      className="w-full min-w-0 flex items-center gap-3 px-3 py-2 text-left transition-colors"
                       style={{ background: isActive ? 'rgba(212,175,55,0.08)' : undefined }}
                       onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)' }}
                       onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = '' }}
