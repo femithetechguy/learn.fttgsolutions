@@ -38,8 +38,13 @@ export default function StackPrintPage() {
       <style>{`
         ::selection { background: rgba(0,0,0,0.12); color: black; }
         @page { margin: 0.8cm 1cm; size: A4; }
+        .print-cols { columns: 1; column-gap: 1.2cm; }
+        table { width: 100%; word-break: break-word; }
+        td { overflow-wrap: break-word; }
+        @media (min-width: 640px) { .print-cols { columns: 2; } }
         @media print {
           .no-print { display: none !important; }
+          .print-cols { columns: 2; }
           html, body { background: white !important; color: black !important; }
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
@@ -76,7 +81,7 @@ export default function StackPrintPage() {
         </div>
 
         {/* 2-column grid of categories */}
-        <div style={{ columns: 2, columnGap: '1.2cm' }}>
+        <div className="print-cols">
           {data.stack.map(cat => (
             <div key={cat.category} style={{ breakInside: 'avoid-column', marginBottom: '0.35cm' }}>
 

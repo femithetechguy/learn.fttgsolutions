@@ -48,7 +48,10 @@ export default function ArticlePrintPage({ params }: { params: { slug: string } 
         .print-body blockquote { border-left: 3px solid ${color}; padding-left: 0.75rem; margin: 1rem 0; }
         .print-body blockquote p { font-style: italic; color: #6b7280; }
         .print-body code { font-family: monospace; font-size: 0.8em; background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 2px; padding: 1px 4px; }
-        .print-body pre { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; overflow-x: auto; }
+        .print-body pre { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 0.75rem 1rem; margin-bottom: 0.75rem; overflow-x: auto; max-width: 100%; }
+        .print-body code { white-space: pre-wrap; word-break: break-all; }
+        .print-body table { width: 100%; word-break: break-word; }
+        .print-body td, .print-body th { overflow-wrap: break-word; }
         .print-body pre code { background: none; border: none; padding: 0; }
         .print-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.25rem 0; }
         .print-body a { color: ${color}; }
