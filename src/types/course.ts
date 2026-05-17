@@ -8,9 +8,18 @@ export interface Lesson {
   transcript?: string   // full transcript text; shown in the player transcript panel
 }
 
+export interface CourseDownload {
+  name: string
+  url: string
+  size?: string   // e.g. "2.3 MB"
+}
+
 export interface CourseModule {
   id: string
   title: string
+  description?: string        // intro text shown above the video when in this module
+  hasDownloads?: boolean
+  downloads?: CourseDownload[]
   lessons: Lesson[]
 }
 

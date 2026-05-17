@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText } from 'lucide-react'
+import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
 
@@ -146,6 +146,8 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
     setTimeout(() => setCopied(false), 2000)
   }
 
+  const activeModule = modules.find(m => m.lessons.some(l => l.id === activeLesson.id))
+
   const treeProps = { modules, activeLesson, expandedMods, pillarColor, activeItemRef, onToggle: toggleMod, onSelect }
 
   return (
@@ -229,8 +231,51 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
           <ModuleTree {...treeProps} />
         </div>
 
-        {/* Main content — video + transcript (scrolls as one) */}
+        {/* Main content — module intro + video + transcript (scrolls as one) */}
         <div className="flex-1 min-w-0 overflow-y-auto">
+
+          {/* Module intro banner */}
+          {activeModule?.description && (
+            <div className="px-5 sm:px-7 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-[9px] uppercase tracking-widest font-semibold mb-1.5" style={{ color: pillarColor }}>
+                {activeModule.title}
+              </p>
+              <p className="text-[0.78rem] leading-relaxed" style={{ color: 'rgba(240,237,230,0.52)' }}>
+                {activeModule.description}
+              </p>
+
+              {/* Downloads — only rendered when hasDownloads is true and downloads exist */}
+              {activeModule.hasDownloads && activeModule.downloads && activeModule.downloads.length > 0 && (
+                <div className="mt-4">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Download size={10} style={{ color: 'rgba(255,255,255,0.28)' }} />
+                    <p className="text-[9px] uppercase tracking-widest font-semibold" style={{ color: 'rgba(255,255,255,0.28)' }}>
+                      Resources
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    {activeModule.downloads.map((dl, i) => (
+                      <a
+                        key={i}
+                        href={dl.url}
+                        download
+                        className="flex items-center gap-3 px-3 py-2.5 rounded transition-colors"
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
+                        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.07)')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.04)')}
+                      >
+                        <Download size={13} style={{ color: pillarColor, flexShrink: 0 }} />
+                        <span className="flex-1 text-[0.78rem]" style={{ color: 'rgba(240,237,230,0.8)' }}>{dl.name}</span>
+                        {dl.size && (
+                          <span className="text-[0.68rem] tabular-nums flex-shrink-0" style={{ color: 'rgba(255,255,255,0.28)' }}>{dl.size}</span>
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Video — natural 16:9, no forced full-height */}
           <div className="w-full bg-black aspect-video">
