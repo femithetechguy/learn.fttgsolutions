@@ -3,10 +3,13 @@ import fs from 'fs'
 import path from 'path'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { Special_Elite } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollHomeButton from '@/components/ScrollHomeButton'
 import CourseBlackboard, { CourseDetail } from '@/components/CourseBlackboard'
+
+const chalkFont = Special_Elite({ weight: '400', subsets: ['latin'], variable: '--font-chalk' })
 
 export default function CourseBoardPage({ params }: { params: { slug: string } }) {
   const filePath = path.join(process.cwd(), 'data', 'courses', 'detail', `${params.slug}.json`)
@@ -16,7 +19,7 @@ export default function CourseBoardPage({ params }: { params: { slug: string } }
   const course: CourseDetail = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 
   return (
-    <div className="min-h-screen bg-bg-primary bg-grid">
+    <div className={`min-h-screen bg-bg-primary bg-grid ${chalkFont.variable}`}>
       <Nav />
 
       <div className="overflow-x-hidden">

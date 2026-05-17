@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Play, Clock, Lock, X } from 'lucide-react'
+import { X, Clock } from 'lucide-react'
 
 export interface Lesson {
   id: string
@@ -31,240 +31,217 @@ export interface CourseDetail {
   modules: CourseModule[]
 }
 
-const CHALK_COLORS = ['#f0ede6', '#f5e47a', '#7ccfb5', '#f48fb1', '#90caf9', '#ef9a9a', '#ffcc80']
-const CHALK_ROTATIONS = [-8, -4, 2, -6, 3, -2, 5]
+const CHALK  = "var(--font-chalk, 'Courier New', Courier, monospace)"
+const c      = (a = 1) => `rgba(232,228,208,${a})`
+const glow   = (a = 0.14) => `0 0 10px rgba(232,228,208,${a}), 0 1px 3px rgba(0,0,0,0.9)`
+
+const MARKERS: { cap: string }[] = [
+  { cap: '#1a1a1a' },
+  { cap: '#cc2020' },
+  { cap: '#1a36cc' },
+  { cap: '#1a1a1a' },
+]
 
 export default function CourseBlackboard({ course }: { course: CourseDetail }) {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null)
-
-  const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0)
+  const total = course.modules.reduce((s, m) => s + m.lessons.length, 0)
 
   return (
     <>
-      {/* Wooden frame */}
+      {/* ── Outer wooden frame ── */}
       <div
         className="w-full rounded-sm relative select-none"
         style={{
-          background: 'linear-gradient(160deg, #5c3010 0%, #7a4218 20%, #6b3a15 55%, #4a2c0a 100%)',
-          padding: '14px 14px 0',
+          background: 'linear-gradient(160deg, #7a4218 0%, #9a5220 18%, #8a4818 55%, #5c2e0a 100%)',
+          padding: '28px 16px 0',          // extra top space for tray decorations
           boxShadow: [
-            '0 16px 56px rgba(0,0,0,0.8)',
-            '0 4px 16px rgba(0,0,0,0.5)',
-            'inset 0 1px 0 rgba(255,255,255,0.09)',
+            '0 20px 60px rgba(0,0,0,0.85)',
+            'inset 0 1px 0 rgba(255,255,255,0.11)',
             'inset 0 -2px 4px rgba(0,0,0,0.6)',
-            'inset 1px 0 0 rgba(255,255,255,0.05)',
-            'inset -1px 0 0 rgba(0,0,0,0.4)',
+            'inset 1px 0 0 rgba(255,255,255,0.06)',
+            'inset -1px 0 0 rgba(0,0,0,0.45)',
           ].join(','),
         }}
       >
-        {/* Corner screws */}
-        <Screw className="absolute top-3.5 left-3.5" />
-        <Screw className="absolute top-3.5 right-3.5" />
-
-        {/* Board surface */}
+        {/* ── Top-frame decorations ── */}
+        {/* Eraser holder / clip — centre top */}
         <div
-          className="w-full relative overflow-hidden"
+          className="absolute z-30"
           style={{
-            minHeight: '500px',
-            background: 'linear-gradient(160deg, #163222 0%, #1e3d2e 30%, #1b3829 65%, #12291e 100%)',
-            borderRadius: '2px',
-            boxShadow: [
-              'inset 0 2px 10px rgba(0,0,0,0.6)',
-              'inset 0 0 80px rgba(0,0,0,0.25)',
-            ].join(','),
+            top: 0, left: '50%', transform: 'translateX(-50%)',
+            width: '60px', height: '22px',
+            background: 'linear-gradient(180deg, #1c1c1c, #0a0a0a)',
+            borderRadius: '0 0 5px 5px',
+            boxShadow: '0 3px 8px rgba(0,0,0,0.8), inset 0 -1px 0 rgba(255,255,255,0.04)',
           }}
         >
-          {/* Chalk-dust erased smear overlays */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: [
-                'radial-gradient(ellipse 220px 90px at 12% 22%, rgba(255,255,255,0.016) 0%, transparent 100%)',
-                'radial-gradient(ellipse 160px 60px at 72% 58%, rgba(255,255,255,0.011) 0%, transparent 100%)',
-                'radial-gradient(ellipse 120px 50px at 48% 82%, rgba(255,255,255,0.009) 0%, transparent 100%)',
-                'radial-gradient(ellipse 80px 30px at 88% 18%, rgba(255,255,255,0.013) 0%, transparent 100%)',
-              ].join(','),
-            }}
-          />
+          <div style={{ margin: '6px auto 0', width: '32px', height: '5px', background: '#333', borderRadius: '2px' }} />
+        </div>
 
-          <div className="relative z-10 p-5 sm:p-8">
+        {/* Marker resting on top ledge — right of centre */}
+        <div className="absolute z-30 flex" style={{ top: '6px', right: '80px' }}>
+          <ExpoMarker cap="#222" />
+        </div>
 
-            {/* Course header */}
-            <div className="mb-7 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-              <p
-                className="text-[10px] uppercase tracking-[0.22em] font-bold mb-1"
-                style={{
-                  color: course.pillarColor,
-                  textShadow: `0 0 12px ${course.pillarColor}60`,
-                }}
-              >
-                {course.pillarLabel} · {course.level} · {course.totalDuration}
-              </p>
-              <h1
-                className="text-xl sm:text-2xl font-bold leading-tight"
-                style={{
-                  color: '#f0ede6',
-                  textShadow: '0 0 18px rgba(240,237,230,0.22), 1px 1px 3px rgba(0,0,0,0.95)',
-                  letterSpacing: '0.01em',
-                }}
-              >
+        {/* Corner screws (top only — bottom are on tray) */}
+        <Screw style={{ position: 'absolute', top: '8px', left: '8px', zIndex: 20 }} />
+        <Screw style={{ position: 'absolute', top: '8px', right: '8px', zIndex: 20 }} />
+
+        {/* ── Board surface ── */}
+        <div
+          style={{
+            minHeight: '520px',
+            background: 'linear-gradient(155deg, #131715 0%, #0c1110 45%, #101310 100%)',
+            borderRadius: '2px',
+            boxShadow: [
+              'inset 0 2px 12px rgba(0,0,0,0.7)',
+              'inset 0 0 60px rgba(0,0,0,0.3)',
+            ].join(','),
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Subtle chalk-dust smears */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            backgroundImage: [
+              'radial-gradient(ellipse 200px 80px at 10% 20%, rgba(255,255,255,0.012) 0%, transparent 100%)',
+              'radial-gradient(ellipse 150px 60px at 78% 65%, rgba(255,255,255,0.009) 0%, transparent 100%)',
+            ].join(','),
+          }} />
+
+          {/* Board content */}
+          <div className="relative z-10 px-7 pt-6 pb-10" style={{ fontFamily: CHALK }}>
+
+            {/* ── Course header ── */}
+            <p className="text-[11px] uppercase tracking-[0.18em] mb-2"
+              style={{ color: course.pillarColor, textShadow: `0 0 10px ${course.pillarColor}55` }}>
+              {course.pillarLabel} – {course.level} · {course.totalDuration}
+            </p>
+
+            <div>
+              <h1 className="text-[1.85rem] sm:text-[2.1rem] leading-tight"
+                style={{ color: c(0.93), textShadow: glow(0.22), letterSpacing: '0.01em' }}>
                 {course.title}
               </h1>
-              <p
-                className="mt-1.5 text-sm leading-relaxed"
-                style={{
-                  color: 'rgba(240,237,230,0.42)',
-                  textShadow: '0 1px 2px rgba(0,0,0,0.9)',
-                }}
-              >
-                {course.subtitle}
-              </p>
-              <p className="mt-2 text-[11px]" style={{ color: 'rgba(240,237,230,0.28)' }}>
-                {course.modules.length} modules · {totalLessons} lessons
-              </p>
+              {/* Chalk underline beneath title */}
+              <div style={{
+                height: '1.5px',
+                marginTop: '5px',
+                marginBottom: '10px',
+                width: '100%',
+                background: 'linear-gradient(90deg, rgba(232,228,208,0.35) 0%, rgba(232,228,208,0.18) 75%, transparent 100%)',
+                borderRadius: '1px',
+              }} />
             </div>
 
-            {/* Modules */}
-            <div className="space-y-9">
+            <p className="text-[0.8rem] leading-relaxed mb-1.5" style={{ color: c(0.5), textShadow: glow(0.06) }}>
+              {course.subtitle}
+            </p>
+            <p className="text-[0.72rem] mb-5" style={{ color: c(0.35) }}>
+              {course.modules.length} modules · {total} lessons
+            </p>
+
+            {/* Chalk divider */}
+            <div style={{
+              height: '1px',
+              marginBottom: '20px',
+              background: 'linear-gradient(90deg, transparent, rgba(232,228,208,0.2) 12%, rgba(232,228,208,0.16) 88%, transparent)',
+            }} />
+
+            {/* ── Modules ── */}
+            <div className="space-y-8">
               {course.modules.map((mod, mi) => (
                 <div key={mod.id}>
-                  {/* Module label */}
-                  <div className="mb-3">
-                    <p className="text-[9px] uppercase tracking-[0.2em] mb-0.5" style={{ color: 'rgba(240,237,230,0.32)' }}>
-                      Module {mi + 1}
-                    </p>
-                    <h2
-                      className="text-sm font-bold"
-                      style={{
-                        color: '#dedad0',
-                        textShadow: '0 0 8px rgba(240,237,230,0.18)',
-                      }}
-                    >
-                      {mod.title}
-                    </h2>
-                    {/* Chalk underline */}
-                    <div
-                      style={{
-                        marginTop: '5px',
-                        height: '1.5px',
-                        width: '90px',
-                        background: 'rgba(240,237,230,0.16)',
-                        borderRadius: '1px',
-                      }}
-                    />
-                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.18em] mb-0.5"
+                    style={{
+                      color: c(0.38),
+                      textDecoration: 'underline',
+                      textDecorationColor: c(0.16),
+                      textUnderlineOffset: '3px',
+                    }}>
+                    Module {mi + 1}
+                  </p>
+                  <h2 className="text-[1.02rem] mb-3" style={{ color: c(0.83), textShadow: glow(0.1) }}>
+                    {mod.title}
+                  </h2>
 
-                  {/* Lesson cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5">
-                    {mod.lessons.map((lesson, li) => {
-                      const hasVideo = !!lesson.videoId
-                      return (
-                        <button
-                          key={lesson.id}
-                          onClick={() => setActiveLesson(lesson)}
-                          className="lesson-card text-left"
-                        >
-                          <div className="flex items-start gap-2.5 p-3">
-                            <div className="mt-0.5 flex-shrink-0">
-                              {hasVideo && lesson.free ? (
-                                <Play
-                                  size={11}
-                                  fill={course.pillarColor}
-                                  style={{ color: course.pillarColor }}
-                                />
-                              ) : hasVideo ? (
-                                <Lock size={11} style={{ color: 'rgba(240,237,230,0.28)' }} />
-                              ) : (
-                                <Clock size={11} style={{ color: 'rgba(240,237,230,0.22)' }} />
-                              )}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p
-                                className="text-[11px] font-semibold leading-snug"
-                                style={{
-                                  color: hasVideo ? '#e8e4d4' : 'rgba(240,237,230,0.38)',
-                                  textShadow: hasVideo ? '0 0 6px rgba(240,237,230,0.1)' : 'none',
-                                }}
-                              >
-                                {li + 1}. {lesson.title}
-                              </p>
-                              <p className="text-[10px] mt-1" style={{ color: 'rgba(240,237,230,0.28)' }}>
-                                {lesson.duration}
-                              </p>
-                            </div>
+                  {/* 2-column lesson grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {mod.lessons.map((lesson, li) => (
+                      <button
+                        key={lesson.id}
+                        onClick={() => setActiveLesson(lesson)}
+                        className="chalk-card text-left"
+                        style={{ fontFamily: CHALK }}
+                      >
+                        <div className="flex items-start gap-3 p-3 sm:p-3.5">
+                          {/* Circled number */}
+                          <div className="flex-shrink-0 flex items-center justify-center" style={{
+                            width: '22px', height: '22px',
+                            borderRadius: '50%',
+                            border: `1.5px solid ${c(lesson.videoId ? 0.48 : 0.24)}`,
+                            fontSize: '11px',
+                            color: lesson.videoId ? c(0.72) : c(0.32),
+                            lineHeight: 1, marginTop: '1px',
+                          }}>
+                            {li + 1}
                           </div>
-                        </button>
-                      )
-                    })}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[0.78rem] leading-snug" style={{
+                              color: lesson.videoId ? c(0.88) : c(0.4),
+                              textShadow: lesson.videoId ? glow(0.09) : 'none',
+                            }}>
+                              {lesson.title}
+                            </p>
+                            <p className="text-[0.68rem] mt-1" style={{ color: c(0.3) }}>
+                              {lesson.duration}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
-
           </div>
         </div>
 
-        {/* Chalk tray */}
+        {/* ── Marker tray ── */}
         <div
-          className="relative flex items-center"
+          className="relative"
           style={{
-            height: '40px',
-            background: 'linear-gradient(180deg, #6b3a14 0%, #4e2c0e 55%, #3a2008 100%)',
-            borderTop: '3px solid rgba(0,0,0,0.55)',
+            height: '48px',
+            background: 'linear-gradient(180deg, #7a4015 0%, #5a2e0c 55%, #3a1e06 100%)',
+            borderTop: '3px solid rgba(0,0,0,0.6)',
             borderRadius: '0 0 3px 3px',
-            boxShadow: 'inset 0 4px 10px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.04)',
-            paddingLeft: '22px',
-            gap: '8px',
+            boxShadow: 'inset 0 5px 12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04)',
           }}
         >
-          {/* Tray ledge shadow line */}
-          <div
-            className="absolute"
-            style={{
-              top: '8px',
-              left: '8px',
-              right: '8px',
-              height: '1.5px',
-              background: 'linear-gradient(90deg, transparent, rgba(240,237,230,0.07) 15%, rgba(240,237,230,0.05) 85%, transparent)',
-            }}
-          />
+          {/* Tray ledge line */}
+          <div className="absolute" style={{
+            top: '9px', left: '8px', right: '8px', height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(232,228,208,0.06) 15%, rgba(232,228,208,0.05) 85%, transparent)',
+          }} />
 
-          {/* Bottom corner screws */}
-          <Screw className="absolute bottom-2.5 left-3.5" />
-          <Screw className="absolute bottom-2.5 right-3.5" />
+          {/* Bottom screws (outside the scrollable area) */}
+          <Screw style={{ position: 'absolute', bottom: '10px', left: '8px', zIndex: 20 }} />
+          <Screw style={{ position: 'absolute', bottom: '10px', right: '8px', zIndex: 20 }} />
 
-          {/* Chalk pieces */}
-          {CHALK_COLORS.map((color, i) => (
-            <div
-              key={i}
-              style={{
-                width: '24px',
-                height: '9px',
-                borderRadius: '3px',
-                background: `linear-gradient(155deg, ${color}f2 0%, ${color}a8 50%, ${color}c4 100%)`,
-                transform: `rotate(${CHALK_ROTATIONS[i]}deg)`,
-                boxShadow: `0 2px 5px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.38), inset 0 -1px 0 rgba(0,0,0,0.25)`,
-                flexShrink: 0,
-              }}
-            />
-          ))}
-
-          {/* Chalk dust smudge */}
-          <div style={{ marginLeft: '6px', opacity: 0.55 }}>
-            <div
-              style={{
-                width: '18px',
-                height: '4px',
-                borderRadius: '9px',
-                background: 'rgba(240,237,230,0.22)',
-                filter: 'blur(3px)',
-              }}
-            />
+          {/* Scrollable items — clips silently on narrow screens */}
+          <div className="flex items-center overflow-hidden" style={{ height: '100%', paddingLeft: '18px', paddingRight: '16px', gap: '12px' }}>
+            <BoardEraser />
+            {/* Hide last 2 markers on xs so tray doesn't overflow */}
+            {MARKERS.map((m, i) => (
+              <div key={i} className={i >= 2 ? 'hidden sm:block' : 'block'}>
+                <ExpoMarker cap={m.cap} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Video modal */}
+      {/* ── Video modal ── */}
       {activeLesson && (
         <VideoModal
           lesson={activeLesson}
@@ -276,37 +253,82 @@ export default function CourseBlackboard({ course }: { course: CourseDetail }) {
   )
 }
 
-function Screw({ className }: { className: string }) {
+/* ── Sub-components ── */
+
+function Screw({ style }: { style?: React.CSSProperties }) {
   return (
-    <div
-      className={`${className} w-3 h-3 rounded-full z-20 flex items-center justify-center`}
-      style={{
-        background: 'radial-gradient(circle at 35% 30%, #9a8a78, #3c2c1c)',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.1)',
-      }}
-    >
-      <div
-        style={{
-          width: '55%',
-          height: '1.5px',
-          background: 'rgba(0,0,0,0.55)',
-          borderRadius: '1px',
-          transform: 'rotate(45deg)',
-        }}
-      />
+    <div style={{
+      width: '12px', height: '12px', borderRadius: '50%',
+      background: 'radial-gradient(circle at 35% 30%, #b8a888, #3c2c1c)',
+      boxShadow: '0 1px 4px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.12)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      ...style,
+    }}>
+      <div style={{ width: '55%', height: '1.5px', background: 'rgba(0,0,0,0.5)', borderRadius: '1px', transform: 'rotate(45deg)' }} />
     </div>
   )
 }
 
-function VideoModal({
-  lesson,
-  pillarColor,
-  onClose,
-}: {
-  lesson: Lesson
-  pillarColor: string
-  onClose: () => void
-}) {
+function BoardEraser() {
+  return (
+    <div style={{
+      width: '78px', height: '28px', flexShrink: 0,
+      background: 'linear-gradient(180deg, #2a2a2a 0%, #181818 100%)',
+      borderRadius: '4px',
+      boxShadow: '0 3px 8px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)',
+      position: 'relative', overflow: 'hidden',
+    }}>
+      {/* Felt strip at bottom */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: '3px', right: '3px', height: '9px',
+        background: 'linear-gradient(180deg, #3a2c20, #2a1c10)',
+        borderRadius: '0 0 2px 2px',
+      }} />
+      {/* Top highlight */}
+      <div style={{
+        position: 'absolute', top: '4px', left: '8px', right: '8px', height: '2px',
+        background: 'rgba(255,255,255,0.07)', borderRadius: '1px',
+      }} />
+    </div>
+  )
+}
+
+function ExpoMarker({ cap, bodyWidth = 70 }: { cap: string; bodyWidth?: number }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', height: '15px', flexShrink: 0 }}>
+      {/* Coloured cap (left end) */}
+      <div style={{
+        width: '16px', height: '15px',
+        background: `linear-gradient(180deg, ${cap}cc 0%, ${cap} 100%)`,
+        borderRadius: '4px 0 0 4px',
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.35)`,
+      }} />
+      {/* White body */}
+      <div style={{
+        width: `${bodyWidth}px`, height: '13px',
+        background: 'linear-gradient(180deg, #f4f4f4 0%, #d4d4d4 100%)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.18)',
+      }}>
+        {bodyWidth >= 50 && (
+          <span style={{ fontSize: '6px', fontWeight: 900, color: '#444', letterSpacing: '1.5px', fontFamily: 'Arial, sans-serif', textTransform: 'uppercase' }}>
+            expo
+          </span>
+        )}
+      </div>
+      {/* Black felt tip (right end) */}
+      <div style={{
+        width: '7px', height: '9px',
+        background: '#2a2a2a',
+        borderRadius: '0 3px 3px 0',
+        marginTop: '3px',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+      }} />
+    </div>
+  )
+}
+
+function VideoModal({ lesson, pillarColor, onClose }: { lesson: Lesson; pillarColor: string; onClose: () => void }) {
   const hasVideo = !!lesson.videoId
 
   return (
@@ -316,18 +338,12 @@ function VideoModal({
       onClick={onClose}
     >
       <div className="w-full max-w-2xl" onClick={e => e.stopPropagation()}>
-        {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-3">
           <div className="flex-1 min-w-0">
-            <p
-              className="text-[10px] uppercase tracking-widest font-bold mb-0.5"
-              style={{ color: pillarColor }}
-            >
+            <p className="text-[10px] uppercase tracking-widest font-bold mb-0.5" style={{ color: pillarColor }}>
               {lesson.free ? 'Free Lesson' : 'Member Lesson'}
             </p>
-            <h3 className="font-bold text-text-primary text-sm leading-tight truncate">
-              {lesson.title}
-            </h3>
+            <h3 className="font-bold text-text-primary text-sm leading-tight truncate">{lesson.title}</h3>
             <p className="text-text-muted text-xs mt-0.5">{lesson.duration}</p>
           </div>
           <button
@@ -338,67 +354,29 @@ function VideoModal({
           </button>
         </div>
 
-        {/* Video or coming soon */}
         {hasVideo ? (
-          <div
-            style={{
-              position: 'relative',
-              paddingBottom: '56.25%',
-              borderRadius: '3px',
-              overflow: 'hidden',
-              background: '#000',
-            }}
-          >
+          <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '3px', overflow: 'hidden', background: '#000' }}>
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${lesson.videoId}?autoplay=1&rel=0&modestbranding=1`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                border: 'none',
-              }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
             />
           </div>
         ) : (
-          <div
-            style={{
-              position: 'relative',
-              paddingBottom: '56.25%',
-              borderRadius: '3px',
-              overflow: 'hidden',
-              background: 'linear-gradient(160deg, #163222 0%, #1e3d2e 100%)',
-              border: '1px solid rgba(255,255,255,0.06)',
-            }}
-          >
-            <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-            >
-              <Clock size={30} style={{ color: 'rgba(240,237,230,0.25)' }} />
+          <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '3px', overflow: 'hidden', background: 'linear-gradient(160deg, #101310 0%, #141714 100%)', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <Clock size={30} style={{ color: 'rgba(232,228,208,0.25)' }} />
               <div className="text-center">
-                <p
-                  className="font-semibold text-sm"
-                  style={{ color: 'rgba(240,237,230,0.55)' }}
-                >
-                  Coming soon
-                </p>
-                <p
-                  className="text-xs mt-1.5"
-                  style={{ color: 'rgba(240,237,230,0.28)' }}
-                >
-                  This lesson video will be added shortly.
-                </p>
+                <p className="font-semibold text-sm" style={{ color: 'rgba(232,228,208,0.55)' }}>Coming soon</p>
+                <p className="text-xs mt-1.5" style={{ color: 'rgba(232,228,208,0.28)' }}>This lesson video will be added shortly.</p>
               </div>
             </div>
           </div>
         )}
 
         {lesson.description && (
-          <p className="mt-3 text-xs text-text-secondary leading-relaxed">
-            {lesson.description}
-          </p>
+          <p className="mt-3 text-xs text-text-secondary leading-relaxed">{lesson.description}</p>
         )}
       </div>
     </div>
