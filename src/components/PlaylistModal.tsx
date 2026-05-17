@@ -355,8 +355,10 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                       className="w-full h-full"
                       style={{ border: 'none', display: 'block' }}
                     />
-                    <div className="absolute bottom-0 left-0 w-[30%] h-[28%]" style={{ zIndex: 1 }} />
-                    <div className="absolute bottom-0 right-0 w-[40%] h-[28%]" style={{ zIndex: 1 }} />
+                    {/* End-screen card blockers — stop at 12% from bottom so the control bar (fullscreen etc.) stays clickable */}
+                    <div className="absolute left-0 w-[30%] h-[18%]" style={{ bottom: '12%', zIndex: 1 }} />
+                    <div className="absolute right-0 w-[40%] h-[18%]" style={{ bottom: '12%', zIndex: 1 }} />
+                    {/* Share button blocker — top-right corner */}
                     <div className="absolute top-0 right-0 w-[12%] h-[14%]" style={{ zIndex: 1 }} />
                   </>
                 ) : (
