@@ -18,7 +18,7 @@ export default function CourseBoardPage({
   searchParams,
 }: {
   params: { slug: string }
-  searchParams: { v?: string }
+  searchParams: { v?: string; m?: string }
 }) {
   const filePath = path.join(process.cwd(), 'data', 'courses', 'detail', `${params.slug}.json`)
   if (!fs.existsSync(filePath)) notFound()
@@ -34,9 +34,12 @@ export default function CourseBoardPage({
     }
   }
 
-  // Pre-open a specific lesson if ?v= is present
+  // Pre-open a specific lesson (?v=) or module overview (?m=)
   const initialLesson = searchParams.v
     ? findLessonBySlug(course.modules, searchParams.v)
+    : null
+  const initialModule = searchParams.m
+    ? (course.modules.find(m => m.id === searchParams.m) ?? null)
     : null
 
   return (
@@ -54,7 +57,7 @@ export default function CourseBoardPage({
             All Courses
           </Link>
 
-          <CourseBlackboard course={course} initialLesson={initialLesson} />
+          <CourseBlackboard course={course} initialLesson={initialLesson} initialModule={initialModule} />
 
           {notesHtml && (
             <div className="mt-14">

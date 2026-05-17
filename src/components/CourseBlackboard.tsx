@@ -1,21 +1,47 @@
 'use client'
 
 import { useState } from 'react'
+import { Link as LinkIcon, Check } from 'lucide-react'
 import Blackboard, { CHALK, chalkColor, chalkGlow } from './Blackboard'
 import PlaylistModal from './PlaylistModal'
-import type { CourseDetail, Lesson } from '@/types/course'
+import type { CourseDetail, CourseModule, Lesson } from '@/types/course'
 
 // Re-export for the server page import
 export type { CourseDetail } from '@/types/course'
 
+function ModuleShareButton({ modId }: { modId: string }) {
+  const [copied, setCopied] = useState(false)
+  function copy() {
+    const url = `${window.location.origin}${window.location.pathname}?m=${modId}`
+    navigator.clipboard.writeText(url)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+  return (
+    <button
+      onClick={e => { e.stopPropagation(); copy() }}
+      title="Copy link to this module"
+      className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded transition-opacity opacity-0 group-hover:opacity-100"
+      style={{ color: copied ? '#4ade80' : chalkColor(0.45) }}
+    >
+      {copied ? <Check size={11} /> : <LinkIcon size={11} />}
+    </button>
+  )
+}
+
 export default function CourseBlackboard({
   course,
   initialLesson = null,
+  initialModule = null,
 }: {
   course: CourseDetail
   initialLesson?: Lesson | null
+  initialModule?: CourseModule | null
 }) {
-  const [activeLesson, setActiveLesson] = useState<Lesson | null>(initialLesson)
+  // If a module is deep-linked, open on its first lesson but show the overview
+  const [activeLesson, setActiveLesson] = useState<Lesson | null>(
+    initialLesson ?? (initialModule ? initialModule.lessons[0] : null)
+  )
   const total = course.modules.reduce((s, m) => s + m.lessons.length, 0)
 
   return (
@@ -56,15 +82,18 @@ export default function CourseBlackboard({
         <div className="space-y-8">
           {course.modules.map((mod, mi) => (
             <div key={mod.id}>
-              <p className="text-[10px] uppercase tracking-[0.18em] mb-0.5"
-                style={{
-                  color: chalkColor(0.38),
-                  textDecoration: 'underline',
-                  textDecorationColor: chalkColor(0.16),
-                  textUnderlineOffset: '3px',
-                }}>
-                Module {mi + 1}
-              </p>
+              <div className="flex items-center gap-2 mb-0.5 group">
+                <p className="flex-1 text-[10px] uppercase tracking-[0.18em]"
+                  style={{
+                    color: chalkColor(0.38),
+                    textDecoration: 'underline',
+                    textDecorationColor: chalkColor(0.16),
+                    textUnderlineOffset: '3px',
+                  }}>
+                  Module {mi + 1}
+                </p>
+                <ModuleShareButton modId={mod.id} />
+              </div>
               <h2 className="text-[1.02rem] mb-3" style={{ color: chalkColor(0.83), textShadow: chalkGlow(0.1) }}>
                 {mod.title}
               </h2>
@@ -113,6 +142,7 @@ export default function CourseBlackboard({
           pillarColor={course.pillarColor}
           modules={course.modules}
           activeLesson={activeLesson}
+          initialIntroModId={initialModule?.id ?? null}
           onSelect={setActiveLesson}
           onClose={() => setActiveLesson(null)}
         />

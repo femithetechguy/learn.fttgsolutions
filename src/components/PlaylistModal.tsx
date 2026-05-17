@@ -10,6 +10,7 @@ interface Props {
   pillarColor: string
   modules: CourseModule[]
   activeLesson: Lesson
+  initialIntroModId?: string | null
   onSelect: (lesson: Lesson) => void
   onClose: () => void
 }
@@ -134,11 +135,11 @@ function ModuleTree({
 }
 
 /* ── Main modal ── */
-export default function PlaylistModal({ courseTitle, pillarColor, modules, activeLesson, onSelect, onClose }: Props) {
+export default function PlaylistModal({ courseTitle, pillarColor, modules, activeLesson, initialIntroModId = null, onSelect, onClose }: Props) {
   const activeItemRef = useRef<HTMLButtonElement>(null)
   const [copied, setCopied] = useState(false)
   // null = viewing a lesson; module id = viewing that module's intro/overview
-  const [activeIntroModId, setActiveIntroModId] = useState<string | null>(null)
+  const [activeIntroModId, setActiveIntroModId] = useState<string | null>(initialIntroModId)
 
   const allLessons = modules.flatMap(m => m.lessons)
   const activeIndex = allLessons.findIndex(l => l.id === activeLesson.id)
@@ -157,10 +158,12 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
     if (mod) setExpandedMods(prev => new Set(Array.from(prev).concat(mod.id)))
   }, [activeLesson.id])
 
-  // URL sync — only for lessons, not intro pages
+  // URL sync — ?m= for module overview, ?v= for lessons
   useEffect(() => {
-    if (activeIntroModId) return
-    window.history.replaceState({}, '', `${window.location.pathname}?v=${lessonToSlug(activeLesson.title)}`)
+    const param = activeIntroModId
+      ? `?m=${activeIntroModId}`
+      : `?v=${lessonToSlug(activeLesson.title)}`
+    window.history.replaceState({}, '', `${window.location.pathname}${param}`)
   }, [activeLesson.id, activeIntroModId])
   useEffect(() => () => { window.history.replaceState({}, '', window.location.pathname) }, [])
 
@@ -243,7 +246,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             disabled={!hasPrev || !!introModule}
             title="Previous video"
             className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
-            style={{ color: hasPrev && !introModule ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)', cursor: hasPrev && !introModule ? 'pointer' : 'default' }}
+            style={{ color: hasPrev && !introModule ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.2)', cursor: hasPrev && !introModule ? 'pointer' : 'default' }}
           >
             <SkipBack size={14} />
           </button>
@@ -252,22 +255,20 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             disabled={!hasNext || !!introModule}
             title="Next video"
             className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
-            style={{ color: hasNext && !introModule ? 'rgba(255,255,255,0.65)' : 'rgba(255,255,255,0.18)', cursor: hasNext && !introModule ? 'pointer' : 'default' }}
+            style={{ color: hasNext && !introModule ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.2)', cursor: hasNext && !introModule ? 'pointer' : 'default' }}
           >
             <SkipForward size={14} />
           </button>
 
-          {/* Copy link — hidden on small screens or when viewing intro */}
-          {!introModule && (
-            <button
-              onClick={copyLink}
-              title="Copy shareable link"
-              className="hidden sm:flex w-8 h-8 items-center justify-center rounded-sm bevel-sm transition-colors"
-              style={{ color: copied ? '#4ade80' : 'rgba(255,255,255,0.4)' }}
-            >
-              {copied ? <Check size={13} /> : <LinkIcon size={13} />}
-            </button>
-          )}
+          {/* Copy link — always visible on sm+; copies ?m= for overview, ?v= for lesson */}
+          <button
+            onClick={copyLink}
+            title="Copy shareable link"
+            className="hidden sm:flex w-8 h-8 items-center justify-center rounded-sm bevel-sm transition-colors"
+            style={{ color: copied ? '#4ade80' : 'rgba(255,255,255,0.68)' }}
+          >
+            {copied ? <Check size={13} /> : <LinkIcon size={13} />}
+          </button>
           <button
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm text-text-muted hover:text-text-primary transition-colors"
