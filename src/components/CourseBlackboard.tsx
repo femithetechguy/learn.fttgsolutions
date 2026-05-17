@@ -209,16 +209,13 @@ export default function CourseBlackboard({ course }: { course: CourseDetail }) {
 
         {/* ── Marker tray ── */}
         <div
-          className="relative flex items-center"
+          className="relative"
           style={{
             height: '48px',
             background: 'linear-gradient(180deg, #7a4015 0%, #5a2e0c 55%, #3a1e06 100%)',
             borderTop: '3px solid rgba(0,0,0,0.6)',
             borderRadius: '0 0 3px 3px',
             boxShadow: 'inset 0 5px 12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04)',
-            paddingLeft: '18px',
-            paddingRight: '16px',
-            gap: '14px',
           }}
         >
           {/* Tray ledge line */}
@@ -227,17 +224,20 @@ export default function CourseBlackboard({ course }: { course: CourseDetail }) {
             background: 'linear-gradient(90deg, transparent, rgba(232,228,208,0.06) 15%, rgba(232,228,208,0.05) 85%, transparent)',
           }} />
 
-          {/* Bottom screws */}
+          {/* Bottom screws (outside the scrollable area) */}
           <Screw style={{ position: 'absolute', bottom: '10px', left: '8px', zIndex: 20 }} />
           <Screw style={{ position: 'absolute', bottom: '10px', right: '8px', zIndex: 20 }} />
 
-          {/* Felt eraser */}
-          <BoardEraser />
-
-          {/* Expo markers */}
-          {MARKERS.map((m, i) => (
-            <ExpoMarker key={i} cap={m.cap} />
-          ))}
+          {/* Scrollable items — clips silently on narrow screens */}
+          <div className="flex items-center overflow-hidden" style={{ height: '100%', paddingLeft: '18px', paddingRight: '16px', gap: '12px' }}>
+            <BoardEraser />
+            {/* Hide last 2 markers on xs so tray doesn't overflow */}
+            {MARKERS.map((m, i) => (
+              <div key={i} className={i >= 2 ? 'hidden sm:block' : 'block'}>
+                <ExpoMarker cap={m.cap} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -293,7 +293,7 @@ function BoardEraser() {
   )
 }
 
-function ExpoMarker({ cap }: { cap: string }) {
+function ExpoMarker({ cap, bodyWidth = 70 }: { cap: string; bodyWidth?: number }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', height: '15px', flexShrink: 0 }}>
       {/* Coloured cap (left end) */}
@@ -305,14 +305,16 @@ function ExpoMarker({ cap }: { cap: string }) {
       }} />
       {/* White body */}
       <div style={{
-        width: '70px', height: '13px',
+        width: `${bodyWidth}px`, height: '13px',
         background: 'linear-gradient(180deg, #f4f4f4 0%, #d4d4d4 100%)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.18)',
       }}>
-        <span style={{ fontSize: '6px', fontWeight: 900, color: '#444', letterSpacing: '1.5px', fontFamily: 'Arial, sans-serif', textTransform: 'uppercase' }}>
-          expo
-        </span>
+        {bodyWidth >= 50 && (
+          <span style={{ fontSize: '6px', fontWeight: 900, color: '#444', letterSpacing: '1.5px', fontFamily: 'Arial, sans-serif', textTransform: 'uppercase' }}>
+            expo
+          </span>
+        )}
       </div>
       {/* Black felt tip (right end) */}
       <div style={{
