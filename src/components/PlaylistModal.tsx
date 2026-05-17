@@ -344,16 +344,21 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             /* ── Lesson / video view ── */
             <>
               {/* Video — natural 16:9 */}
-              <div className="w-full bg-black aspect-video">
+              <div className="w-full bg-black aspect-video relative">
                 {activeLesson.videoId ? (
-                  <iframe
-                    key={activeLesson.videoId}
-                    src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1&rel=0`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="w-full h-full"
-                    style={{ border: 'none', display: 'block' }}
-                  />
+                  <>
+                    <iframe
+                      key={activeLesson.videoId}
+                      src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1&rel=0&iv_load_policy=3`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full"
+                      style={{ border: 'none', display: 'block' }}
+                    />
+                    <div className="absolute bottom-0 left-0 w-[30%] h-[28%]" style={{ zIndex: 1 }} />
+                    <div className="absolute bottom-0 right-0 w-[40%] h-[28%]" style={{ zIndex: 1 }} />
+                    <div className="absolute top-0 right-0 w-[12%] h-[14%]" style={{ zIndex: 1 }} />
+                  </>
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-3"
                     style={{ background: 'linear-gradient(160deg, #101310 0%, #141714 100%)' }}>
