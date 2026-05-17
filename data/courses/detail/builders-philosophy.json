@@ -1,71 +1,306 @@
 {
   "slug": "builders-philosophy",
   "title": "The Builder's Philosophy",
-  "subtitle": "Jim Rohn, Napoleon Hill, Earl Nightingale — applied to the life of a builder.",
+  "subtitle": "Napoleon Hill, Jim Rohn, Earl Nightingale — the philosophical foundation for every serious builder.",
   "pillar": "philosophy",
   "pillarLabel": "Philosophy",
   "pillarColor": "#EF9F27",
   "level": "All levels",
-  "totalDuration": "2h 00m",
+  "totalDuration": "72+ hours",
   "free": true,
+  "playlistId": "PL-kaoXbNQhEqQ5SXhyGquxE2gAktBNU85",
+  "links": null,
   "modules": [
     {
       "id": "m1",
-      "title": "Philosophy Foundations",
+      "title": "Napoleon Hill — Applied Wisdom",
+      "description": "This module draws from Napoleon Hill's most potent applied teachings — not the theory, but the lived practice. Hill spent 20 years studying 500 of America's most successful men at Andrew Carnegie's direction. What emerged was a repeatable philosophy of mind, desire, and transmutation that shaped an entire century of achievers. These recordings are dense, deliberate, and meant to be absorbed slowly over time.",
+      "hasDownloads": false,
       "lessons": [
         {
           "id": "l1",
-          "title": "Why Builders Need a Philosophy",
-          "duration": "14:00",
-          "videoId": "",
-          "free": true,
-          "description": "Skills without philosophy produce technicians. Philosophy without skills produces talkers. This is the bridge."
+          "title": "Fall Asleep to Napoleon Hill for 7 Days",
+          "duration": "1:42:23",
+          "videoId": "-HvT9aSg8JA",
+          "free": true
         },
         {
           "id": "l2",
-          "title": "Jim Rohn: The Five Fundamentals",
-          "duration": "18:00",
-          "videoId": "",
-          "free": true,
-          "description": "Philosophy, attitude, activity, results, lifestyle — applied to a modern tech career."
+          "title": "Watch This Every Morning for 30 Days",
+          "duration": "1:03:49",
+          "videoId": "OOoo0pSS0R4",
+          "free": true
         },
         {
           "id": "l3",
-          "title": "Earl Nightingale: The Strangest Secret",
-          "duration": "16:00",
-          "videoId": "",
-          "free": false,
-          "description": "We become what we think about. What does that mean for a developer or data analyst in 2025?"
+          "title": "In-Depth Lesson on LUST: Turning Urge Into Achievement",
+          "duration": "43:53",
+          "videoId": "xaviFPx95D4",
+          "free": true
+        },
+        {
+          "id": "l4",
+          "title": "This Is Why You Must Stay SILENT",
+          "duration": "50:19",
+          "videoId": "gzW8R4AdfBw",
+          "free": true
+        },
+        {
+          "id": "l5",
+          "title": "Why Certain Men MUST Separate to Succeed",
+          "duration": "1:08:14",
+          "videoId": "DXbtaozLasc",
+          "free": true
+        },
+        {
+          "id": "l6",
+          "title": "How To Unlock The Spiritual Side of Success",
+          "duration": "54:03",
+          "videoId": "IHpDB82HZ7g",
+          "free": true
+        },
+        {
+          "id": "l7",
+          "title": "Transmute Lust into Legacy and Conquer Yourself",
+          "duration": "57:49",
+          "videoId": "Gr7oeRxi-Kg",
+          "free": true
+        },
+        {
+          "id": "l8",
+          "title": "The Art of Transmuting LUST into Lasting Achievement",
+          "duration": "47:59",
+          "videoId": "2e1tsq2FT-M",
+          "free": true
+        },
+        {
+          "id": "l9",
+          "title": "The Mastermind Principle",
+          "duration": "9:50",
+          "videoId": "XMzu0ZzyIFo",
+          "free": true
+        },
+        {
+          "id": "l10",
+          "title": "Outwitting The Devil (Audiobook)",
+          "duration": "3:41:03",
+          "videoId": "BZGnJImTlfw",
+          "free": true
         }
       ]
     },
     {
       "id": "m2",
-      "title": "Applied Builder Mindset",
+      "title": "Napoleon Hill — Law of Success (Complete Series)",
+      "description": "The Law of Success is Hill's original 8-volume masterwork — predating Think and Grow Rich by over a decade. This is the uncut philosophy: the Mastermind, Definiteness of Purpose, Self-Confidence, Imagination, and the Golden Rule laid out in full. If Think and Grow Rich is the summary, this series is the source. Expect long sessions. Each book deserves a separate sitting.",
+      "hasDownloads": false,
       "lessons": [
         {
-          "id": "l4",
-          "title": "Designing Your Personal Development Plan",
-          "duration": "20:00",
-          "videoId": "",
-          "free": false,
-          "description": "Not a vision board. A structured, quarterly-reviewed system for skill and character growth."
+          "id": "l11",
+          "title": "Book 1 · The Master Mind",
+          "duration": "3:01:58",
+          "videoId": "n8j4XvSEdm0",
+          "free": true
         },
         {
-          "id": "l5",
-          "title": "Consistency Over Intensity",
-          "duration": "16:00",
-          "videoId": "",
-          "free": false,
-          "description": "Why 30 minutes daily beats 8-hour weekend sprints — and how to build the daily practice."
+          "id": "l12",
+          "title": "Book 2 · A Definite Chief Aim & Self-Confidence",
+          "duration": "3:17:27",
+          "videoId": "eEqrGpYIoM8",
+          "free": true
         },
         {
-          "id": "l6",
-          "title": "Your Environment Is Your Future",
-          "duration": "16:00",
-          "videoId": "",
-          "free": false,
-          "description": "Curate what you read, who you spend time with, and what you build — these are your life inputs."
+          "id": "l13",
+          "title": "Book 3 · Habit of Saving & Initiative and Leadership",
+          "duration": "3:12:13",
+          "videoId": "TWwe_GPyh00",
+          "free": true
+        },
+        {
+          "id": "l14",
+          "title": "Book 4 · Imagination & Enthusiasm",
+          "duration": "3:32:39",
+          "videoId": "CsyzMhpgaec",
+          "free": true
+        },
+        {
+          "id": "l15",
+          "title": "Book 5 · Self-Control & Habit of Doing More",
+          "duration": "3:15:27",
+          "videoId": "fEXBx8UlwBA",
+          "free": true
+        },
+        {
+          "id": "l16",
+          "title": "Book 6 · Pleasing Personality & Accurate Thought",
+          "duration": "3:03:39",
+          "videoId": "ZSfHWZveQIA",
+          "free": true
+        },
+        {
+          "id": "l17",
+          "title": "Book 7 · Concentration & Co-operation",
+          "duration": "3:23:35",
+          "videoId": "Hj6oZSLvCkA",
+          "free": true
+        },
+        {
+          "id": "l18",
+          "title": "Book 8 · Failure, Tolerance & The Golden Rule",
+          "duration": "3:43:58",
+          "videoId": "VeyM084EhTw",
+          "free": true
+        },
+        {
+          "id": "l19",
+          "title": "Napoleon Hill's Master Key (1954 Original Video)",
+          "duration": "2:12:44",
+          "videoId": "JfqDvi8b4gg",
+          "free": true
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Napoleon Hill — Live Lectures (1963)",
+      "description": "Recorded in 1963, these are the only surviving live lecture sessions from Napoleon Hill himself. At over 80 years old, Hill is unfiltered and direct — no publishing house, no editor. You hear the man who built the philosophy speaking it aloud. Three talks on self-discipline, cosmic habit force, and positive mental attitude. Short sessions, maximum density.",
+      "hasDownloads": false,
+      "lessons": [
+        {
+          "id": "l20",
+          "title": "Mastering Your Mind & Self-Discipline",
+          "duration": "29:35",
+          "videoId": "fPn2YHHqdOk",
+          "free": true
+        },
+        {
+          "id": "l21",
+          "title": "Cosmic Habit Force",
+          "duration": "23:05",
+          "videoId": "PGaMfYCMBHo",
+          "free": true
+        },
+        {
+          "id": "l22",
+          "title": "Positive Mental Attitude",
+          "duration": "29:18",
+          "videoId": "VxhGyqLI-Nc",
+          "free": true
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Earl Nightingale",
+      "description": "Earl Nightingale is the voice of the mid-century self-development movement. A protégé of Napoleon Hill and one of the first people to put personal development on vinyl, his recordings defined an era. The Strangest Secret — recorded in 1956 — sold over a million copies and became the first spoken-word recording to go gold. Start there. Then follow through on the 30-day challenge he lays out.",
+      "hasDownloads": false,
+      "lessons": [
+        {
+          "id": "l23",
+          "title": "The Strangest Secret (1950s Original)",
+          "duration": "31:37",
+          "videoId": "jLPdcGe0eS4",
+          "free": true
+        },
+        {
+          "id": "l24",
+          "title": "Pay The Price / The 30-Day Challenge",
+          "duration": "16:49",
+          "videoId": "XdkfL3dqdRQ",
+          "free": true
+        },
+        {
+          "id": "l25",
+          "title": "Train Your Mind to Achieve Anything You Desire",
+          "duration": "25:26",
+          "videoId": "QoDsC4zZ0uc",
+          "free": true
+        }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "Jim Rohn",
+      "description": "Jim Rohn was Anthony Robbins' mentor and one of the most articulate voices in the history of personal philosophy. His seminars are less about motivation and more about the discipline of thinking clearly, working deliberately, and building a life by design. These two recordings — one a full-day seminar, one a 1981 live event — are among the best long-form philosophy sessions ever recorded.",
+      "hasDownloads": false,
+      "lessons": [
+        {
+          "id": "l26",
+          "title": "The Proven Way To Have Your Best Year Ever",
+          "duration": "4:08:41",
+          "videoId": "Mres4xDThPg",
+          "free": true
+        },
+        {
+          "id": "l27",
+          "title": "The Challenge to Succeed Seminar — Anaheim 1981",
+          "duration": "2:23:03",
+          "videoId": "ZwpAsl6SaCM",
+          "free": true
+        }
+      ]
+    },
+    {
+      "id": "m6",
+      "title": "Other Classics",
+      "description": "These are the works that didn't fit neatly into one teacher's body of work but belong in every builder's library. Neville Goddard on imagination and feeling. Wallace Wattles on self-promotion. Dorothea Brande on living deliberately. Joseph Murphy on the subconscious. George Clason on wealth. James Allen on thought. Each one is a standalone philosophy. Take them one at a time.",
+      "hasDownloads": false,
+      "lessons": [
+        {
+          "id": "l28",
+          "title": "Feeling Is the Secret — Neville Goddard (1944)",
+          "duration": "39:11",
+          "videoId": "ffNWoefuwPM",
+          "free": true
+        },
+        {
+          "id": "l29",
+          "title": "Wake UP and LIVE! — Dorothea Brande",
+          "duration": "2:58:51",
+          "videoId": "fUQp879ft0M",
+          "free": true
+        },
+        {
+          "id": "l30",
+          "title": "How To Promote Yourself — Wallace D. Wattles (1914)",
+          "duration": "49:20",
+          "videoId": "o0Exu8S7gQg",
+          "free": true
+        },
+        {
+          "id": "l31",
+          "title": "The Richest Man in Babylon — George S. Clason (Full)",
+          "duration": "22:34",
+          "videoId": "e6UTnwz39Z8",
+          "free": true
+        },
+        {
+          "id": "l32",
+          "title": "The Richest Man in Babylon (Condensed 1963 Edition)",
+          "duration": "19:27",
+          "videoId": "a9HquctrR0c",
+          "free": true
+        },
+        {
+          "id": "l33",
+          "title": "The Power of Your Subconscious Mind — Joseph Murphy",
+          "duration": "7:12:13",
+          "videoId": "Solb9uA-tgQ",
+          "free": true
+        },
+        {
+          "id": "l34",
+          "title": "As A Man Thinketh — James Allen (1903)",
+          "duration": "49:51",
+          "videoId": "VeBX4WjhhXs",
+          "free": true
+        },
+        {
+          "id": "l35",
+          "title": "Sleep — Carlos H. Schenck, M.D.",
+          "duration": "10:05:00",
+          "videoId": "Dw94Q-v9os8",
+          "free": true
         }
       ]
     }
