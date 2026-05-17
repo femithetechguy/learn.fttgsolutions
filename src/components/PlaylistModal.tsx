@@ -413,11 +413,14 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
               <button
                 onClick={refreshBookmarks}
                 disabled={refreshing || !isAuthenticated}
-                title="Refresh bookmarks"
-                className="w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
+                className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
                 style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
               >
                 <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+                <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                  style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  Sync bookmarks from server
+                </span>
               </button>
             )}
           </div>
@@ -563,11 +566,14 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                 <button
                   onClick={refreshBookmarks}
                   disabled={refreshing || !isAuthenticated}
-                  title="Refresh bookmarks"
-                  className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                  className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
                   style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
                 >
                   <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+                  <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                    style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    Sync bookmarks from server
+                  </span>
                 </button>
               )}
             </div>
