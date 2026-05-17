@@ -35,8 +35,6 @@ export async function generateMetadata(
   }
 }
 
-export { PILLAR_COLORS }
-
 export default function ArticleSlugLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }

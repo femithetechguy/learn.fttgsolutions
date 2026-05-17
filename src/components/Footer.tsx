@@ -1,3 +1,5 @@
+'use client'
+
 import { Youtube, Instagram, Twitter, Send } from 'lucide-react'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
