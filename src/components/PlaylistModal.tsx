@@ -361,8 +361,8 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                     <div className="absolute right-0 w-[38%]" style={{ bottom: '11%', height: '22%', zIndex: 1 }} />
                     {/* Control bar — covers everything LEFT of the settings/CC/fullscreen strip (~rightmost 32%) */}
                     <div className="absolute bottom-0 left-0 w-[68%] h-[11%]" style={{ zIndex: 1 }} />
-                    {/* YouTube logo + link icon slot in control bar (~right 7–30%, between fullscreen and settings) */}
-                    <div className="absolute bottom-0 w-[23%]" style={{ right: '7%', height: '11%', zIndex: 1 }} />
+                    {/* YouTube logo + link icon — pushed to right: 4% so the full icon is covered; fullscreen stays at the last 4% */}
+                    <div className="absolute bottom-0 w-[26%]" style={{ right: '4%', height: '11%', zIndex: 1 }} />
                   </>
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-3"
