@@ -1,0 +1,122 @@
+{
+  "sql-thinks-in-sets": [
+    {
+      "id": "c1",
+      "author": "Tunde A.",
+      "body": "The GROUP BY explanation finally clicked for me. I've been writing SQL for two years and always felt like I was guessing — this framing of 'you're describing a new grouped set' changes everything.",
+      "date": "2025-05-15",
+      "replies": [
+        {
+          "id": "c1-r1",
+          "author": "FTTG",
+          "body": "Exactly — once you see GROUP BY as a transformation into a new set rather than a sorting operation, the column restriction stops feeling arbitrary. Glad it landed.",
+          "date": "2025-05-15"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "author": "Amaka O.",
+      "body": "The NULL section saved me today. Had a WHERE clause that was silently dropping rows and couldn't figure out why. IS NULL vs = NULL — never making that mistake again.",
+      "date": "2025-05-16",
+      "replies": []
+    },
+    {
+      "id": "c3",
+      "author": "Jide K.",
+      "body": "CTEs made my queries 10x more readable. I used to nest subqueries 3 levels deep and wonder why nobody else on the team could follow what I wrote.",
+      "date": "2025-05-16",
+      "replies": [
+        {
+          "id": "c3-r1",
+          "author": "Tunde A.",
+          "body": "Same here. The moment I started naming intermediate sets the reviews got so much faster.",
+          "date": "2025-05-16"
+        }
+      ]
+    }
+  ],
+  "thinking-in-models": [
+    {
+      "id": "c4",
+      "author": "Chisom E.",
+      "body": "The habit at the end — writing a single sentence of what you expect to find before looking at the data — is deceptively simple and incredibly effective. I've started doing this every morning and my analysis work has gotten sharper.",
+      "date": "2025-05-14",
+      "replies": [
+        {
+          "id": "c4-r1",
+          "author": "FTTG",
+          "body": "The pre-mortem energy of it is what makes it work. Forces you to commit to a hypothesis so you can't retroactively claim you knew it all along.",
+          "date": "2025-05-14"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "author": "Seun B.",
+      "body": "\"The gap between model and reality is almost always more interesting than a number that confirms what you already believed.\" — this line is going on my wall.",
+      "date": "2025-05-15",
+      "replies": []
+    }
+  ],
+  "ship-before-perfect": [
+    {
+      "id": "c6",
+      "author": "Emeka R.",
+      "body": "The distinction between correct and complete is the most useful framing I've seen on this topic. I've been using 'done' as the threshold when I should have been using 'correct'. Shipping now.",
+      "date": "2025-05-12",
+      "replies": [
+        {
+          "id": "c6-r1",
+          "author": "FTTG",
+          "body": "That's the shift. 'Done' implies nothing left to do — 'correct' just means the core works and the learning can start.",
+          "date": "2025-05-13"
+        }
+      ]
+    },
+    {
+      "id": "c7",
+      "author": "Blessing N.",
+      "body": "Setting the deadline before you start — not after — is something I wish I'd read two years ago. My last project spent three months in 'almost done' mode.",
+      "date": "2025-05-13",
+      "replies": []
+    },
+    {
+      "id": "c8",
+      "author": "Dayo F.",
+      "body": "The psychological barrier section is real. Perfectionism as risk avoidance dressed up as quality control. Hard to admit but true.",
+      "date": "2025-05-14",
+      "replies": [
+        {
+          "id": "c8-r1",
+          "author": "Blessing N.",
+          "body": "Felt personally called out reading that part.",
+          "date": "2025-05-14"
+        }
+      ]
+    }
+  ],
+  "systems-over-goals": [
+    {
+      "id": "c9",
+      "author": "Kemi T.",
+      "body": "The three properties of a good system — small enough to start, measurable but not exhausting, with a natural trigger — I've been designing systems wrong by making them too ambitious. Starting over with these as the criteria.",
+      "date": "2025-05-11",
+      "replies": [
+        {
+          "id": "c9-r1",
+          "author": "FTTG",
+          "body": "The 'design for your worst week' framing is the key one. Most systems fail not because they're bad ideas but because they only survive the good weeks.",
+          "date": "2025-05-11"
+        }
+      ]
+    },
+    {
+      "id": "c10",
+      "author": "Rotimi A.",
+      "body": "Goals as navigation, systems as movement. Simple distinction but it completely reframes how I think about productivity. I've been trying to get motivated to hit goals instead of just building the process.",
+      "date": "2025-05-12",
+      "replies": []
+    }
+  ]
+}
