@@ -57,8 +57,8 @@ function ModuleTree({
 
             {isExpanded && (
               <>
-                {/* Intro item — first in the list when module has a description */}
-                {mod.description && (() => {
+                {/* Overview item — always first */}
+                {(() => {
                   const isActive = activeIntroModId === mod.id
                   return (
                     <button

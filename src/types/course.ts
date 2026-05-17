@@ -17,7 +17,7 @@ export interface CourseDownload {
 export interface CourseModule {
   id: string
   title: string
-  description?: string        // intro text shown above the video when in this module
+  description: string         // always present — shown as the Overview item
   hasDownloads?: boolean
   downloads?: CourseDownload[]
   lessons: Lesson[]
