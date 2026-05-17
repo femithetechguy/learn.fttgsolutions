@@ -355,13 +355,13 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                       className="w-full h-full"
                       style={{ border: 'none', display: 'block' }}
                     />
-                    {/* Top-right share/link button */}
-                    <div className="absolute top-0 right-0 w-[12%] h-[14%]" style={{ zIndex: 1 }} />
-                    {/* End-screen card zones — sit above the control bar (bottom 11%) */}
+                    {/* End-screen card zones (above control bar) */}
                     <div className="absolute left-0 w-[32%]" style={{ bottom: '11%', height: '22%', zIndex: 1 }} />
                     <div className="absolute right-0 w-[38%]" style={{ bottom: '11%', height: '22%', zIndex: 1 }} />
-                    {/* YouTube logo in control bar — slot between Settings and Fullscreen (~right 6–22%) */}
-                    <div className="absolute bottom-0 w-[16%]" style={{ right: '6%', height: '11%', zIndex: 1 }} />
+                    {/* Control bar — covers everything LEFT of the settings/CC/fullscreen strip (~rightmost 32%) */}
+                    <div className="absolute bottom-0 left-0 w-[68%] h-[11%]" style={{ zIndex: 1 }} />
+                    {/* YouTube logo + link icon slot in control bar (~right 7–30%, between fullscreen and settings) */}
+                    <div className="absolute bottom-0 w-[23%]" style={{ right: '7%', height: '11%', zIndex: 1 }} />
                   </>
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-3"
