@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark } from 'lucide-react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark, RefreshCw } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
 import { useAuth } from '@/lib/auth-context'
@@ -136,13 +136,74 @@ function ModuleTree({
   )
 }
 
+/* ── Bookmarks list ── */
+function BookmarksList({
+  modules, bookmarkedIds, activeLesson, activeIntroModId, pillarColor, activeItemRef, onSelect,
+}: {
+  modules: CourseModule[]
+  bookmarkedIds: Set<string>
+  activeLesson: Lesson
+  activeIntroModId: string | null
+  pillarColor: string
+  activeItemRef: React.RefObject<HTMLButtonElement>
+  onSelect: (lesson: Lesson) => void
+}) {
+  const saved = modules.flatMap(m =>
+    m.lessons.filter(l => bookmarkedIds.has(l.id)).map(l => ({ lesson: l, modTitle: m.title }))
+  )
+  if (saved.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-2 py-12 px-4 text-center">
+        <Bookmark size={22} style={{ color: 'rgba(255,255,255,0.18)' }} />
+        <p className="text-[0.72rem]" style={{ color: 'rgba(255,255,255,0.3)' }}>No bookmarks yet.</p>
+        <p className="text-[0.66rem]" style={{ color: 'rgba(255,255,255,0.18)' }}>Bookmark lessons while watching.</p>
+      </div>
+    )
+  }
+  return (
+    <>
+      {saved.map(({ lesson, modTitle }) => {
+        const isActive = lesson.id === activeLesson.id && activeIntroModId === null
+        return (
+          <button
+            key={lesson.id}
+            ref={isActive ? activeItemRef : undefined}
+            onClick={() => onSelect(lesson)}
+            className="w-full min-w-0 flex items-start gap-2.5 px-4 py-2 text-left transition-colors"
+            style={{ background: isActive ? `${pillarColor}14` : undefined }}
+            onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)' }}
+            onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = '' }}
+          >
+            <Bookmark size={11} className="flex-shrink-0 mt-[3px]"
+              fill={isActive ? pillarColor : 'none'}
+              style={{ color: isActive ? pillarColor : 'rgba(255,255,255,0.35)' }} />
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.71rem] leading-snug line-clamp-2" style={{
+                color: isActive ? 'rgba(240,237,230,0.95)' : 'rgba(240,237,230,0.62)',
+                fontWeight: isActive ? 600 : 400,
+              }}>
+                {lesson.title}
+              </p>
+              <p className="text-[0.61rem] mt-0.5" style={{ color: 'rgba(255,255,255,0.26)' }}>
+                {modTitle} · {lesson.duration}
+              </p>
+            </div>
+          </button>
+        )
+      })}
+    </>
+  )
+}
+
 /* ── Main modal ── */
 export default function PlaylistModal({ courseTitle, pillarColor, modules, activeLesson, initialIntroModId = null, onSelect, onClose }: Props) {
   const activeItemRef = useRef<HTMLButtonElement>(null)
   const bookmarkBtnRef = useRef<HTMLButtonElement>(null)
   const [copied, setCopied] = useState(false)
-  const [bookmarked, setBookmarked] = useState(false)
+  const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set())
   const [showGuestPopup, setShowGuestPopup] = useState(false)
+  const [sidebarTab, setSidebarTab] = useState<'lectures' | 'bookmarks'>('lectures')
+  const [refreshing, setRefreshing] = useState(false)
   const { isAuthenticated } = useAuth()
   // null = viewing a lesson; module id = viewing that module's intro/overview
   const [activeIntroModId, setActiveIntroModId] = useState<string | null>(initialIntroModId)
@@ -210,6 +271,23 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
     setTimeout(() => setCopied(false), 2000)
   }
 
+  function toggleBookmark() {
+    if (!isAuthenticated) { setShowGuestPopup(v => !v); return }
+    setBookmarkedIds(prev => {
+      const next = new Set(prev)
+      next.has(activeLesson.id) ? next.delete(activeLesson.id) : next.add(activeLesson.id)
+      return next
+    })
+  }
+
+  const refreshBookmarks = useCallback(async () => {
+    if (!isAuthenticated) return
+    setRefreshing(true)
+    // TODO: replace with real API call — e.g. fetch('/api/bookmarks').then(r => r.json())
+    await new Promise(r => setTimeout(r, 600))
+    setRefreshing(false)
+  }, [isAuthenticated])
+
   const introModule = activeIntroModId ? modules.find(m => m.id === activeIntroModId) : null
 
   const treeProps = {
@@ -276,18 +354,17 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             {copied ? <Check size={13} /> : <LinkIcon size={13} />}
           </button>
 
-          {/* Bookmark */}
+          {/* Bookmark current lesson */}
           <button
             ref={bookmarkBtnRef}
-            onClick={() => {
-              if (!isAuthenticated) { setShowGuestPopup(v => !v); return }
-              setBookmarked(v => !v)
-            }}
-            title={isAuthenticated ? (bookmarked ? 'Remove bookmark' : 'Bookmark this lesson') : 'Sign in to bookmark'}
+            onClick={toggleBookmark}
+            title={isAuthenticated
+              ? (bookmarkedIds.has(activeLesson.id) ? 'Remove bookmark' : 'Bookmark this lesson')
+              : 'Sign in to bookmark'}
             className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
-            style={{ color: bookmarked ? pillarColor : 'rgba(255,255,255,0.68)' }}
+            style={{ color: bookmarkedIds.has(activeLesson.id) ? pillarColor : 'rgba(255,255,255,0.68)' }}
           >
-            <Bookmark size={13} fill={bookmarked && isAuthenticated ? 'currentColor' : 'none'} />
+            <Bookmark size={13} fill={bookmarkedIds.has(activeLesson.id) ? 'currentColor' : 'none'} />
           </button>
           {showGuestPopup && (
             <GuestGatePopup
@@ -310,18 +387,49 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
         {/* Desktop sidebar */}
         <div
-          className="hidden md:flex flex-col w-56 lg:w-64 flex-shrink-0 overflow-y-auto"
+          className="hidden md:flex flex-col w-56 lg:w-64 flex-shrink-0"
           style={{ borderRight: '1px solid rgba(255,255,255,0.07)', background: '#0a0a0a' }}
         >
+          {/* Tab bar */}
           <div
-            className="sticky top-0 z-10 px-4 py-2.5"
+            className="sticky top-0 z-10 flex items-center flex-shrink-0"
             style={{ background: '#0a0a0a', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
           >
-            <p className="text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.28)' }}>
-              Playlist · {allLessons.length} videos
-            </p>
+            {(['lectures', 'bookmarks'] as const).map(tab => (
+              <button
+                key={tab}
+                onClick={() => setSidebarTab(tab)}
+                className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
+                style={{
+                  color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
+                  borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
+                }}
+              >
+                {tab}
+              </button>
+            ))}
+            {/* Refresh — only on bookmarks tab */}
+            {sidebarTab === 'bookmarks' && (
+              <button
+                onClick={refreshBookmarks}
+                disabled={refreshing || !isAuthenticated}
+                title="Refresh bookmarks"
+                className="w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
+                style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
+              >
+                <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+              </button>
+            )}
           </div>
-          <ModuleTree {...treeProps} />
+          {/* Sidebar body */}
+          <div className="overflow-y-auto flex-1">
+            {sidebarTab === 'lectures'
+              ? <ModuleTree {...treeProps} />
+              : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+                  activeIntroModId={activeIntroModId} pillarColor={pillarColor}
+                  activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
+            }
+          </div>
         </div>
 
         {/* Main content — scrolls as one column */}
@@ -433,20 +541,42 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             </>
           )}
 
-          {/* Mobile module list — below the content */}
-          <div
-            className="md:hidden"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
-          >
-            <div
-              className="px-4 py-2.5"
-              style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', background: '#080808' }}
-            >
-              <p className="text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.28)' }}>
-                Playlist · {allLessons.length} videos
-              </p>
+          {/* Mobile playlist — below the content */}
+          <div className="md:hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+            {/* Tab bar */}
+            <div className="flex items-center sticky top-0 z-10"
+              style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+              {(['lectures', 'bookmarks'] as const).map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setSidebarTab(tab)}
+                  className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
+                  style={{
+                    color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
+                    borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+              {sidebarTab === 'bookmarks' && (
+                <button
+                  onClick={refreshBookmarks}
+                  disabled={refreshing || !isAuthenticated}
+                  title="Refresh bookmarks"
+                  className="w-8 h-8 flex items-center justify-center flex-shrink-0"
+                  style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
+                >
+                  <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+                </button>
+              )}
             </div>
-            <ModuleTree {...treeProps} />
+            {sidebarTab === 'lectures'
+              ? <ModuleTree {...treeProps} />
+              : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+                  activeIntroModId={activeIntroModId} pillarColor={pillarColor}
+                  activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
+            }
           </div>
 
         </div>
