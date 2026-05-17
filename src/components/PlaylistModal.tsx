@@ -349,14 +349,19 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                   <>
                     <iframe
                       key={activeLesson.videoId}
-                      src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1&rel=0&iv_load_policy=3`}
+                      src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1&rel=0&iv_load_policy=3&modestbranding=1`}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                       className="w-full h-full"
                       style={{ border: 'none', display: 'block' }}
                     />
-                    {/* Share button blocker — top-right corner only; bottom overlays removed so CC/settings/fullscreen stay fully accessible */}
+                    {/* Top-right share/link button */}
                     <div className="absolute top-0 right-0 w-[12%] h-[14%]" style={{ zIndex: 1 }} />
+                    {/* End-screen card zones — sit above the control bar (bottom 11%) */}
+                    <div className="absolute left-0 w-[32%]" style={{ bottom: '11%', height: '22%', zIndex: 1 }} />
+                    <div className="absolute right-0 w-[38%]" style={{ bottom: '11%', height: '22%', zIndex: 1 }} />
+                    {/* YouTube logo in control bar — slot between Settings and Fullscreen (~right 6–22%) */}
+                    <div className="absolute bottom-0 w-[16%]" style={{ right: '6%', height: '11%', zIndex: 1 }} />
                   </>
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center gap-3"
