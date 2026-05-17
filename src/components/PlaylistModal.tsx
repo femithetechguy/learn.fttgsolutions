@@ -168,7 +168,8 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
         {/* Counter + skip + actions */}
         <div className="flex items-center gap-1 flex-shrink-0">
-          <span className="text-[11px] tabular-nums mr-1" style={{ color: 'rgba(255,255,255,0.28)' }}>
+          {/* Counter — hidden on small screens to save space */}
+          <span className="hidden sm:inline text-[11px] tabular-nums mr-1" style={{ color: 'rgba(255,255,255,0.28)' }}>
             {activeIndex + 1}/{allLessons.length}
           </span>
 
@@ -191,10 +192,11 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             <SkipForward size={14} />
           </button>
 
+          {/* Copy link — hidden on small screens (use native browser share instead) */}
           <button
             onClick={copyLink}
             title="Copy shareable link"
-            className="w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
+            className="hidden sm:flex w-8 h-8 items-center justify-center rounded-sm bevel-sm transition-colors"
             style={{ color: copied ? '#4ade80' : 'rgba(255,255,255,0.4)' }}
           >
             {copied ? <Check size={13} /> : <LinkIcon size={13} />}
