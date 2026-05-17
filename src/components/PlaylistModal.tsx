@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark, RefreshCw } from 'lucide-react'
+import { X, Clock, Link as LinkIcon, Check, SkipBack, SkipForward, ChevronDown, FileText, Download, BookOpen, Bookmark, RefreshCw, Search } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
 import { useAuth } from '@/lib/auth-context'
@@ -136,6 +136,96 @@ function ModuleTree({
   )
 }
 
+/* ── Search results ── */
+function highlight(text: string, query: string) {
+  if (!query) return <>{text}</>
+  const idx = text.toLowerCase().indexOf(query.toLowerCase())
+  if (idx === -1) return <>{text}</>
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark style={{ background: 'rgba(239,159,39,0.35)', color: 'inherit', borderRadius: '2px' }}>
+        {text.slice(idx, idx + query.length)}
+      </mark>
+      {text.slice(idx + query.length)}
+    </>
+  )
+}
+
+function matches(lesson: Lesson, mod: CourseModule, q: string): boolean {
+  const lower = q.toLowerCase()
+  return (
+    lesson.title.toLowerCase().includes(lower) ||
+    (lesson.description?.toLowerCase().includes(lower) ?? false) ||
+    (lesson.transcript?.toLowerCase().includes(lower) ?? false) ||
+    mod.title.toLowerCase().includes(lower)
+  )
+}
+
+function SearchResults({
+  modules, query, activeLesson, activeIntroModId, pillarColor, activeItemRef, onSelect,
+}: {
+  modules: CourseModule[]
+  query: string
+  activeLesson: Lesson
+  activeIntroModId: string | null
+  pillarColor: string
+  activeItemRef: React.RefObject<HTMLButtonElement>
+  onSelect: (lesson: Lesson) => void
+}) {
+  const results = modules.flatMap(m =>
+    m.lessons.filter(l => matches(l, m, query)).map(l => ({ lesson: l, mod: m }))
+  )
+
+  if (results.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-2 py-10 px-4 text-center">
+        <Search size={20} style={{ color: 'rgba(255,255,255,0.18)' }} />
+        <p className="text-[0.72rem]" style={{ color: 'rgba(255,255,255,0.3)' }}>No results for "{query}"</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="py-1">
+      <p className="px-4 pb-1.5 text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.28)' }}>
+        {results.length} result{results.length !== 1 ? 's' : ''}
+      </p>
+      {results.map(({ lesson, mod }) => {
+        const isActive = lesson.id === activeLesson.id && activeIntroModId === null
+        return (
+          <button
+            key={lesson.id}
+            ref={isActive ? activeItemRef : undefined}
+            onClick={() => onSelect(lesson)}
+            className="w-full min-w-0 flex items-start gap-2.5 px-4 py-2 text-left transition-colors"
+            style={{ background: isActive ? `${pillarColor}14` : undefined }}
+            onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)' }}
+            onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = '' }}
+          >
+            <div className="flex-shrink-0 mt-[3px]" style={{
+              width: '13px', height: '13px', borderRadius: '50%',
+              border: isActive ? `2px solid ${pillarColor}` : '1.5px solid rgba(255,255,255,0.22)',
+              background: isActive ? pillarColor : 'transparent',
+            }} />
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.71rem] leading-snug line-clamp-2" style={{
+                color: isActive ? 'rgba(240,237,230,0.95)' : 'rgba(240,237,230,0.62)',
+                fontWeight: isActive ? 600 : 400,
+              }}>
+                {highlight(lesson.title, query)}
+              </p>
+              <p className="text-[0.61rem] mt-0.5" style={{ color: 'rgba(255,255,255,0.26)' }}>
+                {mod.title} · {lesson.duration}
+              </p>
+            </div>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 /* ── Bookmarks list ── */
 function BookmarksList({
   modules, bookmarkedIds, activeLesson, activeIntroModId, pillarColor, activeItemRef, onSelect,
@@ -203,6 +293,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set())
   const [showGuestPopup, setShowGuestPopup] = useState(false)
   const [sidebarTab, setSidebarTab] = useState<'lectures' | 'bookmarks'>('lectures')
+  const [searchQuery, setSearchQuery] = useState('')
   const [refreshing, setRefreshing] = useState(false)
   const { isAuthenticated } = useAuth()
   // null = viewing a lesson; module id = viewing that module's intro/overview
@@ -390,47 +481,73 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
           className="hidden md:flex flex-col w-56 lg:w-64 flex-shrink-0"
           style={{ borderRight: '1px solid rgba(255,255,255,0.07)', background: '#0a0a0a' }}
         >
-          {/* Tab bar */}
-          <div
-            className="sticky top-0 z-10 flex items-center flex-shrink-0"
-            style={{ background: '#0a0a0a', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
-          >
-            {(['lectures', 'bookmarks'] as const).map(tab => (
-              <button
-                key={tab}
-                onClick={() => setSidebarTab(tab)}
-                className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
-                style={{
-                  color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
-                  borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-            {/* Refresh — only on bookmarks tab */}
-            {sidebarTab === 'bookmarks' && (
-              <button
-                onClick={refreshBookmarks}
-                disabled={refreshing || !isAuthenticated}
-                className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
-                style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
-              >
-                <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
-                <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
-                  style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  Sync bookmarks from server
-                </span>
-              </button>
-            )}
+          {/* Search input */}
+          <div className="px-3 py-2 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-sm" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <Search size={11} style={{ color: 'rgba(255,255,255,0.35)', flexShrink: 0 }} />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search lessons…"
+                className="flex-1 min-w-0 bg-transparent text-[0.72rem] outline-none placeholder:text-[rgba(255,255,255,0.28)]"
+                style={{ color: 'rgba(240,237,230,0.85)' }}
+              />
+              {searchQuery && (
+                <button onClick={() => setSearchQuery('')} className="flex-shrink-0" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                  <X size={10} />
+                </button>
+              )}
+            </div>
           </div>
+
+          {/* Tab bar — hidden while searching */}
+          {!searchQuery && (
+            <div
+              className="flex items-center flex-shrink-0"
+              style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+            >
+              {(['lectures', 'bookmarks'] as const).map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setSidebarTab(tab)}
+                  className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
+                  style={{
+                    color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
+                    borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+              {sidebarTab === 'bookmarks' && (
+                <button
+                  onClick={refreshBookmarks}
+                  disabled={refreshing || !isAuthenticated}
+                  className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
+                  style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
+                >
+                  <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+                  <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                    style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    Sync bookmarks from server
+                  </span>
+                </button>
+              )}
+            </div>
+          )}
+
           {/* Sidebar body */}
           <div className="overflow-y-auto flex-1">
-            {sidebarTab === 'lectures'
-              ? <ModuleTree {...treeProps} />
-              : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+            {searchQuery
+              ? <SearchResults modules={modules} query={searchQuery} activeLesson={activeLesson}
                   activeIntroModId={activeIntroModId} pillarColor={pillarColor}
                   activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
+              : sidebarTab === 'lectures'
+                ? <ModuleTree {...treeProps} />
+                : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+                    activeIntroModId={activeIntroModId} pillarColor={pillarColor}
+                    activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
             }
           </div>
         </div>
@@ -546,42 +663,69 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
           {/* Mobile playlist — below the content */}
           <div className="md:hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-            {/* Tab bar */}
-            <div className="flex items-center sticky top-0 z-10"
-              style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              {(['lectures', 'bookmarks'] as const).map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => setSidebarTab(tab)}
-                  className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
-                  style={{
-                    color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
-                    borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
-                  }}
-                >
-                  {tab}
-                </button>
-              ))}
-              {sidebarTab === 'bookmarks' && (
-                <button
-                  onClick={refreshBookmarks}
-                  disabled={refreshing || !isAuthenticated}
-                  className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
-                  style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
-                >
-                  <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
-                  <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
-                    style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    Sync bookmarks from server
-                  </span>
-                </button>
-              )}
+            {/* Search */}
+            <div className="px-3 py-2" style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-sm" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <Search size={11} style={{ color: 'rgba(255,255,255,0.35)', flexShrink: 0 }} />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search lessons…"
+                  className="flex-1 min-w-0 bg-transparent text-[0.72rem] outline-none placeholder:text-[rgba(255,255,255,0.28)]"
+                  style={{ color: 'rgba(240,237,230,0.85)' }}
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery('')} className="flex-shrink-0" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    <X size={10} />
+                  </button>
+                )}
+              </div>
             </div>
-            {sidebarTab === 'lectures'
-              ? <ModuleTree {...treeProps} />
-              : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+
+            {/* Tab bar — hidden while searching */}
+            {!searchQuery && (
+              <div className="flex items-center sticky top-0 z-10"
+                style={{ background: '#080808', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                {(['lectures', 'bookmarks'] as const).map(tab => (
+                  <button
+                    key={tab}
+                    onClick={() => setSidebarTab(tab)}
+                    className="flex-1 py-2.5 text-[9px] uppercase tracking-widest font-semibold transition-colors"
+                    style={{
+                      color: sidebarTab === tab ? 'rgba(240,237,230,0.85)' : 'rgba(255,255,255,0.28)',
+                      borderBottom: sidebarTab === tab ? `2px solid ${pillarColor}` : '2px solid transparent',
+                    }}
+                  >
+                    {tab}
+                  </button>
+                ))}
+                {sidebarTab === 'bookmarks' && (
+                  <button
+                    onClick={refreshBookmarks}
+                    disabled={refreshing || !isAuthenticated}
+                    className="relative group w-8 h-8 flex items-center justify-center flex-shrink-0 transition-opacity"
+                    style={{ color: 'rgba(255,255,255,0.4)', opacity: refreshing ? 0.4 : 1 }}
+                  >
+                    <RefreshCw size={11} className={refreshing ? 'animate-spin' : ''} />
+                    <span className="pointer-events-none absolute bottom-full mb-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded px-2 py-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                      style={{ background: '#1a1a1a', color: 'rgba(240,237,230,0.7)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                      Sync bookmarks from server
+                    </span>
+                  </button>
+                )}
+              </div>
+            )}
+
+            {searchQuery
+              ? <SearchResults modules={modules} query={searchQuery} activeLesson={activeLesson}
                   activeIntroModId={activeIntroModId} pillarColor={pillarColor}
                   activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
+              : sidebarTab === 'lectures'
+                ? <ModuleTree {...treeProps} />
+                : <BookmarksList modules={modules} bookmarkedIds={bookmarkedIds} activeLesson={activeLesson}
+                    activeIntroModId={activeIntroModId} pillarColor={pillarColor}
+                    activeItemRef={activeItemRef} onSelect={handleSelectLesson} />
             }
           </div>
 
