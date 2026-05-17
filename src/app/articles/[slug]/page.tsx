@@ -8,6 +8,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ArticleActions from '@/components/ArticleActions'
 import ArticleComments from '@/components/ArticleComments'
+import ScrollHomeButton from '@/components/ScrollHomeButton'
 import { ARTICLES } from '@/lib/articles'
 
 const PILLAR_META: Record<string, { label: string; color: string }> = {
@@ -98,6 +99,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
       </div>
 
+      <ScrollHomeButton />
       <Footer />
     </div>
   )
