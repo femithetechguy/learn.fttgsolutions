@@ -21,8 +21,8 @@ function ModuleShareButton({ modId }: { modId: string }) {
     <button
       onClick={e => { e.stopPropagation(); copy() }}
       title="Copy link to this module"
-      className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded transition-opacity opacity-0 group-hover:opacity-100"
-      style={{ color: copied ? '#4ade80' : chalkColor(0.45) }}
+      className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded transition-opacity opacity-40 hover:opacity-100"
+      style={{ color: copied ? '#4ade80' : chalkColor(0.7) }}
     >
       {copied ? <Check size={11} /> : <LinkIcon size={11} />}
     </button>
@@ -82,7 +82,7 @@ export default function CourseBlackboard({
         <div className="space-y-8">
           {course.modules.map((mod, mi) => (
             <div key={mod.id}>
-              <div className="flex items-center gap-2 mb-0.5 group">
+              <div className="flex items-center gap-2 mb-0.5">
                 <p className="flex-1 text-[10px] uppercase tracking-[0.18em]"
                   style={{
                     color: chalkColor(0.38),
