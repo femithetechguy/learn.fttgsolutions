@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { X, Clock, Play, Link as LinkIcon, Check } from 'lucide-react'
+import { X, Clock, Play, Link as LinkIcon, Check, SkipBack, SkipForward, FileText } from 'lucide-react'
 import type { Lesson, CourseModule } from '@/types/course'
 import { lessonToSlug } from '@/lib/lesson-slug'
 
@@ -19,24 +19,25 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
   const [copied, setCopied] = useState(false)
   const allLessons = modules.flatMap(m => m.lessons)
   const activeIndex = allLessons.findIndex(l => l.id === activeLesson.id)
+  const hasPrev = activeIndex > 0
+  const hasNext = activeIndex < allLessons.length - 1
 
-  // Sync URL whenever the active lesson changes
+  // Sync URL on lesson change
   useEffect(() => {
-    const slug = lessonToSlug(activeLesson.title)
-    const url = `${window.location.pathname}?v=${slug}`
-    window.history.replaceState({}, '', url)
-    return () => {
-      // Clear ?v= when modal unmounts
-      window.history.replaceState({}, '', window.location.pathname)
-    }
+    window.history.replaceState({}, '', `${window.location.pathname}?v=${lessonToSlug(activeLesson.title)}`)
   }, [activeLesson.id])
 
-  // Scroll active item into view whenever selection changes
+  // Clear URL on unmount
+  useEffect(() => {
+    return () => window.history.replaceState({}, '', window.location.pathname)
+  }, [])
+
+  // Scroll active item into sidebar view
   useEffect(() => {
     activeItemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }, [activeLesson.id])
 
-  // Close on Escape
+  // Escape to close
   useEffect(() => {
     const handler = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
     window.addEventListener('keydown', handler)
@@ -54,10 +55,33 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
       {/* ── Header ── */}
       <div
-        className="flex items-center gap-3 px-4 flex-shrink-0"
+        className="flex items-center gap-2 px-4 flex-shrink-0"
         style={{ height: '52px', borderBottom: '1px solid rgba(255,255,255,0.07)' }}
       >
-        <div className="flex-1 min-w-0">
+        {/* Skip prev */}
+        <button
+          onClick={() => hasPrev && onSelect(allLessons[activeIndex - 1])}
+          disabled={!hasPrev}
+          title="Previous video"
+          className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
+          style={{ color: hasPrev ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.18)', cursor: hasPrev ? 'pointer' : 'default' }}
+        >
+          <SkipBack size={14} />
+        </button>
+
+        {/* Skip next */}
+        <button
+          onClick={() => hasNext && onSelect(allLessons[activeIndex + 1])}
+          disabled={!hasNext}
+          title="Next video"
+          className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-sm bevel-sm transition-colors"
+          style={{ color: hasNext ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.18)', cursor: hasNext ? 'pointer' : 'default' }}
+        >
+          <SkipForward size={14} />
+        </button>
+
+        {/* Title */}
+        <div className="flex-1 min-w-0 px-1">
           <p className="text-[10px] uppercase tracking-widest font-bold" style={{ color: pillarColor }}>
             {courseTitle} · {activeIndex + 1} of {allLessons.length}
           </p>
@@ -65,7 +89,8 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
             {activeLesson.title}
           </p>
         </div>
-        {/* Share / copy link */}
+
+        {/* Copy link */}
         <button
           onClick={copyLink}
           title="Copy shareable link"
@@ -84,33 +109,63 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
         </button>
       </div>
 
-      {/* ── Body: player + sidebar ── */}
+      {/* ── Body: left col (player + transcript) + sidebar ── */}
       <div className="flex-1 flex flex-col md:flex-row min-h-0">
 
-        {/* Player */}
-        <div className="flex-shrink-0 md:flex-1 md:min-h-0 relative bg-black">
-          {/*
-            Mobile:  padding-bottom 56.25% creates the 16:9 box; iframe fills it absolutely.
-            Desktop: md:pb-0 + md:absolute md:inset-0 makes the inner div fill the flex container.
-          */}
-          <div className="relative pb-[56.25%] md:pb-0 md:absolute md:inset-0">
-            {activeLesson.videoId ? (
-              <iframe
-                key={activeLesson.videoId}
-                src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-                style={{ border: 'none' }}
-              />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3"
-                style={{ background: 'linear-gradient(160deg, #101310 0%, #141714 100%)' }}>
-                <Clock size={32} style={{ color: 'rgba(232,228,208,0.22)' }} />
-                <p className="text-sm font-semibold" style={{ color: 'rgba(232,228,208,0.5)' }}>Coming soon</p>
-              </div>
-            )}
+        {/* Left column */}
+        <div className="flex flex-col flex-shrink-0 md:flex-1 md:min-h-0">
+
+          {/* Player */}
+          <div className="flex-shrink-0 md:flex-1 md:min-h-0 relative bg-black">
+            <div className="relative pb-[56.25%] md:pb-0 md:absolute md:inset-0">
+              {activeLesson.videoId ? (
+                <iframe
+                  key={activeLesson.videoId}
+                  src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                  style={{ border: 'none' }}
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3"
+                  style={{ background: 'linear-gradient(160deg, #101310 0%, #141714 100%)' }}>
+                  <Clock size={32} style={{ color: 'rgba(232,228,208,0.22)' }} />
+                  <p className="text-sm font-semibold" style={{ color: 'rgba(232,228,208,0.5)' }}>Coming soon</p>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Transcript panel */}
+          <div
+            className="flex-shrink-0 overflow-y-auto"
+            style={{
+              minHeight: '80px',
+              maxHeight: '160px',
+              borderTop: '1px solid rgba(255,255,255,0.07)',
+              background: '#0a0a0a',
+            }}
+          >
+            <div className="px-5 py-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <FileText size={11} style={{ color: 'rgba(255,255,255,0.25)' }} />
+                <p className="text-[9px] uppercase tracking-widest font-semibold" style={{ color: 'rgba(255,255,255,0.25)' }}>
+                  Transcript
+                </p>
+              </div>
+              {activeLesson.description ? (
+                <p className="text-[0.75rem] leading-relaxed" style={{ color: 'rgba(240,237,230,0.5)' }}>
+                  {activeLesson.description}
+                </p>
+              ) : (
+                <p className="text-[0.73rem]" style={{ color: 'rgba(255,255,255,0.18)' }}>
+                  Transcript not yet available for this video.
+                </p>
+              )}
+            </div>
+          </div>
+
         </div>
 
         {/* ── Playlist sidebar ── */}
@@ -118,12 +173,12 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
           className="flex-1 md:flex-none md:w-80 lg:w-[360px] overflow-y-auto overflow-x-hidden"
           style={{
             borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderLeft: '1px solid rgba(255,255,255,0.05)',
             background: '#0d0d0d',
           }}
         >
           <div>
-
-            {/* Sticky count header */}
+            {/* Sticky header */}
             <div
               className="sticky top-0 z-10 px-4 py-2.5"
               style={{ background: '#0d0d0d', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
@@ -135,7 +190,6 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
 
             {modules.map((mod) => (
               <div key={mod.id}>
-                {/* Module label */}
                 <div className="px-4 pt-3 pb-1">
                   <p className="text-[9px] uppercase tracking-widest font-semibold" style={{ color: 'rgba(255,255,255,0.25)' }}>
                     {mod.title}
@@ -168,14 +222,12 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                             <Clock size={14} style={{ color: 'rgba(255,255,255,0.2)' }} />
                           </div>
                         )}
-                        {/* Active play overlay */}
                         {isActive && (
                           <div className="absolute inset-0 flex items-center justify-center"
                             style={{ background: 'rgba(0,0,0,0.45)' }}>
                             <Play size={16} fill="white" style={{ color: 'white' }} />
                           </div>
                         )}
-                        {/* Gold left accent bar */}
                         {isActive && (
                           <div className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ background: pillarColor }} />
                         )}

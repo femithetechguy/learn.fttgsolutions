@@ -5,6 +5,7 @@ export interface Lesson {
   videoId: string
   free: boolean
   description?: string
+  transcript?: string   // full transcript text; shown in the player transcript panel
 }
 
 export interface CourseModule {
