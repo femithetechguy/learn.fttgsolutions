@@ -112,6 +112,23 @@ body::before {
   .tag-pill {
     @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-semibold tracking-wide;
   }
+
+  /* Article markdown body */
+  .article-body h1 { font-family: 'Playfair Display', serif; font-size: 1.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.2; }
+  .article-body h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-primary); margin-top: 2rem; margin-bottom: 0.6rem; }
+  .article-body h3 { font-family: 'Source Sans Pro', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.4rem; }
+  .article-body p  { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.25rem; font-size: 1rem; }
+  .article-body ul, .article-body ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+  .article-body li { color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.35rem; }
+  .article-body strong { color: var(--text-primary); font-weight: 600; }
+  .article-body em { font-style: italic; }
+  .article-body a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+  .article-body hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 2rem 0; }
+  .article-body blockquote { border-left: 3px solid var(--gold); padding-left: 1.25rem; margin: 1.5rem 0; }
+  .article-body blockquote p { color: var(--text-secondary); font-style: italic; }
+  .article-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; background: var(--bg-elevated); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 0.1em 0.4em; color: var(--gold-light); }
+  .article-body pre { background: var(--bg-elevated); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 1rem 1.25rem; overflow-x: auto; margin-bottom: 1.25rem; }
+  .article-body pre code { background: none; border: none; padding: 0; font-size: 0.85em; color: var(--text-secondary); }
 }
 
 @layer utilities {

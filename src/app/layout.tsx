@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import content from '@/lib/content'
+import { AuthProvider } from '@/lib/auth-context'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://learn.fttgsolutions.com'),
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="antialiased">
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   )

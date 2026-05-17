@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Info } from 'lucide-react'
+import { Copy, Check } from 'lucide-react'
 import { SI_MAP, CUSTOM_MAP } from '@/lib/brand-icons'
 
 interface StackTool     { name: string; slug: string; color: string; definition?: string }
@@ -14,11 +14,17 @@ interface TooltipPos {
   placement: 'top' | 'bottom'
 }
 
+const LONG_PRESS_MS = 500
+
 function ToolChip({ slug, name, color, definition }: StackTool) {
   const path = (slug ? SI_MAP[slug]?.path : undefined) ?? (slug ? CUSTOM_MAP[slug] : undefined)
-  const [open, setOpen] = useState(false)
-  const [pos,  setPos]  = useState<TooltipPos | null>(null)
-  const ref = useRef<HTMLSpanElement>(null)
+  const [open,   setOpen]   = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [pos,    setPos]    = useState<TooltipPos | null>(null)
+  const ref            = useRef<HTMLSpanElement>(null)
+  const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const didLongPress   = useRef(false)
+  const pointerTypeRef = useRef<string>('mouse')
 
   const calcPos = () => {
     if (!ref.current) return
@@ -28,6 +34,19 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
       top:  rect.top > 90 ? rect.top - 8 : rect.bottom + 8,
       left: rect.left + rect.width / 2,
     })
+  }
+
+  const copy = () => {
+    navigator.clipboard.writeText(name)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  const cancelLongPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
   }
 
   useEffect(() => {
@@ -42,10 +61,33 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
   return (
     <span
       ref={ref}
-      className="group relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5"
+      className="group relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-bg-elevated border border-white/10 rounded-sm cursor-copy transition-all duration-200 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/5 select-none bevel-sm"
       onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; calcPos(); setOpen(true) }}
       onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setOpen(false) }}
-      onClick={(e) => { if ((e.nativeEvent as PointerEvent).pointerType === 'mouse') return; calcPos(); setOpen(v => !v) }}
+      onPointerDown={(e) => {
+        pointerTypeRef.current = e.pointerType
+        if (e.pointerType === 'mouse') return
+        didLongPress.current = false
+        longPressTimer.current = setTimeout(() => {
+          didLongPress.current = true
+          calcPos()
+          copy()
+        }, LONG_PRESS_MS)
+      }}
+      onPointerMove={(e) => { if (e.pointerType !== 'mouse') cancelLongPress() }}
+      onPointerUp={cancelLongPress}
+      onPointerCancel={cancelLongPress}
+      onContextMenu={(e) => e.preventDefault()}
+      onClick={() => {
+        if (pointerTypeRef.current !== 'mouse') {
+          if (didLongPress.current) { didLongPress.current = false; return }
+          calcPos()
+          setOpen(prev => !prev)
+        } else {
+          calcPos()
+          copy()
+        }
+      }}
     >
       {path && (
         <svg
@@ -63,14 +105,13 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
       <span className="font-sans text-xs text-text-secondary leading-none transition-colors duration-200 group-hover:text-text-primary">
         {name}
       </span>
-      {definition && (
-        <Info
-          size={10}
-          className={`shrink-0 transition-colors duration-200 ${open ? 'text-gold' : 'text-text-muted opacity-40 group-hover:opacity-80 group-hover:text-text-secondary'}`}
-        />
-      )}
+      {copied
+        ? <Check size={10} className="shrink-0 text-green-400" />
+        : <Copy size={10} className="shrink-0 text-text-muted opacity-40 group-hover:opacity-80 group-hover:text-text-secondary transition-colors duration-200" />
+      }
 
-      {definition && open && pos && typeof window !== 'undefined' && createPortal(
+      {/* Definition tooltip */}
+      {definition && open && !copied && pos && typeof window !== 'undefined' && createPortal(
         <span
           className="fixed z-[9999] w-72 px-3 py-2 bg-bg-elevated border border-white/20 rounded-sm font-sans text-xs text-text-primary shadow-2xl leading-relaxed whitespace-normal text-left pointer-events-none"
           style={{
@@ -82,6 +123,24 @@ function ToolChip({ slug, name, color, definition }: StackTool) {
           }}
         >
           {definition}
+        </span>,
+        document.body
+      )}
+
+      {/* Copied flash */}
+      {copied && pos && typeof window !== 'undefined' && createPortal(
+        <span
+          className="fixed z-[9999] inline-flex items-center gap-1 px-2.5 py-1.5 bg-bg-elevated border border-green-400/30 rounded-sm shadow-2xl pointer-events-none font-sans text-xs text-green-400 font-medium"
+          style={{
+            top:       pos.top,
+            left:      pos.left,
+            transform: pos.placement === 'top'
+              ? 'translateX(-50%) translateY(-100%)'
+              : 'translateX(-50%)',
+          }}
+        >
+          <Check size={11} />
+          Copied!
         </span>,
         document.body
       )}
@@ -102,19 +161,26 @@ export default function StackGrid({ categories, columns = 2 }: StackGridProps) {
   }[columns]
 
   return (
-    <div className={`grid ${colClass} gap-x-10 gap-y-3`}>
-      {categories.map(row => (
-        <div key={row.category} className="flex items-start gap-2 sm:gap-3">
-          <span className="font-sans text-xs font-bold tracking-widest text-text-primary uppercase w-28 sm:w-36 shrink-0 pt-1.5 leading-tight">
-            {row.category}
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {row.tools.map(tool => (
-              <ToolChip key={tool.name} {...tool} />
-            ))}
+    <div>
+      <p className="font-sans text-xs text-text-muted mb-6">
+        <span className="[@media(hover:none)]:inline hidden">Tap for definition &middot; Hold to copy name</span>
+        <span className="[@media(hover:hover)]:inline hidden">Hover for definition &middot; Click to copy name</span>
+      </p>
+
+      <div className={`grid ${colClass} gap-x-10 gap-y-3`}>
+        {categories.map(row => (
+          <div key={row.category} className="flex items-start gap-2 sm:gap-3">
+            <span className="font-sans text-xs font-bold tracking-widest text-text-primary uppercase w-28 sm:w-36 shrink-0 pt-1.5 leading-tight">
+              {row.category}
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {row.tools.map(tool => (
+                <ToolChip key={tool.name} {...tool} />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

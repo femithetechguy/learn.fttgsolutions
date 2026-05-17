@@ -72,7 +72,8 @@
       "tools": [
         { "name": "Clerk",    "slug": "clerk", "color": "6C47FF", "definition": "Drop-in authentication for React — user management, sessions, and MFA in minutes, not days." },
         { "name": "NextAuth", "slug": "",      "color": "7F7F7F", "definition": "Auth library for Next.js — handles OAuth providers, sessions, and JWT out of the box." },
-        { "name": "JWT",      "slug": "",      "color": "D63AFF", "definition": "JSON Web Token — a compact, self-contained token for securely passing user identity between services." }
+        { "name": "JWT",      "slug": "",      "color": "D63AFF", "definition": "JSON Web Token — a compact, self-contained token for securely passing user identity between services." },
+        { "name": "bcrypt",   "slug": "",      "color": "7A8B99", "definition": "Password hashing library — salts and hashes passwords with a cost factor so brute-force attacks are computationally expensive." }
       ]
     },
     {
@@ -98,7 +99,8 @@
         { "name": "GitHub",   "slug": "github",   "color": "DDDDDD", "definition": "Cloud platform for Git repositories — pull requests, issues, Actions, and the world's largest code community." },
         { "name": "Postman",  "slug": "postman",  "color": "FF6C37", "definition": "API testing client — send requests, inspect responses, and document your API without writing code." },
         { "name": "pnpm",     "slug": "pnpm",     "color": "F69220", "definition": "Fast, disk-efficient package manager — installs node_modules up to 3x faster than npm." },
-        { "name": "Turborepo","slug": "turborepo","color": "FF1E56", "definition": "Monorepo build system — caches tasks and runs pipelines in parallel across your workspace." }
+        { "name": "Turborepo","slug": "turborepo","color": "FF1E56", "definition": "Monorepo build system — caches tasks and runs pipelines in parallel across your workspace." },
+        { "name": "marked",   "slug": "",        "color": "AAAAAA", "definition": "Fast, lightweight markdown parser for Node.js — converts .md files to HTML with zero dependencies." }
       ]
     },
     {
