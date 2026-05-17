@@ -7,6 +7,7 @@ import { Clock, ArrowLeft } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ArticleActions from '@/components/ArticleActions'
+import ArticleComments from '@/components/ArticleComments'
 import { ARTICLES } from '@/lib/articles'
 
 const PILLAR_META: Record<string, { label: string; color: string }> = {
@@ -91,6 +92,8 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             className="article-body"
             dangerouslySetInnerHTML={{ __html: html }}
           />
+
+          <ArticleComments slug={params.slug} />
         </div>
 
       </div>
