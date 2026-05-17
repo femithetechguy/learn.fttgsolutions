@@ -1,6 +1,7 @@
 import sql    from './sql.json'
 import python from './python.json'
 import dax    from './dax.json'
+import mCode  from './m-code.json'
 import git    from './git.json'
 import vscode from './vscode.json'
 import vim      from './vim.json'
@@ -21,6 +22,7 @@ export const SHEETS = [
   { key: 'sql',    data: sql    },
   { key: 'python', data: python },
   { key: 'dax',    data: dax    },
+  { key: 'm-code', data: mCode  },
   { key: 'git',    data: git    },
   { key: 'vscode', data: vscode },
   { key: 'vim',      data: vim      },

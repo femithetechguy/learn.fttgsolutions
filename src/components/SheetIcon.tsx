@@ -1,8 +1,9 @@
-import { Code2, BarChart3, Coffee, Bot } from 'lucide-react'
+import { Code2, BarChart3, Coffee, Bot, Database } from 'lucide-react'
 import { SHEET_ICON_PATHS } from '@/lib/sheet-icons'
 
 const LUCIDE_FALLBACKS: Record<string, React.ElementType> = {
   dax:          BarChart3,
+  'm-code':     Database,
   vscode:       Code2,
   java:         Coffee,
   'ai-prompts': Bot,

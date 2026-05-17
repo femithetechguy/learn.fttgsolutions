@@ -17,6 +17,7 @@ export const SHEET_ICON_PATHS: Record<string, string | null> = {
   sql:          siPostgresql.path,
   python:       siPython.path,
   dax:          null,              // lucide: BarChart3
+  'm-code':     null,             // lucide: Database
   git:          siGit.path,
   vscode:       null,              // lucide: Code2
   vim:          siVim.path,
