@@ -73,14 +73,26 @@ body::before {
     @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-bg-primary bg-gold rounded-sm transition-all duration-200 hover:bg-gold-light active:scale-95 overflow-hidden;
     font-family: 'Source Sans Pro', sans-serif;
     letter-spacing: 0.02em;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.30), inset 0 -1px 0 rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.30);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(0,0,0,0.10) 100%);
+    box-shadow:
+      inset 0  1px 0  rgba(255,255,255,0.45),
+      inset 0 -1px 0  rgba(0,0,0,0.22),
+      inset  1px 0 0  rgba(255,255,255,0.18),
+      inset -1px 0 0  rgba(0,0,0,0.12),
+      0 2px 10px rgba(0,0,0,0.35);
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-text-secondary border border-text-muted rounded-sm transition-all duration-200 hover:border-gold hover:text-gold active:scale-95;
     font-family: 'Source Sans Pro', sans-serif;
     letter-spacing: 0.02em;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.22);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.10) 100%);
+    box-shadow:
+      inset 0  1px 0  rgba(255,255,255,0.12),
+      inset 0 -1px 0  rgba(0,0,0,0.40),
+      inset  1px 0 0  rgba(255,255,255,0.05),
+      inset -1px 0 0  rgba(0,0,0,0.14),
+      0 2px 6px rgba(0,0,0,0.25);
   }
 
   .input-dark {
@@ -103,26 +115,35 @@ body::before {
 }
 
 @layer utilities {
-  /* Raised bevel — light top edge, shadow bottom edge, subtle drop shadow */
+  /* Metallic bevel — 4-edge inset + curved-surface gradient + drop shadow */
   .bevel {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(0,0,0,0.10) 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.10),
-      inset 0 -1px 0 rgba(0,0,0,0.30),
-      0 2px 6px rgba(0,0,0,0.25);
+      inset 0  1px 0  rgba(255,255,255,0.18),
+      inset 0 -1px 0  rgba(0,0,0,0.50),
+      inset  1px 0 0  rgba(255,255,255,0.07),
+      inset -1px 0 0  rgba(0,0,0,0.15),
+      0 2px 8px rgba(0,0,0,0.30);
   }
-  /* Lighter variant for smaller chips */
+  /* Smaller chips — same material, quieter contrast */
   .bevel-sm {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.08) 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.07),
-      inset 0 -1px 0 rgba(0,0,0,0.22),
-      0 1px 4px rgba(0,0,0,0.18);
+      inset 0  1px 0  rgba(255,255,255,0.13),
+      inset 0 -1px 0  rgba(0,0,0,0.42),
+      inset  1px 0 0  rgba(255,255,255,0.05),
+      inset -1px 0 0  rgba(0,0,0,0.12),
+      0 1px 4px rgba(0,0,0,0.22);
   }
-  /* Bevel on a colored/active background — brighter top highlight */
+  /* Active / colored background — brighter top shine, gradient preserves the tint */
   .bevel-active {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(0,0,0,0.14) 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.28),
-      inset 0 -1px 0 rgba(0,0,0,0.22),
-      0 2px 6px rgba(0,0,0,0.25);
+      inset 0  1px 0  rgba(255,255,255,0.38),
+      inset 0 -1px 0  rgba(0,0,0,0.26),
+      inset  1px 0 0  rgba(255,255,255,0.14),
+      inset -1px 0 0  rgba(0,0,0,0.16),
+      0 2px 6px rgba(0,0,0,0.28);
   }
 
   .text-gradient-gold {
