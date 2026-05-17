@@ -1,6 +1,8 @@
 import sql    from './sql.json'
 import python from './python.json'
+import powerBi from './power-bi.json'
 import dax    from './dax.json'
+import mCode  from './m-code.json'
 import git    from './git.json'
 import vscode from './vscode.json'
 import vim      from './vim.json'
@@ -20,7 +22,9 @@ import markdown   from './markdown.json'
 export const SHEETS = [
   { key: 'sql',    data: sql    },
   { key: 'python', data: python },
+  { key: 'power-bi', data: powerBi },
   { key: 'dax',    data: dax    },
+  { key: 'm-code', data: mCode  },
   { key: 'git',    data: git    },
   { key: 'vscode', data: vscode },
   { key: 'vim',      data: vim      },

@@ -1,0 +1,190 @@
+{
+  "label": "M Code",
+  "headline": "Power Query M Cheat Sheet",
+  "tagline": "Extract. Transform. Load.",
+  "description": "Quick reference for Power Query M — the functional language behind Power BI and Excel data transformations. Covers values, operators, text, numbers, dates, lists, records, and tables.",
+  "color": "0078D4",
+  "categories": [
+    {
+      "category": "Core Concepts",
+      "items": [
+        { "name": "Power Query", "syntax": "— ETL tool", "definition": "Power Query is a tool for extract-transform-load (ETL). It lets you import and prepare data for use in Power BI, Excel, Azure Data Lake Storage, and Dataverse." },
+        { "name": "Power Query M", "syntax": "— functional language", "definition": "M (short for 'Mashup') is the functional programming language used in Power Query. Case-sensitive. Used for data transformation, not data analysis (that's DAX)." },
+        { "name": "Expression", "syntax": "1 + 1\n\"Hello\" & \" World\"", "definition": "A single formula that returns a value. All M code is composed of expressions." },
+        { "name": "Query (let...in)", "syntax": "let\n  Source = Csv.Document(File.Contents(\"data.csv\")),\n  Result = Table.PromoteHeaders(Source)\nin\n  Result", "definition": "A query is a sequence of expressions defined with let...in. Each step can reference previous steps. The in expression is what the query returns." },
+        { "name": "Comments", "syntax": "// Single-line comment\n/* Multi-line\n   comment */", "definition": "// for single-line comments. /* */ for multi-line comments. Use them to document steps in the Advanced Editor." }
+      ]
+    },
+    {
+      "category": "Creating Values",
+      "items": [
+        { "name": "Number", "syntax": "999\n3.14\n-42", "definition": "Integer or decimal number literals. M has no distinction between int and float at the language level." },
+        { "name": "Text", "syntax": "\"DataCamp\"\n\"It's a \\\"quote\\\"\"", "definition": "Text values are double-quoted. Embed a double-quote by doubling it: \"\"." },
+        { "name": "Logical", "syntax": "true\nfalse", "definition": "Boolean literals. Lowercase only — True and False are not valid in M." },
+        { "name": "Null", "syntax": "null", "definition": "Represents a missing or unknown value. Many functions return null instead of throwing an error on empty input." },
+        { "name": "Date", "syntax": "#date(2025, 12, 31)", "definition": "Date literal using #date(year, month, day). Can also use #datetime, #datetimezone, #duration, #time." },
+        { "name": "Datetime", "syntax": "#datetime(2025, 6, 15, 9, 30, 0)", "definition": "Datetime literal: #datetime(year, month, day, hour, minute, second)." },
+        { "name": "Duration", "syntax": "#duration(days, hours, minutes, seconds)\n#duration(1, 0, 30, 0) // 1 day 30 min", "definition": "Represents an elapsed time span. Use with Date.AddDays or subtraction between two datetime values." },
+        { "name": "List", "syntax": "{1, 2, 3}\n{\"a\", \"b\", null}\n{1..10}", "definition": "A list is an ordered sequence of values in curly braces. Can contain mixed types. {1..10} creates a range." },
+        { "name": "Record", "syntax": "[Name = \"Alice\", Age = 30]", "definition": "A record is a set of named fields in square brackets. Like a single row with column names." },
+        { "name": "Table", "syntax": "#table({\"Name\",\"Age\"}, {{\"Alice\",30},{\"Bob\",25}})", "definition": "Creates a table from a list of column names and a list of row lists." }
+      ]
+    },
+    {
+      "category": "Variables & Queries",
+      "items": [
+        { "name": "let...in", "syntax": "let\n  TempF = 85,\n  TempC = (TempF - 32) * 5 / 9\nin\n  TempC", "definition": "let assigns named intermediate values. Each name can reference earlier names. in specifies the final returned value." },
+        { "name": "Naming conventions", "syntax": "// Standard: UpperCamelCase\nHeightMeters\n// Non-standard (spaces etc): use #\"\"\n#\"Height in Meters\"", "definition": "Variable names are UpperCamelCase by convention. Wrap names with spaces or special characters in #\"...\"." },
+        { "name": "Step reference", "syntax": "let\n  Source = Excel.CurrentWorkbook(){[Name=\"Table1\"]}[Content],\n  Typed = Table.TransformColumnTypes(Source, {{\"Date\", type date}})\nin\n  Typed", "definition": "Each step name becomes a reference. Steps are the building blocks of every Power Query transformation." }
+      ]
+    },
+    {
+      "category": "Operators",
+      "items": [
+        { "name": "Arithmetic", "syntax": "102 + 37  // Add\n102 - 37  // Subtract\n4 * 6     // Multiply\n22 / 7    // Divide", "definition": "Standard math operators. Use Number.Mod for modulo and Number.IntegerDivide for integer division." },
+        { "name": "Comparison", "syntax": "3 = 3    // true (equal)\n3 <> 4   // true (not equal)\n3 > 1    // true\n3 >= 3   // true\n3 < 4    // true\n3 <= 4   // true", "definition": "Returns a logical value (true/false). M comparison is case-sensitive for text." },
+        { "name": "Logical", "syntax": "not (2 = 2)              // false\n(1 < 1) and (1 >= 1)     // false\n(1 >= 1) or (1 < 1)      // true", "definition": "and, or, not operators for combining logical conditions." },
+        { "name": "Text concatenation &", "syntax": "\"fish\" & \" \" & \"chips\"\n// Returns \"fish chips\"", "definition": "The & operator joins text values. Equivalent to Text.Combine for two strings." },
+        { "name": "List concatenation &", "syntax": "{1, 4} & {4, 9}\n// Returns {1, 4, 4, 9}", "definition": "The & operator also concatenates two lists end-to-end." },
+        { "name": "is / as (type)", "syntax": "1 is number      // true\n\"hello\" is text  // true\nValue.Is(x, type number)", "definition": "is checks if a value matches a type. as casts a value to a type (errors if it doesn't match)." },
+        { "name": "? (optional)", "syntax": "Record.Field(rec, \"Name\")?\n// Returns null instead of error if field missing", "definition": "The ? operator after an expression converts errors into null rather than stopping the query." }
+      ]
+    },
+    {
+      "category": "Text Functions",
+      "items": [
+        { "name": "Text.Length", "syntax": "Text.Length(\"Hello World\") // 11", "definition": "Returns the number of characters in a text string." },
+        { "name": "Text.Upper / Lower / Proper", "syntax": "Text.Upper(\"hello\")   // \"HELLO\"\nText.Lower(\"HELLO\")   // \"hello\"\nText.Proper(\"hello world\") // \"Hello World\"", "definition": "Converts text to uppercase, lowercase, or title case (first letter of each word capitalised)." },
+        { "name": "Text.Start / End", "syntax": "Text.Start(\"DataCamp\", 4)  // \"Data\"\nText.End(\"DataCamp\", 4)    // \"Camp\"", "definition": "Extracts characters from the start or end of a string." },
+        { "name": "Text.Middle", "syntax": "Text.Middle(\"Zip: 10018\", 5, 5) // \"10018\"", "definition": "Extracts a substring starting at a zero-based position for the given length." },
+        { "name": "Text.Range", "syntax": "Text.Range(\"DataCamp\", 0, 4) // \"Data\"", "definition": "Extracts a substring by zero-based start index and length. Similar to Text.Middle." },
+        { "name": "Text.Split", "syntax": "Text.Split(\"a,b,c\", \",\")\n// {\"a\", \"b\", \"c\"}", "definition": "Splits a text value on a delimiter and returns a list of text values." },
+        { "name": "Text.Combine", "syntax": "Text.Combine({\"fish\",\"chips\"}, \" & \")\n// \"fish & chips\"", "definition": "Joins a list of text values with a separator string." },
+        { "name": "Text.Replace", "syntax": "Text.Replace(\"Have a nice trip\", \"trip\", \"day\")\n// \"Have a nice day\"", "definition": "Replaces all occurrences of a substring with a new substring." },
+        { "name": "Text.Contains", "syntax": "Text.Contains(\"Power Query\", \"Query\") // true", "definition": "Returns true if the text string contains the specified substring." },
+        { "name": "Text.StartsWith / EndsWith", "syntax": "Text.StartsWith(\"DataCamp\", \"Data\") // true\nText.EndsWith(\"DataCamp\", \"Camp\")   // true", "definition": "Checks whether a text value starts or ends with a given substring." },
+        { "name": "Text.Trim / TrimStart / TrimEnd", "syntax": "Text.Trim(\"  hello  \")      // \"hello\"\nText.TrimStart(\"  hello\")   // \"hello\"\nText.TrimEnd(\"hello  \")     // \"hello\"", "definition": "Removes whitespace (or specified characters) from both ends, the start, or the end of a string." },
+        { "name": "Text.PadStart / PadEnd", "syntax": "Text.PadStart(\"42\", 6, \"0\") // \"000042\"\nText.PadEnd(\"42\", 6, \"0\")   // \"420000\"", "definition": "Pads a string to a minimum length using a fill character on the left or right." },
+        { "name": "Text.From", "syntax": "Text.From(42)         // \"42\"\nText.From(true)       // \"true\"\nText.From(#date(2025,1,1)) // \"1/1/2025\"", "definition": "Converts any value to its text representation." },
+        { "name": "Text.ToList", "syntax": "Text.ToList(\"abc\") // {\"a\", \"b\", \"c\"}", "definition": "Splits a text string into a list of individual characters." }
+      ]
+    },
+    {
+      "category": "Number Functions",
+      "items": [
+        { "name": "Number.Abs", "syntax": "Number.Abs(-42) // 42", "definition": "Returns the absolute (positive) value of a number." },
+        { "name": "Number.Round", "syntax": "Number.Round(12.3456, 2) // 12.35", "definition": "Rounds to the specified number of decimal places using standard half-up rounding." },
+        { "name": "Number.RoundUp / Down", "syntax": "Number.RoundUp(1.1, 0)   // 2\nNumber.RoundDown(1.9, 0) // 1", "definition": "Always rounds away from or toward zero, regardless of the digit value." },
+        { "name": "Number.IntegerDivide", "syntax": "Number.IntegerDivide(22, 7) // 3", "definition": "Returns the integer quotient — discards the remainder." },
+        { "name": "Number.Mod", "syntax": "Number.Mod(22, 7) // 1", "definition": "Returns the remainder after integer division." },
+        { "name": "Number.Power", "syntax": "Number.Power(3, 4) // 81", "definition": "Raises a number to the given power." },
+        { "name": "Number.Sqrt", "syntax": "Number.Sqrt(49) // 7", "definition": "Returns the positive square root of a number." },
+        { "name": "Number.Ln / Exp", "syntax": "Number.Ln(10)  // 2.302...\nNumber.Exp(1)  // 2.718...", "definition": "Natural logarithm and exponential (e^n)." },
+        { "name": "Number.Log", "syntax": "Number.Log(100, 10) // 2", "definition": "Returns the logarithm of a number to the specified base." },
+        { "name": "Number.IsNaN", "syntax": "Number.IsNaN(0/0) // true", "definition": "Returns true if the value is NaN (Not a Number). Useful after division that may produce undefined results." },
+        { "name": "Number.From", "syntax": "Number.From(\"3.14\")  // 3.14\nNumber.From(true)    // 1\nNumber.From(#date(2025,1,1)) // days since 1899-12-30", "definition": "Converts text, logical, or date values to a number." },
+        { "name": "Number.ToText", "syntax": "Number.ToText(4500, \"E\") // \"4.5E+3\"\nNumber.ToText(0.45, \"P\") // \"45.00%\"", "definition": "Formats a number as text. Format codes: G (general), F (fixed), N (number), P (percent), E (exponential)." },
+        { "name": "Value.Equals", "syntax": "Value.Equals(1.999999, 2, Precision.Double) // true", "definition": "Compares two values for equality with optional precision control — useful for floating-point comparisons." }
+      ]
+    },
+    {
+      "category": "Date & Time Functions",
+      "items": [
+        { "name": "Date.From", "syntax": "Date.From(\"2025-06-15\")\nDate.From(#datetime(2025,6,15,9,0,0))", "definition": "Converts text or datetime values to a date." },
+        { "name": "DateTime.LocalNow", "syntax": "DateTime.LocalNow()", "definition": "Returns the current local date and time. Refreshes on every query evaluation." },
+        { "name": "Date.Year / Month / Day", "syntax": "Date.Year(#date(2025,6,15))  // 2025\nDate.Month(#date(2025,6,15)) // 6\nDate.Day(#date(2025,6,15))   // 15", "definition": "Extracts the year, month (1–12), or day of month from a date value." },
+        { "name": "Date.DayOfWeek", "syntax": "Date.DayOfWeek(#date(2025,6,15), Day.Monday)\n// 6 (Sunday, 0=Monday start)", "definition": "Returns the day of the week as a number. Second argument sets the first day: Day.Monday, Day.Sunday." },
+        { "name": "Date.WeekOfYear", "syntax": "Date.WeekOfYear(#date(2025,6,15))", "definition": "Returns the week number within the year for the given date." },
+        { "name": "Date.QuarterOfYear", "syntax": "Date.QuarterOfYear(#date(2025,6,15)) // 2", "definition": "Returns the quarter number (1–4) for a date." },
+        { "name": "Date.AddDays / Months / Years", "syntax": "Date.AddDays(#date(2025,1,1), 30)\nDate.AddMonths(#date(2025,1,1), 3)\nDate.AddYears(#date(2025,1,1), 1)", "definition": "Adds the specified number of days, months, or years to a date." },
+        { "name": "Date.StartOfMonth / EndOfMonth", "syntax": "Date.StartOfMonth(#date(2025,6,15)) // 2025-06-01\nDate.EndOfMonth(#date(2025,6,15))   // 2025-06-30", "definition": "Returns the first or last date of the month containing the given date." },
+        { "name": "Date.StartOfYear / EndOfYear", "syntax": "Date.StartOfYear(#date(2025,6,15)) // 2025-01-01\nDate.EndOfYear(#date(2025,6,15))   // 2025-12-31", "definition": "Returns the first or last date of the year containing the given date." },
+        { "name": "Duration.Days / TotalHours", "syntax": "Duration.Days(#duration(3, 12, 0, 0))       // 3\nDuration.TotalHours(#duration(1, 6, 0, 0))  // 30", "definition": "Extracts a component from a duration. TotalHours/TotalMinutes/TotalSeconds return the full span, not just the component." },
+        { "name": "Date difference", "syntax": "Duration.Days(#date(2025,12,31) - #date(2025,1,1))\n// 364", "definition": "Subtracting two dates returns a duration. Wrap in Duration.Days / TotalHours etc. to get a numeric count." }
+      ]
+    },
+    {
+      "category": "List Functions",
+      "items": [
+        { "name": "List creation", "syntax": "{1, 2, 3}\n{1..10}              // range\n{0, 2..10}           // step range", "definition": "Lists are created with curly braces. Use .. for ranges. Mixed types are allowed." },
+        { "name": "List.Count", "syntax": "List.Count({10, 20, 30}) // 3", "definition": "Returns the number of items in a list." },
+        { "name": "List.First / Last", "syntax": "List.First({\"a\",null,\"c\"}, 2) // \"a\"\nList.Last({\"a\",null,\"c\"}, 2)  // \"c\"", "definition": "Returns the first or last element. Optional second argument is a default value if the list is empty." },
+        { "name": "List.FirstN / LastN", "syntax": "List.FirstN({1,2,3,4,5}, 3) // {1,2,3}\nList.LastN({1,2,3,4,5}, 2)  // {4,5}", "definition": "Returns the first or last N items from a list." },
+        { "name": "List.Distinct", "syntax": "List.Distinct({1,2,2,3,3}) // {1,2,3}", "definition": "Returns a list with duplicate values removed, preserving the first occurrence." },
+        { "name": "List.Select", "syntax": "List.Select({1,-1,0,2,13}, each _ > 1)\n// {2, 13}", "definition": "Returns a new list containing only items that satisfy the condition. Uses each with _ as the current item." },
+        { "name": "List.Transform", "syntax": "List.Transform({1,2,3,4}, each _ * 2)\n// {2, 4, 6, 8}", "definition": "Applies a function to every item and returns the resulting list." },
+        { "name": "List.Sort", "syntax": "List.Sort({3,1,2})           // {1,2,3}\nList.Sort({3,1,2}, Order.Descending) // {3,2,1}", "definition": "Returns a sorted copy of the list. Default is ascending order." },
+        { "name": "List.Reverse", "syntax": "List.Reverse({1,2,3}) // {3,2,1}", "definition": "Returns a new list with the items in reverse order." },
+        { "name": "List.Contains / ContainsAny / All", "syntax": "List.Contains({1,2,3}, 2)            // true\nList.ContainsAny({1,2,3}, {3,4})     // true\nList.ContainsAll({1,2,3}, {1,2})     // true", "definition": "Checks whether a list contains a single value, any from a second list, or all from a second list." },
+        { "name": "List.MatchesAny / All", "syntax": "List.MatchesAny({1,2,13}, each _ > 10)  // true\nList.MatchesAll({1,2,13}, each _ > 0)   // false", "definition": "Returns true if any or all items satisfy the condition." },
+        { "name": "List.RemoveNulls", "syntax": "List.RemoveNulls({\"a\",null,\"c\"}) // {\"a\",\"c\"}", "definition": "Returns a new list with all null values removed." },
+        { "name": "List.RemoveRange", "syntax": "List.RemoveRange({1,2,3,4,5}, 1, 2)\n// {1,4,5} — remove 2 items starting at index 1", "definition": "Removes a range of items by zero-based start index and count." },
+        { "name": "List.Repeat", "syntax": "List.Repeat({\"a\",\"b\"}, 3)\n// {\"a\",\"b\",\"a\",\"b\",\"a\",\"b\"}", "definition": "Repeats the list the specified number of times." },
+        { "name": "List.Combine", "syntax": "List.Combine({{1,2},{3,4}}) // {1,2,3,4}", "definition": "Flattens one level of nesting — takes a list of lists and returns a single flat list." },
+        { "name": "List.Split", "syntax": "List.Split({1,2,3,4,5,6}, 2)\n// {{1,2},{3,4},{5,6}}", "definition": "Splits a list into sub-lists of the given size." },
+        { "name": "List.Min / Max / Sum / Average", "syntax": "List.Min({10,7,-3,2})     // -3\nList.Max({10,7,-3,2})     // 10\nList.Sum({10,7,-3,2})     // 16\nList.Average({10,7,-3,2}) // 4", "definition": "Aggregate functions over a list. All ignore null values." },
+        { "name": "List.Product / StandardDeviation", "syntax": "List.Product({10,7,-3,2})           // -420\nList.StandardDeviation({10,7,-3,2}) // ...", "definition": "Multiplies all items together, or returns the standard deviation of a numeric list." },
+        { "name": "List.Union / Intersect / Difference", "syntax": "List.Union({{1,2},{2,3}})         // {1,2,3}\nList.Intersect({{1,2,3},{2,3,4}}) // {2,3}\nList.Difference({1,2,3},{2,3})   // {1}", "definition": "Set operations on lists. Union merges unique values; Intersect keeps common values; Difference keeps items only in the first list." },
+        { "name": "List.Numbers", "syntax": "List.Numbers(1, 5, 2)\n// {1, 3, 5, 7, 9}", "definition": "Generates a list starting at start, with count items, incrementing by step." },
+        { "name": "List.Dates", "syntax": "List.Dates(#date(2025,1,1), 7, #duration(1,0,0,0))\n// 7 dates starting Jan 1, 2025", "definition": "Generates a list of dates starting at a date, for a count of items, with a duration step." },
+        { "name": "List.Generate", "syntax": "List.Generate(\n  () => 1,\n  each _ < 20,\n  each _ * 2\n)\n// {1,2,4,8,16}", "definition": "Generates a list by repeatedly applying a function until a condition is false. Arguments: initial, condition, next." },
+        { "name": "List.SingleOrDefault", "syntax": "List.SingleOrDefault({42}, -1)  // 42\nList.SingleOrDefault({1,2}, -1) // -1 (more than one item)", "definition": "Returns the single item, or the default value if the list has zero or more than one item." }
+      ]
+    },
+    {
+      "category": "Record Functions",
+      "items": [
+        { "name": "Record creation", "syntax": "[Name = \"Alice\", Age = 30]", "definition": "Records are created with square brackets using Name = Value pairs. Used to represent a single row of data." },
+        { "name": "Record.Field", "syntax": "Record.Field([Name=\"Alice\",Age=30], \"Name\")\n// \"Alice\"", "definition": "Retrieves a field value by name. Equivalent to record[FieldName] shorthand." },
+        { "name": "record[FieldName]", "syntax": "let r = [City = \"Lagos\", Pop = 15000000]\nin r[City] // \"Lagos\"", "definition": "Dot-style field access. Raises an error if the field doesn't exist — use Record.Field with ? for safe access." },
+        { "name": "Record.FieldNames / Values", "syntax": "Record.FieldNames([A=1,B=2])   // {\"A\",\"B\"}\nRecord.FieldValues([A=1,B=2])  // {1,2}", "definition": "Returns a list of the record's field names or field values." },
+        { "name": "Record.HasFields", "syntax": "Record.HasFields([A=1,B=2], \"B\")      // true\nRecord.HasFields([A=1,B=2], {\"A\",\"C\"}) // false", "definition": "Returns true if the record contains a field or all fields in a list." },
+        { "name": "Record.AddField", "syntax": "Record.AddField([A=1], \"B\", 2)\n// [A=1, B=2]", "definition": "Returns a new record with an additional field. Original record is not mutated." },
+        { "name": "Record.RemoveFields", "syntax": "Record.RemoveFields([A=1,B=2,C=3], \"B\")\n// [A=1, C=3]", "definition": "Returns a new record with the specified field(s) removed." },
+        { "name": "Record.RenameFields", "syntax": "Record.RenameFields([OldName=1], {{\"OldName\",\"NewName\"}})\n// [NewName=1]", "definition": "Returns a new record with specified fields renamed. Argument is a list of {old, new} name pairs." },
+        { "name": "Record.ToTable", "syntax": "Record.ToTable([A=1,B=2])\n// Table with Name/Value columns", "definition": "Converts a record to a two-column table with Name and Value columns." },
+        { "name": "Record.FromList", "syntax": "Record.FromList({1, 2}, {\"A\", \"B\"})\n// [A=1, B=2]", "definition": "Creates a record from a list of values and a matching list of field names." }
+      ]
+    },
+    {
+      "category": "Table Functions",
+      "items": [
+        { "name": "Table.FromRecords", "syntax": "Table.FromRecords({\n  [Name=\"Alice\", Age=30],\n  [Name=\"Bob\",   Age=25]\n})", "definition": "Creates a table from a list of records. Each record becomes a row; field names become column headers." },
+        { "name": "Table.RowCount / ColumnCount", "syntax": "Table.RowCount(myTable)    // number of rows\nTable.ColumnCount(myTable) // number of columns", "definition": "Returns the number of rows or columns in a table." },
+        { "name": "Table.ColumnNames", "syntax": "Table.ColumnNames(myTable)\n// {\"Name\",\"Age\",\"Region\"}", "definition": "Returns a list of the table's column names in order." },
+        { "name": "Table.SelectRows", "syntax": "Table.SelectRows(myTable, each [Region] = \"North\")\nTable.SelectRows(myTable, each [Sales] > 1000)", "definition": "Filters a table to rows where the condition is true. Uses each with field access via [ColumnName]." },
+        { "name": "Table.AddColumn", "syntax": "Table.AddColumn(\n  myTable,\n  \"Profit\",\n  each [Revenue] - [Cost],\n  type number\n)", "definition": "Adds a new column computed from each row. Fourth argument is the optional type annotation." },
+        { "name": "Table.TransformColumns", "syntax": "Table.TransformColumns(myTable, {\n  {\"Name\", Text.Upper},\n  {\"Sales\", each _ * 1.1}\n})", "definition": "Applies a transformation function to one or more columns by name." },
+        { "name": "Table.TransformColumnTypes", "syntax": "Table.TransformColumnTypes(myTable, {\n  {\"Date\", type date},\n  {\"Amount\", type number}\n})", "definition": "Changes the data type of one or more columns. The most common step after Source in any query." },
+        { "name": "Table.RemoveColumns", "syntax": "Table.RemoveColumns(myTable, {\"Col1\",\"Col2\"})", "definition": "Returns the table without the specified columns." },
+        { "name": "Table.SelectColumns", "syntax": "Table.SelectColumns(myTable, {\"Name\",\"Sales\"})", "definition": "Returns only the specified columns, in the order listed." },
+        { "name": "Table.RenameColumns", "syntax": "Table.RenameColumns(myTable, {\n  {\"OldName\", \"NewName\"}\n})", "definition": "Renames one or more columns. Argument is a list of {old, new} name pairs." },
+        { "name": "Table.ReorderColumns", "syntax": "Table.ReorderColumns(myTable, {\"Sales\",\"Name\",\"Date\"})", "definition": "Returns the table with columns in the specified order. Unlisted columns are dropped." },
+        { "name": "Table.Sort", "syntax": "Table.Sort(myTable, {\n  {\"Sales\", Order.Descending},\n  {\"Name\",  Order.Ascending}\n})", "definition": "Sorts a table by one or more columns. Order.Ascending (default) or Order.Descending." },
+        { "name": "Table.Group", "syntax": "Table.Group(\n  myTable,\n  {\"Region\"},\n  {{\"Total\", each List.Sum([Sales]), type number}}\n)", "definition": "Groups rows by one or more key columns and aggregates each group. Similar to GROUP BY in SQL." },
+        { "name": "Table.PromoteHeaders", "syntax": "Table.PromoteHeaders(myTable)", "definition": "Promotes the first row of data to become the column headers." },
+        { "name": "Table.DemoteHeaders", "syntax": "Table.DemoteHeaders(myTable)", "definition": "Converts the current column headers into the first data row, then assigns generic column names." },
+        { "name": "Table.FillDown / FillUp", "syntax": "Table.FillDown(myTable,  {\"Region\"})\nTable.FillUp(myTable, {\"Region\"})", "definition": "Fills null values downward or upward from the nearest non-null value in the specified columns." },
+        { "name": "Table.Pivot", "syntax": "Table.Pivot(\n  myTable,\n  List.Distinct(myTable[Month]),\n  \"Month\", \"Sales\"\n)", "definition": "Rotates unique values of one column into new column headers, aggregating the value column. Same as Pivot Column in the UI." },
+        { "name": "Table.Unpivot / UnpivotOtherColumns", "syntax": "Table.Unpivot(myTable, {\"Jan\",\"Feb\",\"Mar\"}, \"Month\", \"Sales\")\nTable.UnpivotOtherColumns(myTable, {\"Product\"}, \"Month\", \"Sales\")", "definition": "Converts column headers into rows. UnpivotOtherColumns keeps the specified columns fixed and unpivots everything else." },
+        { "name": "Table.ExpandListColumn", "syntax": "Table.ExpandListColumn(myTable, \"Tags\")", "definition": "Expands a column containing lists — each list item becomes a separate row." },
+        { "name": "Table.ExpandRecordColumn", "syntax": "Table.ExpandRecordColumn(\n  myTable, \"Details\",\n  {\"City\",\"Zip\"}\n)", "definition": "Expands a column containing records — each specified field becomes its own column." },
+        { "name": "Table.NestedJoin", "syntax": "Table.NestedJoin(\n  left, {\"ID\"},\n  right, {\"ID\"},\n  \"Joined\",\n  JoinKind.Inner\n)", "definition": "Joins two tables on a key column. Returns the right-side matches as a nested table in a new column. JoinKind: Inner, LeftOuter, RightOuter, FullOuter, LeftAnti, RightAnti." },
+        { "name": "Table.Join", "syntax": "Table.Join(\n  left, {\"ID\"},\n  right, {\"ID\"},\n  JoinKind.LeftOuter\n)", "definition": "Flat join that returns combined columns directly, without a nested table step." },
+        { "name": "Table.Distinct", "syntax": "Table.Distinct(myTable)\nTable.Distinct(myTable, {\"Region\"})", "definition": "Removes duplicate rows. Optional second argument specifies which columns to consider for uniqueness." },
+        { "name": "Table.Buffer", "syntax": "Table.Buffer(myTable)", "definition": "Forces the table to be fully evaluated and cached in memory. Prevents repeated evaluation of expensive upstream steps." }
+      ]
+    },
+    {
+      "category": "Functions & Each",
+      "items": [
+        { "name": "Function definition", "syntax": "let\n  Hypotenuse = (x, y) =>\n    Number.Sqrt(Number.Power(x,2) + Number.Power(y,2))\nin\n  Hypotenuse(3, 4) // 5", "definition": "Functions are defined with (params) => expression. They can be assigned to names with let and called by name." },
+        { "name": "each shorthand", "syntax": "each _ + 1\n// same as: (_) => _ + 1\n\neach Number.Power(_, 2)\n// same as: (x) => Number.Power(x, 2)", "definition": "each is syntactic sugar for a one-argument function where the argument is named _. Used heavily in List, Table, and Record functions." },
+        { "name": "each with record fields", "syntax": "each [Sales] > 1000\n// same as: (row) => row[Sales] > 1000", "definition": "Inside Table functions, each automatically receives the current row as a record. Access columns with [ColumnName]." },
+        { "name": "Type annotation", "syntax": "(x as number, y as number) as number =>\n  x + y", "definition": "Add type constraints to function parameters and return values with as. M checks types at runtime, not compile time." },
+        { "name": "Optional parameters", "syntax": "(text as text, optional delimiter as nullable text) =>\n  Text.Split(text, delimiter ?? \",\")", "definition": "Mark parameters optional with the optional keyword. Use ?? to provide a default if null is passed." },
+        { "name": "?? (null coalescing)", "syntax": "x ?? defaultValue", "definition": "Returns the left value if it is not null, otherwise returns the right value. Cleaner than if x = null then default else x." }
+      ]
+    }
+  ]
+}

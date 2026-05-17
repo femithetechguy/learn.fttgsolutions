@@ -1,0 +1,65 @@
+{
+  "slug": "the-crossover-series",
+  "title": "The Crossover Series",
+  "subtitle": "Where DAX meets Rohn. Where APIs meet purpose. Your unique territory.",
+  "pillar": "philosophy",
+  "pillarLabel": "Crossover",
+  "pillarColor": "#D4AF37",
+  "level": "All levels",
+  "totalDuration": "2h 30m",
+  "free": true,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "The Crossover Sessions",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "The Developer Who Reads Rohn",
+          "duration": "20:00",
+          "videoId": "",
+          "free": true,
+          "description": "How technical skill + philosophy creates an unfair advantage. Your unique positioning starts here."
+        },
+        {
+          "id": "l2",
+          "title": "Data Storytelling Meets Business Philosophy",
+          "duration": "22:00",
+          "videoId": "",
+          "free": true,
+          "description": "Making dashboards that don't just report numbers — dashboards that change decisions."
+        },
+        {
+          "id": "l3",
+          "title": "Building APIs with Purpose",
+          "duration": "24:00",
+          "videoId": "",
+          "free": false,
+          "description": "Why the best API architects understand the business domain as well as the code."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Applied Crossover",
+      "lessons": [
+        {
+          "id": "l4",
+          "title": "Career Capital vs Job Security",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "Why building skills and results compounds differently than collecting titles."
+        },
+        {
+          "id": "l5",
+          "title": "The FTTG Blueprint",
+          "duration": "26:00",
+          "videoId": "",
+          "free": false,
+          "description": "How this platform came to be — the thinking, the tools, the philosophy behind building it."
+        }
+      ]
+    }
+  ]
+}

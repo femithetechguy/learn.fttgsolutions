@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { PlayCircle, Clock, Lock, ChevronRight, Sparkles, TrendingUp } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -142,12 +143,13 @@ export default function CoursesPage() {
                     </span>
                   </div>
 
-                  <button
+                  <Link
+                    href={`/courses/${course.slug ?? course.id}`}
                     className="w-full flex items-center justify-center gap-2 py-2.5 rounded-sm font-sans text-sm font-semibold bg-gold/10 border border-gold/20 text-gold hover:bg-gold hover:text-bg-primary active:scale-95 transition-all duration-150"
                   >
                     {ui.startButton}
                     <ChevronRight size={14} />
-                  </button>
+                  </Link>
                 </div>
               )
             })}

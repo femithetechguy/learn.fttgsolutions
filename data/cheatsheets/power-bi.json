@@ -1,0 +1,128 @@
+{
+  "label": "Power BI",
+  "headline": "Power BI Cheat Sheet",
+  "tagline": "Connect. Transform. Visualize.",
+  "description": "Quick reference for Power BI — from loading data and Power Query transformations to DAX measures, chart types, and data profiling.",
+  "color": "F2C811",
+  "categories": [
+    {
+      "category": "Components & Views",
+      "items": [
+        { "name": "Power BI Desktop", "syntax": "Free download — powerbi.microsoft.com", "definition": "The Windows desktop application for building reports and data models. Where you connect data, write DAX, and design visuals." },
+        { "name": "Power BI Service", "syntax": "app.powerbi.com", "definition": "Cloud-based version of Power BI. Used for report publishing, sharing, scheduling refreshes, and collaboration." },
+        { "name": "Power BI Mobile", "syntax": "iOS / Android app", "definition": "View and interact with published reports on the go. Supports annotations, alerts, and favorites." },
+        { "name": "Report View", "syntax": "Default view — canvas for building visuals", "definition": "The main canvas where you create, arrange, and format visualizations. Most report-building happens here." },
+        { "name": "Data View", "syntax": "Table icon in the left sidebar", "definition": "Shows the raw data tables loaded into the model. Use it to inspect values, verify data types, and review calculated columns." },
+        { "name": "Model View", "syntax": "Diagram icon in the left sidebar", "definition": "Displays all tables and their relationships. Used to create, edit, and manage how tables connect to each other." }
+      ]
+    },
+    {
+      "category": "Connecting Data",
+      "items": [
+        { "name": "Get Data", "syntax": "Home tab → Get Data", "definition": "Entry point for connecting to any data source — Excel, CSV, SQL Server, SharePoint, web pages, APIs, and more." },
+        { "name": "Load dataset", "syntax": "Get Data → choose source → double-click → Load", "definition": "Imports the data directly into the model without opening Power Query. Click Transform Data instead to shape data first." },
+        { "name": "Transform Data", "syntax": "Get Data → Transform Data", "definition": "Opens the Power Query Editor before loading. Use this to clean, reshape, and prepare data before it enters the model." },
+        { "name": "Data view inspection", "syntax": "Click the Data View icon after loading", "definition": "After loading, click Data View to verify the data was loaded correctly — check row counts, data types, and sample values." },
+        { "name": "Refresh data", "syntax": "Home tab → Refresh", "definition": "Re-executes all queries to pull the latest data from connected sources. Scheduled refresh is configured in Power BI Service." },
+        { "name": "Create relationship", "syntax": "Model View → drag column from one table to another", "definition": "Link two tables by dragging a key column onto a matching column in another table. Defines how filters propagate between tables." }
+      ]
+    },
+    {
+      "category": "Power Query Editor",
+      "items": [
+        { "name": "Open (on load)", "syntax": "Home tab → Get Data → Transform Data", "definition": "Opens Power Query Editor during the initial data connection flow before the data is loaded into the model." },
+        { "name": "Open (already loaded)", "syntax": "Home tab → Transform Data", "definition": "Opens Power Query Editor for an already loaded dataset. All existing steps are preserved in the Applied Steps pane." },
+        { "name": "Applied Steps", "syntax": "Right pane in Power Query Editor", "definition": "Every transformation is recorded as a step. Steps can be renamed, reordered, deleted, or inspected. Click any step to see the state of the data at that point." },
+        { "name": "Remove Rows", "syntax": "Home tab → Remove Rows → choose option", "definition": "Removes rows based on position or condition: Remove Top Rows, Remove Bottom Rows, Remove Duplicates, Remove Blank Rows, Remove Errors." },
+        { "name": "Add Column", "syntax": "Add Column tab → Custom Column", "definition": "Creates a new column using an M Code formula. Define the name and expression. The column is computed row by row." },
+        { "name": "Replace Values", "syntax": "Select column → Transform tab → Replace Values", "definition": "Find and replace a specific value with another value in the selected column." },
+        { "name": "Change Data Type", "syntax": "Click type icon in column header → select type", "definition": "Sets the column type (Whole Number, Decimal, Text, Date, DateTime, True/False, etc.). Always set types explicitly before loading." },
+        { "name": "Promote Headers", "syntax": "Home tab → Use First Row as Headers", "definition": "Converts the first data row into the column headers. Common after importing raw CSV or Excel files." },
+        { "name": "Split Column", "syntax": "Transform tab → Split Column → By Delimiter / By Number of Characters", "definition": "Splits a text column into multiple columns or rows based on a delimiter or character count." },
+        { "name": "Pivot / Unpivot", "syntax": "Select columns → Transform tab → Pivot Column / Unpivot Columns", "definition": "Pivot rotates unique values of a column into new column headers. Unpivot converts column headers back into rows." },
+        { "name": "Group By", "syntax": "Home tab → Group By", "definition": "Aggregates data by one or more grouping columns. Equivalent to GROUP BY in SQL or SUMMARIZE in DAX." },
+        { "name": "Merge Queries", "syntax": "Home tab → Combine → Merge Queries", "definition": "Joins two queries on a matching key column. Select the join kind to control which rows are kept." },
+        { "name": "Append Queries", "syntax": "Home tab → Combine → Append Queries", "definition": "Stacks two or more queries with the same column structure on top of each other. Equivalent to UNION ALL in SQL." }
+      ]
+    },
+    {
+      "category": "Join Types",
+      "items": [
+        { "name": "Left Outer", "syntax": "JoinKind.LeftOuter", "definition": "All rows from the left table, with matching rows from the right. Nulls where no match exists on the right. Most common join in Power Query." },
+        { "name": "Right Outer", "syntax": "JoinKind.RightOuter", "definition": "All rows from the right table, with matching rows from the left. Nulls where no match exists on the left." },
+        { "name": "Full Outer", "syntax": "JoinKind.FullOuter", "definition": "All rows from both tables. Nulls on both sides where no match exists." },
+        { "name": "Inner", "syntax": "JoinKind.Inner", "definition": "Only rows that have a matching key in both tables. Non-matching rows are excluded entirely." },
+        { "name": "Left Anti", "syntax": "JoinKind.LeftAnti", "definition": "Only rows from the left table that have no match in the right table. Used to find unmatched records." },
+        { "name": "Right Anti", "syntax": "JoinKind.RightAnti", "definition": "Only rows from the right table that have no match in the left table." }
+      ]
+    },
+    {
+      "category": "Data Visualizations",
+      "items": [
+        { "name": "Bar Chart", "syntax": "Horizontal bars", "definition": "Compare specific values across categories. Best for comparing many categories or long category names. E.g. Sales by Region." },
+        { "name": "Column Chart", "syntax": "Vertical bars", "definition": "Compare specific values across categories. Same as Bar Chart but vertical — better for fewer categories and time series comparisons." },
+        { "name": "Line Chart", "syntax": "Points connected by lines", "definition": "Show trends over time. Best for visualising a numeric value changing continuously (e.g. Revenue over time)." },
+        { "name": "Area Chart", "syntax": "Line chart with area below filled in", "definition": "Same as Line Chart but emphasises the magnitude of the value. The area between the axis and line is filled." },
+        { "name": "Scatter Chart", "syntax": "X-axis + Y-axis + optional size axis", "definition": "Display one set of values along the X axis and another set along the Y axis to show relationships or outliers (e.g. Age vs Loan amount)." },
+        { "name": "Combo Chart", "syntax": "Column chart + Line chart combined", "definition": "Combines a column chart and a line chart in one visual. Useful for overlaying an actual value vs a target (e.g. Sales performance vs target)." },
+        { "name": "Treemap", "syntax": "Nested coloured rectangles", "definition": "Visualises categories as coloured rectangles sized by their value. Good for hierarchical data and part-to-whole comparisons (e.g. Product category by sales)." },
+        { "name": "Pie Chart", "syntax": "Circle divided into proportional slices", "definition": "Shows proportions of a whole. Use sparingly — hard to read with more than 5 segments. Donut Chart is a cleaner alternative." },
+        { "name": "Donut Chart", "syntax": "Pie chart with hollow centre", "definition": "Same as Pie Chart but with a blank centre. Slightly easier to read and allows a centre label (e.g. total value)." },
+        { "name": "Map", "syntax": "Geographic bubbles on a map", "definition": "Plot categorical and quantitative data on a map using latitude/longitude or place names (e.g. Sales by State)." },
+        { "name": "Card", "syntax": "Single large number display", "definition": "Displays a single fact or KPI prominently — a sum, count, or any measure as a large number with a label." },
+        { "name": "Table", "syntax": "Grid of rows and columns", "definition": "Displays data in a logical series of rows and columns. Good for detailed data lookup or when exact values matter more than patterns." },
+        { "name": "Matrix", "syntax": "Cross-tabulation (pivot table)", "definition": "Like a Table but supports row and column grouping — similar to a pivot table. Supports drill-down on hierarchies." },
+        { "name": "Slicer", "syntax": "Interactive filter widget", "definition": "An on-canvas filter control that lets report viewers interactively filter other visuals by clicking values." }
+      ]
+    },
+    {
+      "category": "Creating Visuals",
+      "items": [
+        { "name": "Add a visual", "syntax": "Report View → Visualizations pane → click a visual type", "definition": "Click any icon in the Visualizations pane to add that chart type to the canvas. Then drag fields onto it from the Fields pane." },
+        { "name": "Fields: Values vs Axis", "syntax": "Values = measures (numbers)\nAxis = categories (dimensions)", "definition": "Drag numeric measures to Values to aggregate them. Drag dimension columns to Axis, Legend, or Rows to group by them." },
+        { "name": "Change aggregation", "syntax": "Click visual → Values pane → dropdown on field → choose SUM, AVERAGE, COUNT, MAX, MIN, etc.", "definition": "Power BI automatically sums numeric fields. Change the aggregation by clicking the dropdown arrow next to the field in the Values well." },
+        { "name": "Format visual", "syntax": "Visualizations pane → Format (paint roller icon)", "definition": "Control colours, fonts, borders, titles, data labels, axes, and legend. Every visual element can be customised here." },
+        { "name": "Drill down", "syntax": "Click the drill-down arrow icon on a visual", "definition": "Navigate into a hierarchy — from Year to Quarter to Month to Day — within a single visual without filtering other visuals." },
+        { "name": "Cross-filter", "syntax": "Click any bar/slice in one visual", "definition": "Clicking a data point in one visual automatically filters all other visuals on the page by that value. This is the default Power BI interaction." }
+      ]
+    },
+    {
+      "category": "DAX in Power BI",
+      "items": [
+        { "name": "New Measure", "syntax": "Home tab → New Measure (or right-click table)", "definition": "Creates a DAX measure — a formula evaluated in filter context. Measures don't add a column; they compute dynamically in each visual cell." },
+        { "name": "New Column", "syntax": "Table Tools tab → New Column", "definition": "Creates a calculated column — a DAX formula evaluated row by row during model refresh. Stored in the table, not computed in visuals." },
+        { "name": "SUM / AVERAGE", "syntax": "Total Sales = SUM('sales_data'[deal_size])\nAvg Deal = AVERAGE('sales_data'[deal_size])", "definition": "Aggregate a numeric column. These are the most common starting measures in any Power BI report." },
+        { "name": "COUNT / DISTINCTCOUNT", "syntax": "Order Count = COUNT('sales_data'[deal_size])\nCustomers = DISTINCTCOUNT('sales_data'[customer_name])", "definition": "COUNT counts non-blank values. DISTINCTCOUNT counts unique values — use it for customer counts, unique IDs, etc." },
+        { "name": "IF (conditional measure)", "syntax": "large_deal =\n  IF('sales_data'[deal_size] > 2000, \"Yes\", \"No\")", "definition": "Creates a conditional result. Used in calculated columns for row-level flags, or in measures for conditional aggregations." },
+        { "name": "CALCULATE (context modifier)", "syntax": "North Sales =\n  CALCULATE(SUM(Sales[Amount]), Region[Name] = \"North\")", "definition": "The core DAX function for overriding filter context. Used in almost every non-trivial measure." },
+        { "name": "DIVIDE (safe division)", "syntax": "Margin % = DIVIDE([Profit], [Revenue], 0)", "definition": "Safe division — returns the third argument (default BLANK) instead of an error when the denominator is zero." },
+        { "name": "LEFT / LOWER / UPPER", "syntax": "LEFT('sales_data'[customer_name], 3)\nLOWER('sales_data'[customer_name])\nUPPER('sales_data'[customer_name])", "definition": "Text manipulation for calculated columns. LEFT extracts characters from the start; LOWER/UPPER changes case." },
+        { "name": "CALENDAR (date table)", "syntax": "DateTable = CALENDAR(DATE(2020,1,1), DATE(2025,12,31))", "definition": "Generates a date table. Required for time intelligence functions to work correctly in Power BI." },
+        { "name": "WEEKDAY", "syntax": "week_day = WEEKDAY('sales_data'[date], 2)\n// 2 = Monday start (1-7)", "definition": "Returns the day of the week as a number. Second argument sets week start: 1=Sunday-Saturday, 2=Monday-Sunday." },
+        { "name": "TOTALYTD (time intelligence)", "syntax": "YTD Sales = TOTALYTD(SUM(Sales[Amount]), Dates[Date])", "definition": "Calculates a year-to-date value. Requires a proper date table with a continuous date range marked as a date table." }
+      ]
+    },
+    {
+      "category": "Data Profiling",
+      "items": [
+        { "name": "Enable Data Profiling", "syntax": "Power Query → View tab → tick options", "definition": "Data profiling shows quality stats below each column in Power Query Editor. Enable Column Quality, Column Distribution, and Column Profile." },
+        { "name": "Column Quality", "syntax": "View tab → Column Quality", "definition": "Shows the percentage of valid, error, and empty values for each column. Quickly spot columns with missing or problematic data." },
+        { "name": "Column Distribution", "syntax": "View tab → Column Distribution", "definition": "Shows a histogram of value frequencies for each column. Reveals the spread and identifies dominant values or outliers." },
+        { "name": "Column Profile", "syntax": "View tab → Column Profile (select a column first)", "definition": "Shows detailed statistics for the selected column: distinct count, null count, min, max, average, and a value distribution chart." },
+        { "name": "Profile based on entire dataset", "syntax": "Bottom bar in Power Query → 'Column profiling based on top 1000 rows' → click to toggle", "definition": "By default, profiling samples only the first 1,000 rows. Click the status bar text to switch to profiling the entire dataset." },
+        { "name": "Error inspection", "syntax": "Click 'Errors' link in Column Quality bar", "definition": "Filters the table to show only rows with errors in that column. Helps identify the cause of type conversion or formula errors." }
+      ]
+    },
+    {
+      "category": "Publishing & Sharing",
+      "items": [
+        { "name": "Publish to Service", "syntax": "Home tab → Publish → select workspace", "definition": "Uploads the .pbix file to Power BI Service. The report and dataset are published separately and can be managed independently." },
+        { "name": "Share a report", "syntax": "Power BI Service → Share button", "definition": "Share a link with specific people or your organisation. Recipients need a Power BI Pro or Premium Per User licence to view shared content." },
+        { "name": "Schedule refresh", "syntax": "Power BI Service → Dataset settings → Scheduled Refresh", "definition": "Configures automatic data refresh on a schedule. Requires a gateway for on-premises sources. Up to 8 refreshes/day on Pro." },
+        { "name": "Export to PDF / PowerPoint", "syntax": "File menu → Export → PDF or PowerPoint", "definition": "Exports a snapshot of the report pages. Dynamic filtering and drill-downs are not preserved — purely for static distribution." },
+        { "name": "Embed in Teams / SharePoint", "syntax": "Power BI Service → File → Embed report → SharePoint Online or Teams", "definition": "Embed an interactive Power BI report directly inside Microsoft Teams channels or SharePoint pages without requiring a separate app." },
+        { "name": "Row-Level Security (RLS)", "syntax": "Modeling tab → Manage Roles → define DAX filter", "definition": "Restricts which rows each user sees. Define roles with DAX filter expressions, then assign users to roles in Power BI Service." }
+      ]
+    }
+  ]
+}

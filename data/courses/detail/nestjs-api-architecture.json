@@ -1,0 +1,103 @@
+{
+  "slug": "nestjs-api-architecture",
+  "title": "NestJS API Architecture",
+  "subtitle": "Guards, Prisma, PostgreSQL/Neon. The backend stack that runs FTTG projects.",
+  "pillar": "app-dev",
+  "pillarLabel": "App Dev",
+  "pillarColor": "#378ADD",
+  "level": "Advanced",
+  "totalDuration": "3h 45m",
+  "free": false,
+  "modules": [
+    {
+      "id": "m1",
+      "title": "NestJS Foundation",
+      "lessons": [
+        {
+          "id": "l1",
+          "title": "NestJS Architecture Overview",
+          "duration": "15:00",
+          "videoId": "",
+          "free": true,
+          "description": "Modules, controllers, services, providers — the dependency injection model explained for Express developers."
+        },
+        {
+          "id": "l2",
+          "title": "Project Setup & Folder Structure",
+          "duration": "12:00",
+          "videoId": "",
+          "free": false,
+          "description": "The opinionated structure that scales. Feature modules, shared modules, and config."
+        },
+        {
+          "id": "l3",
+          "title": "DTOs, Validation Pipes, and Class Transformer",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "Validate and transform incoming data before it reaches your service. No more runtime type surprises."
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Auth & Database",
+      "lessons": [
+        {
+          "id": "l4",
+          "title": "Prisma ORM with Neon PostgreSQL",
+          "duration": "22:00",
+          "videoId": "",
+          "free": false,
+          "description": "Connect to a serverless Postgres database on Neon. Schema migrations, client generation, and seeding."
+        },
+        {
+          "id": "l5",
+          "title": "JWT Auth with Guards and Decorators",
+          "duration": "24:00",
+          "videoId": "",
+          "free": false,
+          "description": "Issue JWTs on login, verify with Guards, extract user via custom @CurrentUser decorator."
+        },
+        {
+          "id": "l6",
+          "title": "Role-Based Access Control",
+          "duration": "16:00",
+          "videoId": "",
+          "free": false,
+          "description": "Multi-role guard pattern. Admin, member, and guest access without spreading logic across controllers."
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Production Patterns",
+      "lessons": [
+        {
+          "id": "l7",
+          "title": "Interceptors, Exception Filters, Logging",
+          "duration": "18:00",
+          "videoId": "",
+          "free": false,
+          "description": "Consistent response envelopes, structured error codes, and request logging — before you go to prod."
+        },
+        {
+          "id": "l8",
+          "title": "Testing: Unit + E2E with Jest and Supertest",
+          "duration": "20:00",
+          "videoId": "",
+          "free": false,
+          "description": "Mock Prisma, test your services in isolation, and run full E2E tests against a test database."
+        },
+        {
+          "id": "l9",
+          "title": "Deploy on Railway with CI/CD",
+          "duration": "15:45",
+          "videoId": "",
+          "free": false,
+          "description": "Dockerfile, environment variables in production, and GitHub Actions pipeline to Railway."
+        }
+      ]
+    }
+  ]
+}
