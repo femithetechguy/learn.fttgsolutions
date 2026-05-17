@@ -329,7 +329,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
       <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-gold/20 to-transparent" />
 
       {/* ── RIGHT PANEL ── */}
-      <div className="flex-1 relative flex flex-col items-center lg:justify-center px-5 py-4 lg:py-12 lg:px-16 overflow-hidden">
+      <div className="flex-1 relative flex flex-col items-center lg:justify-center px-5 py-4 lg:py-12 lg:px-16 overflow-y-auto lg:overflow-hidden">
 
         {/* Floating orb — mobile only */}
         <div className="lg:hidden absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-gold/4 blur-3xl pointer-events-none animate-float" />
