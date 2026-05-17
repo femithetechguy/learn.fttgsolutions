@@ -8,7 +8,183 @@
     {
       "category": "Aggregation",
       "items": [
-        { "name": "SUM", "syntax": "SUM(table[column])", "definition": "Adds up all numeric values in a column, ignoring blanks." }
+        { "name": "SUM", "syntax": "SUM(table[column])", "definition": "Adds all numeric values in a column. The baseline aggregation." },
+        { "name": "SUMX", "syntax": "SUMX(table, expression)", "definition": "Iterates every row of a table, evaluates an expression per row, then sums the results." },
+        { "name": "AVERAGE", "syntax": "AVERAGE(table[column])", "definition": "Returns the arithmetic mean of all non-blank numeric values in a column." },
+        { "name": "AVERAGEX", "syntax": "AVERAGEX(table, expression)", "definition": "Iterates a table, evaluates an expression per row, then returns the mean." },
+        { "name": "MIN / MAX", "syntax": "MIN(table[column])\nMAX(table[column])", "definition": "Returns the smallest or largest value in a column. Also works on two scalar arguments." },
+        { "name": "MINX / MAXX", "syntax": "MINX(table, expression)\nMAXX(table, expression)", "definition": "Iterates a table, evaluates an expression per row, and returns the min or max result." },
+        { "name": "COUNT", "syntax": "COUNT(table[column])", "definition": "Counts numeric non-blank values in a column. Use COUNTA for text columns." },
+        { "name": "COUNTA", "syntax": "COUNTA(table[column])", "definition": "Counts non-blank values of any data type in a column." },
+        { "name": "COUNTROWS", "syntax": "COUNTROWS(table)", "definition": "Returns the number of rows in a table or table expression. Often used with FILTER." },
+        { "name": "COUNTBLANK", "syntax": "COUNTBLANK(table[column])", "definition": "Counts the number of blank (empty or null) cells in a column." },
+        { "name": "DISTINCTCOUNT", "syntax": "DISTINCTCOUNT(table[column])", "definition": "Counts the number of unique non-blank values in a column." },
+        { "name": "COUNTX", "syntax": "COUNTX(table, expression)", "definition": "Iterates a table and counts the rows where the expression is non-blank." },
+        { "name": "PRODUCT", "syntax": "PRODUCT(table[column])", "definition": "Multiplies all values in a column together and returns the result." },
+        { "name": "PRODUCTX", "syntax": "PRODUCTX(table, expression)", "definition": "Iterates a table, evaluates an expression per row, then multiplies all results." }
+      ]
+    },
+    {
+      "category": "CALCULATE & Filter Context",
+      "items": [
+        { "name": "CALCULATE", "syntax": "CALCULATE(expression, filter1, filter2, ...)", "definition": "Evaluates an expression after modifying the filter context. The most important DAX function — it is what makes context transitions possible." },
+        { "name": "CALCULATETABLE", "syntax": "CALCULATETABLE(table, filter1, ...)", "definition": "Same as CALCULATE but returns a filtered table instead of a scalar value." },
+        { "name": "FILTER", "syntax": "FILTER(table, condition)", "definition": "Returns a table containing only the rows where the condition is TRUE. Often used inside CALCULATE to pass row-level conditions." },
+        { "name": "ALL", "syntax": "ALL(table)\nALL(table[column])", "definition": "Removes all filters from the specified table or column. Use inside CALCULATE to ignore slicers." },
+        { "name": "ALLEXCEPT", "syntax": "ALLEXCEPT(table, table[col1], ...)", "definition": "Removes all filters from a table except the specified columns. Useful for keeping one dimension active while clearing others." },
+        { "name": "ALLSELECTED", "syntax": "ALLSELECTED(table[column])", "definition": "Removes filters applied inside the current visual but keeps filters from slicers and other visuals — used for percent-of-visual-total patterns." },
+        { "name": "REMOVEFILTERS", "syntax": "REMOVEFILTERS(table[column])", "definition": "Clearer alias for ALL when used as a CALCULATE modifier. Removes filters from the specified table or column." },
+        { "name": "KEEPFILTERS", "syntax": "KEEPFILTERS(filter_expression)", "definition": "Adds a filter to the context without overriding existing filters on the same column — used inside CALCULATE." },
+        { "name": "ALLCROSSFILTERED", "syntax": "ALLCROSSFILTERED(table)", "definition": "Removes all filters including those applied via cross-filter relationships." },
+        { "name": "CROSSFILTER", "syntax": "CROSSFILTER(col1, col2, direction)", "definition": "Controls the cross-filter direction for a relationship within a CALCULATE expression. Direction: BOTH, ONEWAY, or NONE." },
+        { "name": "USERELATIONSHIP", "syntax": "USERELATIONSHIP(table1[col], table2[col])", "definition": "Activates an inactive relationship within a CALCULATE expression. Essential for role-playing dimension patterns (e.g. multiple date relationships)." }
+      ]
+    },
+    {
+      "category": "Variables",
+      "items": [
+        { "name": "VAR / RETURN", "syntax": "VAR myValue = CALCULATE(SUM(Sales[Amount]))\nRETURN\n  myValue * 0.1", "definition": "Stores intermediate results to avoid repeated calculation and improve readability. Variables are evaluated at the point of declaration, fixing the filter context at that moment." },
+        { "name": "Multiple VAR", "syntax": "VAR base = SUM(Sales[Amount])\nVAR target = [TargetMeasure]\nVAR pct = DIVIDE(base, target)\nRETURN pct", "definition": "Chain multiple VAR declarations before a single RETURN statement. Each VAR can reference variables declared above it." }
+      ]
+    },
+    {
+      "category": "Logical & Conditional",
+      "items": [
+        { "name": "IF", "syntax": "IF(condition, value_if_true, value_if_false)", "definition": "Evaluates a condition and returns one of two values. The false argument is optional and defaults to BLANK()." },
+        { "name": "SWITCH", "syntax": "SWITCH(expression,\n  value1, result1,\n  value2, result2,\n  else_result)", "definition": "Evaluates an expression against a list of values and returns the matching result. Use SWITCH(TRUE(), ...) for range-based conditions." },
+        { "name": "SWITCH(TRUE())", "syntax": "SWITCH(TRUE(),\n  [Sales] > 100000, \"High\",\n  [Sales] > 50000,  \"Mid\",\n  \"Low\")", "definition": "SWITCH with TRUE() as the expression — evaluates each condition in order and returns the first TRUE match. The cleanest way to replace nested IFs." },
+        { "name": "IFERROR", "syntax": "IFERROR(expression, value_if_error)", "definition": "Returns the expression result, or a fallback value if the expression raises any error. Avoid overusing — it can hide real bugs." },
+        { "name": "COALESCE", "syntax": "COALESCE(expr1, expr2, ...)", "definition": "Returns the first non-blank, non-null value from the list of arguments. Cleaner than nested IFs for null-handling chains." },
+        { "name": "BLANK", "syntax": "BLANK()", "definition": "Returns a blank (null) value. DAX treats BLANK as 0 in numeric operations and as empty string in text operations." },
+        { "name": "AND / OR", "syntax": "AND(condition1, condition2)\nOR(condition1, condition2)", "definition": "Logical AND/OR for exactly two arguments. For multiple conditions, use && and || operators instead." },
+        { "name": "&& and ||", "syntax": "[Sales] > 0 && [Region] = \"North\"\n[Status] = \"A\" || [Status] = \"B\"", "definition": "Inline logical operators for multiple conditions. Preferred over AND/OR when chaining more than two conditions." },
+        { "name": "NOT", "syntax": "NOT(condition)", "definition": "Returns the logical opposite of a boolean expression." },
+        { "name": "IN operator", "syntax": "Table[Column] IN { \"A\", \"B\", \"C\" }", "definition": "Tests whether a column value is contained in a literal list. Can also be used with CALCULATE as a filter." }
+      ]
+    },
+    {
+      "category": "Time Intelligence",
+      "items": [
+        { "name": "TOTALYTD", "syntax": "TOTALYTD(expression, dates[Date])\nTOTALYTD(expression, dates[Date], \"6/30\")", "definition": "Calculates year-to-date for the expression. The third argument sets a non-calendar fiscal year end." },
+        { "name": "TOTALQTD", "syntax": "TOTALQTD(expression, dates[Date])", "definition": "Calculates quarter-to-date for the expression based on the current filter context." },
+        { "name": "TOTALMTD", "syntax": "TOTALMTD(expression, dates[Date])", "definition": "Calculates month-to-date for the expression based on the current filter context." },
+        { "name": "DATESYTD", "syntax": "DATESYTD(dates[Date])\nDATESYTD(dates[Date], \"6/30\")", "definition": "Returns a table of dates from the start of the year to the last date in context. Use inside CALCULATE for custom YTD measures." },
+        { "name": "DATESQTD", "syntax": "DATESQTD(dates[Date])", "definition": "Returns a table of dates from the start of the current quarter to the last date in context." },
+        { "name": "DATESMTD", "syntax": "DATESMTD(dates[Date])", "definition": "Returns a table of dates from the start of the current month to the last date in context." },
+        { "name": "SAMEPERIODLASTYEAR", "syntax": "SAMEPERIODLASTYEAR(dates[Date])", "definition": "Returns dates shifted back exactly one year. Use inside CALCULATE for year-over-year comparisons." },
+        { "name": "DATEADD", "syntax": "DATEADD(dates[Date], -1, YEAR)\nDATEADD(dates[Date], -3, MONTH)", "definition": "Shifts a set of dates by a specified number of intervals (DAY, MONTH, QUARTER, YEAR). Can go forward or backward." },
+        { "name": "PARALLELPERIOD", "syntax": "PARALLELPERIOD(dates[Date], -1, YEAR)", "definition": "Returns the full parallel period (not a partial shift). Unlike DATEADD, always returns a complete period." },
+        { "name": "PREVIOUSMONTH", "syntax": "PREVIOUSMONTH(dates[Date])", "definition": "Returns all dates in the month immediately before the current filter context month." },
+        { "name": "PREVIOUSQUARTER", "syntax": "PREVIOUSQUARTER(dates[Date])", "definition": "Returns all dates in the quarter immediately before the current filter context quarter." },
+        { "name": "PREVIOUSYEAR", "syntax": "PREVIOUSYEAR(dates[Date])", "definition": "Returns all dates in the year immediately before the current filter context year." },
+        { "name": "NEXTMONTH", "syntax": "NEXTMONTH(dates[Date])", "definition": "Returns all dates in the month immediately after the current filter context month." },
+        { "name": "NEXTYEAR", "syntax": "NEXTYEAR(dates[Date])", "definition": "Returns all dates in the year immediately after the current filter context year." },
+        { "name": "DATESBETWEEN", "syntax": "DATESBETWEEN(dates[Date], startDate, endDate)", "definition": "Returns a table of dates within a custom date range. Both boundaries are inclusive." },
+        { "name": "STARTOFMONTH", "syntax": "STARTOFMONTH(dates[Date])", "definition": "Returns the first date of the month in the current filter context." },
+        { "name": "ENDOFMONTH", "syntax": "ENDOFMONTH(dates[Date])", "definition": "Returns the last date of the month in the current filter context." },
+        { "name": "ENDOFQUARTER", "syntax": "ENDOFQUARTER(dates[Date])", "definition": "Returns the last date of the quarter in the current filter context." },
+        { "name": "STARTOFYEAR", "syntax": "STARTOFYEAR(dates[Date])", "definition": "Returns the first date of the year in the current filter context." },
+        { "name": "ENDOFYEAR", "syntax": "ENDOFYEAR(dates[Date])", "definition": "Returns the last date of the year in the current filter context." }
+      ]
+    },
+    {
+      "category": "Date & Time",
+      "items": [
+        { "name": "TODAY", "syntax": "TODAY()", "definition": "Returns today's date as a date value. Refreshes on each model recalculation." },
+        { "name": "NOW", "syntax": "NOW()", "definition": "Returns the current date and time as a datetime value." },
+        { "name": "DATE", "syntax": "DATE(year, month, day)", "definition": "Constructs a date value from year, month, and day integers." },
+        { "name": "YEAR / MONTH / DAY", "syntax": "YEAR(table[Date])\nMONTH(table[Date])\nDAY(table[Date])", "definition": "Extracts the year, month number (1–12), or day of month from a date column." },
+        { "name": "WEEKDAY", "syntax": "WEEKDAY(table[Date], 2)", "definition": "Returns the day of the week as a number. Second argument sets the start: 1=Sunday, 2=Monday." },
+        { "name": "WEEKNUM", "syntax": "WEEKNUM(table[Date], 2)", "definition": "Returns the ISO week number for a date. Second argument controls the week start." },
+        { "name": "DATEDIFF", "syntax": "DATEDIFF(startDate, endDate, interval)", "definition": "Returns the number of intervals between two dates. Interval: SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, YEAR." },
+        { "name": "EOMONTH", "syntax": "EOMONTH(startDate, months)", "definition": "Returns the last day of the month, a given number of months before or after a start date." },
+        { "name": "EDATE", "syntax": "EDATE(startDate, months)", "definition": "Returns a date shifted by a given number of months from the start date." },
+        { "name": "FORMAT (date)", "syntax": "FORMAT(table[Date], \"YYYY-MM\")\nFORMAT(table[Date], \"MMM YYYY\")", "definition": "Converts a date to a text string using a format mask. Use for axis labels or display columns." },
+        { "name": "CALENDAR", "syntax": "CALENDAR(DATE(2020,1,1), DATE(2025,12,31))", "definition": "Returns a single-column table of dates within a range. Used to create a custom date table." },
+        { "name": "CALENDARAUTO", "syntax": "CALENDARAUTO()\nCALENDARAUTO(6)", "definition": "Generates a date table automatically spanning all dates found in the model. Optional argument sets fiscal year end month." }
+      ]
+    },
+    {
+      "category": "Text",
+      "items": [
+        { "name": "CONCATENATE", "syntax": "CONCATENATE(text1, text2)", "definition": "Joins exactly two text strings. For more than two, use the & operator." },
+        { "name": "& (operator)", "syntax": "[FirstName] & \" \" & [LastName]", "definition": "Inline text concatenation. Preferred over CONCATENATE for combining multiple strings." },
+        { "name": "CONCATENATEX", "syntax": "CONCATENATEX(table, expression, delimiter)", "definition": "Iterates a table, evaluates an expression per row, and joins the results into a single string with a delimiter." },
+        { "name": "LEFT / RIGHT", "syntax": "LEFT(text, num_chars)\nRIGHT(text, num_chars)", "definition": "Extracts a given number of characters from the start or end of a string." },
+        { "name": "MID", "syntax": "MID(text, start_position, num_chars)", "definition": "Extracts characters from the middle of a string. Position is 1-based." },
+        { "name": "LEN", "syntax": "LEN(text)", "definition": "Returns the number of characters in a string, including spaces." },
+        { "name": "FIND", "syntax": "FIND(find_text, within_text, start_pos, error_val)", "definition": "Finds one string within another and returns its position. Case-sensitive. Use SEARCH for case-insensitive." },
+        { "name": "SEARCH", "syntax": "SEARCH(find_text, within_text, start_pos, error_val)", "definition": "Same as FIND but case-insensitive and supports wildcards (* and ?)." },
+        { "name": "SUBSTITUTE", "syntax": "SUBSTITUTE(text, old_text, new_text)", "definition": "Replaces all occurrences of a substring within a string." },
+        { "name": "REPLACE", "syntax": "REPLACE(old_text, start, num_chars, new_text)", "definition": "Replaces characters at a specific position rather than by matching a substring." },
+        { "name": "UPPER / LOWER", "syntax": "UPPER(text)\nLOWER(text)", "definition": "Converts a string to all uppercase or all lowercase." },
+        { "name": "TRIM", "syntax": "TRIM(text)", "definition": "Removes leading and trailing spaces and reduces internal multiple spaces to one." },
+        { "name": "VALUE", "syntax": "VALUE(\"1,234.56\")", "definition": "Converts a text string representing a number into a numeric value." },
+        { "name": "FORMAT (text)", "syntax": "FORMAT([Amount], \"$#,##0.00\")\nFORMAT([Pct], \"0.0%\")", "definition": "Formats a numeric or date value as a text string using a format mask. Always returns text — avoid in measures that will be aggregated." }
+      ]
+    },
+    {
+      "category": "Relationship & Virtual",
+      "items": [
+        { "name": "RELATED", "syntax": "RELATED(relatedTable[column])", "definition": "Follows a many-to-one relationship from the current row's table to a related table and returns a column value. Used in calculated columns." },
+        { "name": "RELATEDTABLE", "syntax": "RELATEDTABLE(relatedTable)", "definition": "Returns a table of all rows in a related table that are related to the current row. The inverse of RELATED." },
+        { "name": "TREATAS", "syntax": "TREATAS(table_expression, column1, column2, ...)", "definition": "Applies the values of a table expression as a filter on specified columns — creates a virtual relationship without a physical model relationship." },
+        { "name": "USERELATIONSHIP", "syntax": "CALCULATE(\n  SUM(Sales[Amount]),\n  USERELATIONSHIP(Sales[ShipDate], Dates[Date])\n)", "definition": "Activates an inactive relationship for the duration of a CALCULATE expression. Use for role-playing dimensions with multiple date keys." },
+        { "name": "CROSSFILTER", "syntax": "CALCULATE(\n  [Measure],\n  CROSSFILTER(Sales[ProductID], Products[ID], BOTH)\n)", "definition": "Changes filter propagation direction within a CALCULATE scope. Use BOTH for bidirectional, ONEWAY for default, NONE to disable." }
+      ]
+    },
+    {
+      "category": "Table Functions",
+      "items": [
+        { "name": "SUMMARIZE", "syntax": "SUMMARIZE(\n  table,\n  groupByCol1,\n  groupByCol2,\n  \"AggName\", expression\n)", "definition": "Groups a table by specified columns and adds aggregated columns. Prefer SUMMARIZECOLUMNS for measures; SUMMARIZE for column-level grouping." },
+        { "name": "SUMMARIZECOLUMNS", "syntax": "SUMMARIZECOLUMNS(\n  table[col1],\n  table[col2],\n  \"Measure\", [MyMeasure]\n)", "definition": "Groups by columns from any table and adds measure results. The recommended way to build summary tables in newer DAX versions." },
+        { "name": "ADDCOLUMNS", "syntax": "ADDCOLUMNS(\n  table,\n  \"ColName\", expression\n)", "definition": "Returns the original table with one or more additional calculated columns appended. Does not aggregate." },
+        { "name": "SELECTCOLUMNS", "syntax": "SELECTCOLUMNS(\n  table,\n  \"NewName\", table[Column]\n)", "definition": "Returns a new table with only the specified columns, optionally renamed. Like SELECT in SQL." },
+        { "name": "DISTINCT", "syntax": "DISTINCT(table[column])\nDISTINCT(table)", "definition": "Returns a one-column table of unique values, or a table with duplicate rows removed." },
+        { "name": "VALUES", "syntax": "VALUES(table[column])", "definition": "Returns a single-column table of unique values including a blank if there are unmatched rows from a relationship. Slightly different from DISTINCT." },
+        { "name": "TOPN", "syntax": "TOPN(n, table, orderByExpression, ASC_DESC)", "definition": "Returns the top N rows of a table based on an ordering expression. Used inside CALCULATE or ADDCOLUMNS." },
+        { "name": "UNION", "syntax": "UNION(table1, table2)", "definition": "Combines two tables with the same column structure, keeping all rows including duplicates." },
+        { "name": "INTERSECT", "syntax": "INTERSECT(table1, table2)", "definition": "Returns rows from the first table that also exist in the second table." },
+        { "name": "EXCEPT", "syntax": "EXCEPT(table1, table2)", "definition": "Returns rows from the first table that do not exist in the second table." },
+        { "name": "ROW", "syntax": "ROW(\"ColName\", expression)", "definition": "Creates a single-row table with named columns. Useful for creating inline scalar context." },
+        { "name": "GENERATESERIES", "syntax": "GENERATESERIES(1, 100, 1)", "definition": "Returns a single-column table with a sequence of values from start to end by step. Useful for parameter tables and slicer ranges." }
+      ]
+    },
+    {
+      "category": "Ranking & Information",
+      "items": [
+        { "name": "RANKX", "syntax": "RANKX(\n  ALL(table[column]),\n  [Measure],\n  ,\n  DESC,\n  Dense\n)", "definition": "Returns the rank of an expression against all values of a column. Tie behaviour: Skip (default) or Dense. Leave value blank to use current row." },
+        { "name": "SELECTEDVALUE", "syntax": "SELECTEDVALUE(table[column], alternate_result)", "definition": "Returns the single selected value in a column's filter context, or the alternate result if more than one value is selected." },
+        { "name": "HASONEVALUE", "syntax": "HASONEVALUE(table[column])", "definition": "Returns TRUE if exactly one value exists in the filter context for the column. Useful before calling VALUES or SELECTEDVALUE." },
+        { "name": "HASONEFILTER", "syntax": "HASONEFILTER(table[column])", "definition": "Returns TRUE if exactly one direct filter is applied to the column." },
+        { "name": "ISFILTERED", "syntax": "ISFILTERED(table[column])", "definition": "Returns TRUE if the column has any direct filter applied to it." },
+        { "name": "ISCROSSFILTERED", "syntax": "ISCROSSFILTERED(table[column])", "definition": "Returns TRUE if the column is filtered indirectly via a related table's filter." },
+        { "name": "ISINSCOPE", "syntax": "ISINSCOPE(table[column])", "definition": "Returns TRUE if the column is in the grouping axis of the current visual context. Use to control subtotal/grand total row behaviour." },
+        { "name": "FIRSTNONBLANK", "syntax": "FIRSTNONBLANK(table[column], expression)", "definition": "Returns the first value in the column for which the expression is non-blank, in ascending order." },
+        { "name": "LASTNONBLANK", "syntax": "LASTNONBLANK(table[column], expression)", "definition": "Returns the last value in the column for which the expression is non-blank. Used for last-known-balance patterns." },
+        { "name": "ISBLANK", "syntax": "ISBLANK(expression)", "definition": "Returns TRUE if the expression evaluates to BLANK." },
+        { "name": "ISNUMBER", "syntax": "ISNUMBER(expression)", "definition": "Returns TRUE if the expression evaluates to a numeric value." },
+        { "name": "ISTEXT", "syntax": "ISTEXT(expression)", "definition": "Returns TRUE if the expression evaluates to a text value." },
+        { "name": "ISERROR", "syntax": "ISERROR(expression)", "definition": "Returns TRUE if the expression raises any error. Wrap with IFERROR instead when you also want a fallback value." }
+      ]
+    },
+    {
+      "category": "Math & Stats",
+      "items": [
+        { "name": "DIVIDE", "syntax": "DIVIDE(numerator, denominator, alternate_result)", "definition": "Safe division — returns the alternate result (default BLANK) instead of an error when the denominator is zero. Always prefer over the / operator for measures." },
+        { "name": "ROUND", "syntax": "ROUND(number, num_digits)", "definition": "Rounds a number to the specified number of decimal places. Negative num_digits rounds to the left of the decimal." },
+        { "name": "ROUNDUP / ROUNDDOWN", "syntax": "ROUNDUP(number, num_digits)\nROUNDDOWN(number, num_digits)", "definition": "Always rounds away from or toward zero, regardless of standard rounding rules." },
+        { "name": "INT", "syntax": "INT(number)", "definition": "Rounds a number down to the nearest integer (floor toward negative infinity)." },
+        { "name": "TRUNC", "syntax": "TRUNC(number, num_digits)", "definition": "Truncates toward zero without rounding — drops decimal digits. Use instead of INT for positive numbers." },
+        { "name": "ABS", "syntax": "ABS(number)", "definition": "Returns the absolute (positive) value of a number." },
+        { "name": "MOD", "syntax": "MOD(number, divisor)", "definition": "Returns the remainder after dividing number by divisor." },
+        { "name": "POWER", "syntax": "POWER(number, power)", "definition": "Raises a number to the specified power. Equivalent to number ^ power." },
+        { "name": "SQRT", "syntax": "SQRT(number)", "definition": "Returns the positive square root of a number." },
+        { "name": "SIGN", "syntax": "SIGN(number)", "definition": "Returns 1 for positive numbers, -1 for negative, and 0 for zero." },
+        { "name": "MEDIAN", "syntax": "MEDIAN(table[column])", "definition": "Returns the middle value (50th percentile) of a numeric column." },
+        { "name": "MEDIANX", "syntax": "MEDIANX(table, expression)", "definition": "Iterates a table, evaluates an expression per row, and returns the median of the results." },
+        { "name": "PERCENTILE.INC", "syntax": "PERCENTILE.INC(table[column], 0.9)", "definition": "Returns the k-th percentile of values in a column, inclusive. 0.9 returns the 90th percentile." },
+        { "name": "STDEV.P / STDEV.S", "syntax": "STDEV.P(table[column])\nSTDEV.S(table[column])", "definition": "Standard deviation of a column. .P for the entire population; .S for a sample." }
       ]
     }
   ]
