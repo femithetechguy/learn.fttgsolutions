@@ -100,7 +100,8 @@
         { "name": "Postman",  "slug": "postman",  "color": "FF6C37", "definition": "API testing client — send requests, inspect responses, and document your API without writing code." },
         { "name": "pnpm",     "slug": "pnpm",     "color": "F69220", "definition": "Fast, disk-efficient package manager — installs node_modules up to 3x faster than npm." },
         { "name": "Turborepo","slug": "turborepo","color": "FF1E56", "definition": "Monorepo build system — caches tasks and runs pipelines in parallel across your workspace." },
-        { "name": "marked",   "slug": "",        "color": "AAAAAA", "definition": "Fast, lightweight markdown parser for Node.js — converts .md files to HTML with zero dependencies." }
+        { "name": "marked",   "slug": "",        "color": "AAAAAA", "definition": "Fast, lightweight markdown parser for Node.js — converts .md files to HTML with zero dependencies." },
+        { "name": "Fuse.js",  "slug": "",        "color": "F7A800", "definition": "Lightweight fuzzy-search library — no server required, searches arrays of objects client-side with weighted keys and configurable threshold." }
       ]
     },
     {
