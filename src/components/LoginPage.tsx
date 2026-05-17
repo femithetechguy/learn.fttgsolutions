@@ -27,93 +27,26 @@ const forgot = login.forgot
 function PillarCards({ mobile = false }: { mobile?: boolean }) {
   const cx = PILLARS[3]
 
-  // ── Mobile: left column = 3 stacked pillars, right column = crossover ──
+  // ── Mobile: compact 2×2 grid — all 4 pillars visible without scrolling ──
   if (mobile) {
     return (
-      <div className="flex gap-1.5">
-
-        {/* Left: 3 pillars stacked */}
-        <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-          {PILLARS.slice(0, 3).map(({ Icon, label, tag, color, bg, icon }, i) => (
-            <div
-              key={label}
-              className="relative p-2 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm animate-slide-in-left overflow-hidden"
-              style={{ animationDelay: `${600 + i * 120}ms` }}
-            >
-              <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${color}08` }} />
-
-              {/* Icon + decoration side-by-side */}
-              <div className="flex items-start gap-1.5 mb-1.5">
-                <div
-                  className={`w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0 ${icon === 'Flame' ? 'animate-flicker' : ''}`}
-                  style={{ background: bg }}
-                >
-                  <Icon size={10} style={{ color }} />
-                </div>
-
-                {icon === 'Code2' && (
-                  <div className="font-mono text-[6px] leading-tight flex-1 overflow-hidden" style={{ color, opacity: 0.55 }}>
-                    <div><span style={{ opacity: 0.5 }}>import</span> {'{ useState }'}</div>
-                    <div><span style={{ opacity: 0.5 }}>const</span> {' App = () =>'}</div>
-                  </div>
-                )}
-                {icon === 'BookOpen' && (
-                  <div className="flex items-end gap-0.5 flex-1 h-5">
-                    {[55, 85, 40, 95, 65].map((h, j) => (
-                      <div key={j} className="flex-1 rounded-t-sm origin-bottom animate-grow-bar"
-                        style={{ height: `${h}%`, background: color, opacity: 0.35 + h / 220, animationDelay: `${800 + j * 90}ms` }} />
-                    ))}
-                  </div>
-                )}
-                {icon === 'Flame' && (
-                  <div className="flex items-center gap-0.5 flex-1 h-5">
-                    {[3, 4, 3, 5, 4].map((size, j) => (
-                      <div key={j} className="rounded-full animate-float"
-                        style={{ width: size, height: size, background: color, opacity: 0.2 + j * 0.12,
-                          animationDelay: `${j * 400}ms`, animationDuration: `${3 + j * 0.4}s`, flexShrink: 0 }} />
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <p className="font-sans font-semibold text-text-primary text-xs leading-tight">{label}</p>
-              <p className="font-sans text-text-muted text-[8px] mt-0.5 leading-tight">{tag}</p>
+      <div className="grid grid-cols-2 gap-1.5">
+        {PILLARS.map(({ Icon, label, tag, color, bg }, i) => (
+          <div
+            key={label}
+            className="relative flex items-center gap-2 p-2 rounded-sm border border-white/5 bg-bg-card/50 backdrop-blur-sm animate-slide-in-left overflow-hidden"
+            style={{ animationDelay: `${600 + i * 100}ms`, borderColor: i === 3 ? 'rgba(127,119,221,0.25)' : undefined }}
+          >
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: `inset 0 0 16px ${color}08` }} />
+            <div className="w-6 h-6 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: bg }}>
+              <Icon size={11} style={{ color }} />
             </div>
-          ))}
-        </div>
-
-        {/* Right: Crossover as tall vertical column */}
-        <div
-          className="relative w-[38%] flex-shrink-0 p-2 rounded-sm border border-accent-cross/25 bg-bg-card/30 backdrop-blur-sm animate-slide-in-left flex flex-col items-center overflow-hidden"
-          style={{ animationDelay: '960ms' }}
-        >
-          <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 28px rgba(127,119,221,0.08)' }} />
-
-          {/* Icon */}
-          <div className="w-5 h-5 rounded-sm flex items-center justify-center flex-shrink-0" style={{ background: cx.bg }}>
-            {cx.Icon && <cx.Icon size={10} style={{ color: cx.color }} />}
+            <div className="min-w-0">
+              <p className="font-sans font-semibold text-text-primary text-[10px] leading-tight truncate">{label}</p>
+              <p className="font-sans text-text-muted text-[8px] mt-0.5 leading-tight truncate">{tag}</p>
+            </div>
           </div>
-          <p className="font-sans font-semibold text-text-primary text-xs leading-tight mt-1.5 text-center">{cx.label}</p>
-          <p className="font-sans text-text-muted text-[7px] leading-tight mt-0.5 text-center">{cx.tag}</p>
-
-          <div className="flex-1" />
-
-          {/* Pillar names → convergence → circle */}
-          <div className="flex flex-col items-center gap-0.5 mb-1">
-            {PILLARS.slice(0, 3).map((p, j) => (
-              <span key={p.label} className="font-sans text-[7px] font-semibold animate-pulse"
-                style={{ color: p.color, opacity: 0.8, animationDelay: `${j * 400}ms` }}>
-                {p.label}
-              </span>
-            ))}
-          </div>
-          <svg width="14" height="13" viewBox="0 0 14 13" fill="none" className="flex-shrink-0">
-            <line x1="7" y1="0" x2="7" y2="7" stroke="#7F77DD" strokeWidth="1" strokeOpacity="0.5" />
-            <polygon points="4,7 7,12 10,7" fill="#7F77DD" opacity="0.6" />
-          </svg>
-          <div className="w-3 h-3 rounded-full flex-shrink-0 animate-pulse mt-1"
-            style={{ background: cx.color, boxShadow: `0 0 8px ${cx.color}B0`, animationDelay: '1.2s' }} />
-        </div>
+        ))}
       </div>
     )
   }
@@ -329,7 +262,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
       <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-gold/20 to-transparent" />
 
       {/* ── RIGHT PANEL ── */}
-      <div className="flex-1 relative flex flex-col items-center lg:justify-center px-5 py-4 lg:py-12 lg:px-16 overflow-y-auto lg:overflow-hidden">
+      <div className="flex-1 relative flex flex-col items-center lg:justify-center px-5 py-4 lg:py-12 lg:px-16 overflow-hidden">
 
         {/* Floating orb — mobile only */}
         <div className="lg:hidden absolute top-1/3 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-gold/4 blur-3xl pointer-events-none animate-float" />
@@ -585,9 +518,9 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
 
         {/* ── MOBILE BRAND SECTION (below form, login view only) ── */}
         {view === 'login' && (
-          <div className="lg:hidden w-full max-w-[440px] mt-3 relative z-10">
-            <div className="gold-line mb-3" />
-            <div className="mb-2">
+          <div className="lg:hidden w-full max-w-[440px] mt-2 relative z-10">
+            <div className="gold-line mb-2" />
+            <div className="mb-1.5">
               <p className="font-sans text-text-muted text-xs tracking-widest uppercase mb-1 animate-slide-up animate-delay-100">
                 {login.brand.siteLabel}
               </p>
@@ -603,7 +536,7 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
               {login.brand.pillarsLabel}
             </p>
             <PillarCards mobile />
-            <div className="flex gap-5 mt-2">
+            <div className="flex gap-5 mt-1.5">
               {login.stats.map(({ value, label }, i) => (
                 <div key={label} className="animate-scale-in" style={{ animationDelay: `${1060 + i * 130}ms` }}>
                   <p className="font-display text-base font-bold text-gradient-gold">{value}</p>
