@@ -348,7 +348,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                 {activeLesson.videoId ? (
                   <iframe
                     key={activeLesson.videoId}
-                    src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1`}
+                    src={`https://www.youtube-nocookie.com/embed/${activeLesson.videoId}?autoplay=1&rel=0`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     className="w-full h-full"
