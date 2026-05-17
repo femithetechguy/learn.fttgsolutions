@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import fs from 'fs'
 import path from 'path'
+import { marked } from 'marked'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Special_Elite } from 'next/font/google'
@@ -13,10 +14,18 @@ const chalkFont = Special_Elite({ weight: '400', subsets: ['latin'], variable: '
 
 export default function CourseBoardPage({ params }: { params: { slug: string } }) {
   const filePath = path.join(process.cwd(), 'data', 'courses', 'detail', `${params.slug}.json`)
-
   if (!fs.existsSync(filePath)) notFound()
 
   const course: CourseDetail = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+
+  // Render markdown notes if the course has a links file
+  let notesHtml: string | null = null
+  if (course.links) {
+    const mdPath = path.join(process.cwd(), 'data', course.links)
+    if (fs.existsSync(mdPath)) {
+      notesHtml = marked.parse(fs.readFileSync(mdPath, 'utf-8')) as string
+    }
+  }
 
   return (
     <div className={`min-h-screen bg-bg-primary bg-grid ${chalkFont.variable}`}>
@@ -36,6 +45,17 @@ export default function CourseBoardPage({ params }: { params: { slug: string } }
 
           {/* Blackboard */}
           <CourseBlackboard course={course} />
+
+          {/* Course notes — rendered when a markdown file is linked */}
+          {notesHtml && (
+            <div className="mt-14">
+              <div className="gold-line mb-10" />
+              <div
+                className="article-body max-w-3xl"
+                dangerouslySetInnerHTML={{ __html: notesHtml }}
+              />
+            </div>
+          )}
 
         </div>
       </div>
