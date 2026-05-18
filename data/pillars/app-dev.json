@@ -27,6 +27,9 @@
       "tools": [
         { "name": "Tailwind CSS",   "slug": "tailwindcss", "color": "06B6D4", "definition": "Utility-first CSS framework — style directly in HTML with atomic classes, no context switching." },
         { "name": "Framer Motion",  "slug": "framer",      "color": "0055FF", "definition": "Production-ready animation library for React — declarative animations with physics-based springs." },
+        { "name": "PostCSS",        "slug": "postcss",     "color": "DD3A0A", "definition": "CSS transformation tool — processes your stylesheets through plugins like autoprefixer and Tailwind at build time." },
+        { "name": "Lucide React",   "slug": "lucide",      "color": "F56565", "definition": "Open-source icon library for React — clean, consistent SVG icons as components, tree-shakeable and typed." },
+        { "name": "Simple Icons",   "slug": "",            "color": "AAAAAA", "definition": "Free SVG icons for popular brands — over 3,000 logos with consistent style, great for tech stack displays." },
         { "name": "Storybook",      "slug": "storybook",   "color": "FF4785", "definition": "UI component workshop — build, document, and test components in isolation before wiring them up." }
       ]
     },
@@ -100,7 +103,10 @@
         { "name": "Postman",  "slug": "postman",  "color": "FF6C37", "definition": "API testing client — send requests, inspect responses, and document your API without writing code." },
         { "name": "pnpm",     "slug": "pnpm",     "color": "F69220", "definition": "Fast, disk-efficient package manager — installs node_modules up to 3x faster than npm." },
         { "name": "Turborepo","slug": "turborepo","color": "FF1E56", "definition": "Monorepo build system — caches tasks and runs pipelines in parallel across your workspace." },
-        { "name": "marked",   "slug": "",        "color": "AAAAAA", "definition": "Fast, lightweight markdown parser for Node.js — converts .md files to HTML with zero dependencies." }
+        { "name": "marked",   "slug": "",        "color": "AAAAAA", "definition": "Fast, lightweight markdown parser for Node.js — converts .md files to HTML with zero dependencies." },
+        { "name": "Fuse.js",  "slug": "",        "color": "F7A800", "definition": "Lightweight fuzzy-search library — no server required, searches arrays of objects client-side with weighted keys and configurable threshold." },
+        { "name": "clsx",     "slug": "",        "color": "6B7280", "definition": "Tiny utility for constructing class name strings — conditionally join Tailwind classes without messy template literals." },
+        { "name": "ESLint",   "slug": "eslint",  "color": "4B32C3", "definition": "JavaScript and TypeScript linter — catches bugs, enforces style rules, and keeps code consistent across a team." }
       ]
     },
     {

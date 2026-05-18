@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Fuse from 'fuse.js'
 import Link from 'next/link'
 import { useParams, notFound } from 'next/navigation'
 import { Layers, Search, X, Share2, Printer, Check } from 'lucide-react'
@@ -36,16 +37,29 @@ export default function StackPillarPage() {
     }
   }
 
+  const fuse = useMemo(() => {
+    const items = current.data.stack.flatMap(cat =>
+      cat.tools.map(t => ({ ...t, category: cat.category }))
+    )
+    return new Fuse(items, {
+      keys: [
+        { name: 'name',       weight: 0.6 },
+        { name: 'category',   weight: 0.25 },
+        { name: 'definition', weight: 0.15 },
+      ],
+      threshold: 0.35,
+      includeScore: true,
+    })
+  }, [current])
+
   const filteredCategories = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const q = query.trim()
     if (!q) return current.data.stack
+    const matchedNames = new Set(fuse.search(q).map(r => r.item.name))
     return current.data.stack
-      .map(cat => ({
-        ...cat,
-        tools: cat.tools.filter(t => t.name.toLowerCase().includes(q)),
-      }))
+      .map(cat => ({ ...cat, tools: cat.tools.filter(t => matchedNames.has(t.name)) }))
       .filter(cat => cat.tools.length > 0)
-  }, [query, current])
+  }, [query, current, fuse])
 
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">

@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import Fuse from 'fuse.js'
 import Link from 'next/link'
 import { PlayCircle, Clock, Lock, ChevronRight, Sparkles, TrendingUp } from 'lucide-react'
 import Nav from '@/components/Nav'
@@ -30,12 +31,19 @@ export default function CoursesPage() {
   const [filter, setFilter] = useState('All')
   const [search, setSearch] = useState('')
 
-  const filtered = COURSES.filter(c => {
-    const matchesPillar = filter === 'All' || (filter === 'Free' ? c.free : c.pillar === filter)
-    const q = search.toLowerCase()
-    const matchesSearch = !q || c.title.toLowerCase().includes(q) || c.description.toLowerCase().includes(q)
-    return matchesPillar && matchesSearch
-  })
+  const fuse = useMemo(() => new Fuse(COURSES, {
+    keys: [
+      { name: 'title',       weight: 0.6 },
+      { name: 'description', weight: 0.3 },
+      { name: 'pillar',      weight: 0.1 },
+    ],
+    threshold: 0.35,
+  }), [])
+
+  const filtered = useMemo(() => {
+    const pool = search.trim() ? fuse.search(search.trim()).map(r => r.item) : COURSES
+    return pool.filter(c => filter === 'All' || (filter === 'Free' ? c.free : c.pillar === filter))
+  }, [search, filter, fuse])
 
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">
