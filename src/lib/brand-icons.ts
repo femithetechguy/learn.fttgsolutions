@@ -13,6 +13,7 @@ import {
   siJest, siGraphql, siClerk, siGithubcopilot, siCursor, siSvelte,
   siVuedotjs, siVite, siVitest, siTrpc, siSupabase, siZod,
   siFastapi, siPnpm, siTurborepo, siStorybook,
+  siPostcss, siLucide, siEslint, siHono, siRailway, siSimpleicons,
 } from 'simple-icons'
 
 export const SI_MAP: Record<string, SimpleIcon> = {
@@ -85,6 +86,12 @@ export const SI_MAP: Record<string, SimpleIcon> = {
   pnpm:           siPnpm,
   turborepo:      siTurborepo,
   storybook:      siStorybook,
+  postcss:        siPostcss,
+  lucide:         siLucide,
+  eslint:         siEslint,
+  hono:           siHono,
+  railway:        siRailway,
+  simpleicons:    siSimpleicons,
 }
 
 // Brand icons absent from simple-icons (trademark/removal)

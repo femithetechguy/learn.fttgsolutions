@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight, HelpCircle } from 'lucide-react'
 import Logo from '@/components/Logo'
 import { ICON_MAP } from '@/components/FilterBar'
 import content from '@/lib/content'
+import HelpModal from '@/components/HelpModal'
 
 type View = 'login' | 'register' | 'forgot'
 
@@ -121,6 +122,7 @@ function PillarCards() {
 
 export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPassword }: LoginPageProps) {
   const [view, setView]             = useState<View>('login')
+  const [helpOpen, setHelpOpen]     = useState(false)
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search).get('view')
@@ -335,14 +337,31 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
                   className="font-sans text-sm text-gold hover:text-gold-light transition-colors underline underline-offset-2">
                   {login.form.createAccount}
                 </button>
+                <div className="pt-1">
+                  <button
+                    onClick={() => setHelpOpen(true)}
+                    className="inline-flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
+                  >
+                    <HelpCircle size={13} />
+                    How does it work?
+                  </button>
+                </div>
               </div>
 
-              <div className="hidden lg:block mt-10 pt-6 border-t border-white/5 text-center">
+              <div className="hidden lg:flex items-center justify-center gap-4 mt-10 pt-6 border-t border-white/5">
                 <a href={content.site.mainSiteUrl}
                   className="font-sans text-text-muted text-xs hover:text-text-secondary transition-colors inline-flex items-center gap-1.5"
                   target="_blank" rel="noopener noreferrer">
                   {login.form.backToSite}
                 </a>
+                <span className="text-white/10">·</span>
+                <button
+                  onClick={() => setHelpOpen(true)}
+                  className="inline-flex items-center gap-1.5 font-sans text-xs text-text-muted hover:text-text-secondary transition-colors"
+                >
+                  <HelpCircle size={12} />
+                  How does it work?
+                </button>
               </div>
             </>
           )}
@@ -494,6 +513,8 @@ export default function LoginPage({ onLogin, onGuest, onRegister, onForgotPasswo
           )}
 
         </div>
+
+        {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
 
         {/* ── MOBILE BRAND SECTION (below form, login view only) ── */}
         {view === 'login' && (

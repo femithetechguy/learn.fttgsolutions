@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { LogOut, Menu, X } from 'lucide-react'
+import { LogOut, Menu, X, HelpCircle } from 'lucide-react'
 import Logo from '@/components/Logo'
 import content from '@/lib/content'
 import { ICON_MAP } from '@/components/FilterBar'
+import HelpModal from '@/components/HelpModal'
 
 interface NavProps {
   user?: { name?: string; role: 'member' | 'guest' | null }
@@ -27,6 +28,7 @@ const STAGGER = ['', 'animate-delay-100', 'animate-delay-200', 'animate-delay-30
 
 export default function Nav({ user, onLogout }: NavProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const pathname = usePathname()
   const isGuest = user?.role === 'guest'
   const displayName = user?.name
@@ -71,6 +73,13 @@ export default function Nav({ user, onLogout }: NavProps) {
 
           {/* User area */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={() => setHelpOpen(true)}
+              className="flex items-center justify-center w-7 h-7 text-text-muted hover:text-text-secondary transition-colors duration-200"
+              aria-label="Help"
+            >
+              <HelpCircle size={16} />
+            </button>
             {user ? (
               <>
                 {isGuest ? (
@@ -108,6 +117,8 @@ export default function Nav({ user, onLogout }: NavProps) {
         </div>
       </div>
 
+      {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
+
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/5 bg-bg-secondary px-4 py-4 space-y-1 animate-slide-up">
@@ -136,7 +147,14 @@ export default function Nav({ user, onLogout }: NavProps) {
               </a>
             )
           })}
-          <div className="pt-2 border-t border-white/5">
+          <div className="pt-2 border-t border-white/5 space-y-1">
+            <button
+              onClick={() => { setMobileMenuOpen(false); setHelpOpen(true) }}
+              className="flex items-center gap-2 font-sans text-sm text-text-muted hover:text-text-secondary transition-colors duration-150 py-2 px-2 -mx-2 w-full"
+            >
+              <HelpCircle size={15} />
+              Help
+            </button>
             {user && onLogout ? (
               <button
                 onClick={onLogout}

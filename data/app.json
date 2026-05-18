@@ -169,6 +169,70 @@
     "subtitle": "Curated tools, docs, and links to accelerate your growth"
   },
 
+  "help": {
+    "title": "Help",
+    "tabs": {
+      "howItWorks": "HOW IT WORKS",
+      "faq": "FAQ"
+    },
+    "howItWorks": {
+      "heading": "Get up and running in minutes.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Sign in or explore as a Guest",
+          "body": "Free lessons are open to everyone — no account needed. Create a free account to unlock member courses, bookmarks, and progress tracking."
+        },
+        {
+          "step": "2",
+          "title": "Pick a pillar",
+          "body": "Choose from App Dev, Data & BI, Philosophy, or Crossover. Each pillar is a curated track of courses built around a core skill set."
+        },
+        {
+          "step": "3",
+          "title": "Open a course and start watching",
+          "body": "Lessons are organized into modules. Use the playlist panel to jump between lessons, search within a course, or share a direct link to any lesson."
+        },
+        {
+          "step": "4",
+          "title": "Bookmark lessons to revisit later",
+          "body": "Hit the bookmark icon in the playlist panel to save any lesson. Your bookmarks are always one tab away. Members only."
+        },
+        {
+          "step": "5",
+          "title": "Explore Cheat Sheets and Stack",
+          "body": "Quick-reference syntax cards and the full tool stack used across the platform — great companions while you build alongside the courses."
+        }
+      ]
+    },
+    "faq": [
+      {
+        "q": "What's the difference between Guest and Member access?",
+        "a": "Guests can watch all free lessons without signing up. Members get full access to every course, plus bookmarks and progress tracking. Creating an account is free."
+      },
+      {
+        "q": "How do I bookmark a lesson?",
+        "a": "Open the playlist panel inside any course and click the bookmark icon in the header. Bookmarked lessons appear in the Bookmarks tab so you can pick up exactly where you left off."
+      },
+      {
+        "q": "Are the courses really free?",
+        "a": "Many lessons are free for everyone, including guests. Some courses are members-only — create a free account to unlock them all."
+      },
+      {
+        "q": "What are the three pillars?",
+        "a": "App Dev covers full-stack development. Data & BI covers Power BI, DAX, and data engineering. Philosophy covers the mindset and principles behind building things that last. Crossover blends all three."
+      },
+      {
+        "q": "Can I share a specific lesson with someone?",
+        "a": "Yes. Open the playlist panel and click the share icon — it copies a direct link to the current lesson that anyone can open."
+      },
+      {
+        "q": "How do I search within a course?",
+        "a": "Open the playlist panel and use the search bar at the top. It searches lesson titles, descriptions, and transcripts across the entire course."
+      }
+    ]
+  },
+
   "footer": {
     "brand": {
       "tagline": "Technical training and timeless philosophy for builders."
