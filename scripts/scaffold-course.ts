@@ -6,16 +6,27 @@
  * are filled in automatically. Everything else (module groupings,
  * descriptions, downloads, free flags) you fill in manually.
  *
- * Usage:
- *   YOUTUBE_API_KEY=... npx ts-node scripts/scaffold-course.ts <playlistId> <slug>
- *
- * Example:
- *   YOUTUBE_API_KEY=AIza... npx ts-node scripts/scaffold-course.ts PLxxxxxxx nextjs-mastery
- *
  * Prerequisites:
  *   - YouTube Data API v3 enabled in Google Cloud Console
- *   - API key with YouTube Data API access
+ *   - YOUTUBE_API_KEY set in .env.local (set once, never changes)
  *   - ts-node installed (npx ts-node works without installing globally)
+ *
+ * Usage:
+ *   npx ts-node scripts/scaffold-course.ts <playlistId> <slug>
+ *
+ * One command per course — swap the playlist ID and slug for each pillar:
+ *
+ *   App Dev:
+ *     npx ts-node scripts/scaffold-course.ts PLxxxxxxx nextjs-mastery
+ *
+ *   Data & BI:
+ *     npx ts-node scripts/scaffold-course.ts PLxxxxxxx dax-fundamentals
+ *
+ *   Philosophy:
+ *     npx ts-node scripts/scaffold-course.ts PLxxxxxxx stoic-builder
+ *
+ *   Crossover (when ready):
+ *     npx ts-node scripts/scaffold-course.ts PLxxxxxxx crossover-series
  */
 
 import fs from 'fs'
