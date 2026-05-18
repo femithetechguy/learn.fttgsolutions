@@ -82,16 +82,16 @@ This creates `data/courses/detail/stoic-builder.json` with all video IDs, titles
 **Examples by pillar:**
 ```bash
 # App Dev
-npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx nextjs-mastery
+npx ts-node scripts/scaffold-course.ts PL-kaoXbNQhEqJjzHBclg7HFKiYeVSkzaf nextjs-mastery
 
 # Data & BI
-npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx dax-fundamentals
+npx ts-node scripts/scaffold-course.ts PL-kaoXbNQhErED_N27CbkRucIGhGB-C10 dax-fundamentals
 
 # Philosophy
-npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx stoic-builder
+npx ts-node scripts/scaffold-course.ts PL-kaoXbNQhEqQ5SXhyGquxE2gAktBNU85 stoic-builder
 
-# Crossover (when ready)
-npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx crossover-series
+# Crossover
+npx ts-node scripts/scaffold-course.ts PL-kaoXbNQhEoc3jloM9T5kpwDOgPoO9V_ crossover-series
 ```
 
 **After the script runs, open the generated JSON and:**
