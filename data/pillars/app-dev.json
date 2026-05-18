@@ -17,6 +17,7 @@
       "tools": [
         { "name": "React",   "slug": "react",     "color": "61DAFB", "definition": "UI component library from Meta — the most popular way to build interactive web interfaces." },
         { "name": "Next.js", "slug": "nextdotjs", "color": "EEEEEE", "definition": "React framework for production — adds routing, SSR, and API routes out of the box." },
+        { "name": "next/og", "slug": "nextdotjs", "color": "EEEEEE", "definition": "Next.js built-in for generating dynamic Open Graph images — renders JSX to a PNG via ImageResponse, runs on the edge." },
         { "name": "Vue",     "slug": "vuedotjs",  "color": "4FC08D", "definition": "Progressive frontend framework — gentle learning curve with a clean, approachable syntax." },
         { "name": "Svelte",  "slug": "svelte",    "color": "FF3E00", "definition": "Compiler-based UI framework — writes less code, ships no runtime, blazing fast results." },
         { "name": "Vite",    "slug": "vite",      "color": "9135FF", "definition": "Lightning-fast dev server and build tool — replaces Webpack with near-instant hot reload." }
@@ -29,7 +30,7 @@
         { "name": "Framer Motion",  "slug": "framer",      "color": "0055FF", "definition": "Production-ready animation library for React — declarative animations with physics-based springs." },
         { "name": "PostCSS",        "slug": "postcss",     "color": "DD3A0A", "definition": "CSS transformation tool — processes your stylesheets through plugins like autoprefixer and Tailwind at build time." },
         { "name": "Lucide React",   "slug": "lucide",      "color": "F56565", "definition": "Open-source icon library for React — clean, consistent SVG icons as components, tree-shakeable and typed." },
-        { "name": "Simple Icons",   "slug": "",            "color": "AAAAAA", "definition": "Free SVG icons for popular brands — over 3,000 logos with consistent style, great for tech stack displays." },
+        { "name": "Simple Icons",   "slug": "simpleicons", "color": "AAAAAA", "definition": "Free SVG icons for popular brands — over 3,000 logos with consistent style, great for tech stack displays." },
         { "name": "Storybook",      "slug": "storybook",   "color": "FF4785", "definition": "UI component workshop — build, document, and test components in isolation before wiring them up." }
       ]
     },
@@ -40,7 +41,7 @@
         { "name": "NestJS",   "slug": "nestjs",    "color": "E0234E", "definition": "Opinionated Node.js framework — brings structure and TypeScript-first patterns to backend APIs." },
         { "name": "FastAPI",  "slug": "fastapi",   "color": "009688", "definition": "Python API framework — auto-generates docs, validates requests, and runs at async speed." },
         { "name": "Express",  "slug": "express",   "color": "AAAAAA", "definition": "Minimal Node.js web framework — the building block behind most Node APIs, unopinionated by design." },
-        { "name": "Hono",     "slug": "",          "color": "E36002", "definition": "Ultra-lightweight web framework — runs on any JS runtime including Cloudflare Workers and Bun." }
+        { "name": "Hono",     "slug": "hono",      "color": "E36002", "definition": "Ultra-lightweight web framework — runs on any JS runtime including Cloudflare Workers and Bun." }
       ]
     },
     {
@@ -66,7 +67,7 @@
       "tools": [
         { "name": "Vercel",   "slug": "vercel",  "color": "EEEEEE", "definition": "Deployment platform for frontend apps — git push and your Next.js app is live in seconds." },
         { "name": "Docker",   "slug": "docker",  "color": "2496ED", "definition": "Containerisation tool — package your app and its dependencies so it runs identically anywhere." },
-        { "name": "Railway",  "slug": "",        "color": "9B59B6", "definition": "Simple cloud platform — deploy databases and backends from GitHub with zero infrastructure config." },
+        { "name": "Railway",  "slug": "railway", "color": "9B59B6", "definition": "Simple cloud platform — deploy databases and backends from GitHub with zero infrastructure config." },
         { "name": "AWS",      "slug": "",        "color": "FF9900", "definition": "Amazon's cloud — the industry standard for scalable, production-grade infrastructure at any scale." }
       ]
     },
