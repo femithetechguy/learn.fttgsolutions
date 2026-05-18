@@ -167,6 +167,13 @@ async function main() {
   }
 
   const outPath = path.join(process.cwd(), 'data', 'courses', 'detail', `${SLUG}.json`)
+
+  if (fs.existsSync(outPath) && !process.argv.includes('--force')) {
+    console.error(`\nError: ${outPath} already exists.`)
+    console.error('  Pass --force to overwrite it (this will destroy existing content).')
+    process.exit(1)
+  }
+
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2))
 
   console.log(`\n✓ Scaffolded ${lessons.length} lessons → ${outPath}`)
