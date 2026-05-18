@@ -22,7 +22,18 @@ import fs from 'fs'
 import path from 'path'
 import https from 'https'
 
-const API_KEY   = process.env.YOUTUBE_API_KEY
+// Load .env.local so YOUTUBE_API_KEY doesn't need to be set in the shell
+const envPath = path.join(process.cwd(), '.env.local')
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+    const [key, ...rest] = line.split('=')
+    if (key && rest.length && !key.startsWith('#')) {
+      process.env[key.trim()] ??= rest.join('=').trim()
+    }
+  }
+}
+
+const API_KEY = process.env.YOUTUBE_API_KEY
 const [, , PLAYLIST_ID, SLUG] = process.argv
 
 // ── Validation ─────────────────────────────────────────────────────────────
