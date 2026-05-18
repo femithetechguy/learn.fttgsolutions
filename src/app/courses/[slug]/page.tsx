@@ -43,11 +43,25 @@ export function generateMetadata({
     }
   }
 
+  const imageUrl = `/api/og/course?slug=${params.slug}${
+    searchParams.m ? `&m=${searchParams.m}` : searchParams.v ? `&v=${searchParams.v}` : ''
+  }`
+
   return {
     title,
     description,
-    openGraph: { title, description: description ?? undefined, type: 'website' },
-    twitter:   { card: 'summary', title, description: description ?? undefined },
+    openGraph: {
+      title,
+      description: description ?? undefined,
+      type: 'website',
+      images: [{ url: imageUrl, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: description ?? undefined,
+      images: [imageUrl],
+    },
   }
 }
 
