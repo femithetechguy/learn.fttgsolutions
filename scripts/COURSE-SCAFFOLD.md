@@ -1,10 +1,10 @@
 # Course Scripts
 
-Two scripts for managing course content from YouTube playlists. Both read `YOUTUBE_API_KEY` from `.env.local` — set it once and forget it.
+Two scripts for managing course content from YouTube playlists. Both read `YOUTUBE_API_KEY` from `.env.local` — set it once and never touch it again.
 
 ---
 
-## Setup
+## Setup (one time only)
 
 ### 1. Enable YouTube Data API v3
 
@@ -13,7 +13,8 @@ Two scripts for managing course content from YouTube playlists. Both read `YOUTU
 3. Navigate to **APIs & Services → Library**
 4. Search for **YouTube Data API v3** and enable it
 5. Go to **APIs & Services → Credentials → Create Credentials → API Key**
-6. Copy the key
+6. Name it `fttg-youtube-scaffold-script`, select **YouTube Data API v3** under API restrictions, leave Application restrictions as **None**, click **Create**
+7. Copy the key
 
 ### 2. Add the key to `.env.local`
 
@@ -21,24 +22,62 @@ Two scripts for managing course content from YouTube playlists. Both read `YOUTU
 YOUTUBE_API_KEY=AIzaSy...
 ```
 
-That's the only setup required. The key never changes between runs.
+Done. The key never changes — it works for every pillar and every course.
+
+---
+
+## How to find your Playlist ID
+
+Every YouTube playlist URL looks like this:
+
+```
+https://www.youtube.com/playlist?list=PL-kaoXbNQhEqQ5SXhyGquxE2gAktBNU85
+```
+
+The part after `list=` is the **Playlist ID**. That is what you pass to the scripts.
+
+---
+
+## How to choose a slug
+
+The slug becomes both the **filename** and the **URL** of the course on the platform.
+
+- Lowercase, hyphens only, no spaces
+- Should match the course title closely
+- Must be unique across all courses
+
+**Existing slugs (already taken):**
+```
+builders-philosophy       ← data/courses/detail/builders-philosophy.json
+dax-zero-to-advanced
+nestjs-api-architecture
+nextjs-personal-brand-site
+python-etl-for-power-bi
+the-crossover-series
+think-and-build-rich
+```
 
 ---
 
 ## scaffold-course.ts
 
-Creates a **brand new** course JSON from a YouTube playlist. Use this when starting a course from scratch.
-
-**What it does:**
-- Fetches all videos from the playlist (handles pagination automatically)
-- Pulls each video's title and duration
-- Writes a scaffolded JSON to `data/courses/detail/<slug>.json`
-- All videos are placed in one module — you split them manually
+Use this for a **brand new course** that has no JSON file yet.
 
 **Command:**
 ```bash
 npx ts-node scripts/scaffold-course.ts <playlistId> <slug>
 ```
+
+**What the command arguments mean:**
+- `<playlistId>` — the ID from your YouTube playlist URL (after `list=`)
+- `<slug>` — the name you want to give the course file and URL
+
+**Example — adding a new Philosophy course:**
+```bash
+npx ts-node scripts/scaffold-course.ts PL-kaoXbNQhEqQ5SXhyGquxE2gAktBNU85 stoic-builder
+```
+
+This creates `data/courses/detail/stoic-builder.json` with all video IDs, titles, and durations pre-filled.
 
 **Examples by pillar:**
 ```bash
@@ -55,43 +94,43 @@ npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx stoic-builder
 npx ts-node scripts/scaffold-course.ts PLxxxxxxxxxxxxxxx crossover-series
 ```
 
-**After the script runs:**
+**After the script runs, open the generated JSON and:**
 
-1. Open `data/courses/detail/<slug>.json`
-2. Fill in the `TODO` fields at the top:
+1. Fill in the `TODO` fields at the top — use `builders-philosophy.json` as your reference:
    ```json
-   "title": "Your Course Title",
-   "subtitle": "One line description.",
-   "pillar": "app-dev",
-   "pillarLabel": "App Dev",
-   "pillarColor": "#378ADD",
-   "level": "Intermediate",
-   "totalDuration": "8+ hours",
+   {
+     "slug": "stoic-builder",
+     "title": "The Stoic Builder",
+     "subtitle": "One sentence description of the course.",
+     "pillar": "philosophy",
+     "pillarLabel": "Philosophy",
+     "pillarColor": "#EF9F27",
+     "level": "All levels",
+     "totalDuration": "20+ hours",
+     "free": false,
+     "playlistId": "PL-kaoXbNQhEqQ5SXhyGquxE2gAktBNU85",
+     "links": null
+   }
    ```
-3. Split lessons into logical modules — cut and paste lesson objects into separate module blocks
-4. Write a `description` for each module (shown as the overview before the first lesson plays)
-5. Set `"free": true` on any lessons you want publicly accessible
-6. Add the course to `src/lib/courses.ts` so the platform knows it exists
+2. Split lessons into logical modules — cut and paste lesson objects into separate module blocks
+3. Write a `description` for each module (shown as the overview before the first lesson plays)
+4. Set `"free": true` on any lessons you want publicly accessible
+5. Add the course to `src/lib/courses.ts` so the platform knows it exists
 
-> **Safety:** The script will refuse to run if the file already exists. Pass `--force` only if you intentionally want to wipe and rebuild from scratch.
+> **Safety:** The script will refuse to run if the file already exists. Pass `--force` only if you intentionally want to wipe and start over.
 
 ---
 
 ## sync-course.ts
 
-Adds **new videos** to an existing course JSON. Use this when you upload new videos to a YouTube playlist after the course is already live.
-
-**What it does:**
-- Reads the `playlistId` already stored in the course JSON
-- Fetches the full playlist from YouTube
-- Compares against existing lesson video IDs
-- Appends only new videos to the last module
-- Never touches existing lessons, descriptions, module structure, or flags
+Use this when you **add new videos** to a YouTube playlist for a course that is already live.
 
 **Command:**
 ```bash
 npx ts-node scripts/sync-course.ts <slug>
 ```
+
+No playlist ID needed — it reads the `playlistId` already stored inside the course JSON.
 
 **Examples:**
 ```bash
@@ -99,22 +138,26 @@ npx ts-node scripts/sync-course.ts builders-philosophy
 npx ts-node scripts/sync-course.ts nextjs-mastery
 ```
 
-**After the script runs:**
+**What it does:**
+- Fetches the full playlist from YouTube
+- Compares against every video ID already in the JSON
+- Appends only the new videos to the last module
+- Never touches existing lessons, module structure, descriptions, or flags
 
-1. New lessons are appended to the last module with `"free": false` by default
+**After the script runs:**
+1. New lessons appear at the bottom of the last module with `"free": false`
 2. Move them to a different module if needed
 3. Set `"free": true` on any publicly accessible lessons
-4. Add descriptions or notes if applicable
 
 > **Safety:** Only new video IDs are added. Existing content is never modified or deleted.
 
 ---
 
-## Pillar colors reference
+## Pillar reference
 
-| Pillar | Color |
-|--------|-------|
-| App Dev | `#378ADD` |
-| Data & BI | `#1D9E75` |
-| Philosophy | `#EF9F27` |
-| Crossover | `#7F77DD` |
+| Pillar | `pillar` value | `pillarLabel` | `pillarColor` |
+|--------|---------------|---------------|---------------|
+| App Dev | `app-dev` | `App Dev` | `#378ADD` |
+| Data & BI | `data-bi` | `Data & BI` | `#1D9E75` |
+| Philosophy | `philosophy` | `Philosophy` | `#EF9F27` |
+| Crossover | `crossover` | `Crossover` | `#7F77DD` |
