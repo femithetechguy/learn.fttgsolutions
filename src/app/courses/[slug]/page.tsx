@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { type Metadata } from 'next'
 import fs from 'fs'
 import path from 'path'
 import { marked } from 'marked'
@@ -12,6 +13,43 @@ import CourseBlackboard, { CourseDetail } from '@/components/CourseBlackboard'
 import { findLessonBySlug } from '@/lib/lesson-slug'
 
 const chalkFont = Special_Elite({ weight: '400', subsets: ['latin'], variable: '--font-chalk' })
+
+export function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { v?: string; m?: string }
+}): Metadata {
+  const filePath = path.join(process.cwd(), 'data', 'courses', 'detail', `${params.slug}.json`)
+  if (!fs.existsSync(filePath)) return {}
+
+  const course: CourseDetail = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+
+  let title = course.title
+  let description = course.subtitle
+
+  if (searchParams.m) {
+    const mod = course.modules.find(m => m.id === searchParams.m)
+    if (mod) {
+      title = `${mod.title} — ${course.title}`
+      description = mod.description
+    }
+  } else if (searchParams.v) {
+    const lesson = findLessonBySlug(course.modules, searchParams.v)
+    if (lesson) {
+      title = `${lesson.title} — ${course.title}`
+      description = lesson.description ?? course.subtitle
+    }
+  }
+
+  return {
+    title,
+    description,
+    openGraph: { title, description: description ?? undefined, type: 'website' },
+    twitter:   { card: 'summary', title, description: description ?? undefined },
+  }
+}
 
 export default function CourseBoardPage({
   params,
