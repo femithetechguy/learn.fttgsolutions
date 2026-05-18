@@ -501,7 +501,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Search lessons…"
                 className="flex-1 min-w-0 bg-transparent text-[0.72rem] outline-none placeholder:text-[rgba(255,255,255,0.28)]"
-                style={{ color: 'rgba(240,237,230,0.85)' }}
+                style={{ color: 'rgba(240,237,230,0.85)', fontSize: '16px' }}
               />
               {searchQuery && (
                 <button onClick={() => setSearchQuery('')} className="flex-shrink-0" style={{ color: 'rgba(255,255,255,0.35)' }}>
@@ -683,7 +683,7 @@ export default function PlaylistModal({ courseTitle, pillarColor, modules, activ
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search lessons…"
                   className="flex-1 min-w-0 bg-transparent text-[0.72rem] outline-none placeholder:text-[rgba(255,255,255,0.28)]"
-                  style={{ color: 'rgba(240,237,230,0.85)' }}
+                  style={{ color: 'rgba(240,237,230,0.85)', fontSize: '16px' }}
                 />
                 {searchQuery && (
                   <button onClick={() => setSearchQuery('')} className="flex-shrink-0" style={{ color: 'rgba(255,255,255,0.35)' }}>
