@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Fuse from 'fuse.js'
 import { useParams, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Search, X, Share2, Printer, Check } from 'lucide-react'
@@ -19,25 +20,40 @@ export default function CheatsheetPage() {
   const [shared, setShared] = useState(false)
   const color = `#${sheet.data.color}`
 
+  const allItems = useMemo(() =>
+    sheet.data.categories.flatMap(cat =>
+      cat.items.map(i => ({ ...i, category: cat.category }))
+    ),
+  [sheet])
+
+  const fuse = useMemo(() => new Fuse(allItems, {
+    keys: [
+      { name: 'name',       weight: 0.55 },
+      { name: 'syntax',     weight: 0.25 },
+      { name: 'definition', weight: 0.15 },
+      { name: 'category',   weight: 0.05 },
+    ],
+    threshold: 0.35,
+  }), [allItems])
+
   const filteredCategories = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const q = query.trim()
     if (!q) return sheet.data.categories
+    const ql = q.toLowerCase()
+    const matchedNames = new Set(fuse.search(q).map(r => r.item.name))
     return sheet.data.categories
       .map(cat => {
-        const categoryMatches = cat.category.toLowerCase().includes(q)
+        // category name match → show every item in that category
+        const categoryMatches = cat.category.toLowerCase().includes(ql)
         return {
           ...cat,
           items: categoryMatches
             ? cat.items
-            : cat.items.filter(i =>
-                i.name.toLowerCase().includes(q) ||
-                i.syntax.toLowerCase().includes(q) ||
-                i.definition.toLowerCase().includes(q)
-              ),
+            : cat.items.filter(i => matchedNames.has(i.name)),
         }
       })
       .filter(cat => cat.items.length > 0)
-  }, [query, sheet])
+  }, [query, sheet, fuse])
 
   const handleShare = async () => {
     const url = window.location.href

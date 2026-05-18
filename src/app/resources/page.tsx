@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Fuse from 'fuse.js'
 import { ExternalLink } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -36,19 +37,35 @@ export default function ResourcesPage() {
     return Array.from(tags).map(tag => ({ label: tag, colors: TAG_COLORS[tag] ?? DEFAULT_TAG }))
   }, [])
 
+  const allItems = useMemo(() =>
+    resources.categories.flatMap(c => c.items.map(i => ({ ...i, category: c.heading }))),
+  [])
+
+  const fuse = useMemo(() => new Fuse(allItems, {
+    keys: [
+      { name: 'label',       weight: 0.6 },
+      { name: 'description', weight: 0.3 },
+      { name: 'tag',         weight: 0.1 },
+    ],
+    threshold: 0.35,
+  }), [allItems])
+
   const filteredCategories = useMemo(() => {
-    const q = search.toLowerCase()
+    const q = search.trim()
+    const matchedLabels = q
+      ? new Set(fuse.search(q).map(r => r.item.label))
+      : null
     return resources.categories
       .map(category => ({
         ...category,
         items: category.items.filter(item => {
           const matchesTag = !activeTag || item.tag === activeTag
-          const matchesSearch = !q || item.label.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+          const matchesSearch = !matchedLabels || matchedLabels.has(item.label)
           return matchesTag && matchesSearch
         }),
       }))
       .filter(category => category.items.length > 0)
-  }, [search, activeTag])
+  }, [search, activeTag, fuse])
 
   return (
     <div className="min-h-screen bg-bg-primary bg-grid">
