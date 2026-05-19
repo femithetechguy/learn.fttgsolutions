@@ -280,7 +280,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
         <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'rgba(255,255,255,0.3)' }} />
         <input
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={e => { setQuery(e.target.value); if (e.target.value.trim()) setMobileOpen(true) }}
           placeholder="Search all guides..."
           className="w-full pl-7 pr-6 py-1.5 rounded-sm font-sans text-[0.72rem] placeholder:text-text-muted focus:outline-none focus:border-white/20"
           style={{
@@ -369,7 +369,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
       <div ref={contentRef} className="flex-1 overflow-y-auto overflow-x-hidden bg-bg-primary bg-grid">
 
         {/* Mobile guide selector */}
-        <div className="lg:hidden sticky top-0 z-10 border-b border-white/8 bg-bg-primary overflow-hidden">
+        <div className="lg:hidden sticky top-0 z-10 border-b border-white/8 bg-bg-primary">
           {/* Search — always visible on mobile */}
           {renderSearch()}
           {/* Current guide + toggle */}
@@ -389,16 +389,22 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
               style={{ color: 'rgba(255,255,255,0.3)' }}
             />
           </button>
-          {(mobileOpen || isSearching) && (
-            <div className="flex flex-col border-t border-white/8 max-h-60 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
+          {mobileOpen && (
+            <div
+              className="flex flex-col border-t border-white/8 overflow-y-auto"
+              style={{
+                maxHeight: isSearching ? 'calc(100dvh - 120px)' : '15rem',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
               {renderGuideList()}
             </div>
           )}
         </div>
 
-        {/* Guide body */}
+        {/* Guide body — hidden on mobile while searching */}
         {activeGuide && activeContent ? (
-          <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8">
+          <div className={`max-w-3xl mx-auto px-5 sm:px-8 py-8 ${mobileOpen ? 'hidden lg:block' : ''}`}>
 
             <div className="flex items-start justify-between gap-4 mb-4">
               <div className="flex items-center gap-2.5 flex-wrap">
@@ -529,7 +535,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
 
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-6">
+          <div className={`flex flex-col items-center justify-center h-full gap-3 text-center px-6 ${mobileOpen ? 'hidden lg:flex' : ''}`}>
             <BookOpen size={28} style={{ color: 'rgba(255,255,255,0.15)' }} />
             <p className="font-sans text-sm text-text-muted">Select a guide to start reading.</p>
           </div>
