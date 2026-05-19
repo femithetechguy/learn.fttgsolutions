@@ -16,6 +16,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ArticlesLayout({ children }: { children: React.ReactNode }) {
+export default function GuidesLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }

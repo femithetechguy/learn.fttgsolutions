@@ -2,7 +2,7 @@ import { type MetadataRoute } from 'next'
 import fs from 'fs'
 import path from 'path'
 import { SHEETS } from '../../data/cheatsheets/registry'
-import { ARTICLES } from '@/lib/articles'
+import { GUIDES } from '@/lib/guides'
 
 const BASE = 'https://learn.fttgsolutions.com'
 
@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE,                   lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
     { url: `${BASE}/courses`,      lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/cheatsheets`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/articles`,     lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/guides`,        lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/resources`,    lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/stack`,        lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/favorites`,    lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
@@ -52,9 +52,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.85,
   }))
 
-  const articlePages: MetadataRoute.Sitemap = ARTICLES.map(a => ({
-    url:             `${BASE}/articles/${a.slug}`,
-    lastModified:    new Date(a.date),
+  const guidePages: MetadataRoute.Sitemap = GUIDES.map(g => ({
+    url:             `${BASE}/guides/${g.slug}`,
+    lastModified:    new Date(g.date),
     changeFrequency: 'monthly' as const,
     priority:        0.8,
   }))
@@ -64,6 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...cheatsheetPages,
     ...stackPages,
     ...coursePages,
-    ...articlePages,
+    ...guidePages,
   ]
 }

@@ -50,6 +50,7 @@ export default function FilterBar({
             value={search ?? ''}
             onChange={e => onSearchChange(e.target.value)}
             className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-10 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-gold/50 transition-colors"
+            style={{ fontSize: '16px' }}
           />
           {search && (
             <button

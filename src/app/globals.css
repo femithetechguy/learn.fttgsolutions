@@ -98,6 +98,7 @@ body::before {
   .input-dark {
     @apply w-full bg-bg-elevated border border-text-muted/30 rounded-sm px-4 py-3 text-text-primary placeholder:text-text-muted transition-all duration-200 outline-none focus:border-gold/60 focus:bg-bg-elevated focus:ring-1 focus:ring-gold/20;
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
   }
 
   .card-dark {

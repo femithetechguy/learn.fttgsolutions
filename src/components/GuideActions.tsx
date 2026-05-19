@@ -4,12 +4,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Share2, Printer, Check } from 'lucide-react'
 
-interface ArticleActionsProps {
+interface GuideActionsProps {
   slug:  string
   title: string
 }
 
-export default function ArticleActions({ slug, title }: ArticleActionsProps) {
+export default function GuideActions({ slug, title }: GuideActionsProps) {
   const [shared, setShared] = useState(false)
 
   const handleShare = async () => {
@@ -28,7 +28,7 @@ export default function ArticleActions({ slug, title }: ArticleActionsProps) {
       <button
         onClick={handleShare}
         className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
-        title="Share this article"
+        title="Share this guide"
       >
         {shared
           ? <><Check size={13} className="text-green-400" /><span className="text-green-400">Copied!</span></>
@@ -36,9 +36,9 @@ export default function ArticleActions({ slug, title }: ArticleActionsProps) {
         }
       </button>
       <Link
-        href={`/articles/${slug}/print`}
+        href={`/guides/${slug}/print`}
         className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-white/30 text-text-primary bg-white/5 hover:bg-white/10 hover:border-white/50 transition-all duration-150 font-sans text-xs font-medium bevel"
-        title="Print this article"
+        title="Print this guide"
       >
         <Printer size={13} />
         <span className="hidden sm:inline">Print</span>

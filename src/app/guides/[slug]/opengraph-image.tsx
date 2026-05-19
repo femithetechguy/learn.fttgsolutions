@@ -1,8 +1,8 @@
 import { ImageResponse } from 'next/og'
-import { ARTICLES } from '@/lib/articles'
+import { GUIDES } from '@/lib/guides'
 
 export const runtime     = 'edge'
-export const alt         = 'Article'
+export const alt         = 'Guide'
 export const size        = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -19,11 +19,11 @@ const PILLAR_COLORS: Record<string, string> = {
 }
 
 export default function Image({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find(a => a.slug === params.slug)
-  if (!article) return new ImageResponse(<div>Not found</div>, size)
+  const guide = GUIDES.find(g => g.slug === params.slug)
+  if (!guide) return new ImageResponse(<div>Not found</div>, size)
 
-  const accent = PILLAR_COLORS[article.pillar] ?? '#D4AF37'
-  const pillar = PILLAR_LABELS[article.pillar] ?? article.pillar
+  const accent = PILLAR_COLORS[guide.pillar] ?? '#D4AF37'
+  const pillar = PILLAR_LABELS[guide.pillar] ?? guide.pillar
 
   return new ImageResponse(
     (
@@ -71,13 +71,13 @@ export default function Image({ params }: { params: { slug: string } }) {
             <div
               style={{
                 color: '#ffffff',
-                fontSize: article.title.length > 30 ? 60 : 72,
+                fontSize: guide.title.length > 30 ? 60 : 72,
                 fontWeight: 800,
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
               }}
             >
-              {article.title}
+              {guide.title}
             </div>
             <div
               style={{
@@ -88,7 +88,7 @@ export default function Image({ params }: { params: { slug: string } }) {
                 maxWidth: 900,
               }}
             >
-              {article.subtitle}
+              {guide.subtitle}
             </div>
           </div>
 
