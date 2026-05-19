@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { Printer } from 'lucide-react'
 
-export default function ArticlePrintTrigger() {
+export default function GuidePrintTrigger() {
   useEffect(() => {
     const t = setTimeout(() => window.print(), 600)
     return () => clearTimeout(t)

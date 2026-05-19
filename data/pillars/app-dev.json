@@ -97,6 +97,14 @@
       ]
     },
     {
+      "category": "Search",
+      "tools": [
+        { "name": "Algolia",   "slug": "algolia",   "color": "003DFF", "definition": "Hosted search-as-a-service — fast, typo-tolerant full-text search with a generous free tier and a Next.js SDK." },
+        { "name": "Typesense", "slug": "",          "color": "E44C65", "definition": "Open-source alternative to Algolia — self-hostable or cloud, great for large guide and content libraries." },
+        { "name": "Orama",     "slug": "",          "color": "00C853", "definition": "Edge-native full-text search — runs client-side or at the edge, has a Vercel integration, and handles vector search." }
+      ]
+    },
+    {
       "category": "Dev Tools",
       "tools": [
         { "name": "Git",      "slug": "git",      "color": "F03C2E", "definition": "Version control system — track every change to your codebase and collaborate without stepping on toes." },

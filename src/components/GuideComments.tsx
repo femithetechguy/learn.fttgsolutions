@@ -148,7 +148,7 @@ function CommentThread({ comment, user }: { comment: Comment; user: ReturnType<t
 
 // ─── Main comments section ────────────────────────────────────────────────────
 
-export default function ArticleComments({ slug }: { slug: string }) {
+export default function GuideComments({ slug }: { slug: string }) {
   const { user } = useAuth()
   const [body, setBody]       = useState('')
   const [submitted, setSubmitted] = useState(false)
