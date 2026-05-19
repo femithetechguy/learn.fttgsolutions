@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Fuse from 'fuse.js'
 import {
   Search, X, Clock, ChevronDown,
@@ -28,6 +29,17 @@ const PILLARS = [
 
 function stripHtml(html: string) {
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function injectHighlight(html: string, query: string): string {
+  if (!query.trim()) return html
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const re = new RegExp(`(${escaped})`, 'gi')
+  const style = 'background:rgba(239,159,39,0.45);color:inherit;border-radius:3px;animation:fttg-hl 3s ease forwards;'
+  // Only replace inside text nodes (between > and <), never inside tag attributes
+  return html.replace(/>([^<]+)</g, (_, text) =>
+    '>' + text.replace(re, `<mark style="${style}">$1</mark>`) + '<'
+  )
 }
 
 function getYtId(url: string) {
@@ -69,16 +81,35 @@ function GuideItem({
   bodyOnly: boolean
   onSelect: (slug: string) => void
 }) {
-  const isActive = guide.slug === activeSlug
-  const gPillar  = PILLARS.find(p => p.key === guide.pillar)
-  const snippet  = bodyOnly && guide.body ? bodySnippet(guide.body, query) : ''
+  const isActive   = guide.slug === activeSlug
+  const gPillar    = PILLARS.find(p => p.key === guide.pillar)
+  const snippet    = bodyOnly && guide.body ? bodySnippet(guide.body, query) : ''
+  const tipSnippet = isSearching && guide.body ? bodySnippet(guide.body, query, 100) : ''
+
+  const btnRef                          = useRef<HTMLButtonElement>(null)
+  const [tipPos, setTipPos]             = useState<{ top: number; left: number } | null>(null)
+
+  const showTip = () => {
+    if (!tipSnippet || !btnRef.current) return
+    const rect = btnRef.current.getBoundingClientRect()
+    const top  = Math.min(Math.max(rect.top, 8), window.innerHeight - 180)
+    setTipPos({ top, left: rect.right + 12 })
+  }
+
   return (
     <button
+      ref={btnRef}
       onClick={() => onSelect(guide.slug)}
       className="w-full min-w-0 flex items-start gap-2.5 pl-4 pr-3 py-2 text-left transition-colors"
       style={{ background: isActive ? `${gPillar?.color}14` : undefined }}
-      onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)' }}
-      onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.background = '' }}
+      onMouseEnter={e => {
+        if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.04)'
+        showTip()
+      }}
+      onMouseLeave={e => {
+        if (!isActive) (e.currentTarget as HTMLElement).style.background = ''
+        setTipPos(null)
+      }}
     >
       <div className="flex-shrink-0 mt-[4px]" style={{
         width: 10, height: 10, borderRadius: '50%',
@@ -110,6 +141,28 @@ function GuideItem({
           </span>
         </div>
       </div>
+
+      {tipPos && typeof window !== 'undefined' && createPortal(
+        <div
+          className="fixed z-[9999] w-72 pointer-events-none rounded-sm border border-white/15 shadow-2xl"
+          style={{
+            top:        tipPos.top,
+            left:       tipPos.left,
+            background: 'rgba(18,18,20,0.97)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div className="px-3 pt-2.5 pb-1 border-b border-white/8">
+            <p className="font-sans text-[0.65rem] font-bold uppercase tracking-wider leading-snug" style={{ color: gPillar?.color }}>
+              {guide.title}
+            </p>
+          </div>
+          <p className="px-3 py-2.5 font-sans text-[0.72rem] leading-relaxed line-clamp-5" style={{ color: 'rgba(240,237,230,0.72)' }}>
+            {highlight(tipSnippet, query)}
+          </p>
+        </div>,
+        document.body
+      )}
     </button>
   )
 }
@@ -123,7 +176,10 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
   const [mobileOpen, setMobileOpen]             = useState(false)
   const [tocOpen, setTocOpen]                   = useState(false)
   const [scrollTopVisible, setScrollTopVisible] = useState(false)
-  const [scrollTarget, setScrollTarget]         = useState('')
+  const [scrollTick, setScrollTick]             = useState(0)
+  const pendingScrollRef                        = useRef('')
+  const [highlightQuery, setHighlightQuery]     = useState('')
+  const highlightClearRef                       = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [shared, setShared]                     = useState(false)
   const [copied, setCopied]                     = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -186,58 +242,36 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
     setMobileOpen(false)
     setTocOpen(false)
     if (contentRef.current) contentRef.current.scrollTop = 0
-    setScrollTarget(query.trim())
+    const q = query.trim()
+    if (q) {
+      pendingScrollRef.current = q
+      setScrollTick(t => t + 1)
+      setHighlightQuery(q)
+      if (highlightClearRef.current) clearTimeout(highlightClearRef.current)
+      highlightClearRef.current = setTimeout(() => setHighlightQuery(''), 3200)
+    }
     window.history.pushState(null, '', `/guides/${slug}`)
   }
 
   useEffect(() => {
-    if (!scrollTarget) return
-    const container = contentRef.current
-    const articleEl = container?.querySelector('.article-body')
-    if (!articleEl || !container) { setScrollTarget(''); return }
+    if (scrollTick === 0) return
+    pendingScrollRef.current = ''
 
-    const lower = scrollTarget.toLowerCase()
-    const walker = document.createTreeWalker(articleEl, NodeFilter.SHOW_TEXT)
-    let found: { node: Text; index: number } | null = null
-    let node: Node | null
-    while ((node = walker.nextNode())) {
-      const idx = (node.textContent ?? '').toLowerCase().indexOf(lower)
-      if (idx !== -1) { found = { node: node as Text, index: idx }; break }
-    }
+    // 80ms lets React commit the new highlighted HTML before we measure the DOM
+    const timerId = setTimeout(() => {
+      const container = contentRef.current
+      const articleEl = container?.querySelector('.article-body')
+      if (!articleEl || !container) return
+      const firstMark = articleEl.querySelector('mark')
+      if (!firstMark) return
+      const markRect     = firstMark.getBoundingClientRect()
+      const containerRect = container.getBoundingClientRect()
+      const targetTop    = container.scrollTop + markRect.top - containerRect.top - 120
+      container.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' })
+    }, 80)
 
-    setScrollTarget('')
-    if (!found) return
-
-    const range = document.createRange()
-    range.setStart(found.node, found.index)
-    range.setEnd(found.node, found.index + scrollTarget.length)
-
-    const mark = document.createElement('mark')
-    mark.style.cssText = [
-      'background: rgba(239,159,39,0.4)',
-      'color: inherit',
-      'border-radius: 3px',
-      'scroll-margin-top: 80px',
-      'transition: background 0.8s ease',
-    ].join(';')
-
-    try { range.surroundContents(mark) } catch { return }
-
-    const rafId = requestAnimationFrame(() => mark.scrollIntoView({ behavior: 'smooth', block: 'center' }))
-    const fadeId  = setTimeout(() => { mark.style.background = 'transparent' }, 2000)
-    const cleanId = setTimeout(() => {
-      const p = mark.parentNode
-      if (p) { while (mark.firstChild) p.insertBefore(mark.firstChild, mark); p.removeChild(mark) }
-    }, 2800)
-
-    return () => {
-      cancelAnimationFrame(rafId)
-      clearTimeout(fadeId)
-      clearTimeout(cleanId)
-      const p = mark.parentNode
-      if (p) { while (mark.firstChild) p.insertBefore(mark.firstChild, mark); p.removeChild(mark) }
-    }
-  }, [activeSlug, scrollTarget])
+    return () => clearTimeout(timerId)
+  }, [scrollTick])
 
   /* Called as functions, NOT as <Component /> — avoids remount */
   const renderSearch = () => (
@@ -335,7 +369,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
       <div ref={contentRef} className="flex-1 overflow-y-auto bg-bg-primary bg-grid">
 
         {/* Mobile guide selector */}
-        <div className="lg:hidden border-b border-white/8">
+        <div className="lg:hidden sticky top-0 z-10 border-b border-white/8 bg-bg-primary">
           {/* Search — always visible on mobile */}
           {renderSearch()}
           {/* Current guide + toggle */}
@@ -355,7 +389,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
               style={{ color: 'rgba(255,255,255,0.3)' }}
             />
           </button>
-          {mobileOpen && (
+          {(mobileOpen || isSearching) && (
             <div className="flex flex-col border-t border-white/8 max-h-60 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)' }}>
               {renderGuideList()}
             </div>
@@ -491,7 +525,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
               </div>
             )}
 
-            <div className="article-body" dangerouslySetInnerHTML={{ __html: activeContent.html }} />
+            <div className="article-body" dangerouslySetInnerHTML={{ __html: injectHighlight(activeContent.html, highlightQuery) }} />
 
           </div>
         ) : (
@@ -506,7 +540,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
       <button
         onClick={() => contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
         title="Back to top"
-        className={`hidden md:flex fixed bottom-8 right-8 z-50 items-center justify-center w-10 h-10 rounded-sm bg-bg-elevated border border-white/15 text-text-muted hover:text-text-primary hover:border-white/30 transition-all duration-200 bevel-sm ${
+        className={`flex fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 items-center justify-center w-10 h-10 rounded-sm bg-bg-elevated border border-white/15 text-text-muted hover:text-text-primary hover:border-white/30 transition-all duration-200 bevel-sm ${
           scrollTopVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
         }`}
       >
