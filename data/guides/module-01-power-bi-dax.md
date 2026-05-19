@@ -187,4 +187,4 @@ Any senior Power BI engineer should know DAX Studio and Performance Analyzer. If
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*
