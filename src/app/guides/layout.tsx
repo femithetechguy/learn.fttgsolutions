@@ -1,18 +1,24 @@
 import type { Metadata } from 'next'
 import content from '@/lib/content'
 
+const title       = `${content.articles.title} — FTTG Learn`
+const description = content.articles.subtitle
+const imageUrl    = '/guides/opengraph-image'
+
 export const metadata: Metadata = {
-  title: `${content.articles.title} — FTTG Learn`,
-  description: content.articles.subtitle,
+  title,
+  description,
   openGraph: {
-    title: `${content.articles.title} — FTTG Learn`,
-    description: content.articles.subtitle,
+    title,
+    description,
     type: 'website',
+    images: [{ url: imageUrl, width: 1200, height: 630, alt: content.articles.title }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${content.articles.title} — FTTG Learn`,
-    description: content.articles.subtitle,
+    title,
+    description,
+    images: [imageUrl],
   },
 }
 

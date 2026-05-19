@@ -1,31 +1,13 @@
 import { ImageResponse } from 'next/og'
-import { GUIDES } from '@/lib/guides'
 
 export const runtime     = 'edge'
-export const alt         = 'Guide'
+export const alt         = 'Guides — FTTG Learn'
 export const size        = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-const PILLAR_LABELS: Record<string, string> = {
-  'data-bi':    'Data & BI',
-  'app-dev':    'App Dev',
-  'philosophy': 'Philosophy',
-  'crossover':  'Crossover',
-}
+const ACCENT = '#D4AF37'
 
-const PILLAR_COLORS: Record<string, string> = {
-  'data-bi':    '#1D9E75',
-  'app-dev':    '#378ADD',
-  'philosophy': '#EF9F27',
-}
-
-export default function Image({ params }: { params: { slug: string } }) {
-  const guide = GUIDES.find(g => g.slug === params.slug)
-  if (!guide) return new ImageResponse(<div>Not found</div>, size)
-
-  const accent = PILLAR_COLORS[guide.pillar] ?? '#D4AF37'
-  const pillar = PILLAR_LABELS[guide.pillar] ?? guide.pillar
-
+export default function Image() {
   return new ImageResponse(
     (
       <div
@@ -39,8 +21,7 @@ export default function Image({ params }: { params: { slug: string } }) {
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
       >
-        {/* Top accent bar */}
-        <div style={{ width: '100%', height: 6, background: accent }} />
+        <div style={{ width: '100%', height: 6, background: ACCENT }} />
 
         <div
           style={{
@@ -51,34 +32,32 @@ export default function Image({ params }: { params: { slug: string } }) {
             padding: '64px 80px 60px',
           }}
         >
-          {/* Top label */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 10, height: 10, borderRadius: '50%', background: accent }} />
+            <div style={{ width: 10, height: 10, borderRadius: '50%', background: ACCENT }} />
             <span
               style={{
-                color: accent,
+                color: ACCENT,
                 fontSize: 18,
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
               }}
             >
-              FTTG Learn · {pillar}
+              FTTG Learn · Guides
             </span>
           </div>
 
-          {/* Headline + subtitle */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <div
               style={{
                 color: '#ffffff',
-                fontSize: guide.title.length > 30 ? 60 : 72,
+                fontSize: 80,
                 fontWeight: 800,
-                lineHeight: 1.1,
+                lineHeight: 1.05,
                 letterSpacing: '-0.02em',
               }}
             >
-              {guide.title}
+              Guides
             </div>
             <div
               style={{
@@ -86,14 +65,13 @@ export default function Image({ params }: { params: { slug: string } }) {
                 fontSize: 26,
                 fontWeight: 400,
                 lineHeight: 1.4,
-                maxWidth: 900,
+                maxWidth: 860,
               }}
             >
-              {guide.subtitle}
+              Deep-dives, walkthroughs, and interview prep from the FTTG crew.
             </div>
           </div>
 
-          {/* Bottom domain */}
           <div
             style={{
               color: 'rgba(255,255,255,0.25)',

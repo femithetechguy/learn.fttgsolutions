@@ -42,7 +42,7 @@ export default function FilterBar({
   return (
     <div className="space-y-4">
       {onSearchChange && (
-        <div className="relative w-full sm:max-w-md">
+        <div className="relative w-full">
           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" />
           <input
             type="text"
@@ -55,7 +55,7 @@ export default function FilterBar({
           {search && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
             >
               <X size={15} />
             </button>

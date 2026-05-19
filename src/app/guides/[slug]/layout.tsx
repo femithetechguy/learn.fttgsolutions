@@ -1,12 +1,6 @@
 import type { Metadata } from 'next'
 import { GUIDES } from '@/lib/guides'
 
-const PILLAR_COLORS: Record<string, string> = {
-  'data-bi':    '#1D9E75',
-  'app-dev':    '#378ADD',
-  'philosophy': '#EF9F27',
-}
-
 export async function generateMetadata(
   { params }: { params: { slug: string } }
 ): Promise<Metadata> {
