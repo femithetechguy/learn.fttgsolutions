@@ -149,4 +149,4 @@ Premium Capacity is an expensive SKU. If you describe having Premium without men
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*

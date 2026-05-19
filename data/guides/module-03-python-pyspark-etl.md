@@ -220,4 +220,4 @@ PySpark is not just a faster version of pandas. It has a different execution mod
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*

@@ -205,4 +205,4 @@ Cloud compute costs money. Senior engineers think about it. Describing job clust
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*

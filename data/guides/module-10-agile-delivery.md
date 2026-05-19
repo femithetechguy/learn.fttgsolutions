@@ -168,4 +168,4 @@ Communication is a deliverable. A stakeholder who does not understand the curren
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*

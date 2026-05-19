@@ -166,4 +166,4 @@ The opposite mistake — building complex transformation logic inside a Power Au
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*

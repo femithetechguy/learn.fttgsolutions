@@ -180,4 +180,4 @@ SSRS, SSIS, and Cognos all have execution logs. A senior engineer who has manage
 
 ---
 
-*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context.md)*
+*Part of the FTTG Learn Interview Prep Series — [Back to context guide](./fttg-interview-prep-context)*
