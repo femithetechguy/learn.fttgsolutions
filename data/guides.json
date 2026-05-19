@@ -149,6 +149,42 @@
       "thumbnail": ""
     },
     {
+      "slug": "databricks-cheat-sheet-guide",
+      "title": "Databricks Cheat Sheet Guide",
+      "subtitle": "Quick reference for Databricks — from Delta Lake and PySpark DataFrames to Unity Catalog, MLflow, magic commands, and cluster configuration.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 10,
+      "src": "guides/databricks-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "snowflake-cheat-sheet-guide",
+      "title": "Snowflake Cheat Sheet Guide",
+      "subtitle": "Quick reference for Snowflake — from virtual warehouses and data loading to Time Travel, cloning, streams, tasks, and access control.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 11,
+      "src": "guides/snowflake-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "ms-fabric-cheat-sheet-guide",
+      "title": "Microsoft Fabric Cheat Sheet Guide",
+      "subtitle": "Quick reference for Microsoft Fabric — from OneLake and Data Factory to Lakehouses, Warehouses, Real-Time Analytics, Power BI integration, and governance.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 15,
+      "src": "guides/ms-fabric-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
       "slug": "dax-cheat-sheet-guide",
       "title": "DAX Cheat Sheet Guide",
       "subtitle": "Quick reference for DAX functions used in Power BI — from aggregations and CALCULATE to time intelligence patterns.",
