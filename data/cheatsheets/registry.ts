@@ -3,6 +3,7 @@ import python from './python.json'
 import powerBi from './power-bi.json'
 import dax    from './dax.json'
 import mCode  from './m-code.json'
+import msFabric from './ms-fabric.json'
 import git    from './git.json'
 import vscode from './vscode.json'
 import vim      from './vim.json'
@@ -24,7 +25,8 @@ export const SHEETS = [
   { key: 'python', data: python },
   { key: 'power-bi', data: powerBi },
   { key: 'dax',    data: dax    },
-  { key: 'm-code', data: mCode  },
+  { key: 'm-code',    data: mCode    },
+  { key: 'ms-fabric', data: msFabric },
   { key: 'git',    data: git    },
   { key: 'vscode', data: vscode },
   { key: 'vim',      data: vim      },

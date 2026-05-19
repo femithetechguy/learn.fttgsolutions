@@ -137,6 +137,66 @@
       "thumbnail": ""
     },
     {
+      "slug": "sql-cheat-sheet-guide",
+      "title": "SQL Cheat Sheet Guide",
+      "subtitle": "Quick reference for SQL — from basic SELECT queries to joins, aggregations, window functions, CTEs, and DDL.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 12,
+      "src": "guides/sql-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "dax-cheat-sheet-guide",
+      "title": "DAX Cheat Sheet Guide",
+      "subtitle": "Quick reference for DAX functions used in Power BI — from aggregations and CALCULATE to time intelligence patterns.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 12,
+      "src": "guides/dax-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "m-code-cheat-sheet-guide",
+      "title": "Power Query M Cheat Sheet Guide",
+      "subtitle": "Quick reference for Power Query M — the functional language behind Power BI and Excel data transformations.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 12,
+      "src": "guides/m-code-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "python-cheat-sheet-guide",
+      "title": "Python Cheat Sheet Guide",
+      "subtitle": "Quick reference for Python syntax and built-ins — variables, strings, lists, dicts, loops, functions, classes, file I/O, and more.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 15,
+      "src": "guides/python-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "slug": "power-bi-cheat-sheet-guide",
+      "title": "Power BI Cheat Sheet Guide",
+      "subtitle": "Quick reference for Power BI — from loading data and Power Query transformations to DAX measures, chart types, and data profiling.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 11,
+      "src": "guides/power-bi-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
       "slug": "sql-thinks-in-sets",
       "title": "SQL Thinks in Sets",
       "subtitle": "Why learning to stop thinking row by row is the unlock that makes SQL finally click.",

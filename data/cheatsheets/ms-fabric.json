@@ -1,0 +1,314 @@
+{
+  "label": "Microsoft Fabric",
+  "headline": "Microsoft Fabric Cheat Sheet",
+  "tagline": "Ingest. Engineer. Analyze. Govern.",
+  "description": "Quick reference for Microsoft Fabric — from OneLake and Data Factory to Lakehouses, Warehouses, Real-Time Analytics, Power BI integration, and governance.",
+  "color": "6B4EFF",
+  "categories": [
+    {
+      "category": "Core Components",
+      "items": [
+        {
+          "name": "Microsoft Fabric",
+          "syntax": "fabric.microsoft.com",
+          "definition": "An end-to-end analytics SaaS platform that unifies data engineering, data integration, data warehousing, data science, real-time analytics, and business intelligence in a single environment."
+        },
+        {
+          "name": "OneLake",
+          "syntax": "Built-in unified data lake",
+          "definition": "Fabric’s central storage layer. OneLake stores all organizational data in open formats and provides a single source of truth across Fabric workloads."
+        },
+        {
+          "name": "Lakehouse",
+          "syntax": "Workspace → New → Lakehouse",
+          "definition": "Combines data lake flexibility with warehouse-style structure. Stores files and Delta tables for analytics, notebooks, SQL queries, and Power BI reporting."
+        },
+        {
+          "name": "Warehouse",
+          "syntax": "Workspace → New → Warehouse",
+          "definition": "A fully managed SQL-based analytics warehouse optimized for structured relational querying and reporting workloads."
+        },
+        {
+          "name": "Data Factory",
+          "syntax": "Data Factory experience",
+          "definition": "Fabric’s data integration layer for creating pipelines, orchestrating data movement, and scheduling transformations across multiple systems."
+        },
+        {
+          "name": "Real-Time Analytics",
+          "syntax": "Eventstream / KQL Database",
+          "definition": "Handles streaming and high-frequency telemetry data using Kusto Query Language (KQL) for fast querying and monitoring."
+        },
+        {
+          "name": "Power BI",
+          "syntax": "Integrated within Fabric",
+          "definition": "Provides visualization, semantic modeling, dashboards, and enterprise reporting capabilities directly within Fabric workspaces."
+        }
+      ]
+    },
+    {
+      "category": "Workspaces & Storage",
+      "items": [
+        {
+          "name": "Workspace",
+          "syntax": "Fabric portal → Workspaces",
+          "definition": "Logical container for organizing Fabric assets such as Lakehouses, Warehouses, Pipelines, Reports, and Notebooks."
+        },
+        {
+          "name": "Capacity",
+          "syntax": "F SKU (F2, F4, F64, etc.)",
+          "definition": "Dedicated compute resources assigned to Fabric workloads. Determines performance, concurrency, and feature availability."
+        },
+        {
+          "name": "Shortcuts",
+          "syntax": "Lakehouse → New Shortcut",
+          "definition": "Creates virtual references to external storage locations without copying the data into OneLake."
+        },
+        {
+          "name": "Delta Tables",
+          "syntax": "Tables stored in Delta format",
+          "definition": "Transactional storage format supporting ACID compliance, schema evolution, and scalable analytics."
+        },
+        {
+          "name": "Files Section",
+          "syntax": "Lakehouse → Files",
+          "definition": "Stores raw and semi-structured files such as CSV, JSON, Parquet, and text files before transformation."
+        },
+        {
+          "name": "Tables Section",
+          "syntax": "Lakehouse → Tables",
+          "definition": "Contains structured Delta tables optimized for SQL analytics and Power BI consumption."
+        }
+      ]
+    },
+    {
+      "category": "Data Engineering",
+      "items": [
+        {
+          "name": "Notebook",
+          "syntax": "Workspace → New → Notebook",
+          "definition": "Interactive Spark-based environment supporting Python, SQL, Scala, and Spark operations for large-scale data engineering."
+        },
+        {
+          "name": "Apache Spark",
+          "syntax": "Spark runtime in Fabric",
+          "definition": "Distributed processing engine used for large-scale transformations, machine learning, and notebook execution."
+        },
+        {
+          "name": "PySpark",
+          "syntax": "Python API for Spark",
+          "definition": "Allows scalable distributed data processing using Python syntax within Fabric notebooks."
+        },
+        {
+          "name": "DataFrame",
+          "syntax": "spark.read.format(...)",
+          "definition": "Distributed tabular data structure used in Spark for transformations, filtering, aggregation, and joins."
+        },
+        {
+          "name": "Save as Table",
+          "syntax": "df.write.saveAsTable()",
+          "definition": "Writes Spark DataFrame results directly into a managed Lakehouse Delta table."
+        },
+        {
+          "name": "Semantic Link",
+          "syntax": "Semantic model integration",
+          "definition": "Enables notebooks and machine learning workloads to directly interact with Power BI semantic models."
+        }
+      ]
+    },
+    {
+      "category": "Data Factory & Pipelines",
+      "items": [
+        {
+          "name": "Pipeline",
+          "syntax": "Data Factory → New Pipeline",
+          "definition": "Workflow orchestration engine used to automate ingestion, transformation, and movement of data."
+        },
+        {
+          "name": "Copy Activity",
+          "syntax": "Pipeline → Copy Data",
+          "definition": "Moves data from source systems into Fabric destinations such as Lakehouses and Warehouses."
+        },
+        {
+          "name": "Dataflow Gen2",
+          "syntax": "New → Dataflow Gen2",
+          "definition": "Modern Power Query-based ETL tool inside Fabric that supports scalable cloud-native transformations."
+        },
+        {
+          "name": "Schedule Pipeline",
+          "syntax": "Pipeline → Schedule",
+          "definition": "Configures recurring execution of data workflows at specified intervals."
+        },
+        {
+          "name": "Parameters",
+          "syntax": "Pipeline → Parameters",
+          "definition": "Dynamic values passed into pipeline activities for reusable and configurable workflows."
+        },
+        {
+          "name": "Monitor Hub",
+          "syntax": "Fabric → Monitor",
+          "definition": "Centralized interface for viewing execution history, failures, durations, and refresh status across Fabric workloads."
+        }
+      ]
+    },
+    {
+      "category": "SQL & Warehousing",
+      "items": [
+        {
+          "name": "SQL Endpoint",
+          "syntax": "Lakehouse → SQL analytics endpoint",
+          "definition": "Automatically generated SQL interface that enables T-SQL querying against Lakehouse tables."
+        },
+        {
+          "name": "T-SQL",
+          "syntax": "SELECT * FROM table_name",
+          "definition": "Primary SQL dialect used in Fabric Warehouses and SQL Endpoints for querying and transformations."
+        },
+        {
+          "name": "Stored Procedure",
+          "syntax": "CREATE PROCEDURE",
+          "definition": "Reusable SQL routines that encapsulate logic and automate database operations."
+        },
+        {
+          "name": "View",
+          "syntax": "CREATE VIEW",
+          "definition": "Virtual table defined by a SQL query to simplify reporting and abstract complexity."
+        },
+        {
+          "name": "CTAS",
+          "syntax": "CREATE TABLE AS SELECT",
+          "definition": "Creates a new table from the output of a SQL query. Common for staging and transformations."
+        },
+        {
+          "name": "Star Schema",
+          "syntax": "Fact + Dimension tables",
+          "definition": "Recommended modeling pattern for analytics workloads. Optimizes performance and simplifies reporting."
+        }
+      ]
+    },
+    {
+      "category": "Real-Time Analytics",
+      "items": [
+        {
+          "name": "Eventstream",
+          "syntax": "Real-Time Analytics → Eventstream",
+          "definition": "Captures and routes streaming data from sources such as IoT devices, applications, and logs."
+        },
+        {
+          "name": "KQL Database",
+          "syntax": "New → KQL Database",
+          "definition": "High-performance analytics engine optimized for log analytics, telemetry, and time-series workloads."
+        },
+        {
+          "name": "Kusto Query Language (KQL)",
+          "syntax": "StormEvents | take 10",
+          "definition": "Read-optimized query language designed for fast filtering, aggregation, and analytics on streaming data."
+        },
+        {
+          "name": "Real-Time Dashboard",
+          "syntax": "KQL Dashboard",
+          "definition": "Interactive dashboard for monitoring live streaming data and operational metrics."
+        },
+        {
+          "name": "Streaming Data",
+          "syntax": "Continuous ingestion",
+          "definition": "Data arriving continuously in near real time from devices, APIs, sensors, or applications."
+        }
+      ]
+    },
+    {
+      "category": "Power BI Integration",
+      "items": [
+        {
+          "name": "Semantic Model",
+          "syntax": "Dataset layer in Fabric",
+          "definition": "Business-friendly data model used for Power BI reporting, DAX calculations, and reusable analytics."
+        },
+        {
+          "name": "Direct Lake",
+          "syntax": "Direct access to OneLake",
+          "definition": "High-performance mode allowing Power BI to query Delta tables directly from OneLake without import refreshes."
+        },
+        {
+          "name": "Import Mode",
+          "syntax": "Cached dataset",
+          "definition": "Loads data into memory for fast query performance. Requires scheduled refresh to stay current."
+        },
+        {
+          "name": "DAX",
+          "syntax": "Measures and calculated columns",
+          "definition": "Expression language used for calculations and analytics in Power BI semantic models."
+        },
+        {
+          "name": "Report",
+          "syntax": "Power BI Report",
+          "definition": "Interactive analytical canvas containing charts, filters, KPIs, and drill-through capabilities."
+        },
+        {
+          "name": "Dashboard",
+          "syntax": "Pinned report visuals",
+          "definition": "High-level monitoring interface created from pinned report visuals and KPIs."
+        }
+      ]
+    },
+    {
+      "category": "Security & Governance",
+      "items": [
+        {
+          "name": "Microsoft Purview",
+          "syntax": "Governance integration",
+          "definition": "Provides data cataloging, lineage, sensitivity labels, and governance across Fabric assets."
+        },
+        {
+          "name": "Row-Level Security (RLS)",
+          "syntax": "Manage Roles",
+          "definition": "Restricts access to specific rows of data based on the logged-in user."
+        },
+        {
+          "name": "Sensitivity Labels",
+          "syntax": "Confidential / Highly Confidential",
+          "definition": "Classifies and protects sensitive organizational data across Fabric and Microsoft 365."
+        },
+        {
+          "name": "Data Lineage",
+          "syntax": "Workspace lineage view",
+          "definition": "Tracks upstream and downstream dependencies between datasets, reports, pipelines, and tables."
+        },
+        {
+          "name": "Workspace Roles",
+          "syntax": "Admin / Member / Contributor / Viewer",
+          "definition": "Controls permissions and collaboration capabilities within Fabric workspaces."
+        }
+      ]
+    },
+    {
+      "category": "Best Practices",
+      "items": [
+        {
+          "name": "Use Medallion Architecture",
+          "syntax": "Bronze → Silver → Gold",
+          "definition": "Layer raw, cleaned, and business-ready data into separate stages for maintainability and governance."
+        },
+        {
+          "name": "Optimize Delta Tables",
+          "syntax": "VACUUM / OPTIMIZE",
+          "definition": "Maintain Delta table performance by compacting files and cleaning obsolete data."
+        },
+        {
+          "name": "Separate Storage & Compute",
+          "syntax": "OneLake + Capacity",
+          "definition": "Use OneLake for centralized storage while scaling compute independently using Fabric capacities."
+        },
+        {
+          "name": "Prefer Direct Lake",
+          "syntax": "Power BI Direct Lake mode",
+          "definition": "Reduces refresh overhead and improves report performance by querying OneLake directly."
+        },
+        {
+          "name": "Implement Naming Standards",
+          "syntax": "Consistent table/report naming",
+          "definition": "Use structured naming conventions for workspaces, tables, pipelines, and reports to improve governance."
+        }
+      ]
+    }
+  ]
+}
