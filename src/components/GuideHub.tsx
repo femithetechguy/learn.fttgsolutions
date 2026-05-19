@@ -273,6 +273,21 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
     return () => clearTimeout(timerId)
   }, [scrollTick])
 
+  useEffect(() => {
+    const container = contentRef.current
+    if (!container) return
+    const handler = async (e: MouseEvent) => {
+      const btn = (e.target as Element).closest<HTMLButtonElement>('.copy-code-btn')
+      if (!btn) return
+      const code = btn.nextElementSibling?.querySelector('code')?.textContent ?? ''
+      btn.classList.add('copied')
+      setTimeout(() => btn.classList.remove('copied'), 2000)
+      try { await navigator.clipboard.writeText(code) } catch { /* insecure context */ }
+    }
+    container.addEventListener('click', handler)
+    return () => container.removeEventListener('click', handler)
+  }, [])
+
   /* Called as functions, NOT as <Component /> — avoids remount */
   const renderSearch = () => (
     <div className="p-3 border-b border-white/8 flex-shrink-0">
