@@ -14,6 +14,7 @@ import {
   siVuedotjs, siVite, siVitest, siTrpc, siSupabase, siZod,
   siFastapi, siPnpm, siTurborepo, siStorybook,
   siPostcss, siLucide, siEslint, siHono, siRailway, siSimpleicons,
+  siAlgolia,
 } from 'simple-icons'
 
 export const SI_MAP: Record<string, SimpleIcon> = {
@@ -92,6 +93,7 @@ export const SI_MAP: Record<string, SimpleIcon> = {
   hono:           siHono,
   railway:        siRailway,
   simpleicons:    siSimpleicons,
+  algolia:        siAlgolia,
 }
 
 // Brand icons absent from simple-icons (trademark/removal)

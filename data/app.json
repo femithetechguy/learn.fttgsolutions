@@ -95,8 +95,8 @@
       "courses": "COURSES",
       "coursesUrl": "/courses",
       "coursesIcon": "BookOpen",
-      "articles": "ARTICLES",
-      "articlesUrl": "/articles",
+      "articles": "GUIDES",
+      "articlesUrl": "/guides",
       "articlesIcon": "FileText",
       "resources": "RESOURCES",
       "resourcesUrl": "/resources",
@@ -160,8 +160,8 @@
   },
 
   "articles": {
-    "title": "Articles",
-    "subtitle": "Insights, walkthroughs, and builder wisdom from the FTTG crew."
+    "title": "Guides",
+    "subtitle": "Deep-dives, walkthroughs, and interview prep from the FTTG crew."
   },
 
   "resources": {
@@ -241,7 +241,7 @@
       "heading": "Quick Links",
       "links": [
         { "label": "Courses",   "href": "/courses", "external": false },
-        { "label": "Articles",  "href": "/articles", "external": false },
+        { "label": "Guides",    "href": "/guides",   "external": false },
         { "label": "Main Site", "href": "https://www.fttgsolutions.com",            "external": true  }
       ]
     },

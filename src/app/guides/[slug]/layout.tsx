@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { ARTICLES } from '@/lib/articles'
+import { GUIDES } from '@/lib/guides'
 
 const PILLAR_COLORS: Record<string, string> = {
   'data-bi':    '#1D9E75',
@@ -10,12 +10,12 @@ const PILLAR_COLORS: Record<string, string> = {
 export async function generateMetadata(
   { params }: { params: { slug: string } }
 ): Promise<Metadata> {
-  const article = ARTICLES.find(a => a.slug === params.slug)
-  if (!article) return {}
+  const guide = GUIDES.find(g => g.slug === params.slug)
+  if (!guide) return {}
 
-  const { title, subtitle } = article
+  const { title, subtitle } = guide
   const pageTitle = `${title} — FTTG Learn`
-  const imageUrl  = `/articles/${params.slug}/opengraph-image`
+  const imageUrl  = `/guides/${params.slug}/opengraph-image`
 
   return {
     title: pageTitle,
@@ -35,6 +35,6 @@ export async function generateMetadata(
   }
 }
 
-export default function ArticleSlugLayout({ children }: { children: React.ReactNode }) {
+export default function GuideSlugLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }

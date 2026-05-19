@@ -4,8 +4,8 @@ import path from 'path'
 import { marked } from 'marked'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import ArticlePrintTrigger from '@/components/ArticlePrintTrigger'
-import { ARTICLES } from '@/lib/articles'
+import GuidePrintTrigger from '@/components/GuidePrintTrigger'
+import { GUIDES } from '@/lib/guides'
 
 const PILLAR_META: Record<string, { label: string; color: string }> = {
   'data-bi':    { label: 'Data & BI',  color: '#1D9E75' },
@@ -17,15 +17,15 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-export default function ArticlePrintPage({ params }: { params: { slug: string } }) {
-  const article = ARTICLES.find(a => a.slug === params.slug)
-  if (!article) notFound()
+export default function GuidePrintPage({ params }: { params: { slug: string } }) {
+  const guide = GUIDES.find(g => g.slug === params.slug)
+  if (!guide) notFound()
 
-  const filePath = path.join(process.cwd(), 'data', article.src)
+  const filePath = path.join(process.cwd(), 'data', guide.src)
   const markdown = fs.readFileSync(filePath, 'utf-8')
   const html     = marked.parse(markdown) as string
 
-  const meta  = PILLAR_META[article.pillar]
+  const meta  = PILLAR_META[guide.pillar]
   const color = meta?.color ?? '#888'
 
   return (
@@ -62,28 +62,28 @@ export default function ArticlePrintPage({ params }: { params: { slug: string } 
         {/* Toolbar — screen only */}
         <div className="no-print mb-6 flex items-center justify-between">
           <Link
-            href={`/articles/${params.slug}`}
+            href={`/guides/${params.slug}`}
             className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-black transition-colors"
           >
             <ArrowLeft size={14} />
-            Back to article
+            Back to guide
           </Link>
-          <ArticlePrintTrigger />
+          <GuidePrintTrigger />
         </div>
 
-        {/* Article header */}
+        {/* Guide header */}
         <div className="mb-4 pb-3 border-b-2 border-black">
           <p className="text-[9px] uppercase tracking-widest font-bold" style={{ color }}>
             learn.fttgsolutions.com · {meta?.label}
           </p>
-          <h1 className="text-2xl font-bold leading-tight text-black mt-1">{article.title}</h1>
-          <p className="text-gray-500 text-sm mt-0.5">{article.subtitle}</p>
+          <h1 className="text-2xl font-bold leading-tight text-black mt-1">{guide.title}</h1>
+          <p className="text-gray-500 text-sm mt-0.5">{guide.subtitle}</p>
           <p className="text-gray-400 text-xs mt-1">
-            {article.author && <>{article.author} · </>}{formatDate(article.date)} · {article.readTime} min read
+            {guide.author && <>{guide.author} · </>}{formatDate(guide.date)} · {guide.readTime} min read
           </p>
         </div>
 
-        {/* Article body */}
+        {/* Guide body */}
         <div
           className="print-body"
           dangerouslySetInnerHTML={{ __html: html }}

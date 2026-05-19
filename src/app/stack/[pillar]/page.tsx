@@ -142,6 +142,7 @@ export default function StackPillarPage() {
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Search tools…"
                 className="w-full sm:w-56 bg-bg-elevated border border-white/10 rounded-sm pl-8 pr-8 py-2 font-sans text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-white/25 transition-colors duration-150"
+                style={{ fontSize: '16px' }}
               />
               {query && (
                 <button
