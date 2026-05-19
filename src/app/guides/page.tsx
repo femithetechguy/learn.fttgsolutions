@@ -4,6 +4,7 @@ import { marked } from 'marked'
 import Nav from '@/components/Nav'
 import GuideHub, { type TocItem } from '@/components/GuideHub'
 import { GUIDES } from '@/lib/guides'
+import content from '@/lib/content'
 
 function slugify(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
@@ -44,8 +45,27 @@ export default function GuidesPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-bg-primary overflow-hidden">
+    <div className="h-screen flex flex-col bg-bg-primary bg-grid overflow-hidden">
       <Nav />
+
+      {/* Hero */}
+      <div className="flex-shrink-0">
+        <div className="relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 sm:w-[600px] h-64 sm:h-[400px] bg-gold/5 blur-3xl rounded-full pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
+            <div className="animate-fade-in">
+              <h1 className="font-display text-4xl sm:text-5xl font-bold text-text-primary leading-tight">
+                {content.articles.title}
+              </h1>
+              <p className="font-sans text-text-secondary text-lg mt-3 max-w-xl">
+                {content.articles.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="gold-line mx-8" />
+      </div>
+
       <GuideHub guides={GUIDES} contents={contents} />
     </div>
   )
