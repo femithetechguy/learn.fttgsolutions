@@ -149,6 +149,18 @@
       "thumbnail": ""
     },
     {
+      "slug": "snowflake-cheat-sheet-guide",
+      "title": "Snowflake Cheat Sheet Guide",
+      "subtitle": "Quick reference for Snowflake — from virtual warehouses and data loading to Time Travel, cloning, streams, tasks, and access control.",
+      "pillar": "data-bi",
+      "date": "2026-05-19",
+      "readTime": 11,
+      "src": "guides/snowflake-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
       "slug": "ms-fabric-cheat-sheet-guide",
       "title": "Microsoft Fabric Cheat Sheet Guide",
       "subtitle": "Quick reference for Microsoft Fabric — from OneLake and Data Factory to Lakehouses, Warehouses, Real-Time Analytics, Power BI integration, and governance.",
