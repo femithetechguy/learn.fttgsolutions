@@ -1,0 +1,105 @@
+{
+  "label": "Snowflake",
+  "headline": "Snowflake Cheat Sheet",
+  "tagline": "Load. Query. Scale. Share.",
+  "description": "Quick reference for Snowflake — from virtual warehouses and data loading to Time Travel, cloning, streams, tasks, and access control.",
+  "color": "29B5E8",
+  "categories": [
+    {
+      "category": "Virtual Warehouses",
+      "items": [
+        { "name": "CREATE WAREHOUSE", "syntax": "CREATE WAREHOUSE my_wh\n  WAREHOUSE_SIZE = 'MEDIUM'\n  AUTO_SUSPEND = 300\n  AUTO_RESUME = TRUE;", "definition": "Create a virtual warehouse (compute cluster). AUTO_SUSPEND pauses it after inactivity; AUTO_RESUME starts it automatically on query." },
+        { "name": "ALTER WAREHOUSE", "syntax": "ALTER WAREHOUSE my_wh SET WAREHOUSE_SIZE = 'LARGE';", "definition": "Resize a warehouse on the fly with no downtime. Billing switches to the new size immediately." },
+        { "name": "SUSPEND / RESUME", "syntax": "ALTER WAREHOUSE my_wh SUSPEND;\nALTER WAREHOUSE my_wh RESUME;", "definition": "Manually pause or start a warehouse to control costs." },
+        { "name": "USE WAREHOUSE", "syntax": "USE WAREHOUSE my_wh;", "definition": "Set the active warehouse for the current session." },
+        { "name": "SHOW WAREHOUSES", "syntax": "SHOW WAREHOUSES;", "definition": "List all warehouses and their current state, size, and credit usage." }
+      ]
+    },
+    {
+      "category": "Databases & Schemas",
+      "items": [
+        { "name": "CREATE DATABASE", "syntax": "CREATE DATABASE my_db;", "definition": "Create a top-level namespace that contains schemas and all their objects." },
+        { "name": "CREATE SCHEMA", "syntax": "CREATE SCHEMA my_db.my_schema;", "definition": "Create a logical grouping inside a database for tables, views, and other objects." },
+        { "name": "USE DATABASE / SCHEMA", "syntax": "USE DATABASE my_db;\nUSE SCHEMA my_schema;", "definition": "Set the active database and schema for the session so you can omit them from object names." },
+        { "name": "SHOW DATABASES", "syntax": "SHOW DATABASES;\nSHOW SCHEMAS;\nSHOW TABLES;", "definition": "List all objects at each level. Add LIKE 'pattern%' to filter results." }
+      ]
+    },
+    {
+      "category": "Querying",
+      "items": [
+        { "name": "Basic SELECT", "syntax": "SELECT col1, col2\nFROM my_schema.my_table\nWHERE col1 = 'value'\nORDER BY col2 DESC\nLIMIT 100;", "definition": "Standard SQL SELECT with filtering, ordering, and row limiting." },
+        { "name": "QUALIFY", "syntax": "SELECT *\nFROM sales\nQUALIFY ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY sale_date DESC) = 1;", "definition": "Snowflake extension to filter window function results inline — no subquery needed." },
+        { "name": "SAMPLE", "syntax": "SELECT * FROM orders SAMPLE (10);", "definition": "Return an approximate random sample — 10% of rows. Use SAMPLE (100 ROWS) for a fixed row count." },
+        { "name": "PIVOT", "syntax": "SELECT *\nFROM monthly_sales\nPIVOT (SUM(amount) FOR month IN ('Jan','Feb','Mar'));", "definition": "Rotate rows into columns — turn category values into column headers with aggregated values." },
+        { "name": "UNPIVOT", "syntax": "SELECT *\nFROM quarterly_totals\nUNPIVOT (revenue FOR quarter IN (q1, q2, q3, q4));", "definition": "Rotate columns back into rows — the reverse of PIVOT." },
+        { "name": "Result Cache", "syntax": "-- Automatic — same query within 24h returns cached results instantly\nALTER SESSION SET USE_CACHED_RESULT = FALSE; -- disable", "definition": "Snowflake caches query results for 24 hours. Identical queries cost zero compute credits." }
+      ]
+    },
+    {
+      "category": "Data Loading",
+      "items": [
+        { "name": "CREATE STAGE", "syntax": "-- Internal stage\nCREATE STAGE my_stage;\n\n-- External (S3)\nCREATE STAGE s3_stage\n  URL = 's3://my-bucket/data/'\n  CREDENTIALS = (AWS_KEY_ID='...' AWS_SECRET_KEY='...');", "definition": "A stage is a landing area for files before they are loaded into tables. Internal stages live inside Snowflake; external stages point to cloud storage." },
+        { "name": "PUT (upload file)", "syntax": "PUT file:///local/path/data.csv @my_stage;", "definition": "Upload a local file to an internal Snowflake stage using SnowSQL CLI." },
+        { "name": "COPY INTO (load)", "syntax": "COPY INTO my_table\nFROM @my_stage/data.csv\nFILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1\n               FIELD_OPTIONALLY_ENCLOSED_BY = '\"');", "definition": "Bulk-load staged files into a table. Snowflake tracks loaded files and skips duplicates by default." },
+        { "name": "COPY INTO (unload)", "syntax": "COPY INTO @my_stage/export/\nFROM my_table\nFILE_FORMAT = (TYPE = 'PARQUET');", "definition": "Export query results or table data out to a stage as files." },
+        { "name": "Snowpipe", "syntax": "CREATE PIPE my_pipe AS\n  COPY INTO my_table FROM @my_stage\n  FILE_FORMAT = (TYPE = 'JSON');", "definition": "Continuous micro-batch loading. Snowpipe ingests new files automatically as they land in a stage." }
+      ]
+    },
+    {
+      "category": "Semi-Structured Data",
+      "items": [
+        { "name": "VARIANT type", "syntax": "CREATE TABLE events (\n  id INT,\n  payload VARIANT\n);", "definition": "VARIANT stores any JSON, Avro, Parquet, or XML data natively. Snowflake auto-optimises the internal encoding." },
+        { "name": "Parse JSON", "syntax": "SELECT PARSE_JSON('{\"name\":\"Alex\"}'):name::STRING;", "definition": "PARSE_JSON converts a string to VARIANT. Use colon notation to extract fields, then cast with ::TYPE." },
+        { "name": "Dot / colon notation", "syntax": "SELECT payload:user.email::STRING AS email\nFROM events;", "definition": "Navigate nested JSON using colon (:) for top-level keys and dot (.) for nested keys." },
+        { "name": "FLATTEN", "syntax": "SELECT f.value::STRING AS tag\nFROM events,\nLATERAL FLATTEN(INPUT => payload:tags) f;", "definition": "Explode a JSON array into individual rows — one row per array element." },
+        { "name": "OBJECT_CONSTRUCT", "syntax": "SELECT OBJECT_CONSTRUCT('name', first_name, 'age', age)\nFROM users;", "definition": "Build a JSON object from key-value pairs on the fly." },
+        { "name": "ARRAY_AGG", "syntax": "SELECT user_id, ARRAY_AGG(order_id) AS orders\nFROM orders GROUP BY user_id;", "definition": "Aggregate multiple rows into a JSON array — the inverse of FLATTEN." }
+      ]
+    },
+    {
+      "category": "Time Travel",
+      "items": [
+        { "name": "Query past data", "syntax": "-- By timestamp\nSELECT * FROM orders\nAT (TIMESTAMP => '2024-01-01 12:00:00'::TIMESTAMP);\n\n-- By offset (seconds ago)\nSELECT * FROM orders\nBEFORE (OFFSET => -3600);", "definition": "Query historical table state up to 90 days back (Enterprise tier). Default retention is 1 day." },
+        { "name": "UNDROP", "syntax": "UNDROP TABLE orders;\nUNDROP SCHEMA my_schema;\nUNDROP DATABASE my_db;", "definition": "Restore a dropped table, schema, or database within the Time Travel retention window." },
+        { "name": "Set retention period", "syntax": "ALTER TABLE orders SET DATA_RETENTION_TIME_IN_DAYS = 30;", "definition": "Override the default retention period per object. Max 90 days on Enterprise tier." }
+      ]
+    },
+    {
+      "category": "Cloning",
+      "items": [
+        { "name": "CLONE table", "syntax": "CREATE TABLE orders_backup\n  CLONE orders;", "definition": "Zero-copy clone — creates an independent copy that shares storage with the original until data diverges. Instant and free." },
+        { "name": "CLONE database", "syntax": "CREATE DATABASE prod_clone\n  CLONE production;", "definition": "Clone an entire database including all schemas, tables, and views. Great for staging environments." },
+        { "name": "Clone at point in time", "syntax": "CREATE TABLE orders_jan\n  CLONE orders\n  BEFORE (TIMESTAMP => '2024-02-01'::TIMESTAMP);", "definition": "Clone a historical snapshot by combining cloning with Time Travel." }
+      ]
+    },
+    {
+      "category": "Streams & Tasks",
+      "items": [
+        { "name": "CREATE STREAM", "syntax": "CREATE STREAM orders_stream ON TABLE orders;", "definition": "A stream tracks INSERT, UPDATE, and DELETE changes to a table (CDC). Query it like a table — consumed rows are cleared after a DML transaction." },
+        { "name": "Query a stream", "syntax": "SELECT *,\n  METADATA$ACTION,\n  METADATA$ISUPDATE\nFROM orders_stream\nWHERE METADATA$ACTION = 'INSERT';", "definition": "Streams expose METADATA$ACTION (INSERT/DELETE) and METADATA$ISUPDATE to distinguish updates from deletes." },
+        { "name": "CREATE TASK", "syntax": "CREATE TASK sync_task\n  WAREHOUSE = my_wh\n  SCHEDULE = 'USING CRON 0 * * * * UTC'\nAS\n  INSERT INTO summary\n  SELECT * FROM orders_stream WHERE METADATA$ACTION = 'INSERT';", "definition": "Tasks run SQL on a schedule or when triggered. Chain tasks together with AFTER to build pipelines." },
+        { "name": "EXECUTE TASK", "syntax": "EXECUTE TASK sync_task;", "definition": "Manually trigger a task immediately, outside its schedule." }
+      ]
+    },
+    {
+      "category": "Access Control",
+      "items": [
+        { "name": "CREATE ROLE", "syntax": "CREATE ROLE analyst;\nGRANT ROLE analyst TO USER alice;", "definition": "Snowflake uses role-based access control (RBAC). Users are granted roles; roles are granted privileges." },
+        { "name": "GRANT privilege", "syntax": "GRANT USAGE ON DATABASE my_db TO ROLE analyst;\nGRANT SELECT ON ALL TABLES IN SCHEMA my_schema TO ROLE analyst;", "definition": "Grant specific privileges on objects to a role. Always grant USAGE on parent objects before object-level access." },
+        { "name": "REVOKE", "syntax": "REVOKE SELECT ON TABLE orders FROM ROLE analyst;", "definition": "Remove a previously granted privilege from a role." },
+        { "name": "USE ROLE", "syntax": "USE ROLE analyst;", "definition": "Switch the active role for the current session." },
+        { "name": "Row-level security", "syntax": "CREATE ROW ACCESS POLICY region_policy AS\n  (region STRING) RETURNS BOOLEAN ->\n  region = CURRENT_ROLE();\n\nALTER TABLE sales ADD ROW ACCESS POLICY region_policy ON (region);", "definition": "Filter rows at query time based on the current user's role or attributes — enforced automatically." }
+      ]
+    },
+    {
+      "category": "Performance & Optimisation",
+      "items": [
+        { "name": "Clustering keys", "syntax": "ALTER TABLE orders CLUSTER BY (order_date, region);", "definition": "Define a clustering key to co-locate similar data in micro-partitions. Improves pruning for range and equality filters on large tables." },
+        { "name": "EXPLAIN", "syntax": "EXPLAIN SELECT * FROM orders WHERE region = 'EU';", "definition": "Show the logical query plan without executing it. Use Query Profile in the UI for full execution details." },
+        { "name": "Query Profile", "syntax": "-- Run query, then: History → select query → Query Profile", "definition": "Visual breakdown of query execution — shows partition pruning, spill to disk, and bottleneck operators." },
+        { "name": "Materialized view", "syntax": "CREATE MATERIALIZED VIEW mv_daily_sales AS\n  SELECT date, SUM(amount) AS total\n  FROM orders GROUP BY date;", "definition": "Pre-compute and cache expensive aggregations. Snowflake auto-refreshes the view as base data changes." },
+        { "name": "Search optimisation", "syntax": "ALTER TABLE events ADD SEARCH OPTIMIZATION;", "definition": "Accelerates point lookup queries on large tables — useful for selective filters on non-clustered columns." }
+      ]
+    }
+  ]
+}
