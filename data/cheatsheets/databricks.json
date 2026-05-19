@@ -1,0 +1,87 @@
+{
+  "label": "Databricks",
+  "headline": "Databricks Cheat Sheet",
+  "tagline": "Unify. Engineer. Analyse.",
+  "description": "Quick reference for Databricks — from Delta Lake and PySpark DataFrames to Unity Catalog, MLflow, magic commands, and cluster configuration.",
+  "color": "FF3621",
+  "categories": [
+    {
+      "category": "Magic Commands",
+      "items": [
+        { "name": "%sql", "syntax": "%sql\nSELECT * FROM my_catalog.my_schema.orders LIMIT 10;", "definition": "Run a SQL cell in any notebook language context. Results display as a table automatically." },
+        { "name": "%python / %scala / %r", "syntax": "%python\ndf = spark.table('orders')\ndf.show(5)", "definition": "Switch the language of a single cell, overriding the notebook default." },
+        { "name": "%fs", "syntax": "%fs ls /mnt/my-storage/\n%fs mkdirs /mnt/my-storage/output/\n%fs rm -r /mnt/my-storage/tmp/", "definition": "Run Databricks File System (DBFS) commands. Shorthand for dbutils.fs calls." },
+        { "name": "%sh", "syntax": "%sh\npip install great_expectations\ncat /etc/hosts", "definition": "Execute shell commands on the driver node. Changes are local to the driver and not persisted across restarts." },
+        { "name": "%run", "syntax": "%run ./utils/helpers", "definition": "Execute another notebook inline — variables and functions defined there become available in the current notebook." },
+        { "name": "%md", "syntax": "## Section Title\nExplain what this cell does.", "definition": "Render Markdown in the notebook for documentation. Supports headers, bold, code blocks, and tables." }
+      ]
+    },
+    {
+      "category": "Delta Lake",
+      "items": [
+        { "name": "CREATE TABLE (Delta)", "syntax": "CREATE TABLE my_catalog.my_schema.orders (\n  order_id BIGINT,\n  customer_id BIGINT,\n  amount DOUBLE,\n  order_date DATE\n)\nUSING DELTA\nLOCATION 'abfss://container@storage.dfs.core.windows.net/orders/';", "definition": "Create a managed or external Delta table. Delta is the default format in Databricks — ACID transactions, versioning, and schema enforcement built in." },
+        { "name": "MERGE INTO (upsert)", "syntax": "MERGE INTO orders AS target\nUSING updates AS source\nON target.order_id = source.order_id\nWHEN MATCHED THEN UPDATE SET *\nWHEN NOT MATCHED THEN INSERT *;", "definition": "Upsert — update matching rows and insert new ones atomically. The most common CDC pattern in Delta Lake." },
+        { "name": "Time Travel", "syntax": "-- By version\nSELECT * FROM orders VERSION AS OF 5;\n\n-- By timestamp\nSELECT * FROM orders\nTIMESTAMP AS OF '2024-01-01';", "definition": "Query any previous version of a Delta table. History is retained until VACUUM removes old files." },
+        { "name": "DESCRIBE HISTORY", "syntax": "DESCRIBE HISTORY orders;", "definition": "Show all versions of a Delta table — who changed it, when, and what operation was run." },
+        { "name": "OPTIMIZE", "syntax": "OPTIMIZE orders;\nOPTIMIZE orders ZORDER BY (customer_id, order_date);", "definition": "Compact small files into larger ones to improve read performance. ZORDER co-locates related data for faster filtering." },
+        { "name": "VACUUM", "syntax": "VACUUM orders RETAIN 168 HOURS;", "definition": "Remove old data files no longer referenced by any table version. Default retention is 7 days (168 hours). Do not set below 7 days with concurrent reads." },
+        { "name": "RESTORE", "syntax": "RESTORE TABLE orders TO VERSION AS OF 3;\nRESTORE TABLE orders TO TIMESTAMP AS OF '2024-01-15';", "definition": "Roll back a Delta table to a previous version. Creates a new entry in the table history." }
+      ]
+    },
+    {
+      "category": "PySpark DataFrames",
+      "items": [
+        { "name": "Read data", "syntax": "df = spark.read.format('delta').load('/mnt/data/orders')\ndf = spark.read.csv('/mnt/data/file.csv', header=True, inferSchema=True)\ndf = spark.table('my_catalog.my_schema.orders')", "definition": "Load data into a DataFrame from Delta, CSV, Parquet, JSON, or any registered table." },
+        { "name": "Select & filter", "syntax": "from pyspark.sql.functions import col\n\ndf.select('order_id', 'amount') \\\n  .filter(col('amount') > 100) \\\n  .show(10)", "definition": "Chain select and filter transformations. Spark is lazy — nothing executes until an action like show() or write is called." },
+        { "name": "withColumn", "syntax": "from pyspark.sql.functions import col, lit, when\n\ndf = df.withColumn('tax', col('amount') * 0.2)\ndf = df.withColumn('tier', when(col('amount') > 500, 'high').otherwise('low'))", "definition": "Add or replace a column using an expression. Use when/otherwise for conditional logic." },
+        { "name": "GroupBy & aggregate", "syntax": "from pyspark.sql.functions import sum, avg, count\n\ndf.groupBy('region') \\\n  .agg(\n    sum('amount').alias('total'),\n    avg('amount').alias('avg'),\n    count('*').alias('orders')\n  ).show()", "definition": "Group rows and compute aggregates. Import functions from pyspark.sql.functions — not Python builtins." },
+        { "name": "Join", "syntax": "result = orders.join(customers, on='customer_id', how='left')", "definition": "Join two DataFrames. how can be 'inner', 'left', 'right', 'outer', 'semi', or 'anti'." },
+        { "name": "Window functions", "syntax": "from pyspark.sql.window import Window\nfrom pyspark.sql.functions import rank, lag\n\nw = Window.partitionBy('region').orderBy(col('amount').desc())\ndf = df.withColumn('rank', rank().over(w))", "definition": "Apply ranking, lag/lead, and running totals per partition without collapsing rows." },
+        { "name": "Write data", "syntax": "df.write \\\n  .format('delta') \\\n  .mode('overwrite')  # or 'append', 'merge'\n  .partitionBy('order_date') \\\n  .saveAsTable('my_catalog.my_schema.orders_out')", "definition": "Persist a DataFrame as a Delta table. Use partitionBy on high-cardinality filter columns to improve query pruning." }
+      ]
+    },
+    {
+      "category": "Spark SQL",
+      "items": [
+        { "name": "Run SQL", "syntax": "spark.sql('SELECT region, SUM(amount) FROM orders GROUP BY region').show()", "definition": "Execute SQL from Python using spark.sql(). Returns a DataFrame you can chain further transformations on." },
+        { "name": "Create temp view", "syntax": "df.createOrReplaceTempView('orders_view')\n# Use in SQL\nspark.sql('SELECT * FROM orders_view LIMIT 10').show()", "definition": "Register a DataFrame as a temporary SQL view scoped to the current Spark session." },
+        { "name": "CREATE TABLE AS SELECT", "syntax": "CREATE OR REPLACE TABLE my_schema.summary\nUSING DELTA AS\nSELECT region, SUM(amount) AS total\nFROM orders\nGROUP BY region;", "definition": "Create a new Delta table populated from a query result in one statement." }
+      ]
+    },
+    {
+      "category": "Unity Catalog",
+      "items": [
+        { "name": "Three-level namespace", "syntax": "-- catalog.schema.table\nSELECT * FROM my_catalog.sales.orders;", "definition": "Unity Catalog adds a catalog layer above schemas. All object references use the three-level format." },
+        { "name": "CREATE CATALOG", "syntax": "CREATE CATALOG IF NOT EXISTS prod_catalog\n  COMMENT 'Production data';", "definition": "Create a top-level catalog. Each workspace can access multiple catalogs governed by Unity Catalog." },
+        { "name": "GRANT privilege", "syntax": "GRANT SELECT ON TABLE my_catalog.sales.orders\n  TO `data-analysts-group`;\n\nGRANT USE CATALOG ON CATALOG my_catalog\n  TO `data-analysts-group`;", "definition": "Grant fine-grained access on catalogs, schemas, tables, or views. Always grant USE CATALOG and USE SCHEMA alongside object-level grants." },
+        { "name": "Data lineage", "syntax": "-- Automatic — view in Catalog Explorer UI\n-- Filter by table name → Lineage tab", "definition": "Unity Catalog automatically tracks column-level data lineage across notebooks, jobs, and SQL queries." }
+      ]
+    },
+    {
+      "category": "Clusters & Configuration",
+      "items": [
+        { "name": "Cluster types", "syntax": "All-purpose cluster  → interactive notebooks, shared\nJob cluster          → single job, auto-terminated\nSQL warehouse        → SQL analytics, BI tools", "definition": "All-purpose clusters are billed per hour and shared. Job clusters start fresh for each run and are cheaper for automated pipelines. SQL warehouses are optimised for SQL workloads." },
+        { "name": "Spark config (notebook)", "syntax": "spark.conf.set('spark.sql.shuffle.partitions', '200')\nspark.conf.get('spark.sql.shuffle.partitions')", "definition": "Override Spark settings at runtime. Lower shuffle partitions for small datasets (default 200 is too high for most cases)." },
+        { "name": "Adaptive Query Execution", "syntax": "-- Enabled by default in DBR 7.3+\nspark.conf.set('spark.sql.adaptive.enabled', 'true')", "definition": "AQE dynamically adjusts join strategies, coalesces small partitions, and handles skew at runtime." },
+        { "name": "dbutils.secrets", "syntax": "token = dbutils.secrets.get(scope='my-scope', key='api-token')", "definition": "Retrieve secrets from Databricks Secret Scopes (backed by Azure Key Vault or Databricks). Never hardcode credentials in notebooks." }
+      ]
+    },
+    {
+      "category": "MLflow",
+      "items": [
+        { "name": "Start a run", "syntax": "import mlflow\n\nwith mlflow.start_run():\n  mlflow.log_param('lr', 0.01)\n  mlflow.log_metric('accuracy', 0.95)\n  mlflow.sklearn.log_model(model, 'model')", "definition": "Log parameters, metrics, and artefacts to an MLflow experiment. Runs are tracked automatically in the Databricks UI." },
+        { "name": "Autologging", "syntax": "mlflow.autolog()  # before model.fit()\nmodel.fit(X_train, y_train)", "definition": "Automatically log parameters, metrics, and the model for supported frameworks (sklearn, XGBoost, PyTorch, etc.)." },
+        { "name": "Register model", "syntax": "mlflow.register_model(\n  model_uri='runs:/<run_id>/model',\n  name='my-churn-model'\n)", "definition": "Add a trained model to the MLflow Model Registry for versioning, staging, and production promotion." },
+        { "name": "Load model", "syntax": "model = mlflow.sklearn.load_model('models:/my-churn-model/Production')", "definition": "Load a registered model by name and stage. Swap stages without changing code." }
+      ]
+    },
+    {
+      "category": "Jobs & Workflows",
+      "items": [
+        { "name": "Create job (UI)", "syntax": "Workflows → Create Job → Add task\n  Task type: Notebook / Python script / dbt / SQL\n  Cluster: Job cluster (recommended)\n  Schedule: Cron or triggered", "definition": "Jobs orchestrate one or more tasks with dependencies, retries, and alerts. Use job clusters to keep costs predictable." },
+        { "name": "Task dependencies", "syntax": "Task A → Task B → Task C\n             ↘ Task D", "definition": "Define a DAG of tasks. A downstream task starts only when all its upstream tasks succeed." },
+        { "name": "dbutils.notebook.run", "syntax": "result = dbutils.notebook.run(\n  '/path/to/notebook',\n  timeout_seconds=300,\n  arguments={'env': 'prod', 'date': '2024-01-01'}\n)", "definition": "Run another notebook programmatically and pass parameters. Returns the value of dbutils.notebook.exit()." }
+      ]
+    }
+  ]
+}
