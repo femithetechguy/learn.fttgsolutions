@@ -291,7 +291,7 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
           }}
         />
         {query && (
-          <button onClick={() => setQuery('')} className="absolute right-2 top-1/2 -translate-y-1/2">
+          <button onClick={() => setQuery('')} className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center">
             <X size={11} style={{ color: 'rgba(255,255,255,0.4)' }} />
           </button>
         )}
@@ -366,10 +366,10 @@ export default function GuideHub({ guides, contents, initialSlug }: Props) {
       </div>
 
       {/* ── Main content area ── */}
-      <div ref={contentRef} className="flex-1 overflow-y-auto bg-bg-primary bg-grid">
+      <div ref={contentRef} className="flex-1 overflow-y-auto overflow-x-hidden bg-bg-primary bg-grid">
 
         {/* Mobile guide selector */}
-        <div className="lg:hidden sticky top-0 z-10 border-b border-white/8 bg-bg-primary">
+        <div className="lg:hidden sticky top-0 z-10 border-b border-white/8 bg-bg-primary overflow-hidden">
           {/* Search — always visible on mobile */}
           {renderSearch()}
           {/* Current guide + toggle */}
