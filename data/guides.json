@@ -173,6 +173,18 @@
       "thumbnail": ""
     },
     {
+      "slug": "data-warehouse-cheat-sheet-guide",
+      "title": "Data Warehouse Cheat Sheet Guide",
+      "subtitle": "Quick reference for data warehouse concepts — OLTP vs OLAP, dimensional modeling, star and snowflake schemas, SCD types, ETL/ELT patterns, OLAP operations, partitioning, data quality, and governance.",
+      "pillar": "data-bi",
+      "date": "2026-05-20",
+      "readTime": 18,
+      "src": "guides/data-warehouse-cheat-sheet-guide.md",
+      "author": "FTTG",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
       "slug": "ms-fabric-cheat-sheet-guide",
       "title": "Microsoft Fabric Cheat Sheet Guide",
       "subtitle": "Quick reference for Microsoft Fabric — from OneLake and Data Factory to Lakehouses, Warehouses, Real-Time Analytics, Power BI integration, and governance.",

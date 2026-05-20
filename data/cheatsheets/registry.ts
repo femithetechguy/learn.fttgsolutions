@@ -16,7 +16,8 @@ import json       from './json.json'
 import java       from './java.json'
 import javascript from './javascript.json'
 import aiPrompts  from './ai-prompts.json'
-import markdown   from './markdown.json'
+import markdown      from './markdown.json'
+import dataWarehouse from './data-warehouse.json'
 
 // To add a new cheat sheet:
 // 1. Drop a JSON file in this directory (same schema as the others)
@@ -41,7 +42,8 @@ export const SHEETS = [
   { key: 'java',       data: java       },
   { key: 'javascript', data: javascript },
   { key: 'ai-prompts', data: aiPrompts  },
-  { key: 'markdown',   data: markdown   },
+  { key: 'markdown',        data: markdown      },
+  { key: 'data-warehouse',  data: dataWarehouse },
 ] as const
 
 export type SheetKey  = typeof SHEETS[number]['key']
