@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { marked } from 'marked'
+import { marked } from '@/lib/marked-setup'
 import Nav from '@/components/Nav'
 import GuideHub, { type TocItem } from '@/components/GuideHub'
 import { GUIDES } from '@/lib/guides'
