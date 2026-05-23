@@ -93,7 +93,7 @@
       "tools": [
         { "name": "Jest",       "slug": "jest",    "color": "C21325", "definition": "JavaScript testing framework — write unit and integration tests with a simple, familiar API." },
         { "name": "Vitest",     "slug": "vitest",  "color": "00E274", "definition": "Fast unit test framework powered by Vite — drop-in Jest replacement with native ESM support." },
-        { "name": "Playwright", "slug": "",        "color": "2EAD33", "definition": "Browser automation and end-to-end testing — simulate real user interactions across all major browsers." }
+        { "name": "Playwright", "slug": "playwright", "color": "2EAD33", "definition": "Browser automation and end-to-end testing — simulate real user interactions across all major browsers." }
       ]
     },
     {

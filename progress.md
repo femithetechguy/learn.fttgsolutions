@@ -47,6 +47,7 @@ A Next.js 14 training platform hosted at `learn.fttgsolutions.com`, built as par
 - Tailwind CSS 3
 - Lucide React icons
 - Source Sans Pro + Playfair Display (Google Fonts) — matching Grill & Glam repo pattern
+- Playwright — E2E testing (`tests/e2e/`, `playwright.config.ts`, `npm run test:e2e`)
 
 ### Design Tokens (from fttgsolutions.com + grillandglam repo)
 | Token | Value | Usage |
@@ -215,4 +216,4 @@ learn-fttg/
 
 ---
 
-*Last updated: 15 May 2026 · FTTG Solutions LLC*
+*Last updated: 23 May 2026 · FTTG Solutions LLC*
