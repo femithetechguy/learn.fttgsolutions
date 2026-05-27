@@ -23,6 +23,7 @@ const TAG_COLORS: Record<string, PillColor> = {
   Learning:  { text: '#7F77DD', bg: 'rgba(127,119,221,0.1)',border: 'rgba(127,119,221,0.2)' },
   YouTube:   { text: '#EF4444', bg: 'rgba(239,68,68,0.1)',  border: 'rgba(239,68,68,0.2)'   },
   Tools:     { text: '#A78BFA', bg: 'rgba(167,139,250,0.1)',border: 'rgba(167,139,250,0.2)' },
+  Cert:      { text: '#10B981', bg: 'rgba(16,185,129,0.1)',  border: 'rgba(16,185,129,0.2)'  },
 }
 
 const DEFAULT_TAG: PillColor = { text: '#D4AF37', bg: 'rgba(212,175,55,0.1)', border: 'rgba(212,175,55,0.2)' }
