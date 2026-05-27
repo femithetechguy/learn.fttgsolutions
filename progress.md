@@ -205,6 +205,42 @@ learn-fttg/
 
 ---
 
+## Reference Resources — Data & BI / Microsoft Fabric
+
+> Key external resources for content research, course planning, and audience building. All entries live in `data/resources.json` and render on the `/resources` page.
+
+### Official Microsoft Learning
+| Resource | URL | Tag in resources.json |
+|---|---|---|
+| MS Learn — Fabric path | [get-started-fabric](https://learn.microsoft.com/en-us/training/paths/get-started-fabric/) | `BI` |
+| MS Learn — Fabric hub | [learn.microsoft.com/fabric](https://learn.microsoft.com/fabric) | `Docs` |
+
+### Certifications (Microsoft Fabric)
+| Cert | Focus | Tag in resources.json | Priority |
+|---|---|---|---|
+| **PL-300** | Power BI Data Analyst | `Cert` | 🟡 Medium |
+| **DP-600** | Fabric Analytics Engineer | `Cert` | 🔴 High — aligns with Data & BI pillar |
+| **DP-700** | Fabric Data Engineer | `Cert` | 🟡 Medium — infrastructure/pipeline side |
+
+### YouTube Channels
+| Channel | URL | Tag |
+|---|---|---|
+| Microsoft Fabric (official) | [@MicrosoftFabric](https://www.youtube.com/@MicrosoftFabric) | `YouTube` |
+| Learn Microsoft Fabric | [@LearnMicrosoftFabric](https://www.youtube.com/@LearnMicrosoftFabric) | `YouTube` |
+| Guy in a Cube | [@GuyInACube](http://youtube.com/@GuyInACube) | `YouTube` |
+
+### Community & Expert Sites
+| Site | URL | Tag |
+|---|---|---|
+| Fabric Guru | [fabric.guru](https://fabric.guru/) | `BI` |
+| SQLBI | [sqlbi.com](https://www.sqlbi.com/) | `BI` |
+
+### Resources Page Filter Pills
+All tags drive auto-generated filter pills on `/resources`. Current pill set:
+`Docs` · `Hosting` · `Backend` · `Styling` · `Data` · `BI` · `Cert` · `Learning` · `YouTube` · `Tools` · `Community` · `FTTG`
+
+---
+
 ## Next Steps (Priority Order)
 
 1. **Drop files into local Next.js repo** — `npm install && npm run dev`
@@ -216,4 +252,4 @@ learn-fttg/
 
 ---
 
-*Last updated: 23 May 2026 · FTTG Solutions LLC*
+*Last updated: 26 May 2026 · FTTG Solutions LLC — resources page: Fabric links, Cert + Docs filter pills added*
