@@ -143,6 +143,36 @@
           "label": "PL-300 Certification",
           "url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/?practice-assessment-type=certification",
           "description": "Microsoft's official Power BI Data Analyst Associate certification with practice assessments.",
+          "tag": "Cert"
+        },
+        {
+          "label": "Microsoft Fabric — Learning Path",
+          "url": "https://learn.microsoft.com/en-us/training/paths/get-started-fabric/",
+          "description": "Microsoft's official structured learning path for getting started with Microsoft Fabric end-to-end.",
+          "tag": "BI"
+        },
+        {
+          "label": "Microsoft Fabric — Docs Hub",
+          "url": "https://learn.microsoft.com/fabric",
+          "description": "Central hub for all Microsoft Fabric documentation, tutorials, and product updates.",
+          "tag": "Docs"
+        },
+        {
+          "label": "DP-600 Certification",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/fabric-analytics-engineer-associate/",
+          "description": "Microsoft Fabric Analytics Engineer Associate — design and build analytics solutions on Fabric.",
+          "tag": "Cert"
+        },
+        {
+          "label": "DP-700 Certification",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/fabric-data-engineer-associate/",
+          "description": "Microsoft Fabric Data Engineer Associate — build and manage data pipelines and lakehouses on Fabric.",
+          "tag": "Cert"
+        },
+        {
+          "label": "Fabric Guru",
+          "url": "https://fabric.guru/",
+          "description": "Community site with Microsoft Fabric tutorials, patterns, and expert tips from practitioners.",
           "tag": "BI"
         }
       ]
@@ -260,6 +290,18 @@
           "label": "Analytics with Nags",
           "url": "https://www.youtube.com/@AnalyticswithNags",
           "description": "Power BI and data analytics walkthroughs focused on practical, job-ready skills.",
+          "tag": "YouTube"
+        },
+        {
+          "label": "Microsoft Fabric (Official)",
+          "url": "https://www.youtube.com/@MicrosoftFabric",
+          "description": "Official Microsoft Fabric YouTube channel — product announcements, demos, and feature walkthroughs.",
+          "tag": "YouTube"
+        },
+        {
+          "label": "Learn Microsoft Fabric",
+          "url": "https://www.youtube.com/@LearnMicrosoftFabric",
+          "description": "Community-driven tutorials and certification prep content focused on Microsoft Fabric.",
           "tag": "YouTube"
         }
       ]
